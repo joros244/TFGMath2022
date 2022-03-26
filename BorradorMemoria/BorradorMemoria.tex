@@ -83,13 +83,13 @@
 	
 	Un \textit{complejo simplicial abstracto} es una colección, 
 	\begin{Large}$\nu$\end{Large}, de subconjuntos no vacíos de un 
-	conjunto, {\Large $\nu$}$_{0}$, tal que verifica las siguientes 
+	conjunto, {\Large $\nu$}$_{0}$, que verifica las siguientes 
 	propiedades:
 	
 	\begin{enumerate}
-		\item $v \in $ {\Large $ \nu$}$_{0}$ $ \implies \{v\} \in$
+		\item Si $v \in $ {\Large $ \nu$}$_{0}$ $ \implies \{v\} \in$
 			\begin{Large}$ \nu$\end{Large}
-		\item $ \sigma \in $ {\Large $ \nu$}$ \text{ y } \tau \subset 
+		\item Si $\sigma \in $ {\Large $ \nu$}$ \text{ y } \tau \subset 
 			\sigma \implies \tau \in $
 			\begin{Large}$ \nu$\end{Large}
 	\end{enumerate}
@@ -126,16 +126,181 @@
 			\{a,b,c\},\{a,b,d\},\\
 			\{a,c,d\},\{a,b,c,d\}\}
 		\end{multline*}
+		Así, tenemos que la dimensión de {\Large $\nu$} es 3. También 
+		observamos que el 3-símplice $\{a,b,c,d\}$ tiene por caras de 
+		codimensión 1 a los 2-símplices $\{a,b,c\},\{a,b,d\}$ y 
+		$\{a,c,d\}$. Veamos su representación geométrica.
+
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}
+				%Nodes
+				\coordinate      (a) 	at 	(4,2.5);
+				\coordinate      (b) 	at 	(3,0.8);
+				\coordinate     (c) 	at 	(4.7,0.3);
+				\coordinate      (d) 	at 	(5.3,1.2);
+				
+				%Lines
+		    		\draw[thick, fill=black!20] (a) -- (b) -- (c) -- (d) -- cycle;
+				\draw[thick, dashed] (b) -- (d);
+				\draw[thick] (a) -- (c);
+
+				\fill[black!20, draw=black, thick] (a) circle (3pt) node[black, above right] {a};
+				\fill[black!20, draw=black, thick] (b) circle (3pt) node[black, above left] {b};
+				\fill[black!20, draw=black, thick] (c) circle (3pt) node[black, below right] {c};
+				\fill[black!20, draw=black, thick] (d) circle (3pt) node[black, above right] {d};
+
+			\end{tikzpicture}
+			\caption{Representación geométrica del complejo 
+			simplicial {\Large $\nu$}.}
+		\end{figure}
+
+		Esta representación es única salvo homeomorfismo. Observamos 
+		que interpretando {\Large $\nu$} como un subconjunto de 
+		$\mathbb{R}^{n}$ obtenemos un tetraedro. Esta idea motiva el 
+		otro enfoque de los complejos simpliciales: el enfoque 
+		geométrico.
 	\end{ejem}
-	
+
+	Siguiendo el enfoque geométrico es necesario que, antes de llegar a la
+	definición de complejo simplicial geométrico, veamos unos conceptos 
+	previos relacionados con la propia definición.
+
 	\begin{defi}
-		Una \textit{aplicación entre complejos simpliciales}, 
-		$f:\mathcal{K} \rightarrow \mathcal{L}$, es una aplicación 
-		$f:\text{{\Large $\nu$}$_{0}$} \rightarrow \mathcal{L}_{0}$ tal
-		que $f(\sigma) \in \mathcal{L} \hspace{4pt} \forall \sigma \in \mathcal{K}$.
+		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$. Diremos
+		que los k+1 puntos son \textit{afínmente independientes} si 
+		los k vectores $u_{1}-u_{0},u_{2}-u_{0},...,u_{k}-u_{0}$ son
+		linealmente independientes.\\
+		Sea $x \in \mathbb{R}^{n}$. Diremos que $x$ es una 
+		\textit{combinación afín} de los $u_{i}$ si $\exists 
+		\lambda_{0},...,\lambda_{k}$ tales que 
+		$x=\sum_{i=0}^{k}\lambda_{i}u_{i}$ y 
+		$\sum_{i=0}^{k}\lambda_{i}=1$
+	\end{defi}
+
+	\begin{defi}
+		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$ k+1 
+		puntos afínmente independientes y $x=\sum_{i=0}^{k}
+		\lambda_{i}u_{i}$ una combinación afín. Diremos que $x$ es una
+		\textit{combinación convexa} de los $u_{i}$ si todos los 
+		$\lambda_{i}$ son no negativos.\\
+		Definimos la \textit{clausura convexa} de los $u_{i}$ como el
+		conjunto de todas sus posibles combinaciones convexas.
+	\end{defi}
+
+	Ahora que ya contamos con estas nociones previas pasamos a definir la 
+	pieza clave en la definición de complejo simplicial geométrico: el 
+	\emph{símplice}.
+
+	\begin{defi}
+		Definimos un \textit{k-símplice} como la clausura convexa de 
+		k+1 puntos afínmente independientes. Lo denotaremos por 
+		$\sigma=conv\{u_{0},u_{1},...,u_{k}\}$, y diremos que la 
+		\textit{dimensión de $\sigma$} es k.\\
+		Llamamos \textit{cara} de $\sigma$ a cualquier combinación 
+		convexa de un subconjunto no vacío de los $u_{i}$. Lo 
+		denotaremos por $\leq$.\\
+		Para los casos $k=0,1,2,3$ diremos que $\sigma$ es un vértice,
+		arista, triángulo, tetraedro respectivamente.
+	\end{defi}
+
+	Habiendo definido todos los conceptos previos necesarios pasamos a 
+	definir \emph{complejo simplicial geométrico}.
+
+	\begin{defi}
+		Llamamos \textit{complejo simplicial geométrico} a la 
+		colección finita de símplices {\Large $\nu$} verificando las
+		siguientes propiedades:
+		\begin{enumerate}
+			\item Si $\sigma\in \text{{\Large $\nu$} y }
+				\tau \leq \sigma \implies \tau \in 
+				\text{{\Large $\nu$}}$
+			\item Si $\sigma_{1},\sigma_{2} \in 
+				\text{{\Large $\nu$}} \implies 
+				\sigma_{1}\cap\sigma_{2}=\emptyset \text{ o }
+				\sigma_{1}\cap\sigma_{2} \text{ es una cara 
+				común a ambos.}$
+		\end{enumerate}
 	\end{defi}
 	
+	De aquí en adelante emplearemos la definición de complejo simplicial 
+	abstracto, pues es la más adecuada para nuestros propósitos.\\
+	Ahora que ya hemos definido los objetos con los que vamos a trabajar, 
+	tal como es habitual en Matemáticas, procedemos a definir las 
+	aplicaciones entre ellos.
+	\begin{defi}
+		Una \textit{aplicación entre complejos simpliciales}, 
+		$f:\text{{\Large $\nu$}} \rightarrow \text{{\Large 
+		$\nu$}$^{\prime}$}$, es una aplicación $f:\text{{\Large 
+		$\nu$}$_{0}$} \rightarrow \text{{\Large $\nu$}$_{0}^{\prime}$}$ 
+		tal que $f(\sigma) \in \text{{\Large $\nu$}$^{\prime}$} 
+		\hspace{5pt} \forall \sigma \in \text{{\Large $\nu$}}$.
+	\end{defi}
+	
+	Teniendo definidas las aplicaciones entre complejos simpliciales, 
+	vamos a dotar a los complejos simpliciales de una cierta estructura 
+	que será de lo más útil para los propósitos del presente trabajo.\\
+	\\
+	Consideremos $\mathbb{Z}_{2}$ el cuerpo de dos elementos. Dado un 
+	complejo simplicial {\Large $\nu$}, denotaremos por 
+	$C_{p}(\text{{\Large $\nu$}})$ al $\mathbb{Z}_{2}$-espacio vectorial
+	libre cuya base viene dada por los p-símplices de {\Large $\nu$}. 
+	Ahora, para cualquier $p \in \{1,2,...\}$ definimos la siguiente 
+	aplicación: 
+	\begin{equation}
+		\label{def:borde}
+		\begin{array}{lll}
+			\partial_{p}:C_{p}(\text{{\Large $\nu$}}) & 
+				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
+				\\[3pt] 
+			\multicolumn{1}{r}{\sigma} & \mapsto & \displaystyle 
+				\sum_{\mathclap{\tau \subset \sigma,\tau \in 
+				\text{{\large $\nu$}}_{p-1}}}\tau
+		\end{array} 
+	\end{equation}
+	Si $p=0$ definimos $\partial_{0}=0$. Intuitivamente, $\partial_{p}$ le
+	asigna a cada p-símplice su borde, esto es, la suma de sus caras de
+	codimensión 1. Esta aplicación tiene una propiedad muy importante, 
+	que motivará la siguiente subsección:
 
+	\begin{prop}
+		Sea $\partial_{p}$ definida como en \ref{def:borde}. Entonces 
+		para todo $p \in \{0,1,2,..\}$ $\partial_{p}\circ 
+		\partial_{p+1}=0$. Coloquialmente, ``el borde del borde es 
+		vacío".
+	\end{prop}
+	\begin{proof}
+		Sea $\sigma \in C_{p+1}(\text{{\Large $\nu$}})\text{ y }v\in 
+		\text{{\Large $\nu$}}$ el símplice representado por $\sigma$. 
+		Veamos que $\partial_{p}(\partial_{p+1}(\sigma))=0$.\\ 
+		En efecto, notemos que $v$ posee $\binom{p+2}{p}$ 
+		caras distintas de codimensión 2. Sea $\tau$ una de ellas, es 
+		decir, $\tau$ es un p-1-símplice y $\tau \subset v$.\\ 
+		Si probamos que $\tau$ aparece en 2 caras de codimensión 1 de 
+		$v$ hemos terminado, pues aparecerá 2 veces como vector al 
+		hacer $\partial_{p}(\partial_{p+1}(\sigma))$ y como estamos en 
+		$\mathbb{Z}_{2}$ se anulará. Esto implica lo que queremos
+		probar.\\
+		Observemos que $\tau$ tiene dimensión p mientras que $v$ tiene
+		dimensión p+2. Por lo tanto, supongamos, sin pérdida de 
+		generalidad, que $\tau$ viene dado por los p últimos elementos 
+		de $v$. Así, tenemos dos elementos libres en $v$, y al 
+		calcular las caras de codimensión 1 de $v$, con los p últimos 
+		elementos fijos, tendremos únicamente 2 caras que contienen a
+		$\tau$.  	
+	\end{proof}
+	\begin{remark}
+		Tal y como veremos más adelante, la elección del cuerpo sobre 
+		el que se toman los espacios vectoriales es muy significativa.
+		De hecho, si escogemos otro cuerpo, los resultados serán muy 
+		distintos, y los cálculos para llegar a ellos, serán más 
+		engorrosos.
+	\end{remark}
+
+	De esta proposición se desprende que $Im(\partial_{p+1}) \subset 
+	Ker(\partial_{p})$. Este hecho motiva la siguiente noción 
+	importante del presente trabajo: la \emph{homología}.
+ 
 
 	\subsection{Homología. Homología persistente}
 	
