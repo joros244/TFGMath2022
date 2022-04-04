@@ -1,5 +1,8 @@
-\documentclass[12pt]{article}
+\documentclass[12pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
 \usepackage[spanish,es-noshorthands]{babel}
 
 \usepackage{amsmath,amssymb,amsthm}
@@ -10,7 +13,8 @@
 \usepackage{graphicx}
 \graphicspath{{Images/}}
 \usepackage{float}
-\usepackage[a4paper, total={426pt,674pt}]{geometry}
+\usepackage{fullpage}
+\parskip = 2pt plus 1.5pt minus 1pt
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{babel}
@@ -50,7 +54,7 @@
 	\newpage
 	
 	\begin{abstract}
-	TODO
+	(En construcción.)
 	\end{abstract}
 	
 	\newpage
@@ -60,7 +64,7 @@
 	\newpage
 
 	\section{Introducción}
-	TODO
+	(En construcción.)
 
 	\newpage
 
@@ -74,8 +78,8 @@
 	\emph{complejos simpliciales}. Esta noción admite dos enfoques 
 	diferentes, por lo que debemos dintinguir entre dos definiciones 
 	equivalentes: los complejos simpliciales \emph{abstractos} y los 
-	complejos simpliciales \emph{geométricos}.\\
-	
+	complejos simpliciales \emph{geométricos}.
+
 	Siguiendo el enfoque combinatorio, comenzamos definiendo los complejos 
 	simpliciales abstractos y algunas nociones relacionadas. 
 
@@ -87,10 +91,10 @@
 	propiedades:
 	
 	\begin{enumerate}
-		\item Si $v \in $ {\Large $ \nu$}$_{0}$ $ \implies \{v\} \in$
+		\item Si $v \in $ {\Large $ \nu$}$_{0}$, entonces $\{v\} \in$
 			\begin{Large}$ \nu$\end{Large}
-		\item Si $\sigma \in $ {\Large $ \nu$}$ \text{ y } \tau \subset 
-			\sigma \implies \tau \in $
+		\item Si $\sigma \in $ {\Large $ \nu$}$ \text{ y } \tau 
+			\subset \sigma$, entonces $ \tau \in $
 			\begin{Large}$ \nu$\end{Large}
 	\end{enumerate}
 	
@@ -135,10 +139,10 @@
 			\centering
 			\begin{tikzpicture}
 				%Nodes
-				\coordinate      (a) 	at 	(4,2.5);
+				\coordinate      (a) 	at 	(4.5,2.5);
 				\coordinate      (b) 	at 	(3,0.8);
-				\coordinate     (c) 	at 	(4.7,0.3);
-				\coordinate      (d) 	at 	(5.3,1.2);
+				\coordinate     (c) 	at 	(4.4,0.1);
+				\coordinate      (d) 	at 	(6,0.8);
 				
 				%Lines
 		    		\draw[thick, fill=black!20] (a) -- (b) -- (c) -- (d) -- cycle;
@@ -170,7 +174,8 @@
 		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$. Diremos
 		que los k+1 puntos son \textit{afínmente independientes} si 
 		los k vectores $u_{1}-u_{0},u_{2}-u_{0},...,u_{k}-u_{0}$ son
-		linealmente independientes.\\
+		linealmente independientes.
+
 		Sea $x \in \mathbb{R}^{n}$. Diremos que $x$ es una 
 		\textit{combinación afín} de los $u_{i}$ si $\exists 
 		\lambda_{0},...,\lambda_{k}$ tales que 
@@ -183,7 +188,8 @@
 		puntos afínmente independientes y $x=\sum_{i=0}^{k}
 		\lambda_{i}u_{i}$ una combinación afín. Diremos que $x$ es una
 		\textit{combinación convexa} de los $u_{i}$ si todos los 
-		$\lambda_{i}$ son no negativos.\\
+		$\lambda_{i}$ son no negativos.
+
 		Definimos la \textit{clausura convexa} de los $u_{i}$ como el
 		conjunto de todas sus posibles combinaciones convexas.
 	\end{defi}
@@ -196,10 +202,12 @@
 		Definimos un \textit{k-símplice} como la clausura convexa de 
 		k+1 puntos afínmente independientes. Lo denotaremos por 
 		$\sigma=conv\{u_{0},u_{1},...,u_{k}\}$, y diremos que la 
-		\textit{dimensión de $\sigma$} es k.\\
+		\textit{dimensión de $\sigma$} es k.
+
 		Llamamos \textit{cara} de $\sigma$ a cualquier combinación 
 		convexa de un subconjunto no vacío de los $u_{i}$. Lo 
-		denotaremos por $\leq$.\\
+		denotaremos por $\leq$.
+
 		Para los casos $k=0,1,2,3$ diremos que $\sigma$ es un vértice,
 		arista, triángulo, tetraedro respectivamente.
 	\end{defi}
@@ -224,10 +232,10 @@
 	\end{defi}
 	
 	De aquí en adelante emplearemos la definición de complejo simplicial 
-	abstracto, pues es la más adecuada para nuestros propósitos.\\
+	abstracto, pues es la más adecuada para el presente trabajo.
+
 	Ahora que ya hemos definido los objetos con los que vamos a trabajar, 
-	tal como es habitual en Matemáticas, procedemos a definir las 
-	aplicaciones entre ellos.
+	procedemos a definir las aplicaciones entre ellos.
 	\begin{defi}
 		Una \textit{aplicación entre complejos simpliciales}, 
 		$f:\text{{\Large $\nu$}} \rightarrow \text{{\Large 
@@ -239,8 +247,8 @@
 	
 	Teniendo definidas las aplicaciones entre complejos simpliciales, 
 	vamos a dotar a los complejos simpliciales de una cierta estructura 
-	que será de lo más útil para los propósitos del presente trabajo.\\
-	\\
+	que será de lo más útil para los propósitos del presente trabajo.
+
 	Consideremos $\mathbb{Z}_{2}$ el cuerpo de dos elementos. Dado un 
 	complejo simplicial {\Large $\nu$}, denotaremos por 
 	$C_{p}(\text{{\Large $\nu$}})$ al $\mathbb{Z}_{2}$-espacio vectorial
@@ -253,9 +261,9 @@
 			\partial_{p}:C_{p}(\text{{\Large $\nu$}}) & 
 				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
 				\\[3pt] 
-			\multicolumn{1}{r}{\sigma} & \mapsto & \displaystyle 
-				\sum_{\mathclap{\tau \subset \sigma,\tau \in 
-				\text{{\large $\nu$}}_{p-1}}}\tau
+			\multicolumn{1}{r}{c} & \mapsto & \displaystyle 
+				\sum_{\mathclap{d \subset c,d \in 
+				\text{{\large $\nu$}}_{p-1}}}d
 		\end{array} 
 	\end{equation}
 	Si $p=0$ definimos $\partial_{0}=0$. Intuitivamente, $\partial_{p}$ le
@@ -266,21 +274,24 @@
 	\begin{prop}
 		Sea $\partial_{p}$ definida como en \ref{def:borde}. Entonces 
 		para todo $p \in \{0,1,2,..\}$ $\partial_{p}\circ 
-		\partial_{p+1}=0$. Coloquialmente, ``el borde del borde es 
-		vacío".
+		\partial_{p+1}=0$. Coloquialmente, <<el borde del borde es 
+		vacío>>.
 	\end{prop}
 	\begin{proof}
-		Sea $\sigma \in C_{p+1}(\text{{\Large $\nu$}})\text{ y }v\in 
-		\text{{\Large $\nu$}}$ el símplice representado por $\sigma$. 
-		Veamos que $\partial_{p}(\partial_{p+1}(\sigma))=0$.\\ 
+		Sea $c \in C_{p+1}(\text{{\Large $\nu$}})\text{ y }v\in 
+		\text{{\Large $\nu$}}$ el símplice representado por $c$. 
+		Veamos que $\partial_{p}(\partial_{p+1}(c))=0$.
+
 		En efecto, notemos que $v$ posee $\binom{p+2}{p}$ 
 		caras distintas de codimensión 2. Sea $\tau$ una de ellas, es 
-		decir, $\tau$ es un p-1-símplice y $\tau \subset v$.\\ 
+		decir, $\tau$ es un p-1-símplice y $\tau \subset v$.
+
 		Si probamos que $\tau$ aparece en 2 caras de codimensión 1 de 
-		$v$ hemos terminado, pues aparecerá 2 veces como vector al 
-		hacer $\partial_{p}(\partial_{p+1}(\sigma))$ y como estamos en 
+		$v$ habremos terminado, pues aparecerá 2 veces como vector al 
+		hacer $\partial_{p}(\partial_{p+1}(c))$ y como estamos en 
 		$\mathbb{Z}_{2}$ se anulará. Esto implica lo que queremos
-		probar.\\
+		probar.
+
 		Observemos que $\tau$ tiene dimensión p mientras que $v$ tiene
 		dimensión p+2. Por lo tanto, supongamos, sin pérdida de 
 		generalidad, que $\tau$ viene dado por los p últimos elementos 
@@ -290,20 +301,223 @@
 		$\tau$.  	
 	\end{proof}
 	\begin{remark}
-		Tal y como veremos más adelante, la elección del cuerpo sobre 
-		el que se toman los espacios vectoriales es muy significativa.
-		De hecho, si escogemos otro cuerpo, los resultados serán muy 
-		distintos, y los cálculos para llegar a ellos, serán más 
-		engorrosos.
+		La elección del cuerpo sobre el que se toman los espacios 
+		vectoriales es muy significativa. De hecho, si escogemos otro 
+		cuerpo, los resultados serán muy distintos, y los cálculos 
+		para llegar a ellos, serán más engorrosos.
 	\end{remark}
 
-	De esta proposición se desprende que $Im(\partial_{p+1}) \subset 
-	Ker(\partial_{p})$. Este hecho motiva la siguiente noción 
-	importante del presente trabajo: la \emph{homología}.
+	Veamos un pequeño ejemplo que ilustre esta nota.
+
+	\begin{ejem}
+		Supongamos el complejo simplicial {\Large $\nu$} del ejemplo 
+		anterior. 
+	\end{ejem}
+
+	De la proposición anterior se desprende que $Im(\partial_{p+1}) 
+	\subset Ker(\partial_{p})$. Este hecho motiva la siguiente noción 
+	importante del presente trabajo: los \emph{grupos de homología}.
  
 
 	\subsection{Homología. Homología persistente}
 	
+	En la subsección anterior, más concretamente en \ref{def:borde}, hemos 
+	introducido la aplicación <<borde>>. A lo largo de esta subsección 
+	vamos a profundizar más en ella, y en los espacios sobre los que está
+	definida, llegando de una manera natural a la definición de 
+	\emph{grupo de homología}.
+
+	En primer lugar, vamos a centrarnos en 
+	$C_{p}(\text{{\Large $\nu$}})$ y sus elementos.
+
+	Tal y como hemos mencionado anteriormente, podemos ver 
+	$C_{p}(\text{{\Large $\nu$}})$ como un $\mathbb{Z}_{2}$-espacio 
+	vectorial libre cuya base viene dada por los p-símplices de 
+	{\Large $\nu$}. Así, si $c \in C_{p}(\text{{\Large $\nu$}})$, entonces
+	$c$ es un vector que representa a un p-símplice $v$. De esta manera,
+	podemos ver $v$ como suma de los p-símplices de las componentes no 
+	nulas de $c$. Más formalmente:
+
+	\begin{defi}
+		Sea {\Large $\nu$} un complejo simplicial y $p \in \mathbb{N}
+		\cup\{0\}$ 
+		tal que $p\leq dim \text{{\Large $\nu$}}$. Una 
+		\textit{p-cadena} es una suma formal de p-símplices de 
+		{\Large $\nu$}.
+	\end{defi}
+	
+	Con la noción de p-cadena, ya podemos formalizar la definición de 
+	$C_{p}(\text{{\Large $\nu$}})$. 
+
+	\begin{defi}
+		Sea {\Large $\nu$} un complejo simplicial abstracto. Definimos
+		el \textit{grupo de p-cadenas} de {\Large $\nu$} como el 
+		conjunto de todas las p-cadenas de 
+		{\Large $\nu$}, con la operación suma componente a componente 
+		con coeficientes en $\mathbb{Z}_{2}$. Lo denotaremos por 
+		$(C_{p}(\text{{\Large $\nu$}}), +)$ o simplemente 
+		$C_{p}(\text{{\Large $\nu$}})$.
+	\end{defi}
+
+	De la definición anterior se desprende el siguiente resultado:
+
+	\begin{prop}
+		\label{prop:abel}
+		Sea {\Large $\nu$} un complejo simplicial abstracto. Para cada 
+		$p \in \mathbb{N}\cup\{0\}$ tal que $p \leq dim\text{{\Large $\nu$}}$, 
+		entonces $(C_{p}(\text{{\Large $\nu$}}), +)$ es grupo 
+		abeliano.
+	\end{prop}
+
+	\begin{proof}
+		La asociatividad se tiene por herencia de la suma en 
+		$\mathbb{Z}_{2}$. La existencia de elemento neutro es clara, 
+		pues bastará considerar el vector nulo. La existencia de 
+		opuesto también es inmediata, ya que todo elemento es opuesto 
+		de sí mismo. Finalmente, como la suma en $\mathbb{Z}_{2}$ es 
+		conmutativa, se sigue que $(C_{p}(\text{{\Large $\nu$}}), +)$
+		es abeliano.
+	\end{proof}
+
+	En segundo lugar, y habiendo definido los grupos de p-cadenas, pasamos
+	a hacer un estudio más detallado de la aplicación <<borde>> definida 
+	en \ref{def:borde}. Vamos con su definición:
+
+	\begin{defi}
+		Sea {\Large $\nu$} un complejo simplicial abstracto, $\sigma 
+		\in \text{{\Large $\nu$}}$ y $\sigma = \{u_{1},...,u_{p}\}$. 
+		Definimos el \textit{homomorfismo borde} para un símplice 
+		como:
+		$$
+		\partial_{p}(\sigma)=\displaystyle 
+		\sum_{j=0}^{p}\{u_{1},...,\widehat{u_{j}},...,u_{p}\}
+		$$
+ 		Donde $\widehat{u_{j}}$ indica que omitimos $u_{j}$. Además,
+		podemos extender esta definición para cadenas, en concreto:
+	\begin{equation}
+		\label{def:borde_form}
+		\begin{array}{lll}
+			\partial_{p}:C_{p}(\text{{\Large $\nu$}}) & 
+				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
+				\\[3pt] 
+			\multicolumn{1}{r}{c=\sum\sigma_{i}} & \mapsto & 
+			\partial_{p}(c)=\sum\partial_{p}(\sigma_{i})
+		\end{array}
+	\end{equation}
+	A los elementos de $Im(\partial_{p})$ los llamaremos 
+	\textit{(p-1)-bordes}, y a los elementos de $Ker(\partial_{p})$, 
+	\textit{p-ciclos}.
+	\end{defi}
+	\begin{proof}
+		Vamos a probar que $\partial_{p}$ es, en efecto, un 
+		homomorfismo.
+
+		Sean $\sigma,\tau \in \text{{\Large $\nu$}}_{p}$ tales que
+		$\sigma = \{u_{1},...,u_{p}\}$ y $\tau = \{w_{1},...,w_{p}\}$.
+
+		$\partial_{p}(\sigma)+\partial_{p}(\tau)=\displaystyle 
+		\sum_{j=0}^{p}\{u_{1},...,\widehat{u_{j}},...,u_{p}\} + 
+		\displaystyle \sum_{j=0}^{p}\{w_{1},...,\widehat{w_{j}},...,
+		w_{p}\}=\displaystyle \sum_{i=0}^{p}\sum_{j=0}^{p}\{u_{1} + 
+		w_{1},...,\widehat{u_{i}} + \widehat{w_{j}},...,u_{p}+w_{p}\}=
+		\partial_{p}(\sigma+\tau)$. 
+
+		Esto prueba que $\partial_{p}$ conmuta con la suma para 
+		símplices. Como conmuta para símplices, se sigue que conmuta 
+		para cadenas.
+
+		Ahora, $0=\partial_{p}(\sigma)+\partial_{p}(\sigma)=
+		\partial_{p}(\sigma + \sigma)=\partial_{p}(0)$. Esto implica 
+		que $\partial_{p}$ deja fijo el símplice neutro. Al igual que
+		antes, esta propiedad se extiende para cadenas.
+
+		Finalmente, $0=\partial_{p}(0)=\partial_{p}(\sigma - \sigma)=
+		\partial_{p}(\sigma)+\partial_{p}(-\sigma)$ y sumando 
+		$-\partial_{p}(\sigma)$ a ambos lados de la ecuacion se sigue 
+		que $\partial_{p}$ conmuta con el opuesto. Una vez más, este 
+		hecho se extiende a cadenas.
+	\end{proof}
+
+	Este homomorfismo tiene propiedades muy interesantes, entre ellas:
+
+	\begin{prop}
+		Sea $\partial_{p}$ el homomorfismo borde definido en 
+	   	\ref{def:borde_form}. Entonces $Im(\partial_{p})$ es subgrupo 
+		de $C_{p-1}(\text{{\Large $\nu$}})$ y $Ker(\partial_{p})$ es 
+		subgrupo de $C_{p}(\text{{\Large $\nu$}})$. Más aún, ambos son
+		subgrupos normales de $C_{p-1}(\text{{\Large $\nu$}})$, 
+		$C_{p-1}(\text{{\Large $\nu$}})$ respectivamente.
+	\end{prop}
+	\begin{proof}
+		Vamos a probar ambos hechos por separado:
+		\begin{itemize}
+			\item Probaremos primero que $Im(\partial_{p})$ es subgrupo:
+
+			Sean $a,b \in Im(\partial_{p})$ tales que $a=\partial_{p}(c) 
+			\text{ y } b=\partial_{p}(d), c,d \in 
+			C_{p}(\text{{\Large $\nu$}})$. 
+
+			Entonces $a+b=\partial_{p}(c)+\partial_{p}(d)=
+			\partial_{p}(c+d)$. Esto implica que $Im(\partial_{p})$ es 
+			cerrado para la suma.
+
+			Ahora, $0=\partial_{p}(0)=\partial_{p}(c+c)=
+			\partial_{p}(c)+\partial_{p}(c)=a+a$. Esto implica que 
+			$Im(\partial_{p})$ es cerrado para opuestos.
+
+			Se sigue que $Im(\partial_{p})\leq 
+			C_{p-1}(\text{{\Large $\nu$}})$.
+			
+			\item Probemos ahora que $Ker(\partial_{p})$ es 
+			subgrupo: 
+				
+			Al igual que antes, sean $a,b \in Ker(\partial_{p})$.
+
+			Entonces $0=\partial_{p}(a)+\partial_{p}(b)=
+			\partial_{p}(a+b)$. Esto prueba que 
+			$Ker(\partial_{p})$ es cerrado para la suma.
+
+			Ahora, $0=\partial_{p}(0)=\partial_{p}(a-a)=
+			\partial_{p}(a)+\partial_{p}(-a)=\partial_{p}(-a)$. 
+			Esto prueba que $Ker(\partial_{p})$ es cerrado para 
+			opuestos.
+
+			Se sigue que $Ker(\partial_{p})\leq 
+			C_{p}(\text{{\Large $\nu$}})$.
+		\end{itemize}
+		En virtud de la proposición \ref{prop:abel} y lo ya probado, 
+		se concluye la normalidad.
+	\end{proof}
+
+	
+
+	Además de la propiedad anterior, y tal y como vimos en la subsección 
+	anterior, el homomorfismo borde tiene la propiedad fundamental de que 
+	$\partial_{p}\circ \partial_{p+1}=0$. Este hecho implica que 
+	$Im(\partial_{p+1}) \subset Ker(\partial_{p})$. Por lo tanto, podemos 
+	considerar el cociente entre ambos grupos: $Ker(\partial_{p})/
+	Im(\partial_{p+1})$. Este cociente constituye una de las piezas clave
+	del presente trabajo:
+
+	\begin{defi}
+		\label{defi:homology}
+		Sea $p \in \mathbb{N}\cup\{0\}$ y {\Large $\nu$} un complejo 
+		simplicial. Definimos el \textit{p-ésimo grupo de homología} 
+		de {\Large $\nu$} como el grupo cociente $Ker(\partial_{p})/
+		Im(\partial_{p+1})$, donde $\partial_{p}$ está definida como
+		en \ref{def:borde_form}. Lo denotaremos por $H_{p}(\text{
+		{\Large $\nu$}})$.
+
+		A su cardinal, $|H_{p}(\text{{\Large $\nu$}})|=
+		|Ker(\partial_{p})|-|Im(\partial_{p+1})|$, lo 
+		llamaremos \textit{p-ésimo número de Betti}, y lo denotaremos
+		por $\beta_{p}(\text{{\Large $\nu$}})$.
+	\end{defi}
+
+	Intuitivamente, los p-ciclos que no son p-bordes representan agujeros
+	p-dimensionales. Por lo tanto, $\beta_{p}(\text{{\Large $\nu$}})$ 
+	representa el número de p-agujeros de {\Large $\nu$}.
+
 	\section{Nociones teóricas previas}
 	
 		Comenzamos dando algunas nociones básicas que nos serán muy útiles a lo largo del trabajo.
