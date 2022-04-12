@@ -22,6 +22,10 @@
 \pgfdeclarelayer{foreground}
 \pgfsetlayers{background,main,foreground}
 
+\newcommand\hlightr[1]{\tikz[overlay, remember picture,baseline=-
+\the\dimexpr\fontdimen22\textfont2\relax]\node[rectangle,fill=red!50,rounded 
+corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
+
 \numberwithin{equation}{section}
 
 \theoremstyle{definition}
@@ -45,7 +49,7 @@
 \affil{Facultad de Ciencia y Tecnología\\
   Universidad de La Rioja}
 
-\date{Marzo 2022}
+\date{Abril 2022}
 
 \begin{document}
 	
@@ -304,14 +308,120 @@
 		La elección del cuerpo sobre el que se toman los espacios 
 		vectoriales es muy significativa. De hecho, si escogemos otro 
 		cuerpo, los resultados serán muy distintos, y los cálculos 
-		para llegar a ellos, serán más engorrosos.
+		para llegar a ellos, serán más engorrosos. Veremos este hecho 
+		en los siguientes ejemplos.
 	\end{remark}
 
-	Veamos un pequeño ejemplo que ilustre esta nota.
+	Veamos un ejemplo que ilustre la proposición anterior, es decir, que 
+	<<el borde del borde es vacío>>.
 
 	\begin{ejem}
 		Supongamos el complejo simplicial {\Large $\nu$} del ejemplo 
-		anterior. 
+		anterior y $\sigma = \{a,b,c\} \in \text{{\Large $\nu$}}$.
+
+		Así pues, tendremos $c \in C_{2}(\text{{\Large $\nu$}})$, con
+		$c=\begin{pmatrix}
+			1 \\
+			0 \\
+			0 
+		\end{pmatrix}$ la representación de $\sigma$ en $C_{2}(
+		\text{{\Large $\nu$}})$. Ahora expresamos las aplicaciones 
+		$\partial_{2}$ y $\partial_{1}$ en forma matricial:
+		\begin{equation*}
+			\partial_{2}= \begin{pmatrix}
+				1 & 1 & 0 \\
+				1 & 0 & 1 \\
+				0 & 1 & 1 \\
+				1 & 0 & 0 \\
+				0 & 1 & 0 \\
+				0 & 0 & 1
+			\end{pmatrix}
+			\hspace{0.5cm}\text{y}\hspace{0.5cm}
+			\partial_{1}= \begin{pmatrix}
+				1 & 1 & 1 & 0 & 0 &0 \\
+				1 & 0 & 0 & 1 & 1 &0 \\
+				0 & 1 & 0 & 1 & 0 &1 \\
+				0 & 0 & 1 & 0 & 1 &1
+			\end{pmatrix}
+		\end{equation*}
+		Ahora, teniendo en cuenta que estamos operando en un cuerpo de 
+		característica 2, hacemos $\partial_{1}(\partial_{2}(c))$:
+		\begin{equation*}
+			\begin{split}
+				\partial_{1}(\partial_{2}(c))=\begin{pmatrix}
+				1 & 1 & 1 & 0 & 0 &0 \\
+				1 & 0 & 0 & 1 & 1 &0 \\
+				0 & 1 & 0 & 1 & 0 &1 \\
+				0 & 0 & 1 & 0 & 1 &1
+			\end{pmatrix}\cdot \Bigg( 
+				\begin{pmatrix}
+				1 & 1 & 0 \\
+				1 & 0 & 1 \\
+				0 & 1 & 1 \\
+				1 & 0 & 0 \\
+				0 & 1 & 0 \\
+				0 & 0 & 1
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+				1 \\
+				0 \\
+				0 
+				\end{pmatrix} \Bigg ) = \\
+				=\begin{pmatrix}
+				1 & 1 & 1 & 0 & 0 &0 \\
+				1 & 0 & 0 & 1 & 1 &0 \\
+				0 & 1 & 0 & 1 & 0 &1 \\
+				0 & 0 & 1 & 0 & 1 &1
+				\end{pmatrix}
+				\cdot
+				\begin{pmatrix}
+				1 \\
+				1 \\
+				0 \\
+				1 \\
+				0 \\
+				0
+				\end{pmatrix} =
+				\begin{pmatrix}
+                                0 \\
+				0 \\
+				0 \\
+				0
+				\end{pmatrix}=
+				\vec{0}
+			\end{split}
+		\end{equation*}
+		Hemos comprobado que, en efecto, <<el borde del borde>> de 
+		$\sigma$ es 0. Para comprobarlo para cualquier vector bastará 
+		observar que:
+		\begin{equation*}
+		\begin{pmatrix}
+				1 & 1 & 1 & 0 & 0 &0 \\
+				1 & 0 & 0 & 1 & 1 &0 \\
+				0 & 1 & 0 & 1 & 0 &1 \\
+				0 & 0 & 1 & 0 & 1 &1
+			\end{pmatrix}\cdot 
+				\begin{pmatrix}
+				1 & 1 & 0 \\
+				1 & 0 & 1 \\
+				0 & 1 & 1 \\
+				1 & 0 & 0 \\
+				0 & 1 & 0 \\
+				0 & 0 & 1
+				\end{pmatrix}
+				=
+				\begin{pmatrix}
+				0 & 0 & 0 \\
+				0 & 0 & 0 \\
+				0 & 0 & 0 \\
+				0 & 0 & 0 
+				\end{pmatrix}
+		\end{equation*}
+		En este ejemplo apreciamos lo significativo de elegir el 
+		cuerpo $\mathbb{Z}_{2}$, pues en otro caso, los productos 
+		matriciales son más difíciles de calcular y podrían no 
+		anularse.
 	\end{ejem}
 
 	De la proposición anterior se desprende que $Im(\partial_{p+1}) 
@@ -508,15 +618,126 @@
 		en \ref{def:borde_form}. Lo denotaremos por $H_{p}(\text{
 		{\Large $\nu$}})$.
 
-		A su cardinal, $|H_{p}(\text{{\Large $\nu$}})|=
-		|Ker(\partial_{p})|-|Im(\partial_{p+1})|$, lo 
-		llamaremos \textit{p-ésimo número de Betti}, y lo denotaremos
+		A su dimensión, $dimH_{p}(\text{{\Large $\nu$}})=
+		dimKer(\partial_{p})-dimIm(\partial_{p+1})$, la 
+		llamaremos \textit{p-ésimo número de Betti}, y la denotaremos
 		por $\beta_{p}(\text{{\Large $\nu$}})$.
 	\end{defi}
 
 	Intuitivamente, los p-ciclos que no son p-bordes representan agujeros
 	p-dimensionales. Por lo tanto, $\beta_{p}(\text{{\Large $\nu$}})$ 
-	representa el número de p-agujeros de {\Large $\nu$}.
+	representa el número de p-agujeros de {\Large $\nu$}. Además, notemos 
+	que si $dim\text{{\Large $\nu$}}=n$, entonces $\forall p >n 
+	\hspace{0.25cm} H_{p}(\text{{\Large $\nu$}})=\emptyset$, pues {\Large 
+	$\nu$}$=\emptyset$.
+
+	Ahora veamos un ejemplo en el que calculamos los números de Betti dado 
+	un complejo simplicial abstracto.
+
+	\begin{ejem}
+		Supongamos el siguiente complejo simplicial abstracto:
+		\begin{equation*} 
+			\text{{\Large $\nu$}}=\{\{a\},\{b\},\{c\},\{d\},\{e\},
+			\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{c,d\},\{a,b,c\}\}
+		\end{equation*}
+		Construimos la secuencia de grupos de cadenas asociados:
+		\begin{equation*}
+			 \left.
+			\begin{array}{ccccccccc}
+				 &  &  & \partial_{2} &  & 
+				\partial_{1} &  & \partial_{0} & \\ 
+				\emptyset & \longrightarrow & C_{2}(
+				\text{{\Large $\nu$}}) & 
+				\longrightarrow & C_{1}(\text{{\Large $\nu$}}) 
+						& \longrightarrow 
+				& C_{0}(\text{{\Large $\nu$}}) & 
+				\longrightarrow & \emptyset 
+			\end{array}
+			\right. 
+		\end{equation*}
+		Calculamos $\partial_{2}$ y $\partial_{1}$, y los expresamos 
+		de manera matricial:
+		\begin{equation*}
+			\partial_{2}=
+			\begin{pmatrix}
+			1 \\
+			1 \\
+			0 \\
+			1 \\
+			0
+			\end{pmatrix}
+			\hspace{1cm}
+			\partial_{1}=
+			\begin{pmatrix}
+			1 & 1 & 1 & 0 & 0\\
+			1 & 0 & 0 & 1 & 0\\
+			0 & 1 & 0 & 1 & 1\\
+			0 & 0 & 1 & 0 & 1\\
+			0 & 0 & 0 & 0 & 0
+			\end{pmatrix}
+		\end{equation*}
+		Ahora para calcular $\beta_{0}(\text{{\Large $\nu$}}) 
+		\text{ y } \beta_{1}(\text{{\Large $\nu$}})$ bastará
+		calcular el rango de las anteriores matrices. Observamos que:
+		\begin{equation*}
+			\partial_{1}=
+			\begin{pmatrix}
+			1 & 1 & 1 & 0 & 0\\
+			\hlightr{1} & 0 & 0 & 1 & 0\\
+			0 & \hlightr{1} & 0 & 1 & 1\\
+			0 & 0 & \hlightr{1} & 0 & 1\\
+			0 & 0 & 0 & 0 & 0
+			\end{pmatrix}
+		\end{equation*}
+		Con lo que, $dimIm(\partial_{1})=3 \text{ y } 
+		dimKer(\partial_{1})=2$, y por lo tanto, $\beta_{1}(\text{
+		{\Large $\nu$}})=1$ y $\beta_{0}(\text{{\Large $\nu$}})=2$. La
+		representación gráfica de {\Large $\nu$} en $\mathbb{R}^{2}$
+		nos queda:
+		\begin{figure}[H]
+			\label{fig:homs}
+			\centering
+			\begin{tikzpicture}
+				%Nodes
+				\coordinate      (a) 	at 	(0,0);
+				\coordinate      (b) 	at 	(2,0);
+				\coordinate      (c) 	at 	(2,2);
+				\coordinate      (d) 	at 	(0,2);
+				\coordinate      (e) 	at 	(4,1);
+				
+				%Lines
+				\draw[thick] (a) -- (c);
+				\draw[thick] (a) -- (b);
+				\draw[thick] (a) -- (d);
+				\draw[thick] (b) -- (c);
+				\draw[thick] (d) -- (c);
+
+
+				\fill[black!20, draw=black, thick] (a) -- (c) -- (b) -- cycle;
+				\fill[black!20, draw=black, thick] (a) circle (3pt) node[black, left] {a};
+				\fill[black!20, draw=black, thick] (b) circle (3pt) node[black, right]  {b};
+				\fill[black!20, draw=black, thick] (c) circle (3pt) node[black, right] {c};
+				\fill[black!20, draw=black, thick] (d) circle (3pt) node[black, left] {d};
+				\fill[black!20, draw=black, thick] (e) circle (3pt) node[black, right] {e};
+
+			\end{tikzpicture}
+			\caption{Representación geométrica del complejo 
+			simplicial {\Large $\nu$}.}
+		\end{figure}
+		Tal y como ya hemos comentado, los números de Betti nos 
+		cuentan los agujeros p-dimensionales. En este caso, si 
+		observamos la representación anterior, vemos que tenemos un 
+		agujero 1-dimensional y dos componentes conexas, que se 
+		corresponde con los números de Betti que hemos calculado. 
+
+		Notemos que, al igual que en el ejemplo anterior, si 
+		trabajamos sobre otro cuerpo que no sea $\mathbb{Z}_{2}$, los 
+		rangos de las matrices podrían ser distintos. En este caso, si
+		trabajamos sobre $\mathbb{Q}$, el rango de $\partial_{1}$ es 
+		4. Esto afecta a los números de Betti y perjudica la 
+		eficiencia computacional de los algoritmos empleados para su 
+		cálculo.
+	\end{ejem}
 
 	\section{Nociones teóricas previas}
 	
