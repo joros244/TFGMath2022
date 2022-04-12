@@ -428,6 +428,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\subset Ker(\partial_{p})$. Este hecho motiva la siguiente noción 
 	importante del presente trabajo: los \emph{grupos de homología}.
  
+	\newpage
 
 	\subsection{Homología. Homología persistente}
 	
@@ -496,14 +497,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{defi}
 		Sea {\Large $\nu$} un complejo simplicial abstracto, $\sigma 
 		\in \text{{\Large $\nu$}}$ y $\sigma = \{u_{1},...,u_{p}\}$. 
-		Definimos el \textit{homomorfismo borde} para un símplice 
+		Definimos el \textit{homomorfismo borde para un símplice}
 		como:
 		$$
-		\partial_{p}(\sigma)=\displaystyle 
+		B_{p}(\sigma)=\displaystyle 
 		\sum_{j=0}^{p}\{u_{1},...,\widehat{u_{j}},...,u_{p}\}
 		$$
- 		Donde $\widehat{u_{j}}$ indica que omitimos $u_{j}$. Además,
-		podemos extender esta definición para cadenas, en concreto:
+ 		Donde $\widehat{u_{j}}$ indica que omitimos $u_{j}$. Notemos que este
+		homomorfismo puede extenderse para cadenas, en concreto:
 	\begin{equation}
 		\label{def:borde_form}
 		\begin{array}{lll}
@@ -511,9 +512,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
 				\\[3pt] 
 			\multicolumn{1}{r}{c=\sum\sigma_{i}} & \mapsto & 
-			\partial_{p}(c)=\sum\partial_{p}(\sigma_{i})
+			\partial_{p}(c)=\sum B_{p}(\sigma_{i})
 		\end{array}
 	\end{equation}
+	A $\partial_{p}$ lo llamaremos \textit{homomorfismo borde para 
+	cadenas}, aunque por simplicidad nos referiremos a él como 
+	\textit{homomorfismo borde}.
+	
 	A los elementos de $Im(\partial_{p})$ los llamaremos 
 	\textit{(p-1)-bordes}, y a los elementos de $Ker(\partial_{p})$, 
 	\textit{p-ciclos}.
@@ -525,26 +530,26 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Sean $\sigma,\tau \in \text{{\Large $\nu$}}_{p}$ tales que
 		$\sigma = \{u_{1},...,u_{p}\}$ y $\tau = \{w_{1},...,w_{p}\}$.
 
-		$\partial_{p}(\sigma)+\partial_{p}(\tau)=\displaystyle 
+		$B_{p}(\sigma)+B_{p}(\tau)=\displaystyle 
 		\sum_{j=0}^{p}\{u_{1},...,\widehat{u_{j}},...,u_{p}\} + 
 		\displaystyle \sum_{j=0}^{p}\{w_{1},...,\widehat{w_{j}},...,
 		w_{p}\}=\displaystyle \sum_{i=0}^{p}\sum_{j=0}^{p}\{u_{1} + 
 		w_{1},...,\widehat{u_{i}} + \widehat{w_{j}},...,u_{p}+w_{p}\}=
-		\partial_{p}(\sigma+\tau)$. 
+		B_{p}(\sigma+\tau)$. 
 
-		Esto prueba que $\partial_{p}$ conmuta con la suma para 
-		símplices. Como conmuta para símplices, se sigue que conmuta 
+		Esto prueba que $B_{p}$ conmuta con la suma para 
+		símplices. Se sigue que $\partial_{p}$ conmuta 
 		para cadenas.
 
-		Ahora, $0=\partial_{p}(\sigma)+\partial_{p}(\sigma)=
-		\partial_{p}(\sigma + \sigma)=\partial_{p}(0)$. Esto implica 
-		que $\partial_{p}$ deja fijo el símplice neutro. Al igual que
+		Ahora, $0=B_{p}(\sigma)+B_{p}(\sigma)=
+		B_{p}(\sigma + \sigma)=B_{p}(0)$. Esto implica 
+		que $B_{p}$ deja fijo el símplice neutro. Al igual que
 		antes, esta propiedad se extiende para cadenas.
 
-		Finalmente, $0=\partial_{p}(0)=\partial_{p}(\sigma - \sigma)=
-		\partial_{p}(\sigma)+\partial_{p}(-\sigma)$ y sumando 
-		$-\partial_{p}(\sigma)$ a ambos lados de la ecuacion se sigue 
-		que $\partial_{p}$ conmuta con el opuesto. Una vez más, este 
+		Finalmente, $0=B_{p}(0)=B_{p}(\sigma - \sigma)=
+		B_{p}(\sigma)+B_{p}(-\sigma)$ y sumando 
+		$-B_{p}(\sigma)$ a ambos lados de la ecuacion se sigue 
+		que $B_{p}$ conmuta con el opuesto. Una vez más, este 
 		hecho se extiende a cadenas.
 	\end{proof}
 
@@ -738,92 +743,89 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		eficiencia computacional de los algoritmos empleados para su 
 		cálculo.
 	\end{ejem}
-
-	\section{Nociones teóricas previas}
 	
-		Comenzamos dando algunas nociones básicas que nos serán muy útiles a lo largo del trabajo.
-			
-	\subsection{Homología}	
-
-		Habiendo interiorizado los conceptos previos, vamos a usarlos en nuestros siguientes propósitos. Así pues, consideremos $\mathbb{F}_{2}$ el cuerpo de dos elementos. Dado un
-		complejo simplicial {\Large $\nu$}, denotaremos por $C_{p}(\mathcal{K})$ al $\mathbb{F}_{2}$-espacio vectorial cuya base viene dada por los p-símplices de {\Large $\nu$}. Ahora,
-		para cualquier $p \in \{1,2,...\}$ definimos la siguiente aplicación: 
-		\begin{flalign*}
-			& \left.
-			\begin{array}{l}
-				\partial_{p}:C_{p}(\mathcal{K}) \rightarrow C_{p-1}(\mathcal{K})\\[2pt] 
-				\hspace{1.5cm} \sigma \mapsto \displaystyle \sum_{\mathclap{\tau \subset \sigma,\tau \in \mathcal{K}_{p-1}}}\tau
-			\end{array}
-			\right. &
-		\end{flalign*}
-		
-		Si $p=0$ entonces definimos $\partial_{0}=0$. Observemos que $\partial_{p}$ le asigna a cada p-símplice su borde, esto es, la suma de sus caras de codimensión 1. Adicionalmente, podemos
-		observar que $\forall p \in \{0,1,2,..\}$, $\partial_{p}\circ \partial_{p+1}=0$. De manera informal decimos que el borde del borde es vacío. Veamos un ejemplo para clarificar esta noción.
-
-		\begin{ejem}
-		
-			Ejemplo conveniente de ''el borde del borde es vacío''. (En construcción).
-
-		\end{ejem}
-
-		De la observación anterior se desprende que $Im(\partial_{p+1}) \subset Ker(\partial_{p})$. Esta propiedad motiva la siguiente definición.
-		\begin{defi}
-			Sea $p \in \{0,1,...\}$. Definimos la \textit{p-ésima homología} de un complejo simplicial {\Large $\nu$} como el espacio vectorial cociente:	
-			\begin{flalign*}
-				& \left.
-				H_{p}(\mathcal{K}):=Ker(\partial_{p})/Im(\partial_{p+1})
-				\right. &
-			\end{flalign*}
-		\end{defi}
-
-		\begin{remark}
-			A la dimensión de $H_{p}(\mathcal{K})$ la denotaremos por $B_{p}(\mathcal{K}):=dim H_{p}(\mathcal{K})=dim Ker(\partial_{p})-dim Im(\partial_{p+1})$ y la llamaremos
-			\textit{p-ésimo número de Betti}.\\
-			A los elementos de $Im(\partial_{p+1})$ los llamaremos \textit{p-bordes}, y a los de $Ker(\partial_{p})$ \textit{p-ciclos}.
-		\end{remark}
-
-		De la anterior consideración, deducimos que el p-ésimo número de Betti representa el número de agujeros p-dimensionales de K. Además, si {\Large $\nu$} es un complejo simplicial
-		de dimensión n, entonces $\forall p > n,\hspace{0.1cm} H_{p}(\mathcal{K})=0$ ya que $\mathcal{K}_{p}=\emptyset$. Esto nos lleva a la construcción de la siguiente cadena de 
-		espacios vectoriales:
-		\begin{flalign*}
-			& \left.
-			\begin{array}{l}
-				\hspace{0.1cm} \partial_{n+1} \hspace{1.1cm} \partial_{n} \hspace{1.4cm} \partial_{n-1} \hspace{0.9cm} \partial_{2} \hspace{1.3cm} \partial_{1} \hspace{1.2cm} \partial_{0}\\
-				0 \rightarrow C_{n}(\mathcal{K}) \rightarrow C_{n-1}(\mathcal{K}) \rightarrow \hspace{0.25cm} ... \hspace{0.25cm} \rightarrow C_{1}(\mathcal{K}) \rightarrow C_{0}(\mathcal{K}) \rightarrow 0
-			\end{array}
-			\right. &
-		\end{flalign*}
-
-		\begin{ejem}
-			Ejemplo conveniente de homología simplicial. (En construcción).
-		\end{ejem}	
-
-	\subsection{Aplicaciones entre complejos simpliciales}
-
-		Consideremos una aplicación entre complejos simpliciales, $f:\mathcal{K}\rightarrow\mathcal{K}'$. Tal aplicación induce una aplicación lineal en $\mathbb{F}_{2}$:
-		\begin{flalign*}
-			& \left.
-			\begin{array}{l}
-				\overline{f_{p}}:C_{p}(\mathcal{K})\rightarrow C_{p}(\mathcal{K}')\\[2pt] 
-				\hspace{0.45cm} \displaystyle \sum_{\mathclap{\sigma \in \mathcal{K}_{p}}}a_{\sigma}\sigma \mapsto 
-				\displaystyle \sum_{\mathclap{f(\sigma) \in \mathcal{K}'}}a_{\sigma}f(\sigma)
-			\end{array}
-			\right. ; \hspace{0.25cm} a_{\sigma} \in \mathbb{F}_{2} &
-		\end{flalign*}
-		
-		Observamos también que $\overline{f_{p}}\circ\partial_{p+1}=\partial_{p+1}'\circ\overline{f_{p+1}}$, y en consecuencia, $\overline{f_{p}}$ induce una aplicación lineal
-		entre espacios vectoriales de homología:	
-		\begin{flalign*}
-			& \left.
-			\begin{array}{l}
-				f_{p}:H_{p}(\mathcal{K})\rightarrow H_{p}(\mathcal{K}')\\[2pt] 
-				\hspace{1.35cm} [x] \mapsto [\overline{f_{p}(x)}]
-			\end{array}
-			\right.&
-		\end{flalign*}
-
-		Concluimos que, dada una aplicación $f$ entre complejos simpliciales, siempre es posible asociarle una aplicación $f_{p}$ entre espacios vectoriales de homología.
+	Al igual que en la subsección anterior, veamos como podemos definir 
+	morfismos, de manera más general, entre los objetos que estamos 
+	manejando.
 	
+	Consideremos una aplicación entre complejos simpliciales, $f:\text{
+	{\Large $\nu$}}\rightarrow\text{{\Large $\nu$}}'$. Aplicando el mismo 
+	razonamiento que para la definición del homomorfismo borde, tenemos 
+	que $f$ induce un homomorfismo entre grupos de cadenas :
+	\begin{equation*}
+		\left.
+		\begin{array}{lll}
+			\overline{f_{p}}:C_{p}(\text{{\Large $\nu$}}) & 
+				\rightarrow & C_{p}(\text{{\Large $\nu$}}')
+				\\[3pt] 
+			\multicolumn{1}{r}{c=\displaystyle \sum_{\mathclap{
+			\sigma \in \text{{\Large $\nu$}$_{p}$}}}\sigma} & 
+			\mapsto & 
+			\overline{f_{p}}(c)=\displaystyle \sum_{\mathclap{
+			f(\sigma) \in \text{{\Large $\nu$}$_{p}'$}}}f(\sigma)
+		\end{array}
+		\right. 
+	\end{equation*}
+	Además, tal $f$ nos permite construir la secuencia:
+	\begin{equation*}
+		 \left.
+		\begin{array}{ccccccccccccc}
+			 & & & \partial_{p} &  & 
+			\partial_{p-1} &  & \partial_{2}&  & \partial_{1}&  & 
+			\partial_{0} & \\ 
+			\emptyset & \rightarrow & C_{p}(
+			\text{{\Large $\nu$}}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}}) & \rightarrow &\cdots & 
+			\rightarrow & C_{1}(
+			\text{{\Large $\nu$}})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}})& \rightarrow & \emptyset\\[3pt]
+
+			 & & \downarrow \overline{f_{p}}& & \downarrow 
+			\overline{f_{p-1}}& 
+			 & & & \downarrow \overline{f_{1}}
+			 & & \downarrow \overline{f_{0}} & & \\ [3pt]
+			\emptyset & \rightarrow & C_{p}(
+			\text{{\Large $\nu$}}') & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}}') & \rightarrow &\cdots & 
+			\rightarrow & C_{1}(
+			\text{{\Large $\nu$}}')& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}}')& \rightarrow & \emptyset \\
+			 & & & \partial_{p}' &  & 
+			\partial_{p-1}' &  & \partial_{2}' &  & \partial_{1}'&
+					& \partial_{0}' &
+		\end{array}
+		\right. 
+	\end{equation*}
+	De esta secuencia observamos que: 
+	\begin{equation*}
+		\overline{f_{p-1}}\circ\partial_{p}=
+		\partial_{p}'\circ\overline{f_{p}} 
+	\end{equation*}
+	En consecuencia, $\overline{f_{p}}$ induce un 
+	homomorfismo entre grupos de homología:	
+		\begin{align*}
+			\left.
+			\begin{array}{l}
+				f_{p}:H_{p}(\text{{\Large $\nu$}})\rightarrow 
+				H_{p}(\text{{\Large $\nu$}}')\\[3pt] 
+				\hspace{1.35cm} [c] \mapsto [\overline{f_{p}
+				(c)}]
+			\end{array}
+			\right.
+		\end{align*}
+	Concluimos que, dada una aplicación $f$ entre complejos simpliciales, 
+	siempre es posible asociarle una aplicación $f_{p}$ entre grupos de 
+	homología.
+	
+	\begin{remark}
+		Este propiedad es muy importante, de hecho, se conoce como 
+		\emph{funtorialidad} y pertenece al ámbito de la teoría de 
+		categorías que queda fuera del alcance del presente trabajo. 
+		Sin embargo, observemos que esta propiedad es la responsable 
+		de que podamos ver $C_{p}(\text{{\Large $\nu$}})$ como grupo
+		o como espacio vectorial según nos convenga.
+	\end{remark}
+
 	\subsection{Homología persistente}	
 		
 		Tras todos los conceptos previos, ya estamos en una buena posición para definir el concepto central del trabajo: \textbf{la homología persistente}. Sin embargo, aún
