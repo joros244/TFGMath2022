@@ -623,9 +623,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		en \ref{def:borde_form}. Lo denotaremos por $H_{p}(\text{
 		{\Large $\nu$}})$.
 
-		A su dimensión, $dimH_{p}(\text{{\Large $\nu$}})=
-		dimKer(\partial_{p})-dimIm(\partial_{p+1})$, la 
-		llamaremos \textit{p-ésimo número de Betti}, y la denotaremos
+		A su orden, $|H_{p}(\text{{\Large $\nu$}})|=
+		|Ker(\partial_{p})|-|Im(\partial_{p+1})|$, lo 
+		llamaremos \textit{p-ésimo número de Betti}, y lo denotaremos
 		por $\beta_{p}(\text{{\Large $\nu$}})$.
 	\end{defi}
 
@@ -752,7 +752,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	{\Large $\nu$}}\rightarrow\text{{\Large $\nu$}}'$. Aplicando el mismo 
 	razonamiento que para la definición del homomorfismo borde, tenemos 
 	que $f$ induce un homomorfismo entre grupos de cadenas :
-	\begin{equation*}
+	\begin{equation}
+		\label{hom:induc}
 		\left.
 		\begin{array}{lll}
 			\overline{f_{p}}:C_{p}(\text{{\Large $\nu$}}) & 
@@ -765,9 +766,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			f(\sigma) \in \text{{\Large $\nu$}$_{p}'$}}}f(\sigma)
 		\end{array}
 		\right. 
-	\end{equation*}
+	\end{equation}
 	Además, tal $f$ nos permite construir la secuencia:
-	\begin{equation*}
+	\begin{equation}
+		\label{hom: gruphom}
 		 \left.
 		\begin{array}{ccccccccccccc}
 			 & & & \partial_{p} &  & 
@@ -795,7 +797,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 					& \partial_{0}' &
 		\end{array}
 		\right. 
-	\end{equation*}
+	\end{equation}
 	De esta secuencia observamos que: 
 	\begin{equation*}
 		\overline{f_{p-1}}\circ\partial_{p}=
@@ -837,8 +839,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Sea {\Large $\nu$} un complejo simplicial abstracto finito. 
 		Consideremos la secuencia $ \text{{\Large $\nu$}$_{1}$} 
 		\subset \text{{\Large $\nu$}$_{2}$} \subset \cdots \subset
-		\text{{\Large $\nu$}$_{p-1}$} \subset 
-		\text{{\Large $\nu$}$_{p}$} = \text{{\Large $\nu$}}$ de 
+		\text{{\Large $\nu$}$_{k-1}$} \subset 
+		\text{{\Large $\nu$}$_{k}$} = \text{{\Large $\nu$}}$ de 
 		subcomplejos simpliciales cualesquiera de {\Large $\nu$}. A
 		{\Large $\nu$} junto con su secuencia de subcomplejos 
 		simpliciales encajados lo llamaremos \textit{complejo 
@@ -868,18 +870,22 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{defi}
 	Sea $ \text{{\Large $\nu$}$_{1}$} 
 		\subset \text{{\Large $\nu$}$_{2}$} \subset \cdots \subset
-		\text{{\Large $\nu$}$_{p-1}$} \subset 
-		\text{{\Large $\nu$}$_{p}$} = \text{{\Large $\nu$}}$ un 
+		\text{{\Large $\nu$}$_{k-1}$} \subset 
+		\text{{\Large $\nu$}$_{k}$} = \text{{\Large $\nu$}}$ un 
 		complejo simplicial filtrado. Definimos los \textit{p-ésimos
 		grupos de homología persistente} como las imágenes de los 
 		homomorfismos inducidos por la inclusión, $H_{p}^{i,j}=
-		Imf_{p}^{i,j}$, con $0\leq i \leq j \leq p$. 
+		Imf_{p}^{i,j}$, con $0\leq i \leq j \leq k$.
+
+		A su orden, $|H_{p}^{i,j}|$, lo llamaremos \textit{p-ésimo 
+		número de Betti persistente} y lo denotaremos por 
+		$\beta_{p}^{i,j}$.
 	\end{defi}
 
 	Los homomorfismos $f_{p}^{i,j}$ los definimos siguiendo la idea dada
 	por la funtorialidad. Es decir, tendremos el diagrama:
 	\begin{equation*}
-		 \left.
+		\resizebox{\textwidth}{!}{$ 
 		\begin{array}{ccccccccccccc}
 			 & & & \partial_{p}^{1} &  & 
 			\partial_{p-1}^{1} &  & \partial_{2}^{1}&  & 
@@ -893,10 +899,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\text{{\Large $\nu$}$_{1}$})& \rightarrow & 
 			\emptyset\\[3pt]
 
-			& & \downarrow \overline{f_{p}}& \partial_{p}^{2} & 
-			\downarrow \overline{f_{p-1}}& \partial_{p-1}^{2} 
-			& & \partial_{2}^{2} & \downarrow \overline{f_{1}}
-			& \partial_{1}^{2} & \downarrow \overline{f_{0}} & 
+			& & \downarrow \overline{f_{p}^{1,2}}& \partial_{p}^{2} & 
+			\downarrow \overline{f_{p-1}^{1,2}}& \partial_{p-1}^{2} 
+			& & \partial_{2}^{2} & \downarrow \overline{f_{1}^{1,2}}
+			& \partial_{1}^{2} & \downarrow \overline{f_{0}^{1,2}} & 
 			\partial_{0}^{2} & \\ [3pt]	
 			\emptyset & \rightarrow & C_{p}(
 			\text{{\Large $\nu$}$_{2}$}) & \rightarrow & C_{p-1}(
@@ -910,32 +916,45 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & 
 			\vdots \\[5pt]
 			
-			& & & \partial_{p}^{1} &  & 
-			\partial_{p-1}^{1} &  & \partial_{2}^{1}&  & 
-			\partial_{1}^{1}&  & 
-			\partial_{0}^{1} & \\ 
+			& & & \partial_{p}^{k-1} &  & 
+			\partial_{p-1}^{k-1} &  & \partial_{2}^{k-1}&  & 
+			\partial_{1}^{k-1}&  & 
+			\partial_{0}^{k-1} & \\ 
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$_{1}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$_{1}$}) & \rightarrow &\cdots & 
+			\text{{\Large $\nu$}$_{k-1}$}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}$_{k-1}$}) & \rightarrow &\cdots & 
 			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$_{1}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$_{1}$})& \rightarrow & 
+			\text{{\Large $\nu$}$_{k-1}$})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}$_{k-1}$})& \rightarrow & 
 			\emptyset\\[3pt]
 
-			& & \downarrow \overline{f_{p}}& \partial_{p}^{2} & 
-			\downarrow \overline{f_{p-1}}& \partial_{p-1}^{2} 
-			& & \partial_{2}^{2} & \downarrow \overline{f_{1}}
-			& \partial_{1}^{2} & \downarrow \overline{f_{0}} & 
-			\partial_{0}^{2} & \\ [3pt]	
+			& & \downarrow \overline{f_{p}^{k-1,k}}& \partial_{p}^{k} & 
+			\downarrow \overline{f_{p-1}^{k-1,k}}& \partial_{p-1}^{k} 
+			& & \partial_{2}^{k} & \downarrow \overline{f_{1}^{k-1,k}}
+			& \partial_{1}^{k} & \downarrow \overline{f_{0}^{k-1,k}} & 
+			\partial_{0}^{k} & \\ [3pt]	
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$_{2}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$_{2}$}) & \rightarrow &\cdots & 
+			\text{{\Large $\nu$}$_{k}$}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}$_{k}$}) & \rightarrow &\cdots & 
 			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$_{2}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$_{2}$})& \rightarrow & \emptyset \\
-		\end{array}
-		\right. 
+			\text{{\Large $\nu$}$_{k}$})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}$_{k}$})& \rightarrow & \emptyset \\
+		\end{array}$}
 	\end{equation*}
+	Donde los homomorfismos $\overline{f_{p}^{i,j}}$ entre grupos de 
+	cadenas vienen inducidos por el homomorfismo inclusión $f^{i,j}: 
+	\text{{\Large $\nu$}$_{i}$} \xhookrightarrow{} 
+	\text{{\Large $\nu$}$_{j}$}$ con $0\leq i \leq j \leq k$, como en 
+	\ref{hom:induc}. Ahora, aplicando el mismo razonamiento que en 
+	\ref{hom: gruphom} definimos los homomorfismos entre grupos de 
+	homología $f^{i,j}_{p}$.
+
+	Ahora que ya tenemos una herramienta que nos captura las 
+	características topológicas junto con la variable <<tiempo>>, en un 
+	complejo simplicial abstracto filtrado, necesitamos una manera gŕafica 
+	de visualizar esta información. Para ello, emplearemos los  
+	\emph{diagramas de barras} y los \emph{diagramas de persistencia}.
+	
 	\subsection{Homología persistente}	
 		
 		Tras todos los conceptos previos, ya estamos en una buena posición para definir el concepto central del trabajo: \textbf{la homología persistente}. Sin embargo, aún
