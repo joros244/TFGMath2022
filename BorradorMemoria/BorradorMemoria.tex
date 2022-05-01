@@ -49,7 +49,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 \affil{Facultad de Ciencia y Tecnología\\
   Universidad de La Rioja}
 
-\date{Abril 2022}
+\date{Mayo 2022}
 
 \begin{document}
 	
@@ -81,15 +81,16 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	Comenzamos con el primer concepto fundamental de todo el trabajo, los 
 	\emph{complejos simpliciales}. Esta noción admite dos enfoques 
 	diferentes, por lo que debemos dintinguir entre dos definiciones 
-	equivalentes: los complejos simpliciales \emph{abstractos} y los 
-	complejos simpliciales \emph{geométricos}.
+	relacionadas: los complejos simpliciales \emph{abstractos} y los 
+	complejos simpliciales \emph{geométricos}. Para el desarrrollo estas 
+	nociones seguiremos la guia proporcionada por \cite{}.
 
 	Siguiendo el enfoque combinatorio, comenzamos definiendo los complejos 
 	simpliciales abstractos y algunas nociones relacionadas. 
 
 	\begin{defi}
 	
-	Un \textit{complejo simplicial abstracto} es una colección, 
+	Un \textit{complejo simplicial abstracto} es una colección finita, 
 	\begin{Large}$\nu$\end{Large}, de subconjuntos no vacíos de un 
 	conjunto, {\Large $\nu$}$_{0}$, que verifica las siguientes 
 	propiedades:
@@ -102,7 +103,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\begin{Large}$ \nu$\end{Large}
 	\end{enumerate}
 	
-	A los elementos de {\Large $\nu$} los llamaremos \textit{símplices},
+	A los elementos de {\Large $\nu$} los llamaremos \textit{símplices};
 	más concretamente: dado $\sigma \in $ {\Large $\nu$}, diremos que 
 	$\sigma$ tiene \textit{dimensión p}, y que $\sigma$ es un 
 	\textit{p-símplice}, si $|\sigma|=p+1$. Asimismo, definimos la 
@@ -118,15 +119,17 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{defi}
 		Sean $\sigma$ y $\tau$ dos símplices de {\Large $\nu$} tales 
 		que $\tau \subset \sigma$. Entonces diremos que $\tau$ es una 
-		\textit{cara} de $\sigma$, y si las dimensiones de $\sigma$ y 
-		$\tau$ difieren por a, diremos que $\tau$ es una cara de 
-		$\sigma$ de \textit{codimensión a}.
+		\textit{cara} de $\sigma$, y además, si las dimensiones de 
+		$\sigma$ y $\tau$ difieren por un número natural $a$, 
+		diremos que $\tau$ es una cara de $\sigma$ de 
+		\textit{codimensión a}.
 	\end{defi}
 
 	Ahora que hemos definido los complejos simpliciales abstractos veamos 
 	un pequeño ejemplo para fijar ideas.
 
 	\begin{ejem}
+		\label{ejem:1}
 		Supongamos el siguiente complejo simplicial abstracto:
 		\begin{multline*} 
 			\text{{\Large $\nu$}}=\{\{a\},\{b\},\{c\},\{d\},
@@ -137,9 +140,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Así, tenemos que la dimensión de {\Large $\nu$} es 3. También 
 		observamos que el 3-símplice $\{a,b,c,d\}$ tiene por caras de 
 		codimensión 1 a los 2-símplices $\{a,b,c\},\{a,b,d\}$ y 
-		$\{a,c,d\}$. Veamos su representación geométrica.
+		$\{a,c,d\}$. En la figura \ref{fig:tetra} ilustramos una 
+		representación geométrica de {\Large $\nu$}.
 
 		\begin{figure}[H]
+			\label{fig:tetra}
 			\centering
 			\begin{tikzpicture}
 				%Nodes
@@ -163,9 +168,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			simplicial {\Large $\nu$}.}
 		\end{figure}
 
-		Esta representación es única salvo homeomorfismo. Observamos 
+		La representación recogida en la figura \ref{fig:tetra}, en la
+		que cada símplice corresponde con un poliedro regular (cada 
+		$0$-símplice corresponde a un punto, cada $1$-símplice a una 
+		arista, cada $2$-símplice a un triángulo, cada $3$-símplice a 
+		un tetraedro, etc.) es única salvo homeomorfismo. Observamos 
 		que interpretando {\Large $\nu$} como un subconjunto de 
-		$\mathbb{R}^{n}$ obtenemos un tetraedro. Esta idea motiva el 
+		$\mathbb{R}^{3}$ obtenemos un tetraedro. Esta idea motiva el 
 		otro enfoque de los complejos simpliciales: el enfoque 
 		geométrico.
 	\end{ejem}
@@ -181,8 +190,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		linealmente independientes.
 
 		Sea $x \in \mathbb{R}^{n}$. Diremos que $x$ es una 
-		\textit{combinación afín} de los $u_{i}$ si $\exists 
-		\lambda_{0},...,\lambda_{k}$ tales que 
+		\textit{combinación afín} de $\{u_{0},u_{1},...,u_{k}\}$ si 
+		$\exists \lambda_{0},...,\lambda_{k}$ tales que 
 		$x=\sum_{i=0}^{k}\lambda_{i}u_{i}$ y 
 		$\sum_{i=0}^{k}\lambda_{i}=1$
 	\end{defi}
@@ -191,11 +200,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$ k+1 
 		puntos afínmente independientes y $x=\sum_{i=0}^{k}
 		\lambda_{i}u_{i}$ una combinación afín. Diremos que $x$ es una
-		\textit{combinación convexa} de los $u_{i}$ si todos los 
-		$\lambda_{i}$ son no negativos.
+		\textit{combinación convexa} de $\{u_{0},u_{1},...,\\
+		u_{k}\}$ si $\{\lambda_{0},\lambda_{1},...,\lambda_{k}\}$ son 
+		no negativos.
 
-		Definimos la \textit{clausura convexa} de los $u_{i}$ como el
-		conjunto de todas sus posibles combinaciones convexas.
+		Definimos la \textit{clausura convexa} de $\{u_{0},u_{1},...,
+		u_{k}\}$ como el conjunto de todas sus posibles combinaciones 
+		convexas.
 	\end{defi}
 
 	Ahora que ya contamos con estas nociones previas pasamos a definir la 
@@ -209,8 +220,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\textit{dimensión de $\sigma$} es k.
 
 		Llamamos \textit{cara} de $\sigma$ a cualquier combinación 
-		convexa de un subconjunto no vacío de los $u_{i}$. Lo 
-		denotaremos por $\leq$.
+		convexa de un subconjunto no vacío de $\{u_{0},u_{1},...,
+		u_{k}\}$. A la relación <<ser cara de>> la denotaremos por 
+		$\leq$.
 
 		Para los casos $k=0,1,2,3$ diremos que $\sigma$ es un vértice,
 		arista, triángulo, tetraedro respectivamente.
@@ -235,23 +247,124 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\end{enumerate}
 	\end{defi}
 	
+	La relación entre los complejos simpliciales abstractos y los 
+	geométricos viene dada por la construcción de la \emph{realización
+	geométrica} de un complejo simplicial abstracto, que es un complejo 
+	simplicial geométrico definido tal y como se ilustra en la figura 
+	\ref{fig:tetra} del ejemplo \ref{ejem:1}(para más detalles véase 
+	\cite{}).
+
 	De aquí en adelante emplearemos la definición de complejo simplicial 
 	abstracto, pues es la más adecuada para el presente trabajo.
 
 	Ahora que ya hemos definido los objetos con los que vamos a trabajar, 
 	procedemos a definir las aplicaciones entre ellos.
 	\begin{defi}
-		Una \textit{aplicación entre complejos simpliciales}, 
-		$f:\text{{\Large $\nu$}} \rightarrow \text{{\Large 
-		$\nu$}$^{\prime}$}$, es una aplicación $f:\text{{\Large 
-		$\nu$}$_{0}$} \rightarrow \text{{\Large $\nu$}$_{0}^{\prime}$}$ 
-		tal que $f(\sigma) \in \text{{\Large $\nu$}$^{\prime}$} 
-		\hspace{5pt} \forall \sigma \in \text{{\Large $\nu$}}$.
+		Una \textit{aplicación simplicial entre complejos 
+		simpliciales}, $f:\text{{\Large $\nu$}} \rightarrow 
+		\text{{\Large $\nu$}$^{\prime}$}$, es una aplicación 
+		tal que $f(\sigma)=\{g(u_{1}),g(u_{2}),...,g(u_{k})\}=
+		\{v_{1},v_{2},...,v_{k}\}$; donde
+		$g:\text{{\Large $\nu$}$_{0}$} \rightarrow \text{{\Large 
+		$\nu$}$_{0}^{\prime}$}$ es una aplicación entre $0$-símplices,
+		$\sigma=\{u_{1},u_{2},...,u_{k}\} \in \text{{\Large $\nu$}}$
+		y $\{v_{1},v_{2},...,v_{k}\} \in \text{{\Large $\nu$}$^{
+		\prime}$}$.	
 	\end{defi}
 	
-	Teniendo definidas las aplicaciones entre complejos simpliciales, 
-	vamos a dotar a los complejos simpliciales de una cierta estructura 
-	que será de lo más útil para los propósitos del presente trabajo.
+	\subsection{Homología. Homología persistente}
+	
+	En la sección anterior hemos fijado el concepto de complejo 
+	simplicial, que nos será muy útil a lo largo de esta sección para 
+	desarrollar la noción de \emph{grupos de homología}. A diferencia de 
+	como surgió el concepto de \emph{grupos de homología} en la historia 
+	de las matemáticas, en el presente trabajo desarrollaremos primero la 
+	noción general para luego reducir al caso particular de la 
+	\emph{homología simplicial}. Para ello emplearemos la guía 
+	proporcionada por \cite{}.
+
+	Comenzamos la sección con una definición básica, que no aparece en el 
+	grado, y que nos será necesaria para nuestros propósitos.
+
+	\begin{defi}
+		Sea $R$ anillo. Definimos el \textit{R-módulo izquierdo} sobre
+		$R$ como el conjunto $M$ junto con las operaciones:
+		\begin{itemize}
+			\item Suma: $M \times M \rightarrow M, (x,y) \mapsto 
+				x+y$, y
+			\item Producto por escalares: $R \times M \rightarrow 
+				M, (r,x) \mapsto rx$,	
+		\end{itemize}
+		satisfaciendo las siguientes propiedades:
+		\begin{enumerate}
+			\item La suma es asociativa, conmutativa, $M$ contiene
+			      un elemento neutro para ella y todo elemento 
+			      tiene opuesto. Es decir, $(M,+)$ es un grupo 
+			      abeliano.
+		      \item Para cualesquiera $x,y$ de $M$ y $r,s$ de $R$: 
+		      	\begin{enumerate}
+			 	\item $(r+s)x=rx+sx$ (distributiva respecto a 
+					la suma de $R$).
+				\item $(rs)x=r(sx)$ (asociativa).
+				\item $r(x+y)=rx+ry$ (distributiva respecto a 
+					la suma de $M$).
+				\item Si $R$ es unitario, $1x=x$.	
+			\end{enumerate}
+		\end{enumerate}
+		De manera análoga definimos el \textit{R-módulo derecho}. Si 
+		$R$ es conmutativo, entonces el $R$-módulo izquierdo es el 
+		mismo que el $R$-módulo derecho. En tal caso nos referiremos a
+		él simplemente como \textit{R-módulo}.
+	\end{defi}
+
+	\begin{remark}
+	De la noción de $R$-módulo nos interesan particularmente las 
+	siguientes propiedades: todo grupo abeliano es $\mathbb{Z}$-módulo, y
+	si $R$ es un cuerpo, entonces las nociones de $R$-módulo y $R$-espacio
+	vectorial coinciden.
+	\end{remark}
+
+	Como es natural, a la noción de $R$-módulo le sigue la definición de
+	\emph{R-submódulo}.
+
+	\begin{defi}
+	Sea $M$ un $R$-módulo. Definimos el \textit{R-submódulo} de $M$ como 
+	el subconjunto, no vacío, $N$ de $M$ tal que es cerrado para opuestos 
+	y para las operaciones heredadas de $M$. A la relación <<ser submódulo 
+	de>> la denotaremos por $\leq$.
+	\end{defi}
+
+	Tras estas consideraciones básicas, comenzamos el camino que nos 
+	conducirá a la definición de los \emph{grupos de homología}. Empezamos
+	el camino con la definición de \emph{complejo de cadenas}.
+
+	\begin{defi}
+	Sea $R$ anillo. Decimos que un \textit{complejo de cadenas} sobre $R$ 
+	es un conjunto $\mathcal{C}_{*}=\{(C_{p},d_{p}) | p \in \mathbb{Z}\}$
+	de $R$-módulos y $R$-homomorfismos $\{\partial_{p}: C_{p} \rightarrow 
+	C_{p-1} | p \in \mathbb{Z}\}$, satisfaciendo $\partial_{p}\circ 
+	\partial_{p+1}=0$. Se denota por $(\mathcal{C}_{*},\partial)$ y a 
+	$\partial$ se le llama el diferencial del complejo.
+	\end{defi}
+
+	Notemos que la propiedad anterior es equivalente a que 
+	$Im(\partial_{p+1}) \leq Ker(\partial_{p}), p \in \mathbb{Z}$. Es 
+	habitual pensar en $\mathcal{C}_{*}$ como una sucesión infinita cuya
+	representación es como sigue:
+
+	\begin{equation*}
+		 \left.
+		\begin{array}{ccccccccc}
+			 & \partial_{2} &  & \partial_{1} &  & 
+			\partial_{0} &  & \partial_{-1} & \\ 
+			\cdots & \longrightarrow & C_{1}& 
+			\longrightarrow & C_{0} 
+					& \longrightarrow 
+			& C_{-1} & 
+			\longrightarrow & \cdots 
+		\end{array}
+		\right. 
+	\end{equation*}
 
 	Consideremos $\mathbb{Z}_{2}$ el cuerpo de dos elementos. Dado un 
 	complejo simplicial {\Large $\nu$}, denotaremos por 
@@ -430,7 +543,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
  
 	\newpage
 
-	\subsection{Homología. Homología persistente}
 	
 	En la subsección anterior, más concretamente en \ref{def:borde}, hemos 
 	introducido la aplicación <<borde>>. A lo largo de esta subsección 
