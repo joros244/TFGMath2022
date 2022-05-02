@@ -28,6 +28,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 \numberwithin{equation}{section}
 
+\newtheorem{theorem}{Teorema}
 \theoremstyle{definition}
 \newtheorem{defi}{Definición}
 \newtheorem{ejemplo}{Ejemplo}
@@ -276,12 +277,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	
 	En la sección anterior hemos fijado el concepto de complejo 
 	simplicial, que nos será muy útil a lo largo de esta sección para 
-	desarrollar la noción de \emph{grupos de homología}. A diferencia de 
-	como surgió el concepto de \emph{grupos de homología} en la historia 
-	de las matemáticas, en el presente trabajo desarrollaremos primero la 
-	noción general para luego reducir al caso particular de la 
-	\emph{homología simplicial}. Para ello emplearemos la guía 
-	proporcionada por \cite{}.
+	desarrollar la noción de \emph{espacio vectorial de homología}. A 
+	diferencia de como surgió el concepto de \emph{espacio vectorial de
+	homología} en la historia de las matemáticas, en el presente trabajo 
+	desarrollaremos primero la noción general para luego reducir al caso 
+	particular de la \emph{homología simplicial}. Para ello emplearemos la 
+	guía proporcionada por \cite{}.
 
 	Comenzamos la sección con una definición básica, que no aparece en el 
 	grado, y que nos será necesaria para nuestros propósitos.
@@ -335,12 +336,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{defi}
 
 	Tras estas consideraciones básicas, comenzamos el camino que nos 
-	conducirá a la definición de los \emph{grupos de homología}. Empezamos
-	el camino con la definición de \emph{complejo de cadenas}.
+	conducirá a la definición de los \emph{espacios vectoriales de 
+	homología}. Empezamos el camino con la definición de \emph{complejo de 
+	cadenas}.
 
 	\begin{defi}
 	Sea $R$ anillo. Decimos que un \textit{complejo de cadenas} sobre $R$ 
-	es un conjunto $\mathcal{C}_{*}=\{(C_{p},d_{p}) | p \in \mathbb{Z}\}$
+	es un conjunto $\mathcal{C}_{*}=\{(C_{p},\partial_{p}) | p \in \mathbb{Z}\}$
 	de $R$-módulos y $R$-homomorfismos $\{\partial_{p}: C_{p} \rightarrow 
 	C_{p-1} | p \in \mathbb{Z}\}$, satisfaciendo $\partial_{p}\circ 
 	\partial_{p+1}=0$. Se denota por $(\mathcal{C}_{*},\partial)$ y a 
@@ -366,63 +368,191 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\right. 
 	\end{equation*}
 
-	Consideremos $\mathbb{Z}_{2}$ el cuerpo de dos elementos. Dado un 
-	complejo simplicial {\Large $\nu$}, denotaremos por 
-	$C_{p}(\text{{\Large $\nu$}})$ al $\mathbb{Z}_{2}$-espacio vectorial
-	libre cuya base viene dada por los p-símplices de {\Large $\nu$}. 
-	Ahora, para cualquier $p \in \{1,2,...\}$ definimos la siguiente 
-	aplicación: 
+	Fijemos ahora nuestra atención en los $R$-submódulos de $C_{p}$: 
+	$Im(\partial_{p+1})$ y $Ker(\partial_{p})$.
+
+	\begin{defi}
+		Sea $(\mathcal{C}_{*},\partial)$ un complejo de cadenas sobre 
+		$R$ anillo. 
+		Definimos los siguientes $R$-submódulos de $C_{p}$:
+		\begin{enumerate}
+			\item $Z_{p}(\mathcal{C}_{*})=Ker(\partial_{p})$. A 
+				sus elementos los llamaremos $p$-ciclos.
+			\item $B_{p}(\mathcal{C}_{*})=Im(\partial_{p+1})$. A 
+				sus elementos los llamaremos $p$-bordes.
+		\end{enumerate}
+	\end{defi}
+
+	Ahora bien, en virtud de la relación de inclusión entre ambos 
+	submódulos y de las operaciones heredadas, podemos considerar el 
+	\emph{$R$-módulo cociente} $Z_{p}(\mathcal{C}_{*})/B_{p}(
+	\mathcal{C}_{*})$. Este cociente constituye una pieza fundamental del 
+	presente trabajo y merece una definición detallada:
+
+	\begin{defi}
+		Sea $(\mathcal{C}_{*},\partial)$ un complejo de cadenas sobre 
+		$R$ anillo. Definimos el $p$-ésimo $R$-módulo de homología de
+		$\mathcal{C}_{*}$ como el cociente:
+		$$H_{p}(\mathcal{C}_{*}):=Z_{p}(\mathcal{C}_{*})/B_{p}(
+		\mathcal{C}_{*})$$
+	\end{defi}
+
+	Ahora que ya tenemos una noción general de los $R$-módulos de 
+	homología, pasamos al caso particular que nos ocupa en el presente 
+	trabajo: \emph{la homología simplicial}. El primer paso será definir 
+	el complejo de cadenas asociado a un complejo simplicial, para ello 
+	será necesario fijar los $R$-módulos y $R$-homomorfismos apropiados.
+
+	Ante esta decisión, lo habitual es fijar una orientación para los 
+	símplices (la dada por el orden lexicográfico de sus vértices) y 
+	definir los grupos abelianos de cadenas dados por las sumas formales 
+	de los símplices con coeficientes en $\mathbb{Z}$ 
+	($\mathbb{Z}$-módulos). 
+
+	No obstante, en el presente trabajo ignoramos 
+	la noción de orientación, pues no aporta beneficio alguno a nuestros 
+	propósitos, es más, podría perjudicarlos. Así pues, a partir de ahora,
+	fijaremos el anillo $R=\mathbb{Z}_{2}$, con lo que podremos ver los 
+	$\mathbb{Z}_{2}$-módulos que conformarán nuestro complejo de cadenas 
+	como $\mathbb{Z}_{2}$-espacios vectoriales cuya base vendrá dada por 
+	los símplices del complejo simplicial escogido.
+
+	Veamos esto de manera más formal:
+
+	\begin{defi}
+		Sea {\Large $\nu$} un complejo simplicial y $p \in \mathbb{N}
+		\cup\{0\}$ 
+		tal que $p\leq dim \text{{\Large $\nu$}}$. Una 
+		\textit{p-cadena} es una suma formal de p-símplices de 
+		{\Large $\nu$}. Es decir, si $c$ es una p-cadena, entonces 
+		$c=\sum a_{i}\sigma_{i},\sigma_{i} \in \text{{\Large $\nu$}},
+		a_{i} \in \mathbb{Z}_{2}$. 
+	\end{defi}
+	
+	Con la noción de p-cadena, pasamos a la definición de los 
+	$\mathbb{Z}_{2}$-módulos que hemos introducido anteriormente. En 
+	adelante los denotaremos por $C_{p}(\text{{\Large $\nu$}})$. 
+
+	\begin{defi}
+		Sea {\Large $\nu$} un complejo simplicial abstracto. Definimos
+		el \textit{$\mathbb{Z}_{2}$-módulo de p-cadenas} de 
+		{\Large $\nu$} como el conjunto de todas las p-cadenas de 
+		{\Large $\nu$}, con la operación suma componente a componente 
+		con coeficientes en $\mathbb{Z}_{2}$, y el producto externo 
+		por elementos de $\mathbb{Z}_{2}$ usual. Lo denotaremos por 
+		$(C_{p}(\text{{\Large $\nu$}}), +)$ o simplemente 
+		$C_{p}(\text{{\Large $\nu$}})$. 	
+	\end{defi}
+	
+	Tal y como ya hemos advertido antes, estos $\mathbb{Z}_{2}$-módulos 
+	pueden ser vistos como espacios vectoriales cuyas bases vienen dadas 
+	por los p-símplices de {\Large $\nu$}. Así pues, en adelante, por 
+	simplicidad del lenguaje nos referiremos a ellos como \emph{espacios 
+	vectoriales de p-cadenas}.
+
+	Habiendo especificado los $R$-módulos que vamos a emplear, pasamos a
+	definir los $R$-homomorfismos asociados.
+
+	\begin{defi}
+		Sea {\Large $\nu$} un complejo simplicial abstracto, $\sigma 
+		\in \text{{\Large $\nu$}}$ y $\sigma = \{u_{0},...,u_{p}\}$. 
+		Definimos el \textit{operador borde para un símplice}
+		como:
+		$$
+		B_{p}(\sigma)=\displaystyle 
+		\sum_{j=0}^{p}\{u_{0},...,\widehat{u_{j}},...,u_{p}\}
+		$$
+ 		La suma anterior es una suma formal, donde $\widehat{u_{j}}$ 
+		indica que omitimos $u_{j}$. Ahora extendemos dicho operador 
+		para cadenas, en concreto:
 	\begin{equation}
-		\label{def:borde}
+		\label{def:borde_form}
 		\begin{array}{lll}
 			\partial_{p}:C_{p}(\text{{\Large $\nu$}}) & 
 				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
 				\\[3pt] 
-			\multicolumn{1}{r}{c} & \mapsto & \displaystyle 
-				\sum_{\mathclap{d \subset c,d \in 
-				\text{{\large $\nu$}}_{p-1}}}d
-		\end{array} 
+			\multicolumn{1}{r}{c=\sum\sigma_{i}} & \mapsto & 
+			\partial_{p}(c)=\sum B_{p}(\sigma_{i})
+		\end{array}
 	\end{equation}
-	Si $p=0$ definimos $\partial_{0}=0$. Intuitivamente, $\partial_{p}$ le
-	asigna a cada p-símplice su borde, esto es, la suma de sus caras de
-	codimensión 1. Esta aplicación tiene una propiedad muy importante, 
-	que motivará la siguiente subsección:
+	En esta definición hemos omitido los coeficientes en las cadenas pues
+	trabajamos sobre $\mathbb{Z}_{2}$. A $\partial_{p}$ lo llamaremos 
+	\textit{homomorfismo borde}.	
+	\end{defi}
 
-	\begin{prop}
-		Sea $\partial_{p}$ definida como en \ref{def:borde}. Entonces 
-		para todo $p \in \{0,1,2,..\}$ $\partial_{p}\circ 
+	\begin{proof}
+		Vamos a probar que $\partial_{p}$ es, en efecto, un 
+		$\mathbb{Z}_{2}$-homomorfismo.
+
+		Sean $\sigma,\tau \in \text{{\Large $\nu$}}_{p}$ tales que
+		$\sigma = \{u_{0},...,u_{p}\}$ y $\tau = \{w_{0},...,w_{p}\}$.
+
+		$B_{p}(\sigma)+B_{p}(\tau)=\displaystyle 
+		\sum_{j=0}^{p}\{u_{0},...,\widehat{u_{j}},...,u_{p}\} + 
+		\displaystyle \sum_{j=0}^{p}\{w_{0},...,\widehat{w_{j}},...,
+		w_{p}\}=\displaystyle \sum_{i=0}^{p}\sum_{j=0}^{p}\{u_{0}, 
+		w_{0},...,\widehat{u_{i}},\\\widehat{w_{j}},...,u_{p},w_{p}\}=
+		B_{p}(\sigma+\tau)$. 
+
+		Esto prueba que $B_{p}$ conmuta con la suma para 
+		símplices. Se sigue que $\partial_{p}$ conmuta 
+		con la suma para cadenas.
+
+		Ahora debemos probar que $\partial_{p}$ conmuta con el 
+		producto exterior, pero esto es inmediato pues:
+		\begin{itemize}
+			\item $\partial_{p}(0c)=\partial_{p}(0)=0=
+				0\partial_{p}(c)$
+			\item $\partial_{p}(1c)=\partial_{p}(c)=
+				1\partial_{p}(c)$
+		\end{itemize}
+		Se concluye lo que queremos probar.
+	\end{proof}
+
+	Por lo tanto, ya tenemos casi construido nuestro complejo de cadenas 
+	asociado a un complejo simplicial. Sólo resta enunciar el siguiente 
+	resultado:
+
+	\begin{theorem}
+		Sea $\partial_{p}$ definida como en \ref{def:borde_form}. 
+		Entonces para todo $p \in \{0,1,2,..\}$ $\partial_{p}\circ 
 		\partial_{p+1}=0$. Coloquialmente, <<el borde del borde es 
 		vacío>>.
-	\end{prop}
+	\end{theorem}
 	\begin{proof}
-		Sea $c \in C_{p+1}(\text{{\Large $\nu$}})\text{ y }v\in 
-		\text{{\Large $\nu$}}$ el símplice representado por $c$. 
-		Veamos que $\partial_{p}(\partial_{p+1}(c))=0$.
+		Sea $c \in C_{p+1}(\text{{\Large $\nu$}})$ y, sin pérdida
+		de generalidad (en virtud de la definición 
+		\ref{def:borde_form}), supongamos que $c=v,\text{ con }v\in 
+		\text{{\Large $\nu$}}$. Es decir, $v$ es un elemento de la 
+		base del espacio vectorial de cadenas $C_{p+1}(\text{
+		{\Large $\nu$}})$.Veamos que $\partial_{p}(
+		\partial_{p+1}(c))=0$.
 
-		En efecto, notemos que $v$ posee $\binom{p+2}{p}$ 
+		En efecto, notemos que, si $p\geq1$ (si $p=0$ es trivial), $v$ 
+		posee $\binom{p+2}{p}$ 
 		caras distintas de codimensión 2. Sea $\tau$ una de ellas, es 
-		decir, $\tau$ es un p-1-símplice y $\tau \subset v$.
+		decir, $\tau$ es un $(p-1)$-símplice y $\tau \subset v$.
 
 		Si probamos que $\tau$ aparece en 2 caras de codimensión 1 de 
-		$v$ habremos terminado, pues aparecerá 2 veces como vector al 
+		$v$ habremos terminado, pues aparecerá 2 veces al 
 		hacer $\partial_{p}(\partial_{p+1}(c))$ y como estamos en 
 		$\mathbb{Z}_{2}$ se anulará. Esto implica lo que queremos
 		probar.
 
-		Observemos que $\tau$ tiene dimensión p mientras que $v$ tiene
-		dimensión p+2. Por lo tanto, supongamos, sin pérdida de 
-		generalidad, que $\tau$ viene dado por los p últimos elementos 
-		de $v$. Así, tenemos dos elementos libres en $v$, y al 
-		calcular las caras de codimensión 1 de $v$, con los p últimos 
-		elementos fijos, tendremos únicamente 2 caras que contienen a
-		$\tau$.  	
+		Observemos que $\tau$ tiene cardinalidad $p$ mientras que $v$ 
+		tiene dimensión $p+2$. Por lo tanto, supongamos, sin pérdida 
+		de generalidad, que $\tau$ viene dado por los $p$ últimos 
+		elementos de $v$. Así, tenemos dos elementos libres en $v$, y 
+		al calcular las caras de codimensión 1 de $v$, con los $p$ 
+		últimos elementos fijos, tendremos únicamente 2 caras que 
+		contienen a $\tau$.  	
 	\end{proof}
+
 	\begin{remark}
-		La elección del cuerpo sobre el que se toman los espacios 
-		vectoriales es muy significativa. De hecho, si escogemos otro 
-		cuerpo, los resultados serán muy distintos, y los cálculos 
-		para llegar a ellos, serán más engorrosos. Veremos este hecho 
-		en los siguientes ejemplos.
+		El teorema anterior denota lo significativo de la elección del
+		anillo sobre el que se toman los coeficientes, pues la 
+		demostración sería distinta y los cálculos posteriores se 
+		complican. Veremos este hecho en los siguientes ejemplos.
 	\end{remark}
 
 	Veamos un ejemplo que ilustre la proposición anterior, es decir, que 
@@ -533,211 +663,27 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\end{equation*}
 		En este ejemplo apreciamos lo significativo de elegir el 
 		cuerpo $\mathbb{Z}_{2}$, pues en otro caso, los productos 
-		matriciales son más difíciles de calcular y podrían no 
-		anularse.
+		matriciales son más difíciles de calcular.
 	\end{ejem}
 
-	De la proposición anterior se desprende que $Im(\partial_{p+1}) 
-	\subset Ker(\partial_{p})$. Este hecho motiva la siguiente noción 
-	importante del presente trabajo: los \emph{grupos de homología}.
- 
-	\newpage
-
-	
-	En la subsección anterior, más concretamente en \ref{def:borde}, hemos 
-	introducido la aplicación <<borde>>. A lo largo de esta subsección 
-	vamos a profundizar más en ella, y en los espacios sobre los que está
-	definida, llegando de una manera natural a la definición de 
-	\emph{grupo de homología}.
-
-	En primer lugar, vamos a centrarnos en 
-	$C_{p}(\text{{\Large $\nu$}})$ y sus elementos.
-
-	Tal y como hemos mencionado anteriormente, podemos ver 
-	$C_{p}(\text{{\Large $\nu$}})$ como un $\mathbb{Z}_{2}$-espacio 
-	vectorial libre cuya base viene dada por los p-símplices de 
-	{\Large $\nu$}. Así, si $c \in C_{p}(\text{{\Large $\nu$}})$, entonces
-	$c$ es un vector que representa a un p-símplice $v$. De esta manera,
-	podemos ver $v$ como suma de los p-símplices de las componentes no 
-	nulas de $c$. Más formalmente:
-
-	\begin{defi}
-		Sea {\Large $\nu$} un complejo simplicial y $p \in \mathbb{N}
-		\cup\{0\}$ 
-		tal que $p\leq dim \text{{\Large $\nu$}}$. Una 
-		\textit{p-cadena} es una suma formal de p-símplices de 
-		{\Large $\nu$}.
-	\end{defi}
-	
-	Con la noción de p-cadena, ya podemos formalizar la definición de 
-	$C_{p}(\text{{\Large $\nu$}})$. 
-
-	\begin{defi}
-		Sea {\Large $\nu$} un complejo simplicial abstracto. Definimos
-		el \textit{grupo de p-cadenas} de {\Large $\nu$} como el 
-		conjunto de todas las p-cadenas de 
-		{\Large $\nu$}, con la operación suma componente a componente 
-		con coeficientes en $\mathbb{Z}_{2}$. Lo denotaremos por 
-		$(C_{p}(\text{{\Large $\nu$}}), +)$ o simplemente 
-		$C_{p}(\text{{\Large $\nu$}})$.
-	\end{defi}
-
-	De la definición anterior se desprende el siguiente resultado:
-
-	\begin{prop}
-		\label{prop:abel}
-		Sea {\Large $\nu$} un complejo simplicial abstracto. Para cada 
-		$p \in \mathbb{N}\cup\{0\}$ tal que $p \leq dim\text{{\Large $\nu$}}$, 
-		entonces $(C_{p}(\text{{\Large $\nu$}}), +)$ es grupo 
-		abeliano.
-	\end{prop}
-
-	\begin{proof}
-		La asociatividad se tiene por herencia de la suma en 
-		$\mathbb{Z}_{2}$. La existencia de elemento neutro es clara, 
-		pues bastará considerar el vector nulo. La existencia de 
-		opuesto también es inmediata, ya que todo elemento es opuesto 
-		de sí mismo. Finalmente, como la suma en $\mathbb{Z}_{2}$ es 
-		conmutativa, se sigue que $(C_{p}(\text{{\Large $\nu$}}), +)$
-		es abeliano.
-	\end{proof}
-
-	En segundo lugar, y habiendo definido los grupos de p-cadenas, pasamos
-	a hacer un estudio más detallado de la aplicación <<borde>> definida 
-	en \ref{def:borde}. Vamos con su definición:
-
-	\begin{defi}
-		Sea {\Large $\nu$} un complejo simplicial abstracto, $\sigma 
-		\in \text{{\Large $\nu$}}$ y $\sigma = \{u_{1},...,u_{p}\}$. 
-		Definimos el \textit{homomorfismo borde para un símplice}
-		como:
-		$$
-		B_{p}(\sigma)=\displaystyle 
-		\sum_{j=0}^{p}\{u_{1},...,\widehat{u_{j}},...,u_{p}\}
-		$$
- 		Donde $\widehat{u_{j}}$ indica que omitimos $u_{j}$. Notemos que este
-		homomorfismo puede extenderse para cadenas, en concreto:
-	\begin{equation}
-		\label{def:borde_form}
-		\begin{array}{lll}
-			\partial_{p}:C_{p}(\text{{\Large $\nu$}}) & 
-				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
-				\\[3pt] 
-			\multicolumn{1}{r}{c=\sum\sigma_{i}} & \mapsto & 
-			\partial_{p}(c)=\sum B_{p}(\sigma_{i})
-		\end{array}
-	\end{equation}
-	A $\partial_{p}$ lo llamaremos \textit{homomorfismo borde para 
-	cadenas}, aunque por simplicidad nos referiremos a él como 
-	\textit{homomorfismo borde}.
-	
-	A los elementos de $Im(\partial_{p})$ los llamaremos 
-	\textit{(p-1)-bordes}, y a los elementos de $Ker(\partial_{p})$, 
-	\textit{p-ciclos}.
-	\end{defi}
-	\begin{proof}
-		Vamos a probar que $\partial_{p}$ es, en efecto, un 
-		homomorfismo.
-
-		Sean $\sigma,\tau \in \text{{\Large $\nu$}}_{p}$ tales que
-		$\sigma = \{u_{1},...,u_{p}\}$ y $\tau = \{w_{1},...,w_{p}\}$.
-
-		$B_{p}(\sigma)+B_{p}(\tau)=\displaystyle 
-		\sum_{j=0}^{p}\{u_{1},...,\widehat{u_{j}},...,u_{p}\} + 
-		\displaystyle \sum_{j=0}^{p}\{w_{1},...,\widehat{w_{j}},...,
-		w_{p}\}=\displaystyle \sum_{i=0}^{p}\sum_{j=0}^{p}\{u_{1} + 
-		w_{1},...,\widehat{u_{i}} + \widehat{w_{j}},...,u_{p}+w_{p}\}=
-		B_{p}(\sigma+\tau)$. 
-
-		Esto prueba que $B_{p}$ conmuta con la suma para 
-		símplices. Se sigue que $\partial_{p}$ conmuta 
-		para cadenas.
-
-		Ahora, $0=B_{p}(\sigma)+B_{p}(\sigma)=
-		B_{p}(\sigma + \sigma)=B_{p}(0)$. Esto implica 
-		que $B_{p}$ deja fijo el símplice neutro. Al igual que
-		antes, esta propiedad se extiende para cadenas.
-
-		Finalmente, $0=B_{p}(0)=B_{p}(\sigma - \sigma)=
-		B_{p}(\sigma)+B_{p}(-\sigma)$ y sumando 
-		$-B_{p}(\sigma)$ a ambos lados de la ecuacion se sigue 
-		que $B_{p}$ conmuta con el opuesto. Una vez más, este 
-		hecho se extiende a cadenas.
-	\end{proof}
-
-	Este homomorfismo tiene propiedades muy interesantes, entre ellas:
-
-	\begin{prop}
-		Sea $\partial_{p}$ el homomorfismo borde definido en 
-	   	\ref{def:borde_form}. Entonces $Im(\partial_{p})$ es subgrupo 
-		de $C_{p-1}(\text{{\Large $\nu$}})$ y $Ker(\partial_{p})$ es 
-		subgrupo de $C_{p}(\text{{\Large $\nu$}})$. Más aún, ambos son
-		subgrupos normales de $C_{p-1}(\text{{\Large $\nu$}})$, 
-		$C_{p-1}(\text{{\Large $\nu$}})$ respectivamente.
-	\end{prop}
-	\begin{proof}
-		Vamos a probar ambos hechos por separado:
-		\begin{itemize}
-			\item Probaremos primero que $Im(\partial_{p})$ es subgrupo:
-
-			Sean $a,b \in Im(\partial_{p})$ tales que $a=\partial_{p}(c) 
-			\text{ y } b=\partial_{p}(d), c,d \in 
-			C_{p}(\text{{\Large $\nu$}})$. 
-
-			Entonces $a+b=\partial_{p}(c)+\partial_{p}(d)=
-			\partial_{p}(c+d)$. Esto implica que $Im(\partial_{p})$ es 
-			cerrado para la suma.
-
-			Ahora, $0=\partial_{p}(0)=\partial_{p}(c+c)=
-			\partial_{p}(c)+\partial_{p}(c)=a+a$. Esto implica que 
-			$Im(\partial_{p})$ es cerrado para opuestos.
-
-			Se sigue que $Im(\partial_{p})\leq 
-			C_{p-1}(\text{{\Large $\nu$}})$.
-			
-			\item Probemos ahora que $Ker(\partial_{p})$ es 
-			subgrupo: 
-				
-			Al igual que antes, sean $a,b \in Ker(\partial_{p})$.
-
-			Entonces $0=\partial_{p}(a)+\partial_{p}(b)=
-			\partial_{p}(a+b)$. Esto prueba que 
-			$Ker(\partial_{p})$ es cerrado para la suma.
-
-			Ahora, $0=\partial_{p}(0)=\partial_{p}(a-a)=
-			\partial_{p}(a)+\partial_{p}(-a)=\partial_{p}(-a)$. 
-			Esto prueba que $Ker(\partial_{p})$ es cerrado para 
-			opuestos.
-
-			Se sigue que $Ker(\partial_{p})\leq 
-			C_{p}(\text{{\Large $\nu$}})$.
-		\end{itemize}
-		En virtud de la proposición \ref{prop:abel} y lo ya probado, 
-		se concluye la normalidad.
-	\end{proof}
-
-	
-
-	Además de la propiedad anterior, y tal y como vimos en la subsección 
-	anterior, el homomorfismo borde tiene la propiedad fundamental de que 
-	$\partial_{p}\circ \partial_{p+1}=0$. Este hecho implica que 
-	$Im(\partial_{p+1}) \subset Ker(\partial_{p})$. Por lo tanto, podemos 
-	considerar el cociente entre ambos grupos: $Ker(\partial_{p})/
-	Im(\partial_{p+1})$. Este cociente constituye una de las piezas clave
-	del presente trabajo:
+	Tras el resultado anterior y las construcciones previas, hemos acabado
+	con la construcción del complejo de cadenas asociado a un complejo 
+	simplicial. En consecuencia, ya estamos en posición de definir los
+	\emph{espacios vectoriales de homología}.
 
 	\begin{defi}
 		\label{defi:homology}
 		Sea $p \in \mathbb{N}\cup\{0\}$ y {\Large $\nu$} un complejo 
-		simplicial. Definimos el \textit{p-ésimo grupo de homología} 
-		de {\Large $\nu$} como el grupo cociente $Ker(\partial_{p})/
+		simplicial. Definimos el \textit{p-ésimo espacio vectorial de 
+		homología simplicial} del complejo simplicial {\Large $\nu$} 
+		como el espacio vectorial cociente $Ker(\partial_{p})/
 		Im(\partial_{p+1})$, donde $\partial_{p}$ está definida como
 		en \ref{def:borde_form}. Lo denotaremos por $H_{p}(\text{
 		{\Large $\nu$}})$.
 
-		A su orden, $|H_{p}(\text{{\Large $\nu$}})|=
-		|Ker(\partial_{p})|-|Im(\partial_{p+1})|$, lo 
-		llamaremos \textit{p-ésimo número de Betti}, y lo denotaremos
+		A su dimensión, $dimH_{p}(\text{{\Large $\nu$}})=
+		dimKer(\partial_{p})-dimIm(\partial_{p+1})$, la 
+		llamaremos \textit{p-ésimo número de Betti}, y la denotaremos
 		por $\beta_{p}(\text{{\Large $\nu$}})$.
 	\end{defi}
 
@@ -746,10 +692,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	representa el número de p-agujeros de {\Large $\nu$}. Además, notemos 
 	que si $dim\text{{\Large $\nu$}}=n$, entonces $\forall p >n 
 	\hspace{0.25cm} H_{p}(\text{{\Large $\nu$}})=\emptyset$, pues {\Large 
-	$\nu$}$=\emptyset$.
+	$\nu$}$_{p}=\emptyset$.
 
-	Ahora veamos un ejemplo en el que calculamos los números de Betti dado 
-	un complejo simplicial abstracto.
+	Ahora veamos un ejemplo (propuesto en \cite{}) en el que calculamos 
+	los números de Betti dado un complejo simplicial abstracto.
 
 	\begin{ejem}
 		Supongamos el siguiente complejo simplicial abstracto:
@@ -851,19 +797,17 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		trabajamos sobre otro cuerpo que no sea $\mathbb{Z}_{2}$, los 
 		rangos de las matrices podrían ser distintos. En este caso, si
 		trabajamos sobre $\mathbb{Q}$, el rango de $\partial_{1}$ es 
-		4. Esto afecta a los números de Betti y perjudica la 
-		eficiencia computacional de los algoritmos empleados para su 
-		cálculo.
+		4. Esto afecta a los números de Betti. 
 	\end{ejem}
 	
-	Al igual que en la subsección anterior, veamos como podemos definir 
-	morfismos, de manera más general, entre los objetos que estamos 
-	manejando.
+	Al igual que hicimos para los complejos simpliciales, veamos como 
+	podemos definir morfismos, de manera más general, entre los objetos 
+	que estamos manejando.
 	
 	Consideremos una aplicación entre complejos simpliciales, $f:\text{
 	{\Large $\nu$}}\rightarrow\text{{\Large $\nu$}}'$. Aplicando el mismo 
 	razonamiento que para la definición del homomorfismo borde, tenemos 
-	que $f$ induce un homomorfismo entre grupos de cadenas :
+	que $f$ induce un homomorfismo entre espacios vectoriales de cadenas :
 	\begin{equation}
 		\label{hom:induc}
 		\left.
@@ -916,7 +860,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\partial_{p}'\circ\overline{f_{p}} 
 	\end{equation*}
 	En consecuencia, $\overline{f_{p}}$ induce un 
-	homomorfismo entre grupos de homología:	
+	homomorfismo entre espacios vectoriales de homología:	
 		\begin{align*}
 			\left.
 			\begin{array}{l}
@@ -935,17 +879,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Este propiedad es muy importante, de hecho, se conoce como 
 		\emph{funtorialidad} y pertenece al ámbito de la teoría de 
 		categorías que queda fuera del alcance del presente trabajo. 
-		Sin embargo, observemos que esta propiedad es la responsable 
-		de que podamos ver $C_{p}(\text{{\Large $\nu$}})$ como grupo
-		o como espacio vectorial según nos convenga.
 	\end{remark}
 
-	Si bien los grupos de homología de un complejo simplicial abstracto 
-	nos aportan mucha información acerca de sus características 
-	topológicas, esta información tiene bastante margen de mejora pues no
-	nos dice nada de la variable <<tiempo>>. Pero, ¿Cómo introducimos la 
-	noción de tiempo en un complejo simplicial abstracto? Esta pregunta
-	motiva la siguiente definición.
+	Si bien los espacios vectoriales de homología de un complejo 
+	simplicial abstracto nos aportan mucha información acerca de sus 
+	características topológicas, esta información tiene bastante margen de 
+	mejora pues no nos dice nada de la variable <<tiempo>>. Pero, ¿Cómo 
+	introducimos la noción de tiempo en un complejo simplicial abstracto? 
+	Esta pregunta motiva la siguiente definición:
 
 	\begin{defi}
 		Sea {\Large $\nu$} un complejo simplicial abstracto finito. 
@@ -979,18 +920,26 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	podemos capturar y visualizar esta nueva información? Empleando la 
 	\emph{homología persistente}.
 
+	\begin{remark}
+	En el presente trabajo nos ceñiremos a la homología persistente 
+	definida sobre un complejo simplicial filtrado. No obstante, cabe 
+	destacar que esta noción tiene una generalización conocida como 
+	\emph{módulo de persistencia} que se define sobre un conjunto 
+	parcialmente ordenado.
+	\end{remark}
+
 	\begin{defi}
 	Sea $ \text{{\Large $\nu$}$_{1}$} 
 		\subset \text{{\Large $\nu$}$_{2}$} \subset \cdots \subset
 		\text{{\Large $\nu$}$_{k-1}$} \subset 
 		\text{{\Large $\nu$}$_{k}$} = \text{{\Large $\nu$}}$ un 
 		complejo simplicial filtrado. Definimos los \textit{p-ésimos
-		grupos de homología persistente} como las imágenes de los 
-		homomorfismos inducidos por la inclusión, $H_{p}^{i,j}=
-		Imf_{p}^{i,j}$, con $0\leq i \leq j \leq k$.
+		espacios vectoriales de homología persistente} como las 
+		imágenes de los homomorfismos inducidos por la inclusión, 
+		$H_{p}^{i,j}=Imf_{p}^{i,j}$, con $0\leq i \leq j \leq k$.
 
-		A su orden, $|H_{p}^{i,j}|$, lo llamaremos \textit{p-ésimo 
-		número de Betti persistente} y lo denotaremos por 
+		A su dimensión, $dimH_{p}^{i,j}$, la llamaremos \textit{p-ésimo 
+		número de Betti persistente} y la denotaremos por 
 		$\beta_{p}^{i,j}$.
 	\end{defi}
 
@@ -1053,16 +1002,18 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\text{{\Large $\nu$}$_{k}$})& \rightarrow & \emptyset \\
 		\end{array}$}
 	\end{equation*}
-	Donde los homomorfismos $\overline{f_{p}^{i,j}}$ entre grupos de 
+	Donde los homomorfismos $\overline{f_{p}^{i,j}}$ entre espacios 
+	vectoriales de 
 	cadenas vienen inducidos por el homomorfismo inclusión $f^{i,j}: 
 	\text{{\Large $\nu$}$_{i}$} \xhookrightarrow{} 
 	\text{{\Large $\nu$}$_{j}$}$ con $0\leq i \leq j \leq k$, como en 
 	\ref{hom:induc}. Ahora, aplicando el mismo razonamiento que en 
-	\ref{hom: gruphom} definimos los homomorfismos entre grupos de 
+	\ref{hom: gruphom} definimos los homomorfismos entre espacios 
+	vectoriales de 
 	homología $f^{i,j}_{p}$.
 
 	Ahora que ya tenemos una herramienta que nos captura las 
-	características topológicas junto con la variable <<tiempo>>, en un 
+	características topológicas junto con la variable <<tiempo>> en un 
 	complejo simplicial abstracto filtrado, necesitamos una manera gŕafica 
 	de visualizar esta información. Para ello, emplearemos los  
 	\emph{diagramas de barras} y los \emph{diagramas de persistencia}.
@@ -1095,7 +1046,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		<<buena>> base.
 	\end{remark}
 
-	Veamos un ejemplo ilustrativo de estos conceptos:
+	Veamos un ejemplo (propuesto en \cite{}) ilustrativo de estos 
+	conceptos:
 
 	\begin{ejem}
 	Consideremos el siguiente complejo simplicial filtrado:  
@@ -1240,7 +1192,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{figure}
 	Ahora vamos a dibujar los diagramas de barras correspondientes:
 	\begin{figure}[H]
-		\fbox{\minipage{0.5\textwidth}
+		\fbox{\minipage{0.48\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
 				
@@ -1297,7 +1249,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\end{tikzpicture}}
 			\end{figure}	
 		\endminipage}
-		\fbox{\minipage{0.5\textwidth}
+		\fbox{\minipage{0.48\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
 				\begin{tikzpicture}[scale=2.5]
@@ -1354,7 +1306,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{figure}
 	Por último, visualizamos los diagramas de persistencia:
 	\begin{figure}[H]
-		\fbox{\minipage{0.5\textwidth}
+		\fbox{\minipage{0.48\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
 				
@@ -1418,7 +1370,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\end{tikzpicture}}
 			\end{figure}	
 		\endminipage}
-		\fbox{\minipage{0.5\textwidth}
+		\fbox{\minipage{0.48\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
 				
