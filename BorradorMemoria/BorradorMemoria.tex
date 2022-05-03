@@ -272,6 +272,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		y $\{v_{1},v_{2},...,v_{k}\} \in \text{{\Large $\nu$}$^{
 		\prime}$}$.	
 	\end{defi}
+
+	\newpage
 	
 	\subsection{Homología. Homología persistente}
 	
@@ -1437,4 +1439,201 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{figure}
 	\end{ejem}
 
+	\newpage
+
+	\subsection{Redes neuronales. Grafos subyacentes}
+	
+	Ahora cambiamos completamente de tema: nos alejamos momentáneamente de 
+	la formal topología algebraica y nos acercamos al mundo más 
+	<<mundanal>> de la informática. En esta sección haremos una
+	introducción hacia el otro concepto fundamental del presente trabajo: 
+	\emph{las redes neuronales artificiales}. A lo largo de esta sección
+	seguiremos la guía proporcionada por \cite{}.
+
+	La historia del \emph{aprendizaje profundo} y de las redes neuronales 
+	es muy amplia y queda fuera del alcance del presente trabajo. No 
+	obstante, conviene reseñar que, aunque los términos aprendizaje 
+	profundo y red neuronal nos parezcan algo reciente, la realidad es muy
+	distinta. El origen de esta disciplina data de los años 40 de la mano
+	de McCulloch y Pitts, y ha sufrido varias etapas de desarrollo hasta 
+	llegar a nuestros días. Al igual que con otras líneas de 
+	investigación, la inteligencia artificial (y en particular el 
+	aprendizaje profundo) sufrió varios estancamientos y contratiempos 
+	hasta llegar a nuestros días (<<inviernos de la IA>>). Por lo tanto, 
+	debemos agradecer a todos aquellos investigadores que, aun cuando no 
+	existía certeza del éxito de la inteligencia artificial, continuaron 
+	con su trabajo en la disciplina y la desarrollaron hasta nuestros 
+	días.
+
+	Supongamos que queremos que nuestro ordenador nos escriba con palabras
+	un número entre 0 y 9, dado dicho número en cifras. Parece una tarea 
+	sencilla,¿no?
+	Bastará con desarrollar un programa que a partir de una entrada (la 
+	cifra) nos produzca una salida (la palabra). Pensemos ahora en la 
+	misma tarea, pero esta vez le proporcionaremos como entrada una imagen
+	de la cifra manuscrita. El problema se acaba de volver 
+	significativamente más difícil. La aproximación que propone el 
+	aprendizaje automático es dejar que el ordenador <<aprenda>> a hacer 
+	esa tarea. La idea intuitiva es desarrollar un programa que tome dos 
+	entradas: la imagen y unos parámetros; y que a partir de estas 
+	entradas proporcione una salida, tras esto, ajustar automáticamente 
+	los parámetros para mejorar el desempeño del programa. Iterando este 
+	proceso de predicción-ajuste, llegaremos a proporcionar la salida 
+	correcta. Una vez que hemos encontrado los parámetros <<correctos>>,
+	podemos abandonar este proceso de ajuste y tendremos un 
+	programa clásico que a partir de unas entradas produce unas salidas.
+
+	Teniendo clara la idea intuitiva, vamos con un desarrollo más formal.
+
+	Supongamos que queremos modelar la relación lineal entre una variable
+	objetivo ($y$) y $p$ variables independientes. Este modelo se conoce 
+	como regresión lineal y puede ser expresado como:
+	\begin{equation*}
+		\hat{y}=w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b
+	\end{equation*}
+	donde $\hat{y}$ es valor estimado de $y$, $w_{1},w_{2},\cdots,w_{p}$ 
+	son los pesos que indican la importancia de cada variable 
+	independiente para el modelo, y $b$ es el término independiente. En 
+	principio, $w_{1},w_{2},\cdots,w_{p}$ y $b$ toman valores en 
+	$\mathbb{R}$.
+	Siguiendo la terminología anterior, $\hat{y}$ es nuestra salida, las 
+	variables independientes son nuestras entradas y $w_{1},w_{2},\cdots,
+	w_{p}$ son los parámetros a ajustar. 
+
+	Para realizar este ajuste será necesario tener una métrica que nos 
+	indique si un conjunto de parámetros es mejor que otro. Para ello,
+	usaremos el error cuadrático medio cuya expresión es la siguiente:
+
+	\begin{equation*}
+		J(w,b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2
+	\end{equation*}
+
+	donde $n$ es el número de datos (cada dato es un vector de $p$ 
+	entradas), $y_{i}$ es la salida real y 
+	$\hat{y}_{i}$ es la salida estimada por el modelo. Nuestro objetivo
+	es el de minimizar $J(w,b)$ para que el modelo sea el mejor posible. 
+	Para minimizar esta función será necesario ir ajustando los parámetros 
+	correctamente. Para ello se emplea el algoritmo conocido como 
+	\emph{el descenso del gradiente}.
+
+	Supongamos una función continua y suave. Por ser ella continua sabemos
+	que mapea puntos <<cercanos>> a puntos <<cercanos>>, y por ser suave,
+	sabemos que podemos aproximar valores <<cercanos>> a un punto de la 
+	función por una función lineal cuya pendiente sea la derivada de la 
+	función. Este resultado se conoce como el \emph{teorema de Taylor}. 
+	Como bien sabemos, la derivada de una función en un punto (el 
+	gradiente en general) nos indica cuanto aumenta o disminuye el valor 
+	de la función ante un pequeño cambio en su entrada. Lo que haremos 
+	será <<movernos un poco>> en la dirección marcada por la derivada (el 
+	gradiente en general) pero en sentido opuesto, pues nuestro objetivo 
+	es el de minimizar la función. Iterando este proceso,
+	iremos dando pequeños <<pasos>> minimizando $J(w,b)$. En concreto, la 
+	actualización de los parámetros es como sigue:
+	
+	\begin{equation*}
+	\begin{array}{c}
+		w_{i}^{siguiente}=w_{i}^{actual}-\alpha\frac{\partial J(w,b)}
+		{\partial w_{i}}\\
+		b^{siguiente}=b^{actual}-\alpha\frac{\partial J(w,b)}
+		{\partial w_{i}}
+	\end{array}
+	\end{equation*}
+	donde $\alpha$ es el ratio de aprendizaje: un hiperparámetro que 
+	tenemos que elegir. Este paso de actualización se conoce como 
+	\emph{propagación hacia atrás}, y el paso del cálculo de $\hat{y}$ se 
+	conoce como \emph{propagación hacia adelante}. Una vez hemos logrado 
+	la 
+	configuración óptima de los parámetros ya podemos emplear este modelo 
+	para la predicción de $y$.
+	
+	\begin{remark}
+	Notemos que el proceso presentado logra teóricamente la convergencia 
+	al mínimo local de $J(w,b)$. Para converger de manera teórica al 
+	mínimo global son necesarias técnicas más avanzadas cuya descripción 
+	queda fuera del alcance del presente trabajo. Para más información 
+	véase \cite{}.
+	\end{remark}
+
+	Desafortunadamente, el modelo de regresión lineal es muy limitado: 
+	supone una relación lineal entre la variable objetivo y las variables
+	independientes. Se hace necesaria una generalización que conseguriemos
+	introduciendo una función no lineal a la regresión lineal. El primer
+	modelo conocido con esta definición es el \emph{perceptrón}. Este 
+	modelo se expresa de la siguiente manera:
+	\begin{equation*}
+		\hat{y}=r(w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b)
+	\end{equation*}
+	donde $r(x)$ es una función no lineal que se conoce como \emph{función 
+	de activación} y el resto de variables son como en la regresión 
+	lineal. En el caso particular del preceptrón, $r(x)$ está definida de
+	la siguiente manera:
+	
+	\begin{equation*}
+		r(x)=\left \{
+			\begin{array}{ll}
+				1&\text{si }x>0\\
+				0&\text{si }x\leq0
+			\end{array} 
+		     \right .
+	\end{equation*}
+
+	\begin{remark}
+	En el caso general, la función $r(x)$ es un hiperparámetro, es decir,
+	debemos escoger una función no lineal. Lo habitual suele ser escoger
+	la función sigmoide, la tangente hiperbólica o la función ReLU.
+	\end{remark}
+	
+	Notemos que la función $r(x)$ es continua pero no es suave, pues ella
+	no es diferenciable en $x=0$. Por lo tanto, teóricamente no podemos 
+	asegurar que $J(w,b)$ lo sea. Sin embargo, por cuestiones prácticas, 
+	este incidente no se tiene en cuenta ya que normalmente no se alcanza
+	el mínimo local de $J(w,b)$ luego no hay problemas en que dicha 
+	función no sea diferenciable en dicho punto. Adicionalmente, cabe 
+	destacar que la mayoría de los algoritmos empleados para el cálculo de 
+	la derivada en el descenso del gradiente sólo calculan una de las 
+	derivadas laterales, luego el problema de la no diferenciabilidad 
+	queda <<resuelto>>.
+
+	Tras salvar el anterior problema, podemos razonar de manera análoga
+	a como hemos hecho para la regresión lineal y tendremos el mismo 
+	mecanismo para actualizar los parámetros y minimizar $J(w,b)$. 
+	Obtenemos así un modelo más general que no presupone una relación 
+	lineal entre la variable objetivo y las variables independientes. 
+	
+	A fin de facilitar el entendimiento de nuestros siguientes pasos, 
+	vamos a representar gráficamente la estructura subyacente del 
+	perceptrón.
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[
+			roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+			]
+			%Nodes
+			\node[roundnode]      (x1) 	at 	(-1,2)           {$x_{1}$};
+			\node[roundnode]      (x2)      at 	(-1,1)		{$x_{2}$};
+			\node      (p)      at 	(-1,0)		{$\vdots$};
+			\node[roundnode]      (xn)      at 	(-1,-1)		{$x_{p}$};
+			\node[roundnode]      (b)      at 	(-1,-2)		{$b$};
+			\node[roundnode, text width=2.2cm, align=center]      (ac)      at 	(3,0)		{Función de activación $r$};
+			\node[roundnode]      (dest)      at 	(11,0) {$\hat{y}$};
+			
+			\begin{pgfonlayer}{background}
+			%Lines
+			\draw[thick,->,rounded corners] (x1.mid) -| node[above,pos=0.2] {$w_{1}$} (1,0) -- (ac.west);
+			\draw[thick,->,rounded corners] (x2.mid) -| node[above,pos=0.2] {$w_{2}$}(1,0) --(ac.west);
+			\draw[thick,->,rounded corners] (xn.mid) -| node[above,pos=0.2] {$w_{p}$}(1,0) --(ac.west);
+			\draw[thick,->,rounded corners] (b.mid) -| (1,0) --(ac.west);
+			\draw[thick,->] (ac.east) -- node[above,align=left] {$r(w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b)$} (dest.west);
+			
+			\end{pgfonlayer}
+		\end{tikzpicture}
+		\caption{Representación gráfica de un perceptrón.}
+	\end{figure}
+
+	Esta representación gráfica y las limitaciones del perceptrón (para 
+	más detalles véase \cite{}), motivan el siguiente paso en la 
+	construcción de las \emph{redes neuronales}. Este paso consiste en 
+	añadir más capas y más nodos, consiguiendo lo que se conoce como 
+	\emph{perceptrón multicapa}.
 \end{document} 
+
