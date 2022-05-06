@@ -1444,8 +1444,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\subsection{Redes neuronales. Grafos subyacentes}
 	
 	Ahora cambiamos completamente de tema: nos alejamos momentáneamente de 
-	la formal topología algebraica y nos acercamos al mundo más 
-	<<mundanal>> de la informática. En esta sección haremos una
+	la formal topología algebraica y nos acercamos al mundo 
+	de la informática. En esta sección haremos una
 	introducción hacia el otro concepto fundamental del presente trabajo: 
 	\emph{las redes neuronales artificiales}. A lo largo de esta sección
 	seguiremos la guía proporcionada por \cite{}.
@@ -1467,9 +1467,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Supongamos que queremos que nuestro ordenador nos escriba con palabras
 	un número entre 0 y 9, dado dicho número en cifras. Parece una tarea 
-	sencilla,¿no?
+	sencilla, ¿no?
 	Bastará con desarrollar un programa que a partir de una entrada (la 
-	cifra) nos produzca una salida (la palabra). Pensemos ahora en la 
+	cifra) nos produzca una salida (la palabra) de entre las nueve 
+	posibilidades; en resumidas cuentas, con unas pocas sentencias 
+	condicionales tendremos el resultado esperado.  
+
+	Pensemos ahora en la 
 	misma tarea, pero esta vez le proporcionaremos como entrada una imagen
 	de la cifra manuscrita. El problema se acaba de volver 
 	significativamente más difícil. La aproximación que propone el 
@@ -1479,11 +1483,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	entradas proporcione una salida, tras esto, ajustar automáticamente 
 	los parámetros para mejorar el desempeño del programa. Iterando este 
 	proceso de predicción-ajuste, llegaremos a proporcionar la salida 
-	correcta. Una vez que hemos encontrado los parámetros <<correctos>>,
+	correcta. Una vez que hemos encontrado los parámetros correctos,
 	podemos abandonar este proceso de ajuste y tendremos un 
 	programa clásico que a partir de unas entradas produce unas salidas.
 
-	Teniendo clara la idea intuitiva, vamos con un desarrollo más formal.
+	Teniendo clara la idea intuitiva, vamos a ver su desarrollo hasta 
+	llegar a las redes neuronales.
 
 	Supongamos que queremos modelar la relación lineal entre una variable
 	objetivo ($y$) y $p$ variables independientes. Este modelo se conoce 
@@ -1505,13 +1510,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	usaremos el error cuadrático medio cuya expresión es la siguiente:
 
 	\begin{equation*}
-		J(w,b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2
+		J(w_{1},w_{2},\cdots,w_{p},b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2
 	\end{equation*}
 
 	donde $n$ es el número de datos (cada dato es un vector de $p$ 
 	entradas), $y_{i}$ es la salida real y 
 	$\hat{y}_{i}$ es la salida estimada por el modelo. Nuestro objetivo
-	es el de minimizar $J(w,b)$ para que el modelo sea el mejor posible. 
+	es el de minimizar $J(w_{1},w_{2},\cdots,w_{p},b)$ para que el modelo 
+	sea el mejor posible. 
 	Para minimizar esta función será necesario ir ajustando los parámetros 
 	correctamente. Para ello se emplea el algoritmo conocido como 
 	\emph{el descenso del gradiente}.
@@ -1519,15 +1525,16 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	Supongamos una función continua y suave. Por ser ella continua sabemos
 	que mapea puntos <<cercanos>> a puntos <<cercanos>>, y por ser suave,
 	sabemos que podemos aproximar valores <<cercanos>> a un punto de la 
-	función por una función lineal cuya pendiente sea la derivada de la 
+	función por una función lineal cuya pendiente sea la diferencial de la 
 	función. Este resultado se conoce como el \emph{teorema de Taylor}. 
-	Como bien sabemos, la derivada de una función en un punto (el 
-	gradiente en general) nos indica cuanto aumenta o disminuye el valor 
-	de la función ante un pequeño cambio en su entrada. Lo que haremos 
-	será <<movernos un poco>> en la dirección marcada por la derivada (el 
-	gradiente en general) pero en sentido opuesto, pues nuestro objetivo 
+	Como bien sabemos, el gradiente de una función en un punto 
+	nos indica cuanto aumenta o disminuye el valor 
+	de dicha función ante un pequeño cambio en su entrada. Lo que haremos 
+	será <<movernos un poco>> en la dirección marcada por el gradiente 
+	pero en sentido opuesto, pues nuestro objetivo 
 	es el de minimizar la función. Iterando este proceso,
-	iremos dando pequeños <<pasos>> minimizando $J(w,b)$. En concreto, la 
+	iremos dando pequeños <<pasos>> minimizando $J(w_{1},w_{2},\cdots,
+	w_{p},b)$. En concreto, la 
 	actualización de los parámetros es como sigue:
 	
 	\begin{equation*}
@@ -1548,7 +1555,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	
 	\begin{remark}
 	Notemos que el proceso presentado logra teóricamente la convergencia 
-	al mínimo local de $J(w,b)$. Para converger de manera teórica al 
+	al mínimo local de $J(w_{1},w_{2},\cdots,w_{p},b)$. Para converger de 
+	manera teórica al 
 	mínimo global son necesarias técnicas más avanzadas cuya descripción 
 	queda fuera del alcance del presente trabajo. Para más información 
 	véase \cite{}.
@@ -1563,19 +1571,20 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{equation*}
 		\hat{y}=r(w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b)
 	\end{equation*}
-	donde $r(x)$ es una función no lineal que se conoce como \emph{función 
-	de activación} y el resto de variables son como en la regresión 
-	lineal. En el caso particular del preceptrón, $r(x)$ está definida de
-	la siguiente manera:
+	donde, en general, $r(x)$ es una función no lineal que se conoce como 
+	\emph{función de activación} y el resto de variables son como en la 
+	regresión lineal. En el caso particular del preceptrón, $r(x)$ está 
+	definida de la siguiente manera:
 	
-	\begin{equation*}
+	\begin{equation}
+		\label{def:r}
 		r(x)=\left \{
 			\begin{array}{ll}
 				1&\text{si }x>0\\
 				0&\text{si }x\leq0
 			\end{array} 
 		     \right .
-	\end{equation*}
+	\end{equation}
 
 	\begin{remark}
 	En el caso general, la función $r(x)$ es un hiperparámetro, es decir,
@@ -1585,9 +1594,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	
 	Notemos que la función $r(x)$ es continua pero no es suave, pues ella
 	no es diferenciable en $x=0$. Por lo tanto, teóricamente no podemos 
-	asegurar que $J(w,b)$ lo sea. Sin embargo, por cuestiones prácticas, 
+	asegurar que $J(w_{1},w_{2},\cdots,w_{p},b)$ lo sea. Sin embargo, por 
+	cuestiones prácticas, 
 	este incidente no se tiene en cuenta ya que normalmente no se alcanza
-	el mínimo local de $J(w,b)$ luego no hay problemas en que dicha 
+	el mínimo local de $J(w_{1},w_{2},\cdots,w_{p},b)$ luego no hay 
+	problemas en que dicha 
 	función no sea diferenciable en dicho punto. Adicionalmente, cabe 
 	destacar que la mayoría de los algoritmos empleados para el cálculo de 
 	la derivada en el descenso del gradiente sólo calculan una de las 
@@ -1596,7 +1607,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Tras salvar el anterior problema, podemos razonar de manera análoga
 	a como hemos hecho para la regresión lineal y tendremos el mismo 
-	mecanismo para actualizar los parámetros y minimizar $J(w,b)$. 
+	mecanismo para actualizar los parámetros y minimizar $J(w_{1},w_{2},
+	\cdots,w_{p},b)$. 
 	Obtenemos así un modelo más general que no presupone una relación 
 	lineal entre la variable objetivo y las variables independientes. 
 	
@@ -1613,16 +1625,16 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\node[roundnode]      (x2)      at 	(-1,1)		{$x_{2}$};
 			\node      (p)      at 	(-1,0)		{$\vdots$};
 			\node[roundnode]      (xn)      at 	(-1,-1)		{$x_{p}$};
-			\node[roundnode]      (b)      at 	(-1,-2)		{$b$};
+			\node[roundnode]      (b)      at 	(-1,-2)		{$1$};
 			\node[roundnode, text width=2.2cm, align=center]      (ac)      at 	(3,0)		{Función de activación $r$};
 			\node[roundnode]      (dest)      at 	(11,0) {$\hat{y}$};
 			
 			\begin{pgfonlayer}{background}
 			%Lines
 			\draw[thick,->,rounded corners] (x1.mid) -| node[above,pos=0.2] {$w_{1}$} (1,0) -- (ac.west);
-			\draw[thick,->,rounded corners] (x2.mid) -| node[above,pos=0.2] {$w_{2}$}(1,0) --(ac.west);
-			\draw[thick,->,rounded corners] (xn.mid) -| node[above,pos=0.2] {$w_{p}$}(1,0) --(ac.west);
-			\draw[thick,->,rounded corners] (b.mid) -| (1,0) --(ac.west);
+			\draw[thick,->,rounded corners] (x2.mid) -| node[above,pos=0.2] {$w_{2}$} (1,0) --(ac.west);
+			\draw[thick,->,rounded corners] (xn.mid) -| node[above,pos=0.2] {$w_{p}$} (1,0) --(ac.west);
+			\draw[thick,->,rounded corners] (b.mid) -| node[above,pos=0.2] {$b$} (1,0) --(ac.west);
 			\draw[thick,->] (ac.east) -- node[above,align=left] {$r(w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b)$} (dest.west);
 			
 			\end{pgfonlayer}
@@ -1633,7 +1645,138 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	Esta representación gráfica y las limitaciones del perceptrón (para 
 	más detalles véase \cite{}), motivan el siguiente paso en la 
 	construcción de las \emph{redes neuronales}. Este paso consiste en 
-	añadir más capas y más nodos, consiguiendo lo que se conoce como 
-	\emph{perceptrón multicapa}.
+	añadir más perceptrones en paralelo (nodos) y en serie (capas), 
+	consiguiendo lo que se conoce como \emph{perceptrón multicapa}.
+
+	El perceptrón multicapa es caso particular de arquitectura de una red 
+	neuronal. En esta arquitectura las conexiones entre nodos (neuronas) 
+	se realizan únicamente hacia adelante y no se permite la conexión 
+	entre nodos de la misma capa, y la función de activación es 
+	r(x) definida en \ref{def:r}. Para los propósitos del presente 
+	trabajo, la función de activación no es relevante; pero sí lo es la 
+	dirección de las conexiones entre los nodos. Por lo tanto, nos 
+	ceñiremos al caso particular de las redes neuronales cuyas conexiones
+	se realizan hacia adelante y sin conexiones dentro de la misma capa, 
+	estas redes neuronales se conocen como \emph{redes neuronales 
+	prealimentadas}. 
+	
+	\begin{remark}
+	Aunque puede parecer que nos 
+	estamos restringiendo a un caso muy particular de las redes 
+	neuronales, el \emph{teorema de aproximación universal} nos garantiza
+	que una red de estas características puede aproximar cualquier función
+	Borel-medible cuyo dominio tenga dimensión finita (para más 
+	información véase \cite{}).
+	\end{remark}
+
+	En el presente trabajo nos interesa especialmente la representación 
+	gráfica de las redes neuronales prealimentadas, es decir, los grafos 
+	subyacentes. En este sentido, veamos las siguientes definiciones:
+
+	\begin{defi}
+		Un \textit{grafo} $G=(V,E)$ consiste en un conjunto finito V, 
+		cuyos 
+		elementos reciben el nombre de \textit{vértices}, y un 
+		conjunto 
+		E de pares de elementos de V, cuyos elementos se conocen como 
+		\textit{aristas}. Si $\{u,v\}$ es una arista de $G$, se dice 
+		que los vértices $u$ y $v$ son \textit{adyacentes} y 
+		llamaremos a $u$ y a $v$ \textit{extremos} de la arista.
+	\end{defi}
+
+	Para el caso las redes neuronales prealimentadas, necesitamos un caso 
+	particular de grafo:
+
+	\begin{defi}
+		Un \textit{grafo dirigido} es un grafo en el que se asigna un 
+		orden a los extremos de cada arista. Las aristas dirigidas se
+		denotan $\{u,v\}$, y nótese que $\{u,v\}\neq\{v,u\}$. En el 
+		caso de una arista dirigida $\{u,v\}$, se dice que $u$ es el 
+		\textit{origen} y al vértice $v$ se le llama \textit{término} 
+		de la arista. Un grafo dirigido se dice \textit{acíclico} si 
+		para cada vértice $u$, no existe una sucesión de aristas cuyo
+		origen y término sea $u$.
+	\end{defi}
+
+	En resumen, vamos a estudiar los grafos dirigidos acíclicos 
+	subyacentes a las redes neuronales prealimentadas. A fin de facilitar 
+	la comprensión, veamos un ejemplo:
+
+	\begin{ejem}
+	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas.	
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[
+				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+				]
+				%Nodes
+				\node[roundnode]      (n0) 	at 	(6,1)           {0};
+				\node[roundnode]      (n1) 	at 	(6,-1)          {1};
+				\node[roundnode]      (n2) 	at 	(4,3)           {2};
+				\node[roundnode]      (n3) 	at 	(4,1)           {3};
+				\node[roundnode]      (n4)      at 	(4,-1)		{4};
+				\node[roundnode]      (n5)      at 	(4,-3)		{5};
+				\node[roundnode]      (n6)      at 	(2,3)		{6};
+				\node[roundnode]      (n7) 	at 	(2,1)           {7};
+				\node[roundnode]      (n8) 	at 	(2,-1)           {8};
+				\node[roundnode]      (n9)      at 	(2,-3)		{9};
+				\node[roundnode]      (n10)      at 	(0,2)		{10};
+				\node[roundnode]      (n11) 	at 	(0,0)           {11};
+				\node[roundnode]      (n12) 	at 	(0,-2)           {12};
+				
+				\begin{pgfonlayer}{background}
+				%Lines
+				\draw[thick,->] (n10.mid) -- (n6.west);
+				\draw[thick,->] (n10.mid) -- (n7.west);
+				\draw[thick,->] (n10.mid) -- (n8.west);
+				\draw[thick,->] (n10.mid) -- (n9.west);
+				\draw[thick,->] (n11.mid) -- (n6.west);
+				\draw[thick,->] (n11.mid) -- (n7.west);
+				\draw[thick,->] (n11.mid) -- (n8.west);
+				\draw[thick,->] (n11.mid) -- (n9.west);
+				\draw[thick,->] (n12.mid) -- (n6.west);
+				\draw[thick,->] (n12.mid) -- (n7.west);
+				\draw[thick,->] (n12.mid) -- (n8.west);
+				\draw[thick,->] (n12.mid) -- (n9.west);
+				
+				\draw[thick,->] (n6.mid) -- (n2.west);
+				\draw[thick,->] (n6.mid) -- (n3.west);
+				\draw[thick,->] (n6.mid) -- (n4.west);
+				\draw[thick,->] (n6.mid) -- (n5.west);
+				\draw[thick,->] (n7.mid) -- (n2.west);
+				\draw[thick,->] (n7.mid) -- (n3.west);
+				\draw[thick,->] (n7.mid) -- (n4.west);
+				\draw[thick,->] (n7.mid) -- (n5.west);
+				\draw[thick,->] (n8.mid) -- (n2.west);
+				\draw[thick,->] (n8.mid) -- (n3.west);
+				\draw[thick,->] (n8.mid) -- (n4.west);
+				\draw[thick,->] (n8.mid) -- (n5.west);
+				\draw[thick,->] (n9.mid) -- (n2.west);
+				\draw[thick,->] (n9.mid) -- (n3.west);
+				\draw[thick,->] (n9.mid) -- (n4.west);
+				\draw[thick,->] (n9.mid) -- (n5.west);
+
+				\draw[thick,->] (n2.mid) -- (n0.west);
+				\draw[thick,->] (n2.mid) -- (n1.west);
+				\draw[thick,->] (n3.mid) -- (n0.west);
+				\draw[thick,->] (n3.mid) -- (n1.west);
+				\draw[thick,->] (n4.mid) -- (n0.west);
+				\draw[thick,->] (n4.mid) -- (n1.west);
+				\draw[thick,->] (n5.mid) -- (n0.west);
+				\draw[thick,->] (n5.mid) -- (n1.west);
+				\end{pgfonlayer}
+			\end{tikzpicture}
+			\caption{Grafo dirigido acíclico asociado a una red neuronal de 13 neuronas y 2 capas.}
+		\end{figure}
+		Hemos etiquetado las neuronas (vértices) en orden ascendente 
+		desde la primera neurona de la capa de salida hasta la última
+		de la capa de entrada. En las próximas representaciones 
+		seguiremos usando esta notación.
+	\end{ejem}
+	
+	Habiendo fijado los conceptos de red neuronal prealimentada y de su 
+	grafo asociado, necesitamos dar una serie de pasos previos hasta la 
+	aplicación de la homología persistente. El primer paso será construir 
+	un complejo simplicial a partir del grafo subycente a la red.
 \end{document} 
 
