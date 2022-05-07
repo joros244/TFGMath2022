@@ -12,14 +12,15 @@
 \usepackage{mathtools}
 \usepackage[nottoc]{tocbibind}
 \usepackage{hyperref}
+\usepackage{pdfpages}
 \usepackage{babelbib}
 \usepackage{titlesec}
 \usepackage{titleps}
 
 \newpagestyle{main}[\sffamily]{
 	\setheadrule{.55pt}
-	\sethead[\thepage][\chaptertitlename\space\thechapter.\space\chaptertitle][]
-	{}{\chaptertitlename\space\thechapter.\space\chaptertitle}{\thepage}}
+	\sethead[\thepage][][\chaptertitlename\space\thechapter.\space\chaptertitle]
+	{\thesection\space\sectiontitle}{}{\thepage}}
 
 \titleformat{\chapter}[display]{\bfseries\huge}{\LARGE Capítulo \thechapter}{0pt}{}[]
 \titlespacing{\chapter}{0pt}{0pt}{10pt}
@@ -32,7 +33,7 @@
 \graphicspath{{Images/}}
 \usepackage{float}
 \usepackage[headings]{fullpage}
-\parskip = 2pt plus 1.5pt minus 1pt
+\parskip = 3pt plus 1.5pt minus 1pt
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{babel}
@@ -60,21 +61,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 \theoremstyle{plain}
 \newtheorem{prop}{Proposición}
 
-\title{Sobre la homología persistente en redes neuronales}
-
-
-\author{José Manuel Ros Rodrigo}
-
-\affil{Facultad de Ciencia y Tecnología\\
-  Universidad de La Rioja}
-
-\date{Mayo 2022}
 
 
 \begin{document}
+	\pagenumbering{Roman}
 	\selectlanguage{spanish}
 	\pagestyle{main}
-	\maketitle
+
+	\includepdf{Portada.pdf}
 	
 	\chapter*{Abstract/Resumen}
 	\addcontentsline{toc}{chapter}{Abstract/Resumen}
@@ -87,6 +81,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\newpage
 
+	\pagenumbering{arabic}
+	
 	\chapter{Introducción}
 	(En construcción.)
 
@@ -362,9 +358,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{defi}
 	Sea $R$ anillo. Decimos que un \textit{complejo de cadenas} sobre $R$ 
-	es un conjunto $\mathcal{C}_{*}=\{(C_{p},\partial_{p}) | p \in \mathbb{Z}\}$
+	es un conjunto $\mathcal{C}_{*}=\{(C_{p},\partial_{p}) \mid p \in 
+	\mathbb{Z}\}$
 	de $R$-módulos y $R$-homomorfismos $\{\partial_{p}: C_{p} \rightarrow 
-	C_{p-1} | p \in \mathbb{Z}\}$, satisfaciendo $\partial_{p}\circ 
+	C_{p-1} \mid p \in \mathbb{Z}\}$, satisfaciendo $\partial_{p}\circ 
 	\partial_{p+1}=0$. Se denota por $(\mathcal{C}_{*},\partial)$ y a 
 	$\partial$ se le llama el diferencial del complejo.
 	\end{defi}
@@ -1706,8 +1703,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{defi}
 		Un \textit{grafo dirigido} es un grafo en el que se asigna un 
 		orden a los extremos de cada arista. Las aristas dirigidas se
-		denotan $\{u,v\}$, y nótese que $\{u,v\}\neq\{v,u\}$. En el 
-		caso de una arista dirigida $\{u,v\}$, se dice que $u$ es el 
+		denotan $(u,v)$, y nótese que $(u,v)\neq(v,u)$. En el 
+		caso de una arista dirigida $()u,v)$, se dice que $u$ es el 
 		\textit{origen} y al vértice $v$ se le llama \textit{término} 
 		de la arista. Un grafo dirigido se dice \textit{acíclico} si 
 		para cada vértice $u$, no existe una sucesión de aristas cuyo
@@ -1936,9 +1933,1230 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\chapter{El artículo}
 	
+	En este capítulo nos vamos a centrar en el desarrollo del artículo 
+	\cite{Articulo-Watanabe} sobre el que está basado el presente trabajo. 
+	La motivación principal de las técnicas que expondremos es esclarecer
+	el funcionamiento interno de las redes neuronales prealimentadas, que 
+	habitualmente son vistas como <<cajas negras>>. Mediante el uso de 
+	estas técnicas podremos extraer información relevante acerca de la 
+	complejidad y el grado de aprendizaje de las redes neuronales 
+	prealimentadas. 
+
 	\section{Explicación matemática}
+	
+	Partimos de la base del capítulo anterior, en el que se hizo notoria 
+	la necesidad de extender la noción de clique asociado a una red 
+	neuronal mediate una cierta idea de transitividad. Adicionalmente, 
+	debemos construir el complejo simplicial filtrado para poder aplicar 
+	la homología persistente.
+	
+	Como bien sabemos, dada una red neuronal prealimentada, es posible 
+	asociarle un DAG. Ademas, aunque en el capítulo anterior no lo 
+	mencionamos, a este grafo podemos asociarle unos pesos que serán los 
+	parámetros de la red neuronal prealimentada. Pensando de esta manera, 
+	tendremos un DAG con pesos $w_{ij}$, con $w_{ij}$ el parámetro de la 
+	red entre $u_{i}$ y $u_{j}$. Notemos que $w_{ij}=0$ si y sólo si 
+	$u_{i}$ y $u_{j}$ no están conectadas.
+	Con esto en mente, damos la siguiente definición: 
+	
+	\begin{defi}
+	Definimos la \textit{importancia} de $u_{i}$ (salida) para $u_{j}$ 
+	(llegada) como:
+	\begin{equation*}
+		R_{ij}=  \left \{ 
+			\begin{array}{ll}
+				1 & \text{si } i=j \\
+				w_{ij}^{+}/\sum_{k,k \neq j}w_{kj}^{+} & \text{si } i \neq j
+			\end{array}
+		\right. 
+	\end{equation*}
+	donde $w_{ij}^{+}$ es la parte positiva del parámetro $w_{ij}$ de la 
+	red, esto es, $w_{ij}^{+}:=\text{máx}\{0,w_{ij}\}$. 
+	\end{defi}
+	Observamos que la importancia de una neurona para sí misma es de 1, y 
+	la importancia entre neuronas distintas es la proporción del peso 
+	entre ellas con respecto al resto de pesos de la neurona de llegada. 
+	Además, es claro que la importancia entre dos neuronas conectadas es 
+	un valor entre $0$ y $1$.
+
+	\begin{remark}
+		La noción de importancia entre neuronas y la anterior 
+		observación, nos permiten ver los DAG con pesos, asociados a 
+		una red neuronal prealimentada, como espacios de probabilidad.
+	\end{remark}
+
+	La noción de importancia entre neuronas nos habilita la construcción 
+	de un complejo simplicial filtrado a partir del DAG asociado a la red. 
+	Sin embargo, teniendo en mente la idea de la transitividad, todavía 
+	tenemos que extender la definición de la importancia entre neuronas 
+	para aquellas que no estén directamente conectadas. Así pues, damos la 
+	siguiente definición: 
+	\begin{defi}
+	Consideremos las neuronas $u_{0}$ y $u_{2}$ conectadas por el camino: 
+	$u_{2} 
+	\rightarrow u_{1} \rightarrow u_{0}$, la importancia de $u_{2}$ para 
+	$u_{0}$ es, según el camino entre ellas, $R_{21} \cdot R_{10}$.
+	Por lo tanto, definimos la \textit{importancia extendida} entre 
+	neuronas, y la denotamos por $\overline{R_{ij}}$, como:
+	\begin{equation}
+		\overline{R_{ij}}=\text{máx}\{R_{u_{i}u_{m_{1}}} \cdots
+		R_{u_{m_{n}}u_{j}} \mid (u_{i},u_{m_{1}},...,u_{m_{n}},u_{j}) 
+	\in C_{ij} \}
+		\label{def:ie}
+	\end{equation}	
+	donde $C_{ij}$ denota el conjunto de todos los posibles caminos de 
+	$u_{i}$ a $u_{j}$. 
+	\end{defi}
+
+	\begin{remark}
+	También es podible definir $\overline{R_{ij}}$ considerando varios 
+	caminos en $C_{ij}$. Escogemos el máximo por eficiencia computacional.
+	\end{remark}
+
+	Como ya mencionamos en el capítulo anterior, numeraremos los nodos 
+	(vértices) de un DAG con pesos, asociado a una red neuronal 
+	prealimentada, en orden ascendente, desde las neuronas de llegada 
+	hasta las de salida. Veamos, a continuación, un ejemplo sencillo para 
+	interiorizar estas definiciones que serán clave a lo largo de este 
+	capítulo.
+	\begin{ejem}
+		\label{ej:primerRel}	
+		Supongamos la siguiente representación de una red neuronal con sus correspondientes pesos: 	
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[
+				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+				]
+				%Nodes
+				\node[roundnode]      (n0) 	at 	(2,0)           {0};
+				\node[roundnode]      (n1)      at 	(0,1)		{1};
+				\node[roundnode]      (n2)      at 	(0,-1)		{2};
+				\node[roundnode]      (n3)      at 	(-2,0)		{3};
+				
+				\begin{pgfonlayer}{background}
+				%Lines
+				\draw[thick,->] (n3.mid) -- node[above,sloped] {6.9} (n1.west);
+				\draw[thick,->] (n3.mid) -- node[below,sloped] {5.8} (n2.west);
+				\draw[thick,->] (n1.mid) -- node[above,sloped] {2.6} (n0.west);
+				\draw[thick,->] (n2.mid) -- node[below,sloped] {3.9} (n0.west);
+				
+				\end{pgfonlayer}
+			\end{tikzpicture}
+			\caption{Representación de una red neuronal de 4 neuronas y 1 capa.}
+		\end{figure}
+		
+		Tal y como vemos, las neuronas ya han sido ordenadas de manera 
+		correcta. Además, en este caso, todos los pesos son positivos, 
+		por lo que no nos tenemos que preocupar escoger la parte 
+		positiva. Vamos a calcular algunas importancias entre 
+		neuronas:			
+		\begin{flalign*}
+			& \left.
+				\begin{array}{l}
+					R_{31}=\frac{6.9}{6.9}=1 \hspace{0.5cm} R_{32}=\frac{5.8}{5.8}=1 \\[3pt]
+					R_{10}=\frac{2.6}{6.5}=0.4 \hspace{0.55cm}  R_{20}=\frac{3.9}{6.5}=0.6 \\[3pt]
+					\overline{R_{30}}=\text{máx}\{R_{31} \cdot R_{10}, R_{32}\cdot R_{20}\}=R_{32} \cdot R_{20}=0.6  
+				\end{array}
+			\right. & 
+		\end{flalign*}
+	\end{ejem}
+	El ejemplo anterior pone de manifiesto la intuición detrás de la 
+	definición de la importancia entre neuronas: lo que hace es medir 
+	la aportación de la neurona emisora, $u_{i}$, con respecto al resto de 
+	neuronas emisoras de $u_{j}$.
+	
+	La definición de importancia extendida nos habilita la construcción 
+	del complejo simplicial filtrado asociado a un DAG con pesos de una 
+	manera muy natural. El primer paso será definir el complejo 
+	simplicial asociado, pues no vamos a usar un clique, para ello damos 
+	la siguiente definición: 
+	\begin{defi}
+		Definimos los \textit{$p$-símplices asociados a un DAG 
+		con pesos} a partir del conjunto de vértices del DAG ( que
+		por simplificar notación denotaremos por {\Large $\nu$}$_{0}$) 
+		como sigue:
+	\begin{equation}
+		\text{{\Large $\nu$}}_{p}^{t}=
+		\left \{
+			\begin{array}{ll}
+				\text{{\Large $\nu$}}_{0} & \text{si } p=0\\[3pt]
+				\{(u_{a_{0}},...,u_{a_{p}}) \mid u_{a_{i}} \in 
+					\text{{\Large $\nu$}}_{0},\ 
+					\overline{R_{a_{i}a_{j}}} \geq t,\ 
+				\forall a_{i} > a_{j} \} & \text{si } p \geq 1
+			\end{array}
+		\right.  
+		\label{def:sn}
+	\end{equation}
+	donde $0 \leq t \leq 1$ es un parámetro real.
+	\end{defi}
+	Ahora que ya tenemos definidos los p-símplices, vamos con la 
+	construcción del complejo simplicial asociado. Para ello damos el 
+	siguiente resultado:
+	\begin{prop}
+		Sea {\Large $\nu$}$_{0}=\{u_{0},...,u_{n}\}$ un conjunto 
+		finito, y $\{w_{ij}\}_{0\leq j \leq i \leq n}$ un 
+		conjunto de números reales. Sea $\overline{R_{ij}}$ la 
+		importancia entre neuronas definida en \ref{def:ie}, y 
+		{\Large $\nu$}$_{p}^{t}$ los p-símplices definidos en 
+		\ref{def:sn} con t parámetro real entre 0 y 1. Entonces 
+		$\mathcal{K}^{t}=\bigcup_{s=0}^{s=n}\mathcal{K}_{s}^{t}$ es un 
+		complejo simplicial abstracto. 
+		\label{prop:cs}
+	\end{prop}
+
+	\begin{proof}
+		Supongamos hipótesis generales. \\
+		Para probar que {\Large $\nu$}$^{t}$ es un complejo simplicial 
+		abstracto debemos ver: 
+		\begin{enumerate}
+			\item $u \in \text{{\Large $\nu$}}_{0} \text{ implica 
+				que } \{u\} \in \text{{\Large $\nu$}}^{t}$
+			\item $ \sigma \in \text{{\Large $\nu$}}^{t} 
+				\text{ y } \tau \subset \sigma \text{ implica 
+				que } \tau \in \text{{\Large $\nu$}}^{t}$	
+		\end{enumerate}
+		Notemos que la primera propiedad se deduce inmediatamente de 
+		\ref{def:sn} y de la definición de {\Large $\nu$}$^{t}$.
+
+		Así pues, vamos a probar la segunda propiedad:
+		$\sigma=(u_{a_{0}},...,u_{a_{p}}) \in 
+		\text{{\Large $\nu$}}^{t}$ 
+		 implica que $\overline{R_{a_{i}a_{j}}}\geq t, \  
+		\forall a_{i} \geq a_{j}$. 
+		Ahora sea $\tau \subset \sigma$, entonces, 
+		$\tau = (u_{b_{0}},...,u_{b_{q}})$, y como $\{b_{0},...,
+		b_{q}\} 
+		\subset \{a_{0},...,a_{p}\}$, se tendrá que 
+		$\overline{R_{b_{i}b_{j}}} \geq t,\ \forall n_{i} \geq n_{j}$. 
+		El resultado se sigue inmediatamente. 
+	\end{proof}
+
+	Ahora que ya tenemos construido nuestro complejo simplicial 
+	{\Large $\nu$} procedemos con la construcción del complejo simplicial 
+	filtrado. Para ello, una vez más, damos el siguiente resultado:
+
+	\begin{prop}
+		Sea $(t_{i})_{i=1}^{n}$ una sucesión, monótona decreciente, 
+		de números reales entre 1 y 0, e indexada sobre los naturales. 
+		Entonces {\Large $\nu$}$_{0}=\emptyset$ y {\Large $\nu$}$_{i}=
+		\text{{\Large $\nu$}}^{t_{i}}$ con $1\leq i \leq n$, es un 
+		complejo simplicial filtrado.   
+	\end{prop}
+
+	\begin{proof}
+		Supongamos hipótesis generales.\\
+		Por la proposición anterior, sabemos que 
+		{\Large $\nu$}$^{t_{n}}$ es un complejo simplicial. Ahora 
+		bien, $t_{i} > t_{j} \text{ implica que } 
+		\text{{\Large $\nu$}}_{p}^{t_{i}} \subset 
+		\text{{\Large $\nu$}}_{p}^{t_{j}}$ por la definición 
+		\ref{def:sn}. Entonces $\emptyset=\text{{\Large $\nu$}}_{0} 
+		\subset \text{{\Large $\nu$}}_{1} \subset \cdots \subset 
+		\text{{\Large $\nu$}}_{n}=\text{{\Large $\nu$}}^{t_{n}}$. Se 
+		sigue inmediatamente el resultado.
+	\end{proof}
+
+	Hasta ahora, hemos conseguido construir el complejo simplicial 
+	filtrado asociado a un DAG con pesos, con lo que podemos pensar que ya 
+	estamos listos para aplicar la homología persistente y extraer 
+	conclusiones. No obstante, la realidad es bien distinta y existe un 
+	problema con el que nos topamos en el desarrollo del presente trabajo. 
+	El lector interesado y perspicaz habrá notado que la definición 
+	\ref{def:ie} tiene un pequeño defecto: no se especifica el significado
+	exacto de $C_{ij}$. Este pequeño defecto, que en un principio puede 
+	pasar desapercibido, supone que haya al menos dos maneras distintas de 
+	calcular los $p$-símplices dado un DAG con pesos.
+
+	Esta disyuntiva da lugar a las dos interpretaciones posibles sobre el
+	cálculo de los $p$-símplices: la interpretación \emph{local} y la 
+	interpretación \emph{global}. Tal y como hemos podido comprobar, por 
+	medio de correo electrónico, la interpretación original que hace el 
+	autor es la que hemos bautizado como local.
+	
+	Veamos un pequeño ejemplo que ilustre la diferencia entre ambas 
+	interpretaciones.
+	\begin{ejem}
+		\label{ej:int}
+		Supongamos la siguiente representación de una red neuronal con 
+		las importancias entre neuronas ya calculadas: 	
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[
+				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+				]
+				%Nodes
+				\node[roundnode]      (n0) 	at 	(2,0)           {0};
+				\node[roundnode]      (n1)      at 	(0,1)		{1};
+				\node[roundnode]      (n2)      at 	(0,-1)		{2};
+				\node[roundnode]      (n4)      at 	(-2,-1)		{4};
+				\node[roundnode]      (n3)      at 	(-2,1)		{3};
+				
+				\begin{pgfonlayer}{background}
+				%Lines
+				\draw[thick,->] (n3.mid) -- node[above] {0.5} (n1.west);
+				\draw[thick,->] (n4.mid) -- node[above,sloped] {0.5} (n1.west);
+				\draw[thick,->] (n4.mid) -- node[below] {1} (n2.west);
+				\draw[thick,->] (n1.mid) -- node[above,sloped] {0.4} (n0.west);
+				\draw[thick,->] (n2.mid) -- node[below,sloped] {0.6} (n0.west);
+				
+				\end{pgfonlayer}
+			\end{tikzpicture}
+			\caption{Representación de una red neuronal de 5 neuronas y 1 capa.}
+		\end{figure}
+		Vamos calcular {\Large $\nu$}$^{0.4}_{2}$ para ver las 
+		diferencias entre las dos interpretaciones. En primer lugar, 
+		listamos los posibles 2-símplices: 
+		$$
+		\{4,2,0\},\{4,1,0\},\{3,1,0\}
+		$$
+		\begin{itemize}
+			\item{Interpretación local}\\
+				Como la importancia entre 4-2, 2-0 y 4-0 es 
+				mayor que 0.4, entonces $\{4,2,0\} \in 
+				\text{{\Large $\nu$}}^{0.4}_{2}$,
+				donde importancia entre 4-0 viene dada por:
+				$$\overline{R_{40}}=\text{máx}\{R_{42} \cdot 
+				R_{20}\}=R_{42} \cdot R_{20}=0.6$$
+				Siguiendo la misma regla tenemos que 
+				$\{4,1,0\},\{3,1,0\} \notin 
+				\text{{\Large $\nu$}}^{0.4}_{2}$. Por lo 
+				tanto,
+				$\text{{\Large $\nu$}}^{0.4}_{2}=
+				\{\{4,2,0\}\}$.
+			\item{Interpretación global}\\
+				Razonando igual que antes,$\ \{4,2,0\} \in 
+				\text{{\Large $\nu$}}^{0.4}_{2}$. Ahora bien, 
+				como la importancia entre 4-1 y 1-0 es mayor o 
+				igual que 0.4, y 
+				$$\overline{R_{40}}=\text{máx}\{R_{42} \cdot 
+				R_{20},R_{41} \cdot R_{10}\}=R_{42} \cdot 
+				R_{20}=0.6$$ 
+				Entonces $\{4,1,0\} \in 
+				\text{{\Large $\nu$}}^{0.4}_{2}$. Sin embargo, 
+				$\{3,2,0\} \notin 
+				\text{{\Large $\nu$}}^{0.4}_{2}$ y así, 
+				{\Large $\nu$}$^{0.4}_{2}=\{\{4,2,0\},\\  
+				\{4,1,0\}\}$
+		\end{itemize}
+	\end{ejem}
+	El ejemplo anterior pone de manifiesto la principal diferencia 
+	entre ambas interpretaciones: en la primera, el máximo se 
+	calcula sobre los caminos que aparecen en el p-símplice; en la 
+	segunda, el máximo se calcula sobre los caminos que aparecen 
+	en todos los p-símplices.
+	\begin{remark}
+		Mientras que la interpretación global es consistente 
+		para los 1-símplices (aristas), la interpretación 
+		local no lo es. Para el cálculo de los 1-símplices en 
+		la interpretación local se toma el máximo entre todos 
+		los posibles caminos. 
+	\end{remark}
+	
+	A lo largo de las siguientes secciones veremos más en detalle la 
+	diferencia entre ambas interpretaciones y cómo afecta esta diferencia
+	al cálculo de la homología persistente.
 
 	\section{Interpretación global. Ejemplo}
+	
+	Ahora que ya contamos con todas las herramientas necesarias, veamos un ejemplo completo en el que calculemos los números de Betti y 
+	los diagramas correspondientes. Haremos el desarrollo del ejemplo siguiendo las dos interpretaciones vistas en el ejemplo \ref{ej:int}.  
+
+	\begin{ejem}
+		Supongamos la siguiente representación de una red neuronal con las importancias entre neuronas ya calculadas:	
+		\begin{figure}[H]
+				\centering
+				\begin{tikzpicture}[
+					roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+					]
+					%Nodes
+					\node[roundnode]      (n0) 	at 	(4,1)           {0};
+					\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+					\node[roundnode]      (n2) 	at 	(2,2)           {2};
+					\node[roundnode]      (n3) 	at 	(2,0)           {3};
+					\node[roundnode]      (n4)      at 	(2,-2)		{4};
+					\node[roundnode]      (n5)      at 	(0,3)		{5};
+					\node[roundnode]      (n6)      at 	(0,1)		{6};
+					\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+					\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+					\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+					\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+					\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+					
+					\begin{pgfonlayer}{background}
+					%Lines
+					\draw[thick,->] (n9.mid) -- node[above,sloped] {1.0} (n5.west);
+					\draw[thick,->] (n9.mid) -- node[above,sloped] {0.5} (n6.west);
+					\draw[thick,->] (n10.mid) -- node[above,sloped] {0.5} (n6.west);
+					\draw[thick,->] (n10.mid) -- node[above,sloped] {0.55} (n7.west);
+					\draw[thick,->] (n11.mid) -- node[above,sloped] {0.45} (n7.west);
+					\draw[thick,->] (n11.mid) -- node[above,sloped] {1.0} (n8.west);
+					\draw[thick,->] (n5.mid) -- node[above,sloped] {0.4} (n2.west);
+					\draw[thick,->] (n6.mid) -- node[above,sloped] {0.6} (n2.west);
+					\draw[thick,->] (n6.mid) -- node[above,sloped] {0.58} (n3.west);
+					\draw[thick,->] (n7.mid) -- node[above,sloped] {0.42} (n3.west);
+					\draw[thick,->] (n7.mid) -- node[above,sloped] {0.56} (n4.west);
+					\draw[thick,->] (n8.mid) -- node[above,sloped] {0.44} (n4.west);
+					\draw[thick,->] (n2.mid) -- node[above,sloped] {0.57} (n0.west);
+					\draw[thick,->] (n3.mid) -- node[above,sloped] {0.43} (n0.west);
+					\draw[thick,->] (n3.mid) -- node[above,sloped] {0.59} (n1.west);
+					\draw[thick,->] (n4.mid) -- node[above,sloped] {0.41} (n1.west);
+					\end{pgfonlayer}
+				\end{tikzpicture}
+				\caption{Representación de una red neuronal de 12 neuronas y 2 capas.}
+		\end{figure}
+		Vamos a calcularle el complejo simplicial filtrado asociado. Para ello vamos a ilustrar unos cuantos pasos en la filtración
+		con los correspondientes números de Betti asociados. También añadimos los correspondientes diagramas de persistencia y de barras
+		realizados con \emph{GUDHI} y \emph{Dionysus}.
+		\begin{itemize}
+			\item{\textbf{Interpretación local}}
+		\end{itemize}
+		\begin{figure}[H]
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 0 (t=1.0)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=10,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n9.mid) --  (n5);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 4 (t=0.6)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=9,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n9.mid) --  (n5);
+						\draw[thick] (n6.mid) --  (n2);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 5 (t=0.5)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=2,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n9.mid) --  (n5);
+						\draw[thick] (n6.mid) --  (n2);
+						\draw[thick] (n10.mid) --  (n7);
+						\draw[thick] (n10.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n6);
+						\draw[thick] (n7.mid) --  (n4);
+						\draw[thick] (n6.mid) --  (n3);
+						\draw[thick] (n3.mid) --  (n1);
+						\draw[thick] (n2.mid) --  (n0);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, fill=white, thick, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 6 (t=0.4)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=5$};
+						
+						\begin{pgfonlayer}{background}
+						\draw[thick] (n11.mid) --  (n7);
+						\draw[thick] (n10.mid) --  (n7);
+						\draw[thick] (n10.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n6);
+						\draw[thick] (n7.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n2);
+						\draw[thick] (n4.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n0);
+						\draw[thick] (n2.mid) --  (n0);
+					
+
+						\filldraw[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\filldraw[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+		\end{figure}
+		\begin{figure}[H]
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 7 (t=0.3)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=4$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n11.mid) --  (n7);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7);
+						\draw[thick] (n10.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n5);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n2);
+						\draw[thick] (n6.mid) --  (n0);
+						\draw[thick] (n5.mid) --  (n2);
+						\draw[thick] (n4.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n0);
+						\draw[thick] (n2.mid) --  (n0);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 8 (t=0.2)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n7.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n6.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n4.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n3.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n5.mid) to[bend left] (n0.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6.mid);
+						\draw[thick] (n10.mid) --  (n3.mid);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n3.mid);
+						\draw[thick] (n7.mid) --  (n1.mid);
+						\draw[thick] (n6.mid) --  (n3.mid);
+						\draw[thick] (n6.mid) --  (n2.mid);
+						\draw[thick] (n6.mid) --  (n0.mid);
+						\draw[thick] (n5.mid) --  (n2.mid);
+						\draw[thick] (n4.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n0.mid);
+						\draw[thick] (n2.mid) --  (n0.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 9 (t=0.1)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) to[bend left] (n3.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n7.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n6.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n8.mid) to[bend right] (n1.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n4.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n3.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) to[bend right] (n0.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n5.mid) to[bend left] (n0.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6.mid);
+						\draw[thick] (n10.mid) --  (n3.mid);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n3.mid);
+						\draw[thick] (n7.mid) --  (n1.mid);
+						\draw[thick] (n6.mid) --  (n3.mid);
+						\draw[thick] (n6.mid) --  (n2.mid);
+						\draw[thick] (n6.mid) --  (n0.mid);
+						\draw[thick] (n5.mid) --  (n2.mid);
+						\draw[thick] (n4.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n0.mid);
+						\draw[thick] (n2.mid) --  (n0.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 10 (t=0.0)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) to[bend left] (n3.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n7.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n6.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n8.mid) to[bend right] (n1.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n4.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n3.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) to[bend right] (n0.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n5.mid) to[bend left] (n0.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6.mid);
+						\draw[thick] (n10.mid) --  (n3.mid);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n3.mid);
+						\draw[thick] (n7.mid) --  (n1.mid);
+						\draw[thick] (n6.mid) --  (n3.mid);
+						\draw[thick] (n6.mid) --  (n2.mid);
+						\draw[thick] (n6.mid) --  (n0.mid);
+						\draw[thick] (n5.mid) --  (n2.mid);
+						\draw[thick] (n4.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n0.mid);
+						\draw[thick] (n2.mid) --  (n0.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+		\end{figure}
+		\begin{figure}[H]
+			\minipage{0.5\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\includegraphics{Images/DiagramaBarrasEj7LOCAL.png}}
+				\end{figure}
+			\endminipage
+			\minipage{0.5\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\includegraphics{Images/DiagramaPersistenciaEj7LOCAL.png}}
+				\end{figure}
+			\endminipage
+		\end{figure}
+		
+		\begin{itemize}
+			\item{\textbf{Interpretación global}}
+		\end{itemize}
+		\begin{figure}[H]
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 0 (t=1.0)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=10,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n9.mid) --  (n5);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 4 (t=0.6)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=9,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n9.mid) --  (n5);
+						\draw[thick] (n6.mid) --  (n2);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 5 (t=0.5)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=2,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n9.mid) --  (n5);
+						\draw[thick] (n6.mid) --  (n2);
+						\draw[thick] (n10.mid) --  (n7);
+						\draw[thick] (n10.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n6);
+						\draw[thick] (n7.mid) --  (n4);
+						\draw[thick] (n6.mid) --  (n3);
+						\draw[thick] (n3.mid) --  (n1);
+						\draw[thick] (n2.mid) --  (n0);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, fill=white, thick, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 6 (t=0.4)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=3$};
+						
+						\begin{pgfonlayer}{background}
+					
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n2);
+						\draw[thick] (n5.mid) --  (n2);
+						\draw[thick] (n4.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n0);
+						\draw[thick] (n2.mid) --  (n0);
+						
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+		\end{figure}
+		\begin{figure}[H]
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 7 (t=0.3)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=2$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8);
+						\draw[thick] (n11.mid) --  (n7);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7);
+						\draw[thick] (n10.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n6);
+						\draw[thick] (n9.mid) --  (n5);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n4);
+						\draw[thick] (n7.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n3);
+						\draw[thick] (n6.mid) --  (n2);
+						\draw[thick] (n6.mid) --  (n0);
+						\draw[thick] (n5.mid) --  (n2);
+						\draw[thick] (n4.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n1);
+						\draw[thick] (n3.mid) --  (n0);
+						\draw[thick] (n2.mid) --  (n0);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 8 (t=0.2)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n7.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n6.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n4.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n3.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n5.mid) to[bend left] (n0.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6.mid);
+						\draw[thick] (n10.mid) --  (n3.mid);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n3.mid);
+						\draw[thick] (n7.mid) --  (n1.mid);
+						\draw[thick] (n6.mid) --  (n3.mid);
+						\draw[thick] (n6.mid) --  (n2.mid);
+						\draw[thick] (n6.mid) --  (n0.mid);
+						\draw[thick] (n5.mid) --  (n2.mid);
+						\draw[thick] (n4.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n0.mid);
+						\draw[thick] (n2.mid) --  (n0.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 9 (t=0.1)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) to[bend left] (n3.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n7.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n6.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n8.mid) to[bend right] (n1.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n4.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n3.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) to[bend right] (n0.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n5.mid) to[bend left] (n0.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6.mid);
+						\draw[thick] (n10.mid) --  (n3.mid);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n3.mid);
+						\draw[thick] (n7.mid) --  (n1.mid);
+						\draw[thick] (n6.mid) --  (n3.mid);
+						\draw[thick] (n6.mid) --  (n2.mid);
+						\draw[thick] (n6.mid) --  (n0.mid);
+						\draw[thick] (n5.mid) --  (n2.mid);
+						\draw[thick] (n4.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n0.mid);
+						\draw[thick] (n2.mid) --  (n0.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 10 (t=0.0)};
+						\node[roundnode]      (n0) 	at 	(4,1)           {0};
+						\node[roundnode]      (n1) 	at 	(4,-1)          {1};
+						\node[roundnode]      (n2) 	at 	(2,2)           {2};
+						\node[roundnode]      (n3) 	at 	(2,0)           {3};
+						\node[roundnode]      (n4)      at 	(2,-2)		{4};
+						\node[roundnode]      (n5)      at 	(0,3)		{5};
+						\node[roundnode]      (n6)      at 	(0,1)		{6};
+						\node[roundnode]      (n7) 	at 	(0,-1)           {7};
+						\node[roundnode]      (n8) 	at 	(0,-3)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,2)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,0)           {10};
+						\node[roundnode]      (n11) 	at 	(-2,-2)           {11};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=1,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}							
+					
+
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n8.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) -- (n7.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n11.mid) to[bend left] (n3.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend right] (n4.mid) -- (n7.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n7.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) -- (n6.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n10.mid) to[bend left] (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n6.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n5.mid) -- (n2.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n8.mid) to[bend right] (n1.mid) -- (n4.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n4.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) -- (n3.mid) -- (n1.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n7.mid) to[bend right] (n0.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) to[bend left] (n1.mid) -- (n3.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n3.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n2.mid) -- (n0.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n5.mid) to[bend left] (n0.mid) -- (n2.mid) -- cycle;
+						
+						\draw[thick] (n11.mid) --  (n8.mid);
+						\draw[thick] (n11.mid) --  (n7.mid);
+						\draw[thick] (n11.mid) --  (n4.mid);
+						\draw[thick] (n10.mid) --  (n7.mid);
+						\draw[thick] (n10.mid) --  (n6.mid);
+						\draw[thick] (n10.mid) --  (n3.mid);
+						\draw[thick] (n9.mid) --  (n6.mid);
+						\draw[thick] (n9.mid) --  (n5.mid);
+						\draw[thick] (n9.mid) --  (n2.mid);
+						\draw[thick] (n8.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n4.mid);
+						\draw[thick] (n7.mid) --  (n3.mid);
+						\draw[thick] (n7.mid) --  (n1.mid);
+						\draw[thick] (n6.mid) --  (n3.mid);
+						\draw[thick] (n6.mid) --  (n2.mid);
+						\draw[thick] (n6.mid) --  (n0.mid);
+						\draw[thick] (n5.mid) --  (n2.mid);
+						\draw[thick] (n4.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n1.mid);
+						\draw[thick] (n3.mid) --  (n0.mid);
+						\draw[thick] (n2.mid) --  (n0.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+			\endminipage}
+		\end{figure}
+		\begin{figure}[H]
+			\minipage{0.5\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\includegraphics{Images/DiagramaBarrasEj7GLOBAL.png}}
+				\end{figure}
+			\endminipage
+			\minipage{0.5\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\includegraphics{Images/DiagramaPersistenciaEj7GLOBAL.png}}
+				\end{figure}
+			\endminipage
+		\end{figure}
+		\begin{remark}
+			Para una mayor claridad, en los dibujos de las filtraciones se han omitido algunas aristas.
+		\end{remark}
+	\end{ejem}	
+	Del ejemplo anterior podemos extraer unas conclusiones muy importantes. Por una parte, observamos que si las neuronas de entrada se conectan
+	directamente a las de salida, el conocimiento de la red será ``pobre" ya que será equivalente a la detección de patrones. Por otra parte,
+	el incremento del número de Betti $\beta_{1}$ indica que la red determina la neurona de llegada por combinación de las neuronas de salida. De este modo,
+	podemos suponer que el aumento de $\beta_{1}$ releja la complejidad del conocimiento adquirido por la red. Por lo tanto, mediante el uso de la homología persistente
+	seremos capaces de medir la complejidad del conocimiento adquirido por la red.
+
 
 	\section{Interpretación local. Algoritmos y programas}
 
