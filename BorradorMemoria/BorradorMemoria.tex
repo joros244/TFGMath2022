@@ -3,12 +3,16 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
-\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[spanish, es-noshorthands, english]{babel}
+
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{amsfonts}
 \usepackage{authblk}
 \usepackage{mathtools}
+\usepackage[nottoc]{tocbibind}
+\usepackage{hyperref}
+\usepackage{babelbib}
 
 \usepackage{graphicx}
 \graphicspath{{Images/}}
@@ -52,7 +56,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 \date{Mayo 2022}
 
+
 \begin{document}
+	\selectlanguage{spanish}
 	
 	\maketitle
 	
@@ -84,7 +90,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	diferentes, por lo que debemos dintinguir entre dos definiciones 
 	relacionadas: los complejos simpliciales \emph{abstractos} y los 
 	complejos simpliciales \emph{geométricos}. Para el desarrrollo estas 
-	nociones seguiremos la guia proporcionada por \cite{}.
+	nociones seguiremos la guia proporcionada por 
+	\cite{TopoAlg-Edelsbrunner,Intro-Otter}.
 
 	Siguiendo el enfoque combinatorio, comenzamos definiendo los complejos 
 	simpliciales abstractos y algunas nociones relacionadas. 
@@ -253,7 +260,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	geométrica} de un complejo simplicial abstracto, que es un complejo 
 	simplicial geométrico definido tal y como se ilustra en la figura 
 	\ref{fig:tetra} del ejemplo \ref{ejem:1}(para más detalles véase 
-	\cite{}).
+	\cite{TopoAlg-Edelsbrunner}).
 
 	De aquí en adelante emplearemos la definición de complejo simplicial 
 	abstracto, pues es la más adecuada para el presente trabajo.
@@ -284,7 +291,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	homología} en la historia de las matemáticas, en el presente trabajo 
 	desarrollaremos primero la noción general para luego reducir al caso 
 	particular de la \emph{homología simplicial}. Para ello emplearemos la 
-	guía proporcionada por \cite{}.
+	guía proporcionada por \cite{TopoAlg-Edelsbrunner,Homologia-Macho,
+	Algebra-Elduque}.
 
 	Comenzamos la sección con una definición básica, que no aparece en el 
 	grado, y que nos será necesaria para nuestros propósitos.
@@ -696,7 +704,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\hspace{0.25cm} H_{p}(\text{{\Large $\nu$}})=\emptyset$, pues {\Large 
 	$\nu$}$_{p}=\emptyset$.
 
-	Ahora veamos un ejemplo (propuesto en \cite{}) en el que calculamos 
+	Ahora veamos un ejemplo (propuesto en \cite{Intro-Otter}) en el que calculamos 
 	los números de Betti dado un complejo simplicial abstracto.
 
 	\begin{ejem}
@@ -1048,7 +1056,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		<<buena>> base.
 	\end{remark}
 
-	Veamos un ejemplo (propuesto en \cite{}) ilustrativo de estos 
+	Veamos un ejemplo (propuesto en \cite{Intro-Otter}) ilustrativo de estos 
 	conceptos:
 
 	\begin{ejem}
@@ -1448,7 +1456,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	de la informática. En esta sección haremos una
 	introducción hacia el otro concepto fundamental del presente trabajo: 
 	\emph{las redes neuronales artificiales}. A lo largo de esta sección
-	seguiremos la guía proporcionada por \cite{}.
+	seguiremos la guía proporcionada por \cite{Goodfellow-et-al-2016,
+	IA-Jonathan,MDiscreta-Guti}.
 
 	La historia del \emph{aprendizaje profundo} y de las redes neuronales 
 	es muy amplia y queda fuera del alcance del presente trabajo. No 
@@ -1559,7 +1568,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	manera teórica al 
 	mínimo global son necesarias técnicas más avanzadas cuya descripción 
 	queda fuera del alcance del presente trabajo. Para más información 
-	véase \cite{}.
+	véase \cite{Goodfellow-et-al-2016}.
 	\end{remark}
 
 	Desafortunadamente, el modelo de regresión lineal es muy limitado: 
@@ -1666,7 +1675,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	neuronales, el \emph{teorema de aproximación universal} nos garantiza
 	que una red de estas características puede aproximar cualquier función
 	Borel-medible cuyo dominio tenga dimensión finita (para más 
-	información véase \cite{}).
+	información véase \cite{TeoremaAproxUn-Kurt}).
 	\end{remark}
 
 	En el presente trabajo nos interesa especialmente la representación 
@@ -1778,5 +1787,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	grafo asociado, necesitamos dar una serie de pasos previos hasta la 
 	aplicación de la homología persistente. El primer paso será construir 
 	un complejo simplicial a partir del grafo subycente a la red.
+
+	\newpage
+	\nocite{*}
+	\bibliographystyle{babplain}
+	\bibliography{Referencias}
 \end{document} 
 
