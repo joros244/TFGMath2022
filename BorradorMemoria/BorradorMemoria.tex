@@ -1,4 +1,4 @@
-\documentclass[12pt, a4paper]{article}
+\documentclass[12pt, a4paper, twoside]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -13,11 +13,25 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{hyperref}
 \usepackage{babelbib}
+\usepackage{titlesec}
+\usepackage{titleps}
+
+\newpagestyle{main}[\sffamily]{
+	\setheadrule{.55pt}
+	\sethead[\thepage][\chaptertitlename\space\thechapter.\space\chaptertitle][]
+	{}{\chaptertitlename\space\thechapter.\space\chaptertitle}{\thepage}}
+
+\titleformat{\chapter}[display]{\bfseries\huge}{\LARGE Capítulo \thechapter}{0pt}{}[]
+\titlespacing{\chapter}{0pt}{0pt}{10pt}
+
+\let\cleardoublepageOriginal\cleardoublepage
+\renewcommand{\cleardoublepage}%
+{\newpage{\pagestyle{empty}\cleardoublepageOriginal}}
 
 \usepackage{graphicx}
 \graphicspath{{Images/}}
 \usepackage{float}
-\usepackage{fullpage}
+\usepackage[headings]{fullpage}
 \parskip = 2pt plus 1.5pt minus 1pt
 \usepackage{tikz}
 \usetikzlibrary{positioning}
@@ -59,14 +73,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 \begin{document}
 	\selectlanguage{spanish}
-	
+	\pagestyle{main}
 	\maketitle
 	
-	\newpage
-	
-	\begin{abstract}
+	\chapter*{Abstract/Resumen}
+	\addcontentsline{toc}{chapter}{Abstract/Resumen}
 	(En construcción.)
-	\end{abstract}
+
 	
 	\newpage
 
@@ -74,17 +87,17 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\newpage
 
-	\section{Introducción}
+	\chapter{Introducción}
 	(En construcción.)
 
 	\newpage
 
-	\section{Preeliminares}
+	\chapter{Preeliminares}
 
 	A lo largo de este capítulo vamos a ver todas las nociones teóricas 
 	necesarias para el uso de la homología persistente en redes neuronales.	
 	
-	\subsection{Complejos simpliciales}
+	\section{Complejos simpliciales}
 	Comenzamos con el primer concepto fundamental de todo el trabajo, los 
 	\emph{complejos simpliciales}. Esta noción admite dos enfoques 
 	diferentes, por lo que debemos dintinguir entre dos definiciones 
@@ -279,7 +292,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\prime}$}$.	
 	\end{defi}
 	
-	\subsection{Homología. Homología persistente}
+	\section{Homología. Homología persistente}
 	
 	En la sección anterior hemos fijado el concepto de complejo 
 	simplicial, que nos será muy útil a lo largo de esta sección para 
@@ -554,7 +567,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		últimos elementos fijos, tendremos únicamente 2 caras que 
 		contienen a $\tau$.  	
 	\end{proof}
-
+	
 	\begin{remark}
 		El teorema anterior denota lo significativo de la elección del
 		anillo sobre el que se toman los coeficientes, pues la 
@@ -1443,7 +1456,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{figure}
 	\end{ejem}
 
-	\subsection{Redes neuronales. Grafos subyacentes}
+	\section{Redes neuronales. Grafos subyacentes}
 	
 	Ahora cambiamos completamente de tema: nos alejamos momentáneamente de 
 	la formal topología algebraica y nos acercamos al mundo 
@@ -1690,7 +1703,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Para el caso las redes neuronales prealimentadas, necesitamos un caso 
 	particular de grafo:
-
 	\begin{defi}
 		Un \textit{grafo dirigido} es un grafo en el que se asigna un 
 		orden a los extremos de cada arista. Las aristas dirigidas se
@@ -1922,7 +1934,17 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\newpage
 
-	\section{Topological measurement of deep neural networks using persistent homology}
+	\chapter{El artículo}
+	
+	\section{Explicación matemática}
+
+	\section{Interpretación global. Ejemplo}
+
+	\section{Interpretación local. Algoritmos y programas}
+
+	\section{Ejemplos}
+
+	\chapter{Conclusiones}
 
 	\newpage
 	\nocite{*}
