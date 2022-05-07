@@ -152,7 +152,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		representación geométrica de {\Large $\nu$}.
 
 		\begin{figure}[H]
-			\label{fig:tetra}
 			\centering
 			\begin{tikzpicture}
 				%Nodes
@@ -172,8 +171,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\fill[black!20, draw=black, thick] (d) circle (3pt) node[black, above right] {d};
 
 			\end{tikzpicture}
-			\caption{Representación geométrica del complejo 
-			simplicial {\Large $\nu$}.}
+			\caption{Representación geométrica del complejo simplicial {\Large $\nu$}.}
+			\label{fig:tetra}
 		\end{figure}
 
 		La representación recogida en la figura \ref{fig:tetra}, en la
@@ -279,8 +278,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		y $\{v_{1},v_{2},...,v_{k}\} \in \text{{\Large $\nu$}$^{
 		\prime}$}$.	
 	\end{defi}
-
-	\newpage
 	
 	\subsection{Homología. Homología persistente}
 	
@@ -533,7 +530,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Sea $c \in C_{p+1}(\text{{\Large $\nu$}})$ y, sin pérdida
 		de generalidad (en virtud de la definición 
 		\ref{def:borde_form}), supongamos que $c=v,\text{ con }v\in 
-		\text{{\Large $\nu$}}$. Es decir, $v$ es un elemento de la 
+		\text{{\Large $\nu$}}$. Es decir, $c$ es un elemento de la 
 		base del espacio vectorial de cadenas $C_{p+1}(\text{
 		{\Large $\nu$}})$.Veamos que $\partial_{p}(
 		\partial_{p+1}(c))=0$.
@@ -565,7 +562,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		complican. Veremos este hecho en los siguientes ejemplos.
 	\end{remark}
 
-	Veamos un ejemplo que ilustre la proposición anterior, es decir, que 
+	Veamos un ejemplo que ilustre el teorema anterior, es decir, que 
 	<<el borde del borde es vacío>>.
 
 	\begin{ejem}
@@ -713,7 +710,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\text{{\Large $\nu$}}=\{\{a\},\{b\},\{c\},\{d\},\{e\},
 			\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{c,d\},\{a,b,c\}\}
 		\end{equation*}
-		Construimos la secuencia de grupos de cadenas asociados:
+		Construimos la secuencia de espacios de cadenas asociados:
 		\begin{equation*}
 			 \left.
 			\begin{array}{ccccccccc}
@@ -768,7 +765,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		representación gráfica de {\Large $\nu$} en $\mathbb{R}^{2}$
 		nos queda:
 		\begin{figure}[H]
-			\label{fig:homs}
 			\centering
 			\begin{tikzpicture}
 				%Nodes
@@ -794,8 +790,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\fill[black!20, draw=black, thick] (e) circle (3pt) node[black, right] {e};
 
 			\end{tikzpicture}
-			\caption{Representación geométrica del complejo 
-			simplicial {\Large $\nu$}.}
+			\caption{Representación geométrica del complejo simplicial {\Large $\nu$}.}
+			\label{fig:homs}
 		\end{figure}
 		Tal y como ya hemos comentado, los números de Betti nos 
 		cuentan los agujeros p-dimensionales. En este caso, si 
@@ -900,10 +896,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{defi}
 		Sea {\Large $\nu$} un complejo simplicial abstracto finito. 
-		Consideremos la secuencia $ \text{{\Large $\nu$}$_{1}$} 
-		\subset \text{{\Large $\nu$}$_{2}$} \subset \cdots \subset
-		\text{{\Large $\nu$}$_{k-1}$} \subset 
-		\text{{\Large $\nu$}$_{k}$} = \text{{\Large $\nu$}}$ de 
+		Consideremos la secuencia $ \text{{\Large $\nu$}$^{1}$} 
+		\subset \text{{\Large $\nu$}$^{2}$} \subset \cdots \subset
+		\text{{\Large $\nu$}$^{k-1}$} \subset 
+		\text{{\Large $\nu$}$^{k}$} = \text{{\Large $\nu$}}$ de 
 		subcomplejos simpliciales cualesquiera de {\Large $\nu$}. A
 		{\Large $\nu$} junto con su secuencia de subcomplejos 
 		simpliciales encajados lo llamaremos \textit{complejo 
@@ -939,10 +935,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{remark}
 
 	\begin{defi}
-	Sea $ \text{{\Large $\nu$}$_{1}$} 
-		\subset \text{{\Large $\nu$}$_{2}$} \subset \cdots \subset
-		\text{{\Large $\nu$}$_{k-1}$} \subset 
-		\text{{\Large $\nu$}$_{k}$} = \text{{\Large $\nu$}}$ un 
+	Sea $ \text{{\Large $\nu$}$^{1}$} 
+		\subset \text{{\Large $\nu$}$^{2}$} \subset \cdots \subset
+		\text{{\Large $\nu$}$^{k-1}$} \subset 
+		\text{{\Large $\nu$}$^{k}$} = \text{{\Large $\nu$}}$ un 
 		complejo simplicial filtrado. Definimos los \textit{p-ésimos
 		espacios vectoriales de homología persistente} como las 
 		imágenes de los homomorfismos inducidos por la inclusión, 
@@ -963,11 +959,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\partial_{1}^{1}&  & 
 			\partial_{0}^{1} & \\ 
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$_{1}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$_{1}$}) & \rightarrow &\cdots & 
+			\text{{\Large $\nu$}$^{1}$}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}$^{1}$}) & \rightarrow &\cdots & 
 			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$_{1}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$_{1}$})& \rightarrow & 
+			\text{{\Large $\nu$}$^{1}$})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}$^{1}$})& \rightarrow & 
 			\emptyset\\[3pt]
 
 			& & \downarrow \overline{f_{p}^{1,2}}& \partial_{p}^{2} & 
@@ -976,11 +972,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			& \partial_{1}^{2} & \downarrow \overline{f_{0}^{1,2}} & 
 			\partial_{0}^{2} & \\ [3pt]	
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$_{2}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$_{2}$}) & \rightarrow &\cdots & 
+			\text{{\Large $\nu$}$^{2}$}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}$^{2}$}) & \rightarrow &\cdots & 
 			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$_{2}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$_{2}$})& \rightarrow & 
+			\text{{\Large $\nu$}$^{2}$})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}$^{2}$})& \rightarrow & 
 			\emptyset \\[5pt]
 			
 			\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & 
@@ -992,11 +988,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\partial_{1}^{k-1}&  & 
 			\partial_{0}^{k-1} & \\ 
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$_{k-1}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$_{k-1}$}) & \rightarrow &\cdots & 
+			\text{{\Large $\nu$}$^{k-1}$}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}$^{k-1}$}) & \rightarrow &\cdots & 
 			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$_{k-1}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$_{k-1}$})& \rightarrow & 
+			\text{{\Large $\nu$}$^{k-1}$})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}$^{k-1}$})& \rightarrow & 
 			\emptyset\\[3pt]
 
 			& & \downarrow \overline{f_{p}^{k-1,k}}& \partial_{p}^{k} & 
@@ -1005,18 +1001,18 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			& \partial_{1}^{k} & \downarrow \overline{f_{0}^{k-1,k}} & 
 			\partial_{0}^{k} & \\ [3pt]	
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$_{k}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$_{k}$}) & \rightarrow &\cdots & 
+			\text{{\Large $\nu$}$^{k}$}) & \rightarrow & C_{p-1}(
+			\text{{\Large $\nu$}$^{k}$}) & \rightarrow &\cdots & 
 			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$_{k}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$_{k}$})& \rightarrow & \emptyset \\
+			\text{{\Large $\nu$}$^{k}$})& \rightarrow & C_{0}(
+			\text{{\Large $\nu$}$^{k}$})& \rightarrow & \emptyset \\
 		\end{array}$}
 	\end{equation*}
 	Donde los homomorfismos $\overline{f_{p}^{i,j}}$ entre espacios 
 	vectoriales de 
 	cadenas vienen inducidos por el homomorfismo inclusión $f^{i,j}: 
-	\text{{\Large $\nu$}$_{i}$} \xhookrightarrow{} 
-	\text{{\Large $\nu$}$_{j}$}$ con $0\leq i \leq j \leq k$, como en 
+	\text{{\Large $\nu$}$^{i}$} \xhookrightarrow{} 
+	\text{{\Large $\nu$}$^{j}$}$ con $0\leq i \leq j \leq k$, como en 
 	\ref{hom:induc}. Ahora, aplicando el mismo razonamiento que en 
 	\ref{hom: gruphom} definimos los homomorfismos entre espacios 
 	vectoriales de 
@@ -1061,25 +1057,25 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{ejem}
 	Consideremos el siguiente complejo simplicial filtrado:  
-	$ \text{{\Large $\nu$}$_{1}$} 
-		\subset \text{{\Large $\nu$}$_{2}$} \subset
-		\text{{\Large $\nu$}$_{3}$} \subset 
-		\text{{\Large $\nu$}$_{4}$} = \text{{\Large $\nu$}}$. Donde:
+	$ \text{{\Large $\nu$}$^{1}$} 
+		\subset \text{{\Large $\nu$}$^{2}$} \subset
+		\text{{\Large $\nu$}$^{3}$} \subset 
+		\text{{\Large $\nu$}$^{4}$} = \text{{\Large $\nu$}}$. Donde:
 	\begin{itemize}
 		
 		\item
-			$\text{{\Large $\nu$}$_{1}$}=\{\{a\},\{b\},\{c\},\{d\}
+			$\text{{\Large $\nu$}$^{1}$}=\{\{a\},\{b\},\{c\},\{d\}
 			,\{a,b\}\}$
 		\item
-			$\text{{\Large $\nu$}$_{2}$}=\{\{a\},\{b\},\{c\},
+			$\text{{\Large $\nu$}$^{2}$}=\{\{a\},\{b\},\{c\},
 				\{d\},\{e\},\{f\},\{a,b\},\{a,c\},\{b,c\}\}$
 		\item 
-			$\text{{\Large $\nu$}$_{3}$}=\{\{a\},\{b\},\{c\},
+			$\text{{\Large $\nu$}$^{3}$}=\{\{a\},\{b\},\{c\},
 				\{d\}, \{e\},\{f\},\{a,b\},\{a,c\},\{a,e\},
 				\{b,c\},\{b,f\},\{c,f\},\{c,e\},$\\
 			$\{a,b,c\}\}$
 		\item 
-			$\text{{\Large $\nu$}$_{4}$}=\{\{a\},\{b\},\{c\},
+			$\text{{\Large $\nu$}$^{4}$}=\{\{a\},\{b\},\{c\},
 				\{d\},\{e\},\{f\},\{a,b\},\{a,c\},\{a,e\},
 				\{b,c\},\{b,f\},\{c,f\},\{c,e\},$\\
 				$\{a,b,c\},\{a,c,e\}\}$
@@ -1092,7 +1088,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 			\begin{tikzpicture}
 				%Nodes
-				\node 		 (label) at (2,5) {{\Large $\nu$}$_{1}$};
+				\node 		 (label) at (2,5) {{\Large $\nu$}$^{1}$};
 				\coordinate      (a) 	at 	(0,0);
 				\coordinate      (b) 	at 	(2,0);
 				\coordinate      (c) 	at 	(2,2);
@@ -1117,7 +1113,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\resizebox{1.0\textwidth}{!}{
 				\begin{tikzpicture}
 					%Nodes
-					\node 		 (label) at (2,5) {{\Large $\nu$}$_{2}$};
+					\node 		 (label) at (2,5) {{\Large $\nu$}$^{2}$};
 					\coordinate      (a) 	at 	(0,0);
 					\coordinate      (b) 	at 	(2,0);
 					\coordinate      (c) 	at 	(2,2);
@@ -1145,7 +1141,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\resizebox{1.0\textwidth}{!}{
 				\begin{tikzpicture}
 					%Nodes
-					\node 		 (label) at (2,5) {{\Large $\nu$}$_{3}$};
+					\node 		 (label) at (2,5) {{\Large $\nu$}$^{3}$};
 					\coordinate      (a) 	at 	(0,0);
 					\coordinate      (b) 	at 	(2,0);
 					\coordinate      (c) 	at 	(2,2);
@@ -1175,7 +1171,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\resizebox{1.0\textwidth}{!}{
 				\begin{tikzpicture}
 					%Nodes
-					\node 		 (label) at (2,5) {{\Large $\nu$}$_{4}$};
+					\node 		 (label) at (2,5) {{\Large $\nu$}$^{4}$};
 					\coordinate      (a) 	at 	(0,0);
 					\coordinate      (b) 	at 	(2,0);
 					\coordinate      (c) 	at 	(2,2);
@@ -1447,8 +1443,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{figure}
 	\end{ejem}
 
-	\newpage
-
 	\subsection{Redes neuronales. Grafos subyacentes}
 	
 	Ahora cambiamos completamente de tema: nos alejamos momentáneamente de 
@@ -1649,6 +1643,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\end{pgfonlayer}
 		\end{tikzpicture}
 		\caption{Representación gráfica de un perceptrón.}
+		\label{fig:perceptron}
 	\end{figure}
 
 	Esta representación gráfica y las limitaciones del perceptrón (para 
@@ -1712,7 +1707,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	la comprensión, veamos un ejemplo:
 
 	\begin{ejem}
-	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas.	
+	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas. 
+	 Veamos su grafo asociado:
 		\begin{figure}[H]
 			\centering
 			\begin{tikzpicture}[
@@ -1775,7 +1771,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\draw[thick,->] (n5.mid) -- (n1.west);
 				\end{pgfonlayer}
 			\end{tikzpicture}
-			\caption{Grafo dirigido acíclico asociado a una red neuronal de 13 neuronas y 2 capas.}
+			\caption{Grafo dirigido acíclico asociado a una red neuronal prealimentada de 13 neuronas y 2 capas.}
+			\label{fig:redEjem}
 		\end{figure}
 		Hemos etiquetado las neuronas (vértices) en orden ascendente 
 		desde la primera neurona de la capa de salida hasta la última
@@ -1784,9 +1781,148 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{ejem}
 	
 	Habiendo fijado los conceptos de red neuronal prealimentada y de su 
-	grafo asociado, necesitamos dar una serie de pasos previos hasta la 
-	aplicación de la homología persistente. El primer paso será construir 
-	un complejo simplicial a partir del grafo subycente a la red.
+	grafo asociado, no parece evidente la aplicación de la homología 
+	persistente a estas nociones. Lo que haremos será, dada una red 
+	neuronal prealimentada, construir el complejo simplicial asociado a su
+	grafo dirigido acíclico (DAG por sus siglas en inglés); a partir del 
+	complejo simplicial construiremos un complejo simplicial filtrado, y 
+	sobre éste consideraremos la homología persistente. En esta subsección
+	ilustraremos únicamente el primer paso.
+
+	Si bien existen muchas maneras de construir un complejo simplicial a 
+	partir de un DAG (véase \cite{Clique-Jakob}), en el presente trabajo desarrollaremos la más simple
+	de todas ellas: la construcción del complejo simplicial \emph{clique}. 
+	Esta construcción, aunque simple, nos servirá de inspiración para la 
+	construcción que realizaremos más adelante. 
+	
+	\begin{defi}
+		Definimos el \textit{complejo simplicial clique} asociado a un
+		grafo a partir de la construcción de sus $p$-símplices, $p \in 
+		\mathbb{N}\cup\{0\}$. Los $p$-símplices de un complejo 
+		simplicial clique están construidos de la siguiente manera: el 
+		conjunto de vértices $\{u_{0},\dots,u_{p}\}$ es un 
+		$p$-símplice si y sólo si cada par de vértices está conectado 
+		por una arista. Por simplicidad del lenguaje, nos referiremos
+		a un complejo simplicial clique como clique.
+	\end{defi}
+
+	\begin{remark}
+		Aunque la definición de clique es sencilla, el cálculo de un 
+		clique a partir de un grafo es un problema complejo. De hecho,
+		este problema se conoce como \emph{el problema del clique} y 
+		es NP-completo. Para más detalles véase \cite{NP-Karp}.
+	\end{remark}
+
+	Nótese que, por ser un complejo simplicial, un clique es cerrado por 
+	subconjuntos, esto es, cualquier subcomplejo simplicial de un clique 
+	es un clique. Veamos un ejemplo:
+
+	\begin{ejem}
+		Vamos a construir el clique asociado al ejemplo anterior. Lo
+		denotaremos por {\Large $\nu$}. Atendiendo a la definición de 
+		clique y a la figura \ref{fig:redEjem} tendremos que:
+		\begin{multline*} 
+			\text{{\Large $\nu$}}=\{\{0\},\{1\},\{2\},\{3\},
+			\{4\},\{5\},\{6\},\{7\},\{8\},\{9\},
+			\{10\},\{11\},\{12\},\{0,2\},\{0,3\},\\
+			\{0,4\},\{0,5\},
+			\{1,2\},\{1,3\},\{1,4\},\{1,5\},\{2,6\},\{2,7\},
+			\{2,8\},\{2,9\},\{3,6\},\{3,7\},\{3,8\},\\\{3,9\},
+			\{4,6\},\{4,7\},\{4,8\},\{4,9\},\{5,6\},\{5,7\},
+			\{5,8\},\{5,9\},\{6,10\},\{6,11\},
+			\{6,12\},\\\{7,10\},\{7,11\},
+			\{7,12\},\{8,10\},\{8,11\},
+			\{8,12\},\{9,10\},\{9,11\},
+			\{9,12\}\}
+		\end{multline*}
+
+		Observamos que {\Large $\nu$} es un clique muy particular, 
+		pues está compuesto únicamente por vértices ($0$-símplices) y 
+		aristas (1-símplices). Su representación gráfica es la 
+		siguiente:
+		\begin{figure}[H]
+			\centering
+			\begin{tikzpicture}[
+				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+				]
+				%Nodes
+				\node[roundnode]      (n0) 	at 	(6,1)           {0};
+				\node[roundnode]      (n1) 	at 	(6,-1)          {1};
+				\node[roundnode]      (n2) 	at 	(4,3)           {2};
+				\node[roundnode]      (n3) 	at 	(4,1)           {3};
+				\node[roundnode]      (n4)      at 	(4,-1)		{4};
+				\node[roundnode]      (n5)      at 	(4,-3)		{5};
+				\node[roundnode]      (n6)      at 	(2,3)		{6};
+				\node[roundnode]      (n7) 	at 	(2,1)           {7};
+				\node[roundnode]      (n8) 	at 	(2,-1)           {8};
+				\node[roundnode]      (n9)      at 	(2,-3)		{9};
+				\node[roundnode]      (n10)      at 	(0,2)		{10};
+				\node[roundnode]      (n11) 	at 	(0,0)           {11};
+				\node[roundnode]      (n12) 	at 	(0,-2)           {12};
+				
+				\begin{pgfonlayer}{background}
+				%Lines
+				\draw[thick] (n10.mid) -- (n6.mid);
+				\draw[thick] (n10.mid) -- (n7.mid);
+				\draw[thick] (n10.mid) -- (n8.mid);
+				\draw[thick] (n10.mid) -- (n9.mid);
+				\draw[thick] (n11.mid) -- (n6.mid);
+				\draw[thick] (n11.mid) -- (n7.mid);
+				\draw[thick] (n11.mid) -- (n8.mid);
+				\draw[thick] (n11.mid) -- (n9.mid);
+				\draw[thick] (n12.mid) -- (n6.mid);
+				\draw[thick] (n12.mid) -- (n7.mid);
+				\draw[thick] (n12.mid) -- (n8.mid);
+				\draw[thick] (n12.mid) -- (n9.mid);
+				
+				\draw[thick] (n6.mid) -- (n2.mid);
+				\draw[thick] (n6.mid) -- (n3.mid);
+				\draw[thick] (n6.mid) -- (n4.mid);
+				\draw[thick] (n6.mid) -- (n5.mid);
+				\draw[thick] (n7.mid) -- (n2.mid);
+				\draw[thick] (n7.mid) -- (n3.mid);
+				\draw[thick] (n7.mid) -- (n4.mid);
+				\draw[thick] (n7.mid) -- (n5.mid);
+				\draw[thick] (n8.mid) -- (n2.mid);
+				\draw[thick] (n8.mid) -- (n3.mid);
+				\draw[thick] (n8.mid) -- (n4.mid);
+				\draw[thick] (n8.mid) -- (n5.mid);
+				\draw[thick] (n9.mid) -- (n2.mid);
+				\draw[thick] (n9.mid) -- (n3.mid);
+				\draw[thick] (n9.mid) -- (n4.mid);
+				\draw[thick] (n9.mid) -- (n5.mid);
+
+				\draw[thick] (n2.mid) -- (n0.mid);
+				\draw[thick] (n2.mid) -- (n1.mid);
+				\draw[thick] (n3.mid) -- (n0.mid);
+				\draw[thick] (n3.mid) -- (n1.mid);
+				\draw[thick] (n4.mid) -- (n0.mid);
+				\draw[thick] (n4.mid) -- (n1.mid);
+				\draw[thick] (n5.mid) -- (n0.mid);
+				\draw[thick] (n5.mid) -- (n1.mid);
+				\end{pgfonlayer}
+			\end{tikzpicture}
+			\caption{Representación gráfica del clique asociado a una red neuronal prealimentada de 13 neuronas y 2 capas.}
+			\label{fig:cliqueEjem}
+		\end{figure}
+	\end{ejem}
+
+	El ejemplo anterior pone de manifiesto que considerar el clique 
+	asociado a una red neuronal prealimentada no es suficiente, pues el 
+	resultado es un clique trivial que nos aporta muy poca información 
+	sobre la red. Reflexionando sobre ello, se hace notar que debemos 
+	extender la noción de clique mediante una relación transitiva. 
+
+	No obstante, estamos adelantando acontecimientos pues en el siguiente 
+	capítulo veremos detalladamente el proceso necesario para la 
+	aplicación de la homología persistente a una red neuronal 
+	prealimentada. Así pues, finalizamos este capítulo de preeliminares en
+	el que se han expuesto todas las nociones teóricas necesarias para la 
+	comprensión del artículo sobre el que versa el presente trabajo.
+
+	\newpage
+
+	\section{Topological measurement of deep neural networks using persistent homology}
 
 	\newpage
 	\nocite{*}
