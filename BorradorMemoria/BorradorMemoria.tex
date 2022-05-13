@@ -33,7 +33,7 @@
 \graphicspath{{Images/}}
 \usepackage{float}
 \usepackage[headings]{fullpage}
-\parskip = 3pt plus 1pt minus 1.5pt
+\parskip = 2.5pt plus 2pt minus 2pt
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{babel}
@@ -49,8 +49,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 \newtheorem{theorem}{Teorema}
 \theoremstyle{definition}
-\newtheorem{defi}{Definición}
-\newtheorem{ejemplo}{Ejemplo}
+\newtheorem{defi}{Definición}[section]
+\newtheorem{ejemplo}{Ejemplo}[section]
 \newenvironment{ejem}
   {\pushQED{\qed}\renewcommand{\qedsymbol}{$\blacktriangleleft$}\ejemplo}
   {\popQED\endejemplo}
@@ -105,28 +105,36 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{defi}
 	
-	Un \textit{complejo simplicial abstracto} es una colección finita, 
+	Un \textit{complejo simplicial abstracto} es una colección, 
 	\begin{Large}$\nu$\end{Large}, de subconjuntos no vacíos de un 
 	conjunto, {\Large $\nu$}$_{0}$, que verifica las siguientes 
 	propiedades:
 	
 	\begin{enumerate}
 		\item Si $v \in $ {\Large $ \nu$}$_{0}$, entonces $\{v\} \in$
-			\begin{Large}$ \nu$\end{Large}
+			\begin{Large}$ \nu$\end{Large}.
 		\item Si $\sigma \in $ {\Large $ \nu$}$ \text{ y } \tau 
 			\subset \sigma$, entonces $ \tau \in $
-			\begin{Large}$ \nu$\end{Large}
+			\begin{Large}$ \nu$\end{Large}.
 	\end{enumerate}
 	
 	A los elementos de {\Large $\nu$} los llamaremos \textit{símplices};
 	más concretamente: dado $\sigma \in $ {\Large $\nu$}, diremos que 
-	$\sigma$ tiene \textit{dimensión p}, y que $\sigma$ es un 
-	\textit{p-símplice}, si $|\sigma|=p+1$. Asimismo, definimos la 
+	$\sigma$ tiene \textit{dimensión $p$}, y que $\sigma$ es un 
+	\textit{$p$-símplice}, si $|\sigma|=p+1$. Asimismo, definimos la 
 	\textit{dimensión de {\Large $\nu$}} como el máximo de las dimensiones 
 	de sus símplices y denotaremos por {\Large $\nu$}$_{p}$ a la colección 
-	de los p-símplices de {\Large $\nu$}.	
+	de los $p$-símplices de {\Large $\nu$}.	
 	
 	\end{defi}
+
+	Para los propósitos del presente trabajo consideraremos que 
+	{\Large $\nu$}$_{0}$ es finito, lo que supondrá que los complejos 
+	simpliciales definidos a partir de él también serán finitos, así como 
+	sus correspondientes símplices. Nótese que la definición de los 
+	$p$-símplices es coherente con {\Large $\nu$}$_{0}$, es decir, los 
+	elementos de {\Large $\nu$}$_{0}$ los podemos considerar como 
+	$0$-símplices. 
 	
 	En relación con el concepto de símplice y de dimensión surge la 
 	siguiente noción: 
@@ -150,7 +158,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\text{{\Large $\nu$}}=\{\{a\},\{b\},\{c\},\{d\},
 			\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{b,d\},\{c,d\},
 			\{a,b,c\},\{a,b,d\},\\
-			\{a,c,d\},\{a,b,c,d\}\}
+			\{a,c,d\},\{a,b,c,d\}\}.
 		\end{multline*}
 		Así, tenemos que la dimensión de {\Large $\nu$} es 3. También 
 		observamos que el 3-símplice $\{a,b,c,d\}$ tiene por caras de 
@@ -199,23 +207,23 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{defi}
 		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$. Diremos
-		que los k+1 puntos son \textit{afínmente independientes} si 
-		los k vectores $u_{1}-u_{0},u_{2}-u_{0},...,u_{k}-u_{0}$ son
+		que los $k+1$ puntos son \textit{afínmente independientes} si 
+		los $k$ vectores $u_{1}-u_{0},u_{2}-u_{0},...,u_{k}-u_{0}$ son
 		linealmente independientes.
 
 		Sea $x \in \mathbb{R}^{n}$. Diremos que $x$ es una 
 		\textit{combinación afín} de $\{u_{0},u_{1},...,u_{k}\}$ si 
 		$\exists \lambda_{0},...,\lambda_{k}$ tales que 
 		$x=\sum_{i=0}^{k}\lambda_{i}u_{i}$ y 
-		$\sum_{i=0}^{k}\lambda_{i}=1$
+		$\sum_{i=0}^{k}\lambda_{i}=1$.
 	\end{defi}
 
 	\begin{defi}
-		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$ k+1 
+		Sean $\{u_{0},u_{1},...,u_{k}\}\subset\mathbb{R}^{n}$ $k+1$ 
 		puntos afínmente independientes y $x=\sum_{i=0}^{k}
 		\lambda_{i}u_{i}$ una combinación afín. Diremos que $x$ es una
-		\textit{combinación convexa} de $\{u_{0},u_{1},...,\\
-		u_{k}\}$ si $\{\lambda_{0},\lambda_{1},...,\lambda_{k}\}$ son 
+		\textit{combinación convexa} de $\{u_{0},u_{1},...,u_{k}\}$ si 
+		$\{\lambda_{0},\lambda_{1},...,\lambda_{k}\}$ son 
 		no negativos.
 
 		Definimos la \textit{clausura convexa} de $\{u_{0},u_{1},...,
@@ -229,9 +237,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{defi}
 		Definimos un \textit{k-símplice} como la clausura convexa de 
-		k+1 puntos afínmente independientes. Lo denotaremos por 
+		$k+1$ puntos afínmente independientes. Lo denotaremos por 
 		$\sigma=conv\{u_{0},u_{1},...,u_{k}\}$, y diremos que la 
-		\textit{dimensión de $\sigma$} es k.
+		\textit{dimensión de $\sigma$} es $k$.
 
 		Llamamos \textit{cara} de $\sigma$ a cualquier combinación 
 		convexa de un subconjunto no vacío de $\{u_{0},u_{1},...,
@@ -251,11 +259,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		siguientes propiedades:
 		\begin{enumerate}
 			\item Si $\sigma\in \text{{\Large $\nu$} y }
-				\tau \leq \sigma \implies \tau \in 
-				\text{{\Large $\nu$}}$
+				\tau \leq \sigma, \text{ entonces }  \tau \in 
+				\text{{\Large $\nu$}}$,
 			\item Si $\sigma_{1},\sigma_{2} \in 
-				\text{{\Large $\nu$}} \implies 
-				\sigma_{1}\cap\sigma_{2}=\emptyset \text{ o }
+				\text{{\Large $\nu$}}, \text{ entonces } 
+				\sigma_{1}\cap\sigma_{2}=\emptyset, 
+				\text{ o bien, }
 				\sigma_{1}\cap\sigma_{2} \text{ es una cara 
 				común a ambos.}$
 		\end{enumerate}
@@ -265,7 +274,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	geométricos viene dada por la construcción de la \emph{realización
 	geométrica} de un complejo simplicial abstracto, que es un complejo 
 	simplicial geométrico definido tal y como se ilustra en la figura 
-	\ref{fig:tetra} del ejemplo \ref{ejem:1}(para más detalles véase 
+	\ref{fig:tetra} del ejemplo \ref{ejem:1} (para más detalles véase 
 	\cite{TopoAlg-Edelsbrunner}).
 
 	De aquí en adelante emplearemos la definición de complejo simplicial 
@@ -275,11 +284,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	procedemos a definir las aplicaciones entre ellos.
 	\begin{defi}
 		Una \textit{aplicación simplicial entre complejos 
-		simpliciales}, $f:\text{{\Large $\nu$}} \rightarrow 
+		simpliciales}, $f\colon\text{{\Large $\nu$}} \rightarrow 
 		\text{{\Large $\nu$}$^{\prime}$}$, es una aplicación 
 		tal que $f(\sigma)=\{g(u_{1}),g(u_{2}),...,g(u_{k})\}=
 		\{v_{1},v_{2},...,v_{k}\}$; donde
-		$g:\text{{\Large $\nu$}$_{0}$} \rightarrow \text{{\Large 
+		$g\colon\text{{\Large $\nu$}$_{0}$} \rightarrow \text{{\Large 
 		$\nu$}$_{0}^{\prime}$}$ es una aplicación entre $0$-símplices,
 		$\sigma=\{u_{1},u_{2},...,u_{k}\} \in \text{{\Large $\nu$}}$
 		y $\{v_{1},v_{2},...,v_{k}\} \in \text{{\Large $\nu$}$^{
@@ -298,11 +307,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	guía proporcionada por \cite{TopoAlg-Edelsbrunner,Homologia-Macho,
 	Algebra-Elduque}.
 
-	Comenzamos la sección con una definición básica, que no aparece en el 
-	grado, y que nos será necesaria para nuestros propósitos.
+	Comenzamos la sección con algunas definiciones básicas que serán 
+	necesarias para alcanzar la definición de los espacios vectoriales de 
+	homología.
 
 	\begin{defi}
-		Sea $R$ anillo. Definimos el \textit{R-módulo izquierdo} sobre
+		Sea $R$ un anillo. Definimos el \textit{R-módulo izquierdo} 
+		sobre
 		$R$ como el conjunto $M$ junto con las operaciones:
 		\begin{itemize}
 			\item Suma: $M \times M \rightarrow M, (x,y) \mapsto 
@@ -310,7 +321,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\item Producto por escalares: $R \times M \rightarrow 
 				M, (r,x) \mapsto rx$,	
 		\end{itemize}
-		satisfaciendo las siguientes propiedades:
+		que satisfacen las siguientes propiedades:
 		\begin{enumerate}
 			\item La suma es asociativa, conmutativa, $M$ contiene
 			      un elemento neutro para ella y todo elemento 
@@ -349,36 +360,62 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	de>> la denotaremos por $\leq$.
 	\end{defi}
 
+	Ahora que hemos definido los $R$-submódulos, vamos a definir los 
+	cocientes asociados.
+
+	\begin{defi}
+		Sea $M$ un módulo sobre un anillo $R$ y $N$ un submódulo de 
+		$M$. Consideremos la relación de equivalencia en $M$ dada por:
+		$$
+		x \sim y \text{ si } x-y \in N,
+		$$
+		con $x,y \in M$. Mediante esta relación de equivalencia 
+		definimos el conjunto cociente $M/N$. Ahora bien, mediante las 
+		operaciones suma y producto por escalares de $M$ podemos 
+		inducir las correspondientes operaciones sobre $M/N$ de la 
+		siguiente manera:
+		\begin{equation*}
+		\begin{array}{rll}
+			(x+N)+(y+N) & = & (x+y)+N,\\
+			r(x+N) & = & rx+N,
+		\end{array}
+		\end{equation*}
+		donde $x,y \in M$ y $r \in R$. Así, al conjunto cociente 
+		$M/N$ junto con las operaciones previas lo llamaremos 
+		\textit{módulo cociente} de $M$ sobre $N$.
+	\end{defi}
+
 	Tras estas consideraciones básicas, comenzamos el camino que nos 
 	conducirá a la definición de los \emph{espacios vectoriales de 
 	homología}. Empezamos el camino con la definición de \emph{complejo de 
 	cadenas}.
 
 	\begin{defi}
-	Sea $R$ anillo. Decimos que un \textit{complejo de cadenas} sobre $R$ 
+	Sea $R$ un anillo. Decimos que un \textit{complejo de cadenas} sobre 
+	$R$ 
 	es un conjunto $\mathcal{C}_{*}=\{(C_{p},\partial_{p}) \mid p \in 
 	\mathbb{Z}\}$
-	de $R$-módulos y $R$-homomorfismos $\{\partial_{p}: C_{p} \rightarrow 
-	C_{p-1} \mid p \in \mathbb{Z}\}$, satisfaciendo $\partial_{p}\circ 
+	de $R$-módulos y $R$-homomorfismos $\{\partial_{p}\colon C_{p} 
+		\rightarrow 
+	C_{p-1} \mid p \in \mathbb{Z}\}$, que satisfacen la siguiente 
+	relación: $\partial_{p}\circ 
 	\partial_{p+1}=0$. Se denota por $(\mathcal{C}_{*},\partial)$ y a 
 	$\partial$ se le llama el diferencial del complejo.
 	\end{defi}
 
 	Notemos que la propiedad anterior es equivalente a que 
-	$Im(\partial_{p+1}) \leq Ker(\partial_{p}), p \in \mathbb{Z}$. Es 
+	$Im(\partial_{p+1}) \leq Ker(\partial_{p}),\ p \in \mathbb{Z}$. Es 
 	habitual pensar en $\mathcal{C}_{*}$ como una sucesión infinita cuya
 	representación es como sigue:
 
 	\begin{equation*}
 		 \left.
 		\begin{array}{ccccccccc}
-			 & \partial_{2} &  & \partial_{1} &  & 
-			\partial_{0} &  & \partial_{-1} & \\ 
-			\cdots & \longrightarrow & C_{1}& 
-			\longrightarrow & C_{0} 
-					& \longrightarrow 
+			\cdots & \overset{\partial_{2}}{\longrightarrow} & C_{1}& 
+			\overset{\partial_{1}}{\longrightarrow} & C_{0} 
+					& \overset{\partial_{0}}{\longrightarrow}
 			& C_{-1} & 
-			\longrightarrow & \cdots 
+			\overset{\partial_{-1}}{\longrightarrow} & \cdots 
 		\end{array}
 		\right. 
 	\end{equation*}
@@ -409,7 +446,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		$R$ anillo. Definimos el $p$-ésimo $R$-módulo de homología de
 		$\mathcal{C}_{*}$ como el cociente:
 		$$H_{p}(\mathcal{C}_{*}):=Z_{p}(\mathcal{C}_{*})/B_{p}(
-		\mathcal{C}_{*})$$
+		\mathcal{C}_{*}).$$
 	\end{defi}
 
 	Ahora que ya tenemos una noción general de los $R$-módulos de 
@@ -419,14 +456,15 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	será necesario fijar los $R$-módulos y $R$-homomorfismos apropiados.
 
 	Ante esta decisión, lo habitual es fijar una orientación para los 
-	símplices (la dada por el orden lexicográfico de sus vértices) y 
+	símplices (por ejemplo, la dada por el orden lexicográfico de sus 
+	vértices) y 
 	definir los grupos abelianos de cadenas dados por las sumas formales 
 	de los símplices con coeficientes en $\mathbb{Z}$ 
 	($\mathbb{Z}$-módulos). 
 
 	No obstante, en el presente trabajo ignoramos 
 	la noción de orientación, pues no aporta beneficio alguno a nuestros 
-	propósitos, es más, podría perjudicarlos. Así pues, a partir de ahora,
+	propósitos. Así pues, a partir de ahora,
 	fijaremos el anillo $R=\mathbb{Z}_{2}$, con lo que podremos ver los 
 	$\mathbb{Z}_{2}$-módulos que conformarán nuestro complejo de cadenas 
 	como $\mathbb{Z}_{2}$-espacios vectoriales cuya base vendrá dada por 
@@ -440,14 +478,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		tal que $p\leq dim \text{{\Large $\nu$}}$. Una 
 		\textit{p-cadena} es una suma formal de p-símplices de 
 		{\Large $\nu$}. Es decir, si $c$ es una p-cadena, entonces 
-		$c=\sum a_{i}\sigma_{i},\sigma_{i} \in \text{{\Large $\nu$}},
+		$c=\sum a_{i}\sigma_{i},\ \sigma_{i} \in 
+		\text{{\Large $\nu$}}\text{ y } 
 		a_{i} \in \mathbb{Z}_{2}$. 
 	\end{defi}
 	
 	Con la noción de p-cadena, pasamos a la definición de los 
-	$\mathbb{Z}_{2}$-módulos que hemos introducido anteriormente. En 
-	adelante los denotaremos por $C_{p}(\text{{\Large $\nu$}})$. 
-
+	$\mathbb{Z}_{2}$-módulos que hemos introducido anteriormente.
 	\begin{defi}
 		Sea {\Large $\nu$} un complejo simplicial abstracto. Definimos
 		el \textit{$\mathbb{Z}_{2}$-módulo de p-cadenas} de 
@@ -461,8 +498,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	
 	Tal y como ya hemos advertido antes, estos $\mathbb{Z}_{2}$-módulos 
 	pueden ser vistos como espacios vectoriales cuyas bases vienen dadas 
-	por los p-símplices de {\Large $\nu$}. Así pues, en adelante, por 
-	simplicidad del lenguaje nos referiremos a ellos como \emph{espacios 
+	por los p-símplices de {\Large $\nu$}. Así pues, en adelante, para una 
+	mayor claridad nos referiremos a ellos como \emph{espacios 
 	vectoriales de p-cadenas}.
 
 	Habiendo especificado los $R$-módulos que vamos a emplear, pasamos a
@@ -475,7 +512,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		como:
 		$$
 		B_{p}(\sigma)=\displaystyle 
-		\sum_{j=0}^{p}\{u_{0},...,\widehat{u_{j}},...,u_{p}\}
+		\sum_{j=0}^{p}\{u_{0},...,\widehat{u_{j}},...,u_{p}\}.
 		$$
  		La suma anterior es una suma formal, donde $\widehat{u_{j}}$ 
 		indica que omitimos $u_{j}$. Ahora extendemos dicho operador 
@@ -483,11 +520,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{equation}
 		\label{def:borde_form}
 		\begin{array}{lll}
-			\partial_{p}:C_{p}(\text{{\Large $\nu$}}) & 
+			\partial_{p}\colon C_{p}(\text{{\Large $\nu$}}) & 
 				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
 				\\[3pt] 
 			\multicolumn{1}{r}{c=\sum\sigma_{i}} & \mapsto & 
-			\partial_{p}(c)=\sum B_{p}(\sigma_{i})
+			\partial_{p}(c)=\sum B_{p}(\sigma_{i}).
 		\end{array}
 	\end{equation}
 	En esta definición hemos omitido los coeficientes en las cadenas pues
@@ -517,9 +554,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		producto exterior, pero esto es inmediato pues:
 		\begin{itemize}
 			\item $\partial_{p}(0c)=\partial_{p}(0)=0=
-				0\partial_{p}(c)$
+				0\partial_{p}(c)$.
 			\item $\partial_{p}(1c)=\partial_{p}(c)=
-				1\partial_{p}(c)$
+				1\partial_{p}(c)$.
 		\end{itemize}
 		Se concluye lo que queremos probar.
 	\end{proof}
@@ -530,9 +567,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{theorem}
 		Sea $\partial_{p}$ definida como en \ref{def:borde_form}. 
-		Entonces para todo $p \in \{0,1,2,..\}$ $\partial_{p}\circ 
-		\partial_{p+1}=0$. Coloquialmente, <<el borde del borde es 
-		vacío>>.
+		Entonces para todo $p \in \{0,1,2,..\}$, $\partial_{p}\circ 
+		\partial_{p+1}=0$.
 	\end{theorem}
 	\begin{proof}
 		Sea $c \in C_{p+1}(\text{{\Large $\nu$}})$ y, sin pérdida
@@ -564,10 +600,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{proof}
 	
 	\begin{remark}
-		El teorema anterior denota lo significativo de la elección del
-		anillo sobre el que se toman los coeficientes, pues la 
-		demostración sería distinta y los cálculos posteriores se 
-		complican. Veremos este hecho en los siguientes ejemplos.
+		Coloquialmente, diremos que <<el borde del borde es vacío>>. 
+		Notemos que el teorema anterior denota lo significativo de la 
+		elección del anillo sobre el que se toman los coeficientes, 
+		pues la demostración sería distinta y los cálculos posteriores 
+		se complican. Veremos este hecho en los siguientes ejemplos.
 	\end{remark}
 
 	Veamos un ejemplo que ilustre el teorema anterior, es decir, que 
@@ -575,14 +612,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{ejem}
 		Supongamos el complejo simplicial {\Large $\nu$} del ejemplo 
-		anterior y $\sigma = \{a,b,c\} \in \text{{\Large $\nu$}}$.
+		anterior y $\sigma = \{a,b,c\}$ $\in \text{{\Large $\nu$}}$.
 
 		Así pues, tendremos $c \in C_{2}(\text{{\Large $\nu$}})$, con
 		$c=\begin{pmatrix}
 			1 \\
 			0 \\
 			0 
-		\end{pmatrix}$ la representación de $\sigma$ en $C_{2}(
+		\end{pmatrix}$ la cadena asociada a $\sigma$ en $C_{2}(
 		\text{{\Large $\nu$}})$. Ahora expresamos las aplicaciones 
 		$\partial_{2}$ y $\partial_{1}$ en forma matricial:
 		\begin{equation*}
@@ -600,7 +637,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				1 & 0 & 0 & 1 & 1 &0 \\
 				0 & 1 & 0 & 1 & 0 &1 \\
 				0 & 0 & 1 & 0 & 1 &1
-			\end{pmatrix}
+			\end{pmatrix}.
 		\end{equation*}
 		Ahora, teniendo en cuenta que estamos operando en un cuerpo de 
 		característica 2, hacemos $\partial_{1}(\partial_{2}(c))$:
@@ -647,11 +684,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				0 \\
 				0
 				\end{pmatrix}=
-				\vec{0}
+				\vec{0}.
 			\end{split}
 		\end{equation*}
 		Hemos comprobado que, en efecto, <<el borde del borde>> de 
-		$\sigma$ es 0. Para comprobarlo para cualquier vector bastará 
+		$c$ es 0. Para comprobarlo para cualquier vector bastará 
 		observar que:
 		\begin{equation*}
 		\begin{pmatrix}
@@ -674,9 +711,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				0 & 0 & 0 \\
 				0 & 0 & 0 \\
 				0 & 0 & 0 
-				\end{pmatrix}
+				\end{pmatrix}.
 		\end{equation*}
-		En este ejemplo apreciamos lo significativo de elegir el 
+		En este ejemplo ya apreciamos lo significativo de elegir el 
 		cuerpo $\mathbb{Z}_{2}$, pues en otro caso, los productos 
 		matriciales son más difíciles de calcular.
 	\end{ejem}
@@ -716,20 +753,22 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Supongamos el siguiente complejo simplicial abstracto:
 		\begin{equation*} 
 			\text{{\Large $\nu$}}=\{\{a\},\{b\},\{c\},\{d\},\{e\},
-			\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{c,d\},\{a,b,c\}\}
+			\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{c,d\},\{a,b,c\}\}.
 		\end{equation*}
 		Construimos la secuencia de espacios de cadenas asociados:
 		\begin{equation*}
 			 \left.
 			\begin{array}{ccccccccc}
-				 &  &  & \partial_{2} &  & 
-				\partial_{1} &  & \partial_{0} & \\ 
-				\emptyset & \longrightarrow & C_{2}(
+				\emptyset & 
+				\longrightarrow & C_{2}(
 				\text{{\Large $\nu$}}) & 
-				\longrightarrow & C_{1}(\text{{\Large $\nu$}}) 
-						& \longrightarrow 
+				\overset{\partial_{2}}{
+				\longrightarrow} & C_{1}(\text{{\Large $\nu$}}) 
+						& \overset{\partial_{1}}{
+				\longrightarrow} 
 				& C_{0}(\text{{\Large $\nu$}}) & 
-				\longrightarrow & \emptyset 
+				\overset{\partial_{0}}{
+				\longrightarrow} & \emptyset. 
 			\end{array}
 			\right. 
 		\end{equation*}
@@ -743,7 +782,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			0 \\
 			1 \\
 			0
-			\end{pmatrix}
+			\end{pmatrix},
 			\hspace{1cm}
 			\partial_{1}=
 			\begin{pmatrix}
@@ -752,7 +791,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			0 & 1 & 0 & 1 & 1\\
 			0 & 0 & 1 & 0 & 1\\
 			0 & 0 & 0 & 0 & 0
-			\end{pmatrix}
+			\end{pmatrix}.
 		\end{equation*}
 		Ahora para calcular $\beta_{0}(\text{{\Large $\nu$}}) 
 		\text{ y } \beta_{1}(\text{{\Large $\nu$}})$ bastará
@@ -765,7 +804,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			0 & \hlightr{1} & 0 & 1 & 1\\
 			0 & 0 & \hlightr{1} & 0 & 1\\
 			0 & 0 & 0 & 0 & 0
-			\end{pmatrix}
+			\end{pmatrix}.
 		\end{equation*}
 		Con lo que, $dimIm(\partial_{1})=3 \text{ y } 
 		dimKer(\partial_{1})=2$, y por lo tanto, $\beta_{1}(\text{
@@ -808,17 +847,26 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		corresponde con los números de Betti que hemos calculado. 
 
 		Notemos que, al igual que en el ejemplo anterior, si 
-		trabajamos sobre otro cuerpo que no sea $\mathbb{Z}_{2}$, los 
-		rangos de las matrices podrían ser distintos. En este caso, si
-		trabajamos sobre $\mathbb{Q}$, el rango de $\partial_{1}$ es 
-		4. Esto afecta a los números de Betti. 
+		trabajamos sobre otro cuerpo que no sea $\mathbb{Z}_{2}$, las 
+		matrices y sus rangos son más difíciles de calcular. Por 
+		ejemplo, si trabajamos sobre $\mathbb{Q}$, tendremos que 
+		lidiar con la orientabilidad de los símplices para ser 
+		consistentes con las definiciones previas. La orientabilidad 
+		de los símplices nos provoca la aparición se signos negativos 
+		dentro las matrices, lo que, a mayor escala, dificulta el 
+		cálculo de los rangos. No obstante, recordemos que la idea 
+		intuitiva sobre los números de Betti nos indica que éstos 
+		cuentan agujeros $p$-dimensionales, y por lo tanto, éstos 
+		permanecerán constantes ante cualquier variación del 
+		cuerpo de coeficientes escogido.  
 	\end{ejem}
 	
 	Al igual que hicimos para los complejos simpliciales, veamos como 
 	podemos definir morfismos, de manera más general, entre los objetos 
 	que estamos manejando.
 	
-	Consideremos una aplicación entre complejos simpliciales, $f:\text{
+	Consideremos una aplicación entre complejos simpliciales, $f\colon
+	\text{
 	{\Large $\nu$}}\rightarrow\text{{\Large $\nu$}}'$. Aplicando el mismo 
 	razonamiento que para la definición del homomorfismo borde, tenemos 
 	que $f$ induce un homomorfismo entre espacios vectoriales de cadenas :
@@ -826,62 +874,75 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\label{hom:induc}
 		\left.
 		\begin{array}{lll}
-			\overline{f_{p}}:C_{p}(\text{{\Large $\nu$}}) & 
+			\overline{f_{p}}\colon C_{p}(\text{{\Large $\nu$}}) & 
 				\rightarrow & C_{p}(\text{{\Large $\nu$}}')
 				\\[3pt] 
 			\multicolumn{1}{r}{c=\displaystyle \sum_{\mathclap{
 			\sigma \in \text{{\Large $\nu$}$_{p}$}}}\sigma} & 
 			\mapsto & 
 			\overline{f_{p}}(c)=\displaystyle \sum_{\mathclap{
-			f(\sigma) \in \text{{\Large $\nu$}$_{p}'$}}}f(\sigma)
+			f(\sigma) \in \text{{\Large $\nu$}$_{p}'$}}}f(\sigma).
 		\end{array}
 		\right. 
 	\end{equation}
+	\begin{remark}
+		Si consideramos el caso particuar $f=\iota$ (la inclusión) 
+		tendremos que $f$ induce una inclusión entre los complejos de 
+		cadenas asociados a {\Large $\nu$} y 
+		{\Large $\nu$}$^{\prime}$. Es decir, 
+		$C_{*}(\text{{\Large $\nu$}}) \subset C_{*}(\text{{\Large 
+		$\nu$}}^{\prime})$.
+	\end{remark}
 	Además, tal $f$ nos permite construir la secuencia:
 	\begin{equation}
 		\label{hom: gruphom}
 		 \left.
 		\begin{array}{ccccccccccccc}
-			 & & & \partial_{p} &  & 
-			\partial_{p-1} &  & \partial_{2}&  & \partial_{1}&  & 
-			\partial_{0} & \\ 
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}}) & \rightarrow &\cdots & 
-			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}})& \rightarrow & \emptyset\\[3pt]
+			\text{{\Large $\nu$}}) & \overset{\partial_{p}}{
+			\rightarrow} & C_{p-1}(
+			\text{{\Large $\nu$}}) & \overset{\partial_{p-1}}{
+			\rightarrow} &\cdots & 
+			\overset{\partial_{2}}{
+			\rightarrow} & C_{1}(
+			\text{{\Large $\nu$}})& \overset{\partial_{1}}{
+			\rightarrow} & C_{0}(
+			\text{{\Large $\nu$}})& \overset{\partial_{0}}{
+			\rightarrow} & \emptyset\\[3pt]
 
 			 & & \downarrow \overline{f_{p}}& & \downarrow 
 			\overline{f_{p-1}}& 
 			 & & & \downarrow \overline{f_{1}}
 			 & & \downarrow \overline{f_{0}} & & \\ [3pt]
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}}') & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}}') & \rightarrow &\cdots & 
-			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}}')& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}}')& \rightarrow & \emptyset \\
-			 & & & \partial_{p}' &  & 
-			\partial_{p-1}' &  & \partial_{2}' &  & \partial_{1}'&
-					& \partial_{0}' &
+			\text{{\Large $\nu$}}') &\underset{\partial_{p}'}{
+			\rightarrow}  & C_{p-1}(
+			\text{{\Large $\nu$}}') & \underset{\partial_{p-1}'}{
+			\rightarrow}&\cdots & 
+			\underset{\partial_{2}'}{
+			\rightarrow} & C_{1}(
+			\text{{\Large $\nu$}}')& \underset{\partial_{1}'}{
+			\rightarrow} & C_{0}(
+			\text{{\Large $\nu$}}')& \underset{\partial_{0}'}{
+			\rightarrow} & \emptyset. \\
 		\end{array}
 		\right. 
 	\end{equation}
 	De esta secuencia observamos que: 
 	\begin{equation*}
 		\overline{f_{p-1}}\circ\partial_{p}=
-		\partial_{p}'\circ\overline{f_{p}} 
+		\partial_{p}'\circ\overline{f_{p}}. 
 	\end{equation*}
 	En consecuencia, $\overline{f_{p}}$ induce un 
 	homomorfismo entre espacios vectoriales de homología:	
 		\begin{align*}
 			\left.
 			\begin{array}{l}
-				f_{p}:H_{p}(\text{{\Large $\nu$}})\rightarrow 
+				f_{p}\colon H_{p}(\text{{\Large $\nu$}})
+				\rightarrow 
 				H_{p}(\text{{\Large $\nu$}}')\\[3pt] 
 				\hspace{1.35cm} [c] \mapsto [\overline{f_{p}
-				(c)}]
+				(c)}].
 			\end{array}
 			\right.
 		\end{align*}
@@ -898,7 +959,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	Si bien los espacios vectoriales de homología de un complejo 
 	simplicial abstracto nos aportan mucha información acerca de sus 
 	características topológicas, esta información tiene bastante margen de 
-	mejora pues no nos dice nada de la variable <<tiempo>>. Pero, ¿Cómo 
+	mejora pues no nos dice nada de la variable <<tiempo>>, es decir, 
+	sobre el carácter dinámico de la evolución de un complejo simplicial 
+	si este evolucionara en el tiempo. Pero, ¿Cómo 
 	introducimos la noción de tiempo en un complejo simplicial abstracto? 
 	Esta pregunta motiva la siguiente definición:
 
@@ -930,7 +993,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Lo interesante de este método es que si $\mathcal{U}$ verifica ciertas
 	condiciones, el \emph{Teorema del nervio} garantiza que el complejo de
-	Čech recupera la homología de {\Large $\nu$}. Ahora bien, ¿Cómo 
+	Čech recupera la homología de {\Large $\nu$} (para más detalles véase 
+	\cite{TeoremaNervio-Ghrist}). Ahora bien, ¿Cómo 
 	podemos capturar y visualizar esta nueva información? Empleando la 
 	\emph{homología persistente}.
 
@@ -962,63 +1026,55 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{equation*}
 		\resizebox{\textwidth}{!}{$ 
 		\begin{array}{ccccccccccccc}
-			 & & & \partial_{p}^{1} &  & 
-			\partial_{p-1}^{1} &  & \partial_{2}^{1}&  & 
-			\partial_{1}^{1}&  & 
-			\partial_{0}^{1} & \\ 
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$^{1}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$^{1}$}) & \rightarrow &\cdots & 
-			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$^{1}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$^{1}$})& \rightarrow & 
+			\text{{\Large $\nu$}$^{1}$}) & \overset{\partial_{p}^{1}}{\rightarrow} & C_{p-1}(
+			\text{{\Large $\nu$}$^{1}$}) & \overset{\partial_{p-1}^{1}}{\rightarrow} &\cdots & 
+			\overset{\partial_{2}^{1}}{\rightarrow} & C_{1}(
+			\text{{\Large $\nu$}$^{1}$})& \overset{\partial_{1}^{1}}{\rightarrow} & C_{0}(
+			\text{{\Large $\nu$}$^{1}$})& \overset{\partial_{0}^{1}}{\rightarrow} & 
 			\emptyset\\[3pt]
 
-			& & \downarrow \overline{f_{p}^{1,2}}& \partial_{p}^{2} & 
-			\downarrow \overline{f_{p-1}^{1,2}}& \partial_{p-1}^{2} 
-			& & \partial_{2}^{2} & \downarrow \overline{f_{1}^{1,2}}
-			& \partial_{1}^{2} & \downarrow \overline{f_{0}^{1,2}} & 
-			\partial_{0}^{2} & \\ [3pt]	
+			& & \downarrow \overline{f_{p}^{1,2}}& & 
+			\downarrow \overline{f_{p-1}^{1,2}}&  
+			& &  & \downarrow \overline{f_{1}^{1,2}}
+			&  & \downarrow \overline{f_{0}^{1,2}} & 
+			 & \\ 	
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$^{2}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$^{2}$}) & \rightarrow &\cdots & 
-			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$^{2}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$^{2}$})& \rightarrow & 
+			\text{{\Large $\nu$}$^{2}$}) & \overset{\partial_{p}^{2}}{\rightarrow} & C_{p-1}(
+			\text{{\Large $\nu$}$^{2}$}) & \overset{\partial_{p-1}^{2}}{\rightarrow} &\cdots & 
+			\overset{\partial_{2}^{2}}{\rightarrow} & C_{1}(
+			\text{{\Large $\nu$}$^{2}$})& \overset{\partial_{1}^{2}}{\rightarrow} & C_{0}(
+			\text{{\Large $\nu$}$^{2}$})& \overset{\partial_{0}^{2}}{\rightarrow} & 
 			\emptyset \\[5pt]
 			
 			\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & 
 			\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & 
 			\vdots \\[5pt]
 			
-			& & & \partial_{p}^{k-1} &  & 
-			\partial_{p-1}^{k-1} &  & \partial_{2}^{k-1}&  & 
-			\partial_{1}^{k-1}&  & 
-			\partial_{0}^{k-1} & \\ 
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$^{k-1}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$^{k-1}$}) & \rightarrow &\cdots & 
-			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$^{k-1}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$^{k-1}$})& \rightarrow & 
+			\text{{\Large $\nu$}$^{k-1}$}) & \overset{\partial_{p}^{k-1}}{\rightarrow} & C_{p-1}(
+			\text{{\Large $\nu$}$^{k-1}$}) & \overset{\partial_{p-1}^{k-1}}{\rightarrow} &\cdots & 
+			\overset{\partial_{2}^{k-1}}{\rightarrow} & C_{1}(
+			\text{{\Large $\nu$}$^{k-1}$})& \overset{\partial_{1}^{k-1}}{\rightarrow} & C_{0}(
+			\text{{\Large $\nu$}$^{k-1}$})& \overset{\partial_{0}^{k-1}}{\rightarrow} & 
 			\emptyset\\[3pt]
 
-			& & \downarrow \overline{f_{p}^{k-1,k}}& \partial_{p}^{k} & 
-			\downarrow \overline{f_{p-1}^{k-1,k}}& \partial_{p-1}^{k} 
-			& & \partial_{2}^{k} & \downarrow \overline{f_{1}^{k-1,k}}
-			& \partial_{1}^{k} & \downarrow \overline{f_{0}^{k-1,k}} & 
-			\partial_{0}^{k} & \\ [3pt]	
+			& & \downarrow \overline{f_{p}^{k-1,k}}& & 
+			\downarrow \overline{f_{p-1}^{k-1,k}}&  
+			& &  & \downarrow \overline{f_{1}^{k-1,k}}
+			&  & \downarrow \overline{f_{0}^{k-1,k}} &  & \\
+
 			\emptyset & \rightarrow & C_{p}(
-			\text{{\Large $\nu$}$^{k}$}) & \rightarrow & C_{p-1}(
-			\text{{\Large $\nu$}$^{k}$}) & \rightarrow &\cdots & 
-			\rightarrow & C_{1}(
-			\text{{\Large $\nu$}$^{k}$})& \rightarrow & C_{0}(
-			\text{{\Large $\nu$}$^{k}$})& \rightarrow & \emptyset \\
+			\text{{\Large $\nu$}$^{k}$}) & \overset{\partial_{p}^{k}}{\rightarrow} & C_{p-1}(
+			\text{{\Large $\nu$}$^{k}$}) & \overset{\partial_{p-1}^{k}}{\rightarrow} &\cdots & 
+			\overset{\partial_{2}^{k}}{\rightarrow} & C_{1}(
+			\text{{\Large $\nu$}$^{k}$})& \overset{\partial_{1}^{k}}{\rightarrow} & C_{0}(
+			\text{{\Large $\nu$}$^{k}$})& \overset{\partial_{0}^{k}}{\rightarrow} & \emptyset. \\
 		\end{array}$}
 	\end{equation*}
 	Donde los homomorfismos $\overline{f_{p}^{i,j}}$ entre espacios 
 	vectoriales de 
-	cadenas vienen inducidos por el homomorfismo inclusión $f^{i,j}: 
+	cadenas vienen inducidos por el homomorfismo inclusión $f^{i,j}\colon 
 	\text{{\Large $\nu$}$^{i}$} \xhookrightarrow{} 
 	\text{{\Large $\nu$}$^{j}$}$ con $0\leq i \leq j \leq k$, como en 
 	\ref{hom:induc}. Ahora, aplicando el mismo razonamiento que en 
@@ -1055,9 +1111,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{remark}
 		Estos diagramas dependen de la elección de la base de los 
 		espacios vectoriales subyacentes. Una mala elección nos 
-		llevará a diagramas ilegibles. Por suerte, tenemos un 
-		resultado teórico que nos garantiza la existencia de una 
-		<<buena>> base.
+		llevará a diagramas ilegibles. No obstante, la existencia de 
+		una <<buena>> base está garantizada (véase 
+		\cite{BaseDiagExt-Carlsson}) y la 
+		coherencia de los diagramas también (véase 
+		\cite{BaseDiag-Cavanna}).   
 	\end{remark}
 
 	Veamos un ejemplo (propuesto en \cite{Intro-Otter}) ilustrativo de estos 
@@ -1073,20 +1131,20 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		
 		\item
 			$\text{{\Large $\nu$}$^{1}$}=\{\{a\},\{b\},\{c\},\{d\}
-			,\{a,b\}\}$
+			,\{a,b\}\}$.
 		\item
 			$\text{{\Large $\nu$}$^{2}$}=\{\{a\},\{b\},\{c\},
-				\{d\},\{e\},\{f\},\{a,b\},\{a,c\},\{b,c\}\}$
+				\{d\},\{e\},\{f\},\{a,b\},\{a,c\},\{b,c\}\}$.
 		\item 
 			$\text{{\Large $\nu$}$^{3}$}=\{\{a\},\{b\},\{c\},
 				\{d\}, \{e\},\{f\},\{a,b\},\{a,c\},\{a,e\},
 				\{b,c\},\{b,f\},\{c,f\},\{c,e\},$\\
-			$\{a,b,c\}\}$
+			$\{a,b,c\}\}$.
 		\item 
 			$\text{{\Large $\nu$}$^{4}$}=\{\{a\},\{b\},\{c\},
 				\{d\},\{e\},\{f\},\{a,b\},\{a,c\},\{a,e\},
 				\{b,c\},\{b,f\},\{c,f\},\{c,e\},$\\
-				$\{a,b,c\},\{a,c,e\}\}$
+				$\{a,b,c\},\{a,c,e\}\}$.
 	\end{itemize}
 	Veamos su representación gráfica en $\mathbb{R}^{2}$:
 	\begin{figure}[H]
@@ -1457,9 +1515,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	la formal topología algebraica y nos acercamos al mundo 
 	de la informática. En esta sección haremos una
 	introducción hacia el otro concepto fundamental del presente trabajo: 
-	\emph{las redes neuronales artificiales}. A lo largo de esta sección
-	seguiremos la guía proporcionada por \cite{Goodfellow-et-al-2016,
-	IA-Jonathan,MDiscreta-Guti}.
+	\emph{las redes neuronales artificiales}. A direfencia de la sección 
+	anterior, en la presente sección haremos una aproximación un poco menos 
+	formal de las nociones que se introducen. Para el desarrollo de esta 
+	sección emplearemos la guía proporcionada por 
+	\cite{Goodfellow-et-al-2016,IA-Jonathan,MDiscreta-Guti}.
 
 	La historia del \emph{aprendizaje profundo} y de las redes neuronales 
 	es muy amplia y queda fuera del alcance del presente trabajo. No 
@@ -1505,7 +1565,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	objetivo ($y$) y $p$ variables independientes. Este modelo se conoce 
 	como regresión lineal y puede ser expresado como:
 	\begin{equation*}
-		\hat{y}=w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b
+		\hat{y}=w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b,
 	\end{equation*}
 	donde $\hat{y}$ es valor estimado de $y$, $w_{1},w_{2},\cdots,w_{p}$ 
 	son los pesos que indican la importancia de cada variable 
@@ -1521,10 +1581,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	usaremos el error cuadrático medio cuya expresión es la siguiente:
 
 	\begin{equation*}
-		J(w_{1},w_{2},\cdots,w_{p},b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2
+		J(w_{1},w_{2},\cdots,w_{p},b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2,
 	\end{equation*}
 
-	donde $n$ es el número de datos (cada dato es un vector de $p$ 
+	\noindent donde $n$ es el número de datos (cada dato es un vector de $p$ 
 	entradas), $y_{i}$ es la salida real y 
 	$\hat{y}_{i}$ es la salida estimada por el modelo. Nuestro objetivo
 	es el de minimizar $J(w_{1},w_{2},\cdots,w_{p},b)$ para que el modelo 
@@ -1537,7 +1597,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	que mapea puntos <<cercanos>> a puntos <<cercanos>>, y por ser suave,
 	sabemos que podemos aproximar valores <<cercanos>> a un punto de la 
 	función por una función lineal cuya pendiente sea la diferencial de la 
-	función. Este resultado se conoce como el \emph{teorema de Taylor}. 
+	función. Este resultado se conoce como el \emph{teorema de Taylor} (un 
+	enunciado más riguroso, así como su demostración, puede verse en 
+	\cite{Diferencial-Bello}). 
 	Como bien sabemos, el gradiente de una función en un punto 
 	nos indica cuanto aumenta o disminuye el valor 
 	de dicha función ante un pequeño cambio en su entrada. Lo que haremos 
@@ -1554,7 +1616,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		{\partial w_{i}}\\
 		b^{siguiente}=b^{actual}-\alpha\frac{\partial J(w,b)}
 		{\partial w_{i}}
-	\end{array}
+	\end{array},
 	\end{equation*}
 	donde $\alpha$ es el ratio de aprendizaje: un hiperparámetro que 
 	tenemos que elegir. Este paso de actualización se conoce como 
@@ -1580,7 +1642,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	modelo conocido con esta definición es el \emph{perceptrón}. Este 
 	modelo se expresa de la siguiente manera:
 	\begin{equation*}
-		\hat{y}=r(w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b)
+		\hat{y}=r(w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b),
 	\end{equation*}
 	donde, en general, $r(x)$ es una función no lineal que se conoce como 
 	\emph{función de activación} y el resto de variables son como en la 
@@ -1600,7 +1662,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{remark}
 	En el caso general, la función $r(x)$ es un hiperparámetro, es decir,
 	debemos escoger una función no lineal. Lo habitual suele ser escoger
-	la función sigmoide, la tangente hiperbólica o la función ReLU.
+	la función sigmoide, la tangente hiperbólica o la función ReLU (véase 
+	\cite{Goodfellow-et-al-2016}).
 	\end{remark}
 	
 	Notemos que la función $r(x)$ es continua pero no es suave, pues ella
@@ -1655,7 +1718,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{figure}
 
 	Esta representación gráfica y las limitaciones del perceptrón (para 
-	más detalles véase \cite{}), motivan el siguiente paso en la 
+	más detalles véase \cite{Perceptron-Convergencia}), motivan el 
+	siguiente paso en la 
 	construcción de las \emph{redes neuronales}. Este paso consiste en 
 	añadir más perceptrones en paralelo (nodos) y en serie (capas), 
 	consiguiendo lo que se conoce como \emph{perceptrón multicapa}.
@@ -1681,9 +1745,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	información véase \cite{TeoremaAproxUn-Kurt}).
 	\end{remark}
 
-	En el presente trabajo nos interesa especialmente la representación 
-	gráfica de las redes neuronales prealimentadas, es decir, los grafos 
-	subyacentes. En este sentido, veamos las siguientes definiciones:
+	En el presente trabajo nos interesa especialmente la estructura 
+	combinatoria asociada a las redes neuronales prealimentadas, es decir, 
+	los grafos subyacentes. En este sentido, veamos las siguientes 
+	definiciones:
 
 	\begin{defi}
 		Un \textit{grafo} $G=(V,E)$ consiste en un conjunto finito V, 
@@ -1698,20 +1763,40 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Para el caso las redes neuronales prealimentadas, necesitamos un caso 
 	particular de grafo:
+	
 	\begin{defi}
 		Un \textit{grafo dirigido} es un grafo en el que se asigna un 
 		orden a los extremos de cada arista. Las aristas dirigidas se
 		denotan $(u,v)$, y nótese que $(u,v)\neq(v,u)$. En el 
-		caso de una arista dirigida $()u,v)$, se dice que $u$ es el 
+		caso de una arista dirigida $(u,v)$, se dice que $u$ es el 
 		\textit{origen} y al vértice $v$ se le llama \textit{término} 
 		de la arista. Un grafo dirigido se dice \textit{acíclico} si 
 		para cada vértice $u$, no existe una sucesión de aristas cuyo
 		origen y término sea $u$.
 	\end{defi}
 
-	En resumen, vamos a estudiar los grafos dirigidos acíclicos 
-	subyacentes a las redes neuronales prealimentadas. A fin de facilitar 
-	la comprensión, veamos un ejemplo:
+	Así pues, vamos a estudiar los grafos dirigidos acíclicos 
+	subyacentes a las redes neuronales prealimentadas. No obstante, dadas 
+	las características de las redes neuronales prealimentadas, todavía 
+	podemos exigirles una condición más a sus grafos subyacentes.
+
+	\begin{defi}
+		Sea $G=(V, E)$ un grafo dirigido acíclico. Diremos que $G$ es 
+		\textit{grafo nivelado} si tomando una partición de $V$ en 
+		subconjuntos $L_{1},\dots,L_{h}$, se cumple que si $(u,v) \in 
+		E$ con $u \in L_{i}$ y $v \in L_{j}$, entonces $i>j$. A los 
+		conjuntos $L_{1},\dots,L_{h}$ se los conoce como 
+		\textit{niveles} y a $h$ como \textit{altura}.
+	\end{defi}	
+
+	Para el caso que nos ocupa, consideraremos grafos nivelados en los que
+	no puede haber saltos de nivel, es decir, las aristas del grafo tienen
+	por origen un cierto nivel y su término es el nivel siguiente.
+
+	Recapitulando, dada una red neuronal, le asociaremos un grafo dirigido
+	acíclico (nivelado) sobre el que aplicaremos la teoría de homología 
+	vista anteriormente. A fin de facilitar la comprensión, veamos un 
+	ejemplo:
 
 	\begin{ejem}
 	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas. 
@@ -1778,7 +1863,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\draw[thick,->] (n5.mid) -- (n1.west);
 				\end{pgfonlayer}
 			\end{tikzpicture}
-			\caption{Grafo dirigido acíclico asociado a una red neuronal prealimentada de 13 neuronas y 2 capas.}
+			\caption{Grafo dirigido acíclico (nivelado) asociado a 
+			una red neuronal prealimentada de 13 neuronas y 2 capas.}
 			\label{fig:redEjem}
 		\end{figure}
 		Hemos etiquetado las neuronas (vértices) en orden ascendente 
@@ -1796,7 +1882,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	sobre éste consideraremos la homología persistente. En esta subsección
 	ilustraremos únicamente el primer paso.
 
-	Si bien existen muchas maneras de construir un complejo simplicial a 
+	Si bien existen varias maneras de construir un complejo simplicial a 
 	partir de un DAG (véase \cite{Clique-Jakob}), en el presente trabajo desarrollaremos la más simple
 	de todas ellas: la construcción del complejo simplicial \emph{clique}. 
 	Esta construcción, aunque simple, nos servirá de inspiración para la 
@@ -1840,7 +1926,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\{6,12\},\\\{7,10\},\{7,11\},
 			\{7,12\},\{8,10\},\{8,11\},
 			\{8,12\},\{9,10\},\{9,11\},
-			\{9,12\}\}
+			\{9,12\}\}.
 		\end{multline*}
 
 		Observamos que {\Large $\nu$} es un clique muy particular, 
@@ -1915,10 +2001,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{ejem}
 
 	El ejemplo anterior pone de manifiesto que considerar el clique 
-	asociado a una red neuronal prealimentada no es suficiente, pues el 
-	resultado es un clique trivial que nos aporta muy poca información 
-	sobre la red. Reflexionando sobre ello, se hace notar que debemos 
-	extender la noción de clique mediante una relación transitiva. 
+	asociado a un grafo por niveles de una red neuronal prealimentada no 
+	es suficiente, pues el resultado es un clique trivial que nos aporta 
+	muy poca información sobre la red. Reflexionando sobre ello, se hace 
+	notar que debemos hacer una extensión mediante una cierta relación de 
+	transitividad. 
 
 	No obstante, estamos adelantando acontecimientos pues en el siguiente 
 	capítulo veremos detalladamente el proceso necesario para la 
@@ -2159,7 +2246,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	estamos listos para aplicar la homología persistente y extraer 
 	conclusiones. No obstante, la realidad es bien distinta y existe un 
 	problema con el que nos topamos en el desarrollo del presente trabajo. 
-	El lector interesado y perspicaz habrá notado que la definición 
+	El lector interesado habrá notado que la definición 
 	\ref{def:ie} tiene un pequeño defecto: no se especifica el significado
 	exacto de $C_{ij}$. Este pequeño defecto, que en un principio puede 
 	pasar desapercibido, supone que haya al menos dos maneras distintas de 
