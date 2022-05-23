@@ -1376,6 +1376,32 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\end{figure}	
 		\endminipage}
 	\end{figure}
+
+	Como podemos observar, en el diagrama de la izquierda (grado 0) 
+	tenemos inicialmente (filtración 1 que corresponde al dibujo de 
+	{\Large $\nu$}$^{1}$) 3 clases de equivalencia que son, en orden 
+	ascendente 
+	en el diagrama, las clases $[d],[a+b]$ y $[c]$. Como ya hemos visto, 
+	esta representación se corresponde con las componentes conexas de 
+	{\Large $\nu$}$^{1}$. Ahora, a medida que avanzamos en las 
+	filtraciones podemos ver cómo la clase $[a+b]$ muere en la filtración 2
+	(que se corresponde con el dibujo de {\Large $\nu$}$^{2}$), nacen dos 
+	clases más ($[f]$ y $[e]$ en orden ascendente en el diagrama), ambas 
+	clases mueren en la filtración 3 (véase el dibujo de 
+	{\Large $\nu$}$^{3}$), y finalmente, las clases $[d]$ y $[c]$ 
+	persisten.
+	
+	Observemos ahora el diagrama de la derecha (grado 1). Como se puede 
+	ver, en la filtración 1 no tenemos ninguna clase de equivalencia, 
+	tendremos que esperar a la filtración 2 en la que nace la clase 
+	$[ab+bc+ac]$. Esta clase muere en la siguiente filtración, pero nacen 
+	otras 2: la clase $[bc+cf+bf]$ y la clase $[ac+ae+ce]$. Esta última 
+	morirá en la filtración 4, no obstante, la clase $[bc+cf+bf]$ 
+	persiste. Como ya mencionamos, estas clases de equivalencia se 
+	corresponden con agujeros $2$-dimensionales cuya evolución podemos ir
+	viendo en los dibujos anteriores que representan los pasos en la 
+	filtración del complejo simplicial {\Large $\nu$}.
+
 	Por último, visualizamos los diagramas de persistencia:
 	\begin{figure}[H]
 		\fbox{\minipage{0.48\textwidth}
@@ -2016,7 +2042,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\newpage
 
-	\chapter{El artículo}
+	\chapter{¿Es posible aplicar la homología persistente a las redes 
+	neuronales?}
 	
 	En este capítulo nos vamos a centrar en el desarrollo del artículo 
 	\cite{Articulo-Watanabe} sobre el que está basado el presente trabajo. 
@@ -2094,8 +2121,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\end{defi}
 
 	\begin{remark}
-	También es podible definir $\overline{R_{ij}}$ considerando varios 
-	caminos en $C_{ij}$. Escogemos el máximo por eficiencia computacional.
+	Nótese que es posible definir $\overline{R_{ij}}$ considerando varios 
+	caminos en $C_{ij}$. El autor (\cite{Articulo-Watanabe}) justifica la 
+	elección del máximo por eficiencia computacional.
 	\end{remark}
 
 	Como ya mencionamos en el capítulo anterior, numeraremos los nodos 
@@ -2368,9 +2396,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	simplicial filtrado. Veremos más en detalle estos pasos en la 
 	siguiente sección. 
 
-	Habiendo descrito la interpretación global, vamos a aplicarla al 
-	ejemplo propuesto en \cite{Articulo-Watanabe}, en el que vamos a 
-	calcular los números de Betti y vamos a ver los diagramas 
+	Habiendo descrito de manera genera la interpretación global, vamos a 
+	aplicarla al ejemplo propuesto en \cite{Articulo-Watanabe}, en el que 
+	vamos a calcular los números de Betti y vamos a ver los diagramas 
 	correspondientes.
 
 	\begin{ejem}
@@ -3441,9 +3469,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\section{Ejemplos}
 	(En construcción)
 	\chapter{Conclusiones}
-	(En construcción)
-	\chapter*{Trabajo futuro}
-	\addcontentsline{toc}{chapter}{Trabajo futuro}
 	(En construcción)
 	\nocite{*}
 	\bibliographystyle{babplain}
