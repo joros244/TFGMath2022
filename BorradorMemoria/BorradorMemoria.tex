@@ -16,6 +16,8 @@
 \usepackage{babelbib}
 \usepackage{titlesec}
 \usepackage{titleps}
+\usepackage{wrapfig}
+\usepackage{caption}
 
 \newpagestyle{main}[\sffamily]{
 	\setheadrule{.55pt}
@@ -82,10 +84,92 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\pagenumbering{arabic}
 	
 	\chapter{Introducción}
-	(En construcción.)
+	Supongamos que te enseño las siguientes imágenes y te pido que me 
+	digas la figura geométrica de la que proceden.
 
-	\newpage
+	\begin{figure}[H]
+		\minipage{0.5\textwidth}
+			\begin{figure}[H]
+				\resizebox{1.0\textwidth}{!}{\includegraphics{Images/DosCirculos.png}}
+			\end{figure}
+		\endminipage
+		\minipage{0.5\textwidth}
+			\begin{figure}[H]
+				\resizebox{1.0\textwidth}{!}{\includegraphics{Images/Toro.png}}
+			\end{figure}
+		\endminipage
+		\caption{Imágenes misteriosas}
+	\end{figure}
 
+	Observando las imágenes vemos que la primera se corresponde con dos 
+	circunferencias concéntricas, y la segunda se corresponde con un toro. 
+	Pero, ¿Cómo hemos llegado a esta conclusión? 
+
+	Bueno, seguramente hemos
+	analizado la forma de las imágenes, el número de agujeros que poseen y 
+	la dimensión de dichos agujeros. Este análisis nos ha permitido 
+	encontrar las figuras de procedencia. Este proceso, que en 2 y 3 
+	dimensiones nos resulta inmediato, no es tan sencillo en dimensiones 
+	altas, con lo que vamos a necesitar de las matemáticas para resolver 
+	este problema. Y, ¿Qué tienen que decir las matemáticas de todo esto?	
+	
+	\begin{wrapfigure}[12]{r}{0.27\textwidth}
+	  \begin{center}
+		  \raisebox{16pt}[\dimexpr\height-0.6\baselineskip\relax]{\includegraphics[width=0.25\textwidth]{Images/344px-Betti_Enrico.jpg}}
+	  \vspace*{-9mm}
+	  \caption*{Enrico Betti}
+	  \end{center}
+	\end{wrapfigure}
+	
+	Resulta que existe toda una rama de las matemáticas relacionada con 
+	esta idea de estudiar las propiedades invariantes (como los agujeros) 
+	de los objetos mediante el uso del álgebra. Esta rama se conoce como 
+	la topología algebraica y tiene su origen con el matemático italiano 
+	Enrico Betti (1823-1892). Betti principalmente trabajó en bajas 
+	dimensiones y fue capaz de caractrizar la igualdad entre dos 
+	superficies.
+
+	Más tarde llegaría Henri Poincaré (1854-1912) quien formalizaría toda 
+	esta teoría en su <<Analysis Situs>>, acuñando el término 
+	\emph{número de Betti} que precisamente representa el número de 
+	agujeros de un objeto. Esta teoría fue, en un comienzo, puramente 
+	topológica y hubo que esperar a la llegada de la matemática alemana 
+	Emmy Noether (1882-1935) quien apreció la estructura de grupo 
+	subyacente a los ciclos definidos en la teoría existente. Esto originó 
+	una algebraización de esta teoría.
+
+	\begin{wrapfigure}[14]{l}{0.27\textwidth}
+	  \begin{center}
+		  \raisebox{16pt}[\dimexpr\height-0.6\baselineskip\relax]{\includegraphics[width=0.25\textwidth]{Images/315px-Noether.jpg}}
+	  \vspace*{-9mm}
+	  \caption*{Emmy Noether}
+	  \end{center}
+	\end{wrapfigure}
+
+	En los subsiguientes años esta teoría se desarrolla rápidamente de la 
+	mano de grandes matemáticos como Alexandroff, Vietoris, de Rham y 
+	\v{C}ech entre otros. Finalmente, Samuel Eilenberg (1913-1998) y 
+	Saunders Mac Lane (1909-2005) axiomatizaron esta teoría y la 
+	relacionaron con su \emph{teoría de categorías}. 
+
+	Estos fundamentos teóricos nos habilitan, entre otras cosas, el 
+	cálculo de los agujeros en dimensiones superiores así como su 
+	obtención de manera automática.
+
+	Ahora bien, ¿Qué tiene que ver todo esto de los agujeros con las redes 
+	neuronales? Bueno, la idea será buscar agujeros dentro de los grafos 
+	asociados a las redes neuronales. Estos agujeros, más que simples 
+	vacíos dentro de las redes, representarán el grado de conocimiento 
+	adquirido por la red. Por lo tanto, mediante el uso de la topología 
+	algebraica podremos extraer conclusiones valiosas acerca de las redes 
+	neuronales que habitualmente son vistas como <<cajas negras>>.
+
+	En el presente trabajo introduciremos los conceptos necesarios de la 
+	topología algebraica en el capítulo 2, en el mismo capítulo también 
+	haremos un breve desarrollo de la teoría necesaria acerca de las redes 
+	neuronales. Finalizaremos con el capítulo 3 en el que aplicaremos toda
+	la teoría introducida y veremos una serie de ejemplos.
+	
 	\chapter{Preeliminares}
 
 	A lo largo de este capítulo vamos a ver todas las nociones teóricas 
