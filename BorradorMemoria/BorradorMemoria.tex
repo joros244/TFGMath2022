@@ -33,7 +33,7 @@
 \graphicspath{{Images/}}
 \usepackage{float}
 \usepackage[headings]{fullpage}
-\parskip = 2.5pt plus 2pt minus 2pt
+\parskip = 3pt plus 1pt minus 1pt
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{babel}
@@ -1402,6 +1402,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	viendo en los dibujos anteriores que representan los pasos en la 
 	filtración del complejo simplicial {\Large $\nu$}.
 
+	De los anteriores diagramas podemos extraer información topológica 
+	muy importante acerca de nuestro complejo simplicial: vemos que 
+	presenta dos componentes conexas y un agujero $2$-dimensional. Esta 
+	información nos la aporta la homología persiste, ya que las clases de 
+	equivalencia que persisten representan características topológicas, 
+	mientras que las que mueren en alguna filtración representan ruido.
+
 	Por último, visualizamos los diagramas de persistencia:
 	\begin{figure}[H]
 		\fbox{\minipage{0.48\textwidth}
@@ -1533,6 +1540,26 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\end{figure}	
 		\endminipage}
 	\end{figure}
+
+	En este caso, si nos fijamos en el diagrama izquierdo (grado 0), vemos
+	que hay una clase de equivalencia ($[a+b]$) que nace en la 
+	filtración 1 y muere en la filtración 2, dos clases ($[f]$ y $[e]$) 
+	que 
+	nacen en la filtración 2 y mueren en la filtración 3, y dos clases que
+	nacen en la filtración 1 y persisten. Para representar esta 
+	persistencia se ha dibujado en el diagrama una línea horizontal que 
+	simboliza el infinito. Como se puede ver en los diagramas, para 
+	remarcar que hay varias clases que comparten nacimiento y muerte se 
+	han señalizado con un punto grueso.
+
+	Si nos fijamos ahora en el diagrama derecho (grado 1), observamos cómo
+	hay una clase de equivalencia ($[ab+bc+ac]$) que nace en la filtración 
+	2
+	y muere en la filtración 3, una clase ($[ac+ae+ce]$) que nace en la 
+	filtración 3 y muere en la 4, y una clase ($[bc+cf+bf]$) que nace en 
+	la 
+	filtración 3 y persiste.
+
 	\end{ejem}
 
 	\section{Redes neuronales. Grafos subyacentes}
@@ -1825,7 +1852,16 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	ejemplo:
 
 	\begin{ejem}
-	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas. 
+	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas.
+
+	 Etiquetaremos las neuronas (vértices) en orden ascendente desde la 
+	 primera neurona de la capa de salida hasta la última de la capa de 
+	 entrada. En las próximas representaciones seguiremos usando esta 
+	 notación. Nótese que los cálculos y los resultados a los que 
+	 llegaremos en este trabajo son independientes de esta notación, 
+	 seguiremos este convenio pues es el elegido en 
+	 \cite{Articulo-Watanabe}.
+
 	 Veamos su grafo asociado:
 		\begin{figure}[H]
 			\centering
@@ -1893,12 +1929,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			una red neuronal prealimentada de 13 neuronas y 2 capas.}
 			\label{fig:redEjem}
 		\end{figure}
-		Hemos etiquetado las neuronas (vértices) en orden ascendente 
-		desde la primera neurona de la capa de salida hasta la última
-		de la capa de entrada. En las próximas representaciones 
-		seguiremos usando esta notación.
 	\end{ejem}
-	
+
 	Habiendo fijado los conceptos de red neuronal prealimentada y de su 
 	grafo asociado, no parece evidente la aplicación de la homología 
 	persistente a estas nociones. Lo que haremos será, dada una red 
@@ -2045,8 +2077,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\chapter{¿Es posible aplicar la homología persistente a las redes 
 	neuronales?}
 	
-	En este capítulo nos vamos a centrar en el desarrollo del artículo 
-	\cite{Articulo-Watanabe} sobre el que está basado el presente trabajo. 
+	La respuesta a la pregunta del título es afirmativa, sin embargo, a lo 
+	largo de este caítulo iremos viendo que esta respuesta tiene sus 
+	matices. En este capítulo nos vamos a centrar en el desarrollo del 
+	artículo \cite{Articulo-Watanabe} sobre el que está basado el presente 
+	trabajo. 
 	La motivación principal de las técnicas que expondremos es esclarecer
 	el funcionamiento interno de las redes neuronales prealimentadas, que 
 	habitualmente son vistas como <<cajas negras>>. Mediante el uso de 
@@ -2212,8 +2247,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		importancia entre neuronas definida en \ref{def:ie}, y 
 		{\Large $\nu$}$_{p}^{t}$ los p-símplices definidos en 
 		\ref{def:sn} con t parámetro real entre 0 y 1. Entonces 
-		$\mathcal{K}^{t}=\bigcup_{s=0}^{s=n}\mathcal{K}_{s}^{t}$ es un 
-		complejo simplicial abstracto. 
+		{\Large $\nu$}$^{t}=\bigcup_{s=0}^{s=n}$
+		{\Large $\nu$}$_{s}^{t}$ 
+		es un complejo simplicial abstracto. 
 		\label{prop:cs}
 	\end{prop}
 
@@ -2274,17 +2310,22 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	estamos listos para aplicar la homología persistente y extraer 
 	conclusiones. No obstante, la realidad es bien distinta y existe un 
 	problema con el que nos topamos en el desarrollo del presente trabajo. 
-	El lector interesado habrá notado que la definición 
-	\ref{def:ie} tiene un pequeño defecto: no se especifica el significado
-	exacto de $C_{ij}$. Este pequeño defecto, que en un principio puede 
-	pasar desapercibido, supone que haya al menos dos maneras distintas de 
-	calcular los $p$-símplices dado un DAG con pesos.
+	Este problema está relacionado con una pobre explicación en 
+	\cite{Articulo-Watanabe}. 
+	
+	Si leemos detenidamente las definiciones de la presente sección, 
+	observamos que la definición \ref{def:ie} tiene un pequeño defecto: no 
+	se especifica el significado exacto de $C_{ij}$. Este pequeño defecto, 
+	que en un principio puede pasar desapercibido, supone que haya al 
+	menos dos maneras distintas de calcular los $p$-símplices dado un DAG 
+	con pesos.
 
 	Esta disyuntiva da lugar a las dos interpretaciones posibles sobre el
-	cálculo de los $p$-símplices: la interpretación \emph{local} y la 
-	interpretación \emph{global}. Tal y como hemos podido comprobar, por 
-	medio de correo electrónico, la interpretación original que hace el 
-	autor es la que hemos bautizado como local.
+	cálculo de los $p$-símplices, las hemos bautizado como: la 
+	interpretación \emph{local} y la interpretación \emph{global}. Tal y 
+	como hemos podido comprobar, por medio de correo electrónico, la 
+	interpretación original que hace el autor se corresponde con la que 
+	nosotros hemos bautizado como local.
 	
 	Veamos un pequeño ejemplo que ilustre la diferencia entre ambas 
 	interpretaciones.
@@ -2360,9 +2401,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{remark}
 		Mientras que la interpretación global es consistente 
 		para los 1-símplices (aristas), la interpretación 
-		local no lo es. Para el cálculo de los 1-símplices en 
-		la interpretación local se toma el máximo entre todos 
-		los posibles caminos. 
+		local no lo es. Es decir, si seguimos el razonamiento local, 
+		no podremos calcular una arista entre dos vértices no 
+		conectados, pues no existirá camino local sobre el que tomar 
+		el máximo. Este hecho imposibilitaría el cálculo del complejo 
+		simplicial asociado a la red. Por lo tanto, para el cálculo de 
+		los 1-símplices en la interpretación local se toma el máximo 
+		entre todos los posibles caminos, es decir, se sigue el 
+		razonamiento global. 
 	\end{remark}
 	
 	A lo largo de las siguientes secciones veremos más en detalle la 
@@ -2373,7 +2419,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	
 	A lo largo de esta sección desarrollaremos el cálculo de la homología
 	persistente en el ejemplo propuesto en \cite{Articulo-Watanabe} 
-	mediante la interpretación que hemos bautizado como global.
+	mediante la interpretación que hemos bautizado como global. Comenzamos
+	con esta interpretación pues es la que hicimos en un primer momento y 
+	es la que consideramos natural.
 
 	En primer lugar, vamos a detenernos momentáneamente a analizar la 
 	interpretación global. Si bien esta interpretación no es la original, 
@@ -2381,7 +2429,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	cálculo de los 1-símplices. Adicionalmente, esta interpretación es 
 	coherente con la definición de clique y con la definición 
 	\ref{def:ie}, donde $C_{ij}$ se considera globalmente: se toma el DAG
-	inicial y se le calcula el cierre transitivo.
+	inicial y se le calcula el cierre transitivo. Sobre este nuevo DAG se
+	realizan el resto de cálculos.
 
 	No obstante, aunque esta interpretación nos pueda parecer más 
 	coherente desde el punto de vista teórico, habrá que realizar una 
@@ -2930,6 +2979,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 						$\{9, 5, 2, 0\},\{9, 5, 1, 0\},\{8, 5, 2, 0\},\{8, 5, 1, 0\},\{8, 4, 1, 0\}\}$
 				\end{itemize}
 		\end{itemize}
+	Para el cálculo de las anteriores listas se han empleado una serie de 
+	algoritmos y programas que detallaremos en la próxima sección.
 
 	Finalmente, veamos los diagramas de barras y persistencia asociados al
 	complejo simplicial filtrado representado en \ref{fig:CompSimpGlobal}:
@@ -2947,6 +2998,34 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\caption{Diagramas de barras y persistencia asociados a la red 
 		\ref{fig:ejemGlobal}}
 	\end{figure}
+	Observamos que estos diagramas son ligeramente distintos que los 
+	presentados en el capítulo de preeliminares. Esto es debido a que para
+	el cálculo de éstos se ha empleado una librería que los produce 
+	automáticamente. Veremos esto en más detalle en la siguiente sección.
+
+	Si observamos el diagrama izquierdo (diagrama de barras), vemos que en 
+	la filtración 0 nacen 9 clases de equivalencia (componentes conexas) y
+	que a lo largo de las siguientes filtraciones van muriendo hasta que 
+	sólo queda una que persiste. Podemos seguir esta evolución si nos 
+	vamos fijando en el número $\beta_{0}$ en la figura 
+	\ref{fig:CompSimpGlobal}. También podemos observar que en la 
+	filtración 7 nace una clase de equivalencia (agujero $2$-dimensional) 
+	y muere en la filtración 8. Esta clase la podemos seguir viendo la 
+	figura \ref{fig:CompSimpGlobal} y fijándonos en el número $\beta_{1}$.
+
+	Observando ahora el digrama derecho (diagrama de persistencia) vemos 
+	la misma información pero con otra representación. En este caso se 
+	aprecian 6 puntos rojos que nacen en la filtración 0 y van mueriendo a 
+	lo largo de las siguientes filtraciones, excepto uno que persiste. 
+	Estos puntos se corresponden 
+	con las componentes conexas de la filtración. A diferencia de los 
+	diagramas presentados en el capítulo de preeliminares, en este caso, 
+	cuando varias clases nacen y mueren en la misma filtración se 
+	superponen sus puntos correspondientes en el diagrama dando lugar a 
+	puntos más nítidos en el diagrama. También observamos un único punto 
+	azul que se corresponde con la clase de equivalencia que da lugar a un
+	agujero $2$-dimensional, esta clase nace en la filtración 7 y muere en
+	la filtración 8.
 
 	\end{ejem}
 
@@ -2954,17 +3033,21 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	interpretación sea más coherente con la teoría desarrollada, la 
 	información que nos aporta sobre la red es un tanto escasa, pues los 
 	agujeros $p$-dimensionales colapsan muy rápido. Esto se ve claramente 
-	reflejado en el diagrama de barras \ref{fig:ejemGlobal}.
+	reflejado en el diagrama de barras \ref{fig:ejemGlobal}. Por ello, 
+	será conveniente hacer una serie de experimentos con el fin de probar
+	el desempeño de esta herramienta.
 
 	\section{Interpretación local. Algoritmos y programas}
 
-	(En construcción)
+	En esta sección veremos cómo funciona la interpretación que propone 
+	el autor (que se corresponde con la que hemos bautizado como local) 
+	mediante su desempeño en el mismo ejemplo que hemos visto en la 
+	sección anterior. Además, aprovecharemos para describir más 
+	detalladamente los algoritmos y programas que hemos empleado para el 
+	cálculo automático de la homología persistente en este ejemplo.
 
-	En esta sección veremos la interpretación que propone el autor 
-	(que hemos bautizado como local) mediante su desempeño en el mismo 
-	ejemplo. Además, aprovecharemos para describir más detalladamente los 
-	pasos segudios para el cálculo automático de la homología persistente 
-	en este ejemplo.
+	Comenzamos con el ejemplo tal y cómo lo propone el autor en 
+	\cite{Articulo-Watanabe}:
 	
 	\begin{ejem}
 		Supondremos la red \ref{fig:ejemGlobal}. Como en el ejemplo 
@@ -3445,14 +3528,27 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\caption{Diagramas de barras y persistencia asociados a la red 
 		\ref{fig:ejemGlobal}}
 	\end{figure}
-
-	Este ejemplo reproduce fielmente el propuesto por el autor en 
-	\cite{Articulo-Watanabe}, aunque habiendo solucionado alguna errata 
-	presente en los dibujos del autor.
-
-	En esta interpretación, a diferencia de la anterior, tenemos agujeros 
-	$p$-dimensionales ocultos, como el que aparece en 
+	
+	Nótese que en esta interpretación, a diferencia de la anterior, 
+	tenemos agujeros $p$-dimensionales ocultos, como el que aparece en 
 	\ref{fig:CompSimpLocal} en la filtración 9.
+
+	Observamos que, en este caso, los diagramas obtenidos son muy 
+	diferentes a los de la sección anterior. Si bien obtenemos las mismas 
+	clases de equivalencia de la homología de grado 0 (componentes 
+	conexas), vemos que hemos obtenido un resultado muy distinto para las
+	clases de equivalencia de la homología de grado 1 (agujeros 
+	$2$-dimensionales). En este caso hemos obtenido 5 clases de 
+	equivalencia mientras que en el caso anterior sólo teníamos 1. El 
+	hecho de que tengamos las mismas clases de equivalencia de la 
+	homología de grado 0 se debe a que, como ya hemos comentado, el 
+	cálculo de las aristas en esta interpretación se realiza siguiendo el
+	razonamiento global, lo que resulta un tanto incoherente con el 
+	cálculo del resto de los $p$-símplices. 
+
+	Cabe reseñar que este ejemplo reproduce fielmente el propuesto por el 
+	autor en \cite{Articulo-Watanabe}, aunque habiendo solucionado alguna 
+	errata presente en los dibujos del autor.
 
 	\end{ejem}
 
@@ -3466,6 +3562,214 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	complejidad del conocimiento adquirido por la red. Por lo tanto, 
 	mediante la homología persistente es posible medir la complejidad del 
 	conocimiento adquirido por la red.
+
+	Este supuesto puede tener especial sentido en el caso de las redes 
+	neuronales convolucionales (CNN). Aunque una descripción detallada de 
+	las mismas queda fuera del alcance del presente trabajo, en estas 
+	redes la información se presenta de manera jerarquizada, es decir, las
+	neuronas de las capas iniciales detectan patrones simples como líneas
+	horizontales y verticales, y a medida que se avanza en las capas, 
+	estos patrones se combinan para representar objetos más complejos, por 
+	ejemplo una rueda de un coche. Estas redes son muy utilizadas en el 
+	ámbito de la visión por computador.
+
+	Habiendo presentado detalladamente el ejemplo que propone el autor, 
+	vamos a describir todos los algoritmos y programas que hemos empleado
+	para el cálculo automático de los complejos simpliciales asociados, 
+	los números de Betti y los diagramas correspondientes.
+
+	Para el desarrollo de los algoritmos y programas se ha empleado el 
+	lenguaje \emph{Python} (\cite{10.5555/1593511}) y el programa 
+	\emph{Neovim} como entorno de desarrollo. Hemos elegido Python como 
+	lenguaje de programación ya que es un lenguaje de alto nivel (lo que 
+	lo hace bastante sencillo) y el código producido es de fácil lectura. 
+	Este lenguaje es de código abierto y es muy empleado en el campo de la 
+	inteligencia artificial. No obstante, este lenguaje tiene el 
+	inconveniente de ser poco eficiente ya que se trata de un lenguaje 
+	interpretado. Para solucionarlo, hemos empleado librerías que ofrecen 
+	una interfaz en Python pero que están programadas en lenguajes más 
+	eficientes como C++. Estas librerías son \emph{GUDHI} 
+	(\cite{gudhi:urm}) para el cálculo de los diagramas, y \emph{Dionysus} 
+	(\cite{morozov_2021}) para el cálculo de los números de Betti.
+
+	En cuanto a los algoritmos empleados para el cálculo de los complejos
+	simpliciales, nos hemos basado en los algoritmos propuestos en 
+	\cite{Algoritmos-Sedgewick} y los hemos adaptado a nuestras 
+	necesidades particulares. Veamos tales algoritmos en detalle
+
+	En primer lugar, se define un objeto grafo dirigido acíclico (GDA). 
+	Este objeto representa un grafo dirigido acíclico mediante una lista 
+	de adyacencia. Tras esto, se define un objeto grafo dirigido acíclico 
+	con pesos (GDAP). Este objeto consta de un objeto grafo dirigido 
+	acíclico y de una matriz de pesos asociada, esta matriz es la original 
+	dada por la red neuronal y define completamente las aristas del objeto 
+	grafo asociado. La definición es la siguiente:
+
+	\begin{verbatim}
+	#Un GDAP es un GDA con una matriz asociada. La matriz determina las 
+	#aristas y los vértices del GDA asociado.
+    	
+	def __init__(self, M):
+        self.G = GDA.Grafo_dirigido_aciclico(len(M))
+        self.M = M
+        for i in range(0,len(self.M)):
+            for j in range(i):
+                if( self.M[i][j] > 0 ):
+                    self.G.crea_arista(i,j)
+	\end{verbatim}
+
+	Ahora debemos distinguir entre los algoritmos empleados para el 
+	cálculo local y global. Empezaremos con éste último.
+
+	Para el cálculo global hemos empleado la siguiente función:
+
+	\begin{verbatim}
+	#Devuelve una lista de los símplices maximales de cada vértice si al 
+	#menos uno de ellos pasa el filtro t. Recorre la lista de vértices 
+	#adyacentes a uno dado y en caso de que no haya adyacencia directa, 
+	#calcula los caminos indirectos y los añade. Si la adyacencia directa 
+	#pasa el filtro, la añade.
+	def __calcula_simplices_global(self,t)->List[List[int]]:
+        simp=[]
+        #Necesario para recorrer los adyacentes. OPTIMIZACIÓN
+        P=self.filtracion(t)
+        T=P.clausura_transitiva()
+        for i in range(len(self.M)):
+            for j in T.G.adj[i]:
+                if(self.M[i][j]==0):
+                    p=[]
+                    self.busca_pesos(i,j,p)
+                    if(len(p)>0):
+                        m=max([v[0] for v in p])
+                        if(m>=t):
+                            l = [k[1] for k in p]
+                            simp.extend(l)
+                            simp.append([i,j])
+                elif (self.M[i][j]>=t):
+                    simp.append([i,j])
+        return simp
+	\end{verbatim}
+
+	\noindent donde la función <<filtración>> es común a ambas 
+	interpretaciones y su funcionamiento es el siguiente: recorre la 
+	matriz asociada al grafo, si la entrada $a_{ij}$ supera el filtro $t$ 
+	pasa a la siguiente, en caso contrario la sustituye por 0; tras esto 
+	devuelve el GDAP asociado a la nueva matriz. La función 
+	<<clausura transitiva>> calcula la clausura transitiva de un GDA y 
+	la devuelve. La función <<busca pesos>>, común a ambas 
+	interpretaciones, es especialmente importante ya 
+	que hace una búsqueda en profundidad sobre la matriz para calcular el
+	peso apropiado. Damos su definición a continuación:
+
+	\begin{verbatim}
+	#Almacena en p una lista de tuplas donde el primer argumento es el 
+	#posible peso entre origen(o) y destino(d); y el segundo argumento es el 
+	#camino que produce dicho peso. 
+	def busca_pesos(self, o, d, p=[], q=1, c=[]):
+        #BÚSQUEDA EN PROFUNDIDAD
+        if(o==d):
+            c.append(o)
+            p.append((q.__round__(4),c))
+            q=1
+            c=[]
+        else:   
+            for j in range(d,o):
+                if(self.M[o][j]!=0):
+                    #NOTA: Podríamos optimizarlo para que si q<t pase al 
+                    siguente vértice. SÓLO VÁLIDO PARA V.LOCAL
+                    self.busca_pesos(j,d,p,q*self.M[o][j],c+[o])
+	\end{verbatim}
+
+	Notemos que este algoritmo es el clave dentro de toda esta 
+	implementación, y además, es recursivo, lo que lo hace bastante 
+	ineficiente. Esta observación nos lleva a 
+	cuestionar la aplicabilidad de estos algoritmos a casos reales en los 
+	que el número de neuronas de la red es muy grande. No obstante, para 
+	el presente trabajo nos ha resultado suficiente con esta 
+	implementación.
+
+	Finalizamos la implementación de la interpretación global con una 
+	última función que nos devuelve la lista de los símplices del complejo
+	simplicial:
+	\begin{verbatim}
+	#Devuelve un lista con el complejo simplicial asociado al GDAP. 
+	V.GLOBAL
+	def get_simplex_global(self, t : float)->List[List[int]]:
+        simplices=self.__calcula_simplices_global(t)
+        
+        #En este caso hay que añadir los vértices
+        simplices.extend([[i] for i in range(len(self.M))])
+        
+        #Ahora añadimos los subsímplices de los calculados
+        for s in simplices:
+            for L in range(3,len(s)+1):
+                for sub in it.combinations(s,L):
+                    if(list(sub) not in simplices):
+                       simplices.append(list(sub))
+        
+        Limpiamos aquellos símplices con aristas irreales
+        tr=[s for s in simplices if len(s)>2]
+        for e in tr:
+            if(any([list(sub) not in simplices for sub in 
+                it.combinations(e,len(e)-1)])):
+                simplices.remove(e)
+
+        return simplices
+	\end{verbatim}
+
+	Veamos ahora la implementación de los algoritmos asociados a la 
+	interpretación local. Como ya hemos descrito los algoritmos comunes a 
+	ambas interpretaciones, en este caso sólo son necesarias dos 
+	funciones: 
+	\begin{verbatim}
+	#Devuelve una lista de los símplices maximales de cada vértice que 
+	#pasan el filtro t. Lo que hace es recorrer la lista de vértices 
+	#adyacentes y en caso de que no haya adyacencia directa, calcula los 
+	#caminos indirectos.
+	def __calcula_simplices(self,t)->List[List[int]]:
+        simp=[]
+        #Necesario para recorrer los adyacentes. OPTIMIZACIÓN '''
+        P=self.filtracion(t)
+        T=P.clausura_transitiva()
+        for i in range(len(self.M)):
+            for j in T.G.adj[i]:
+                if(self.M[i][j]==0):
+                    p=[]
+                    self.busca_pesos(i,j,p)
+                    if(len(p)>0):
+                        l = [k[1] for k in p if k[0]>=t]
+                        simp.extend(l)
+                elif (self.M[i][j]>=t):
+                    simp.append([i,j])
+        return simp
+	\end{verbatim}
+	Y ahora veamos la función que devuelve la lista de símplices 
+	propiamente dicha:
+	\begin{verbatim}
+	#Devuelve un lista con el complejo simplicial asociado al GDAP. 
+	#V.LOCAL
+	def get_simplex_local(self, t : float)->List[List[int]]:
+        simplices=self.__calcula_simplices(t)
+        
+        simplices.extend([[i] for i in range(len(self.M))])
+        
+        #Hemos calculado símplices "maximales", nos faltan sus 
+        #subsímplices
+        for s in simplices:
+            for L in range(2,len(s)+1):
+                for sub in it.combinations(s,L):
+                    if(list(sub) not in simplices):
+                       simplices.append(list(sub))
+        return simplices
+	\end{verbatim}
+
+	Como ya hemos comentado, los algoritmos aquí expuestos son bastante 
+	ineficientes al ser recursivos. Aunque hemos tratado de optimizarlos 
+	en la medida de lo posible, no hemos conseguido una mejora 
+	significativa en el tiempo de ejecución. Aunque para los ejemplos del 
+	presente trabajo nos ha bastado con esta implementación, se queda como
+	trabajo futuro la optimización de la presente implementación.
+	
 	\section{Ejemplos}
 	(En construcción)
 	\chapter{Conclusiones}
