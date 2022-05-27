@@ -65,6 +65,39 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 \setcounter{MaxMatrixCols}{20}
 
+\usepackage{listings}
+\usepackage{xcolor}
+\renewcommand{\lstlistingname}{Bloque de código}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,
+    columns=fixed,
+    tabsize=2
+}
+
+\lstset{style=mystyle,
+	inputencoding=utf8,
+	extendedchars=true,
+literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
+{Ó}{{\'O}}1 {Á}{{\'A}}1 {Ú}{{\'U}}1}
+
 \begin{document}
 	\pagenumbering{Roman}
 	
@@ -84,10 +117,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\pagenumbering{arabic}
 	
 	\chapter{Introducción}
-	Supongamos que te enseño las siguientes imágenes y te pido que me 
-	digas la figura geométrica de la que proceden.
+	Supongamos que nos entregan las imágenes \ref{fig:mist} y nos 
+	solicitan que identifiquemos la figura geométrica de la que proceden.
 
-	\begin{figure}[H]
+	\begin{figure}[!htbp]
 		\minipage{0.5\textwidth}
 			\begin{figure}[H]
 				\resizebox{1.0\textwidth}{!}{\includegraphics{Images/DosCirculos.png}}
@@ -99,6 +132,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\end{figure}
 		\endminipage
 		\caption{Imágenes misteriosas}
+		\label{fig:mist}
 	\end{figure}
 
 	Observando las imágenes vemos que la primera se corresponde con dos 
@@ -181,7 +215,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	diferentes, por lo que debemos dintinguir entre dos definiciones 
 	relacionadas: los complejos simpliciales \emph{abstractos} y los 
 	complejos simpliciales \emph{geométricos}. Para el desarrrollo estas 
-	nociones seguiremos la guia proporcionada por 
+	nociones seguiremos la guía proporcionada por 
 	\cite{TopoAlg-Edelsbrunner,Intro-Otter}.
 
 	Siguiendo el enfoque combinatorio, comenzamos definiendo los complejos 
@@ -247,10 +281,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Así, tenemos que la dimensión de {\Large $\nu$} es 3. También 
 		observamos que el 3-símplice $\{a,b,c,d\}$ tiene por caras de 
 		codimensión 1 a los 2-símplices $\{a,b,c\},\{a,b,d\}$ y 
-		$\{a,c,d\}$. En la figura \ref{fig:tetra} ilustramos una 
+		$\{a,c,d\}$. En \autoref{fig:tetra} ilustramos una 
 		representación geométrica de {\Large $\nu$}.
 
-		\begin{figure}[H]
+		\begin{figure}[!htbp]
 			\centering
 			\begin{tikzpicture}
 				%Nodes
@@ -274,7 +308,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\label{fig:tetra}
 		\end{figure}
 
-		La representación recogida en la figura \ref{fig:tetra}, en la
+		La representación recogida en \autoref{fig:tetra}, en la
 		que cada símplice corresponde con un poliedro regular (cada 
 		$0$-símplice corresponde a un punto, cada $1$-símplice a una 
 		arista, cada $2$-símplice a un triángulo, cada $3$-símplice a 
@@ -396,7 +430,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	homología.
 
 	\begin{defi}
-		Sea $R$ un anillo. Definimos el \textit{R-módulo izquierdo} 
+		Sea $R$ un anillo. Definimos el \textit{R-módulo a izquierda} 
 		sobre
 		$R$ como el conjunto $M$ junto con las operaciones:
 		\begin{itemize}
@@ -421,9 +455,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\item Si $R$ es unitario, $1x=x$.	
 			\end{enumerate}
 		\end{enumerate}
-		De manera análoga definimos el \textit{R-módulo derecho}. Si 
-		$R$ es conmutativo, entonces el $R$-módulo izquierdo es el 
-		mismo que el $R$-módulo derecho. En tal caso nos referiremos a
+		De manera análoga definimos el \textit{R-módulo a derecha}. Si 
+		$R$ es conmutativo, entonces el $R$-módulo a izquierda es el 
+		mismo que el $R$-módulo a derecha. En tal caso nos referiremos 
+		a
 		él simplemente como \textit{R-módulo}.
 	\end{defi}
 
@@ -894,8 +929,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		dimKer(\partial_{1})=2$, y por lo tanto, $\beta_{1}(\text{
 		{\Large $\nu$}})=1$ y $\beta_{0}(\text{{\Large $\nu$}})=2$. La
 		representación gráfica de {\Large $\nu$} en $\mathbb{R}^{2}$
-		nos queda:
-		\begin{figure}[H]
+		puede verse en \autoref{fig:homs}.
+		
+		\begin{figure}[!htbp]
 			\centering
 			\begin{tikzpicture}
 				%Nodes
@@ -924,6 +960,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 			\caption{Representación geométrica del complejo simplicial {\Large $\nu$}.}
 			\label{fig:homs}
 		\end{figure}
+		
 		Tal y como ya hemos comentado, los números de Betti nos 
 		cuentan los agujeros p-dimensionales. En este caso, si 
 		observamos la representación anterior, vemos que tenemos un 
@@ -1230,8 +1267,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\{b,c\},\{b,f\},\{c,f\},\{c,e\},$\\
 				$\{a,b,c\},\{a,c,e\}\}$.
 	\end{itemize}
-	Veamos su representación gráfica en $\mathbb{R}^{2}$:
-	\begin{figure}[H]
+	En \autoref{fig:EjBas} podemos ver su representación gráfica en 
+	$\mathbb{R}^{2}$.
+	\begin{figure}[!htbp]
 		\fbox{\minipage{0.225\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
@@ -1345,9 +1383,14 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{tikzpicture}}
 			\end{figure}	
 		\endminipage}
+		\caption{Representación gráfica de los pasos en la filtración 
+		de {\Large $\nu$}}
+		\label{fig:EjBas}
 	\end{figure}
-	Ahora vamos a dibujar los diagramas de barras correspondientes:
-	\begin{figure}[H]
+	En \autoref{fig:EjBasDiagB} podemos ver los diagramas de barras 
+	correspondientes.
+	
+	\begin{figure}[!htbp]
 		\fbox{\minipage{0.48\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
@@ -1459,9 +1502,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{tikzpicture}}
 			\end{figure}	
 		\endminipage}
+		\caption{Diagramas de barras asociados a la filtración de 
+		{\Large $\nu$}}
+		\label{fig:EjBasDiagB}
 	\end{figure}
 
-	Como podemos observar, en el diagrama de la izquierda (grado 0) 
+	Como podemos observar en \autoref{fig:EjBasDiagB} diagrama izquierdo 
+	(grado 0), 
 	tenemos inicialmente (filtración 1 que corresponde al dibujo de 
 	{\Large $\nu$}$^{1}$) 3 clases de equivalencia que son, en orden 
 	ascendente 
@@ -1475,7 +1522,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	{\Large $\nu$}$^{3}$), y finalmente, las clases $[d]$ y $[c]$ 
 	persisten.
 	
-	Observemos ahora el diagrama de la derecha (grado 1). Como se puede 
+	Observemos ahora \autoref{fig:EjBasDiagB} diagrama derecho (grado 1). 
+	Como se puede 
 	ver, en la filtración 1 no tenemos ninguna clase de equivalencia, 
 	tendremos que esperar a la filtración 2 en la que nace la clase 
 	$[ab+bc+ac]$. Esta clase muere en la siguiente filtración, pero nacen 
@@ -1493,8 +1541,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	equivalencia que persisten representan características topológicas, 
 	mientras que las que mueren en alguna filtración representan ruido.
 
-	Por último, visualizamos los diagramas de persistencia:
-	\begin{figure}[H]
+	Por último, en \autoref{fig:EjBasDiagP} podemos visualizar los 
+	diagramas de persistencia.
+	\begin{figure}[!htbp]
 		\fbox{\minipage{0.48\textwidth}
 			\begin{figure}[H]
 				\resizebox{\textwidth}{!}{
@@ -1623,9 +1672,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\end{tikzpicture}}
 			\end{figure}	
 		\endminipage}
+		\caption{Diagramas de persistencia asociados a la filtración 
+		de {\Large $\nu$}}
+		\label{fig:EjBasDiagP}
 	\end{figure}
 
-	En este caso, si nos fijamos en el diagrama izquierdo (grado 0), vemos
+	En este caso, si nos fijamos en \autoref{fig:EjBasDiagP} 
+	diagrama izquierdo (grado 0), vemos
 	que hay una clase de equivalencia ($[a+b]$) que nace en la 
 	filtración 1 y muere en la filtración 2, dos clases ($[f]$ y $[e]$) 
 	que 
@@ -1636,7 +1689,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	remarcar que hay varias clases que comparten nacimiento y muerte se 
 	han señalizado con un punto grueso.
 
-	Si nos fijamos ahora en el diagrama derecho (grado 1), observamos cómo
+	Si nos fijamos ahora en \autoref{fig:EjBasDiagP} diagrama 
+	derecho (grado 1), observamos cómo
 	hay una clase de equivalencia ($[ab+bc+ac]$) que nace en la filtración 
 	2
 	y muere en la filtración 3, una clase ($[ac+ae+ce]$) que nace en la 
@@ -1824,9 +1878,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	lineal entre la variable objetivo y las variables independientes. 
 	
 	A fin de facilitar el entendimiento de nuestros siguientes pasos, 
-	vamos a representar gráficamente la estructura subyacente del 
-	perceptrón.
-	\begin{figure}[H]
+	en \autoref{fig:perceptron} representamos gráficamente la estructura 
+	subyacente del perceptrón.
+	\begin{figure}[!htbp]
 		\centering
 		\begin{tikzpicture}[
 			roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -1863,7 +1917,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	El perceptrón multicapa es caso particular de arquitectura de una red 
 	neuronal. En esta arquitectura las conexiones entre nodos (neuronas) 
-	se realizan únicamente hacia adelante y no se permite la conexión 
+	se realizan únicamente hacia adelante, no se permite la conexión 
 	entre nodos de la misma capa, y la función de activación es 
 	r(x) definida en \ref{def:r}. Para los propósitos del presente 
 	trabajo, la función de activación no es relevante; pero sí lo es la 
@@ -1914,21 +1968,40 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Así pues, vamos a estudiar los grafos dirigidos acíclicos 
 	subyacentes a las redes neuronales prealimentadas. No obstante, dadas 
-	las características de las redes neuronales prealimentadas, todavía 
-	podemos exigirles una condición más a sus grafos subyacentes.
+	las características de las redes neuronales prealimentadas, también 
+	podemos aproximarnos a sus grafos subyacentes desde otro punto de 
+	vista. 
+
+	Como ya sabemos, las neuronas de una red neuronal prealimentada están
+	distribuidas por capas. Además, podemos identificar claramente estas 
+	capas, y ya hemos visto que, en el caso que nos ocupa, el flujo de 
+	información de la red se produce en un único sentido. Estas 
+	propiedades nos inducen a pensar, de una manera natural, en un orden 
+	sobre las neuronas de la red. 
+	En este sentido, veamos la otra aproximación a los grafos subyacentes
+	de una red neuronal prealimentada:
 
 	\begin{defi}
-		Sea $G=(V, E)$ un grafo dirigido acíclico. Diremos que $G$ es 
+		Sea $G=(V, E)$ un grafo. Diremos que $G$ es 
 		\textit{grafo nivelado} si tomando una partición de $V$ en 
 		subconjuntos $L_{1},\dots,L_{h}$, se cumple que si $(u,v) \in 
-		E$ con $u \in L_{i}$ y $v \in L_{j}$, entonces $i>j$. A los 
+		E$ con $u \in L_{i}$ y $v \in L_{j}$, entonces $j=i+1$. A los 
 		conjuntos $L_{1},\dots,L_{h}$ se los conoce como 
 		\textit{niveles} y a $h$ como \textit{altura}.
-	\end{defi}	
+	\end{defi}
 
-	Para el caso que nos ocupa, consideraremos grafos nivelados en los que
-	no puede haber saltos de nivel, es decir, las aristas del grafo tienen
-	por origen un cierto nivel y su término es el nivel siguiente.
+	\begin{remark}
+		La condición $j=i+1$ de la definición anterior puede relajarse
+		a $j>i$. Esta relajación implicaría que en nuestra red podrían
+		haber saltos de nivel. Hemos optado por la primera condición 
+		pues es suficiente para los propósitos del presente trabajo.
+	\end{remark}
+
+	Observamos que, aunque puedan parecer distintas, la definición de 
+	grafo nivelado y la definición de grafo dirigido acíclico son 
+	equivalentes. Con lo que, siempre que tengamos una red neuronal 
+	prealimentada podremos identificar de manera natural su grafo nivelado
+	subyacente, y por tanto, su grafo dirigido acíclico asociado.
 
 	Recapitulando, dada una red neuronal, le asociaremos un grafo dirigido
 	acíclico (nivelado) sobre el que aplicaremos la teoría de homología 
@@ -1937,8 +2010,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	\begin{ejem}
 	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas.
-
-	 Etiquetaremos las neuronas (vértices) en orden ascendente desde la 
+	 Su grafo asociado puede verse en \autoref{fig:redEjem}.
+	 
+	 Hemos etiquetado las neuronas (vértices) en orden ascendente desde la 
 	 primera neurona de la capa de salida hasta la última de la capa de 
 	 entrada. En las próximas representaciones seguiremos usando esta 
 	 notación. Nótese que los cálculos y los resultados a los que 
@@ -1946,8 +2020,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	 seguiremos este convenio pues es el elegido en 
 	 \cite{Articulo-Watanabe}.
 
-	 Veamos su grafo asociado:
-		\begin{figure}[H]
+		\begin{figure}[!htbp]
 			\centering
 			\begin{tikzpicture}[
 				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2055,7 +2128,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\begin{ejem}
 		Vamos a construir el clique asociado al ejemplo anterior. Lo
 		denotaremos por {\Large $\nu$}. Atendiendo a la definición de 
-		clique y a la figura \ref{fig:redEjem} tendremos que:
+		clique y a \autoref{fig:redEjem} tendremos que:
 		\begin{multline*} 
 			\text{{\Large $\nu$}}=\{\{0\},\{1\},\{2\},\{3\},
 			\{4\},\{5\},\{6\},\{7\},\{8\},\{9\},
@@ -2073,9 +2146,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 		Observamos que {\Large $\nu$} es un clique muy particular, 
 		pues está compuesto únicamente por vértices ($0$-símplices) y 
-		aristas (1-símplices). Su representación gráfica es la 
-		siguiente:
-		\begin{figure}[H]
+		aristas (1-símplices). Su representación gráfica puede verse 
+		en \autoref{fig:cliqueEjem}.
+		
+		\begin{figure}[!htbp]
 			\centering
 			\begin{tikzpicture}[
 				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2136,7 +2210,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\draw[thick] (n5.mid) -- (n0.mid);
 				\draw[thick] (n5.mid) -- (n1.mid);
 				\end{pgfonlayer}
-			\end{tikzpicture}
+		\end{tikzpicture}
 			\caption{Representación gráfica del clique asociado a una red neuronal prealimentada de 13 neuronas y 2 capas.}
 			\label{fig:cliqueEjem}
 		\end{figure}
@@ -2173,7 +2247,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	complejidad y el grado de aprendizaje de las redes neuronales 
 	prealimentadas. 
 
-	\section{Explicación matemática}
+	\section{Descripción matemática}
 	
 	Partimos de la base del capítulo anterior, en el que se hizo notoria 
 	la necesidad de extender la noción de clique asociado a una red 
@@ -2223,18 +2297,18 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	para aquellas que no estén directamente conectadas. Así pues, damos la 
 	siguiente definición: 
 	\begin{defi}
+		\label{def:impExt}	
 	Consideremos las neuronas $u_{0}$ y $u_{2}$ conectadas por el camino: 
 	$u_{2} 
 	\rightarrow u_{1} \rightarrow u_{0}$, la importancia de $u_{2}$ para 
 	$u_{0}$ es, según el camino entre ellas, $R_{21} \cdot R_{10}$.
 	Por lo tanto, definimos la \textit{importancia extendida} entre 
 	neuronas, y la denotamos por $\overline{R_{ij}}$, como:
-	\begin{equation}
+	\begin{equation*}
 		\overline{R_{ij}}=\text{máx}\{R_{u_{i}u_{m_{1}}} \cdots
 		R_{u_{m_{n}}u_{j}} \mid (u_{i},u_{m_{1}},...,u_{m_{n}},u_{j}) 
 	\in C_{ij} \}
-		\label{def:ie}
-	\end{equation}	
+	\end{equation*}	
 	donde $C_{ij}$ denota el conjunto de todos los posibles caminos de 
 	$u_{i}$ a $u_{j}$. 
 	\end{defi}
@@ -2253,8 +2327,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	capítulo.
 	\begin{ejem}
 		\label{ej:primerRel}	
-		Supongamos la siguiente representación de una red neuronal con sus correspondientes pesos: 	
-		\begin{figure}[H]
+		Supondremos la representación de una red neuronal, que puede 
+		verse en \autoref{fig:ejCalcImp}, con sus correspondientes 
+		pesos.
+
+		\begin{figure}[!htbp]
 			\centering
 			\begin{tikzpicture}[
 				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2275,6 +2352,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{pgfonlayer}
 			\end{tikzpicture}
 			\caption{Representación de una red neuronal de 4 neuronas y 1 capa.}
+			\label{fig:ejCalcImp}
 		\end{figure}
 		
 		Tal y como vemos, las neuronas ya han sido ordenadas de manera 
@@ -2303,10 +2381,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	simplicial asociado, pues no vamos a usar un clique, para ello damos 
 	la siguiente definición: 
 	\begin{defi}
+		\label{def:SimpAut}
 		Definimos los \textit{$p$-símplices asociados a un DAG con pesos} a partir del conjunto de vértices del DAG ( que
 		por simplificar notación denotaremos por {\Large $\nu$}$_{0}$) 
 		como sigue:
-	\begin{equation}
+	\begin{equation*}
 		\text{{\Large $\nu$}}_{p}^{t}=
 		\left \{
 			\begin{array}{ll}
@@ -2317,8 +2396,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\forall a_{i} > a_{j} \} & \text{si } p \geq 1
 			\end{array}
 		\right.  
-		\label{def:sn}
-	\end{equation}
+	\end{equation*}
 	donde $0 \leq t \leq 1$ es un parámetro real.
 	\end{defi}
 	Ahora que ya tenemos definidos los p-símplices, vamos con la 
@@ -2328,9 +2406,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		Sea {\Large $\nu$}$_{0}=\{u_{0},...,u_{n}\}$ un conjunto 
 		finito, y $\{w_{ij}\}_{0\leq j \leq i \leq n}$ un 
 		conjunto de números reales. Sea $\overline{R_{ij}}$ la 
-		importancia entre neuronas definida en \ref{def:ie}, y 
+		importancia entre neuronas definida en \ref{def:impExt}, y 
 		{\Large $\nu$}$_{p}^{t}$ los p-símplices definidos en 
-		\ref{def:sn} con t parámetro real entre 0 y 1. Entonces 
+		\ref{def:SimpAut} con t parámetro real entre 0 y 1. Entonces 
 		{\Large $\nu$}$^{t}=\bigcup_{s=0}^{s=n}$
 		{\Large $\nu$}$_{s}^{t}$ 
 		es un complejo simplicial abstracto. 
@@ -2349,7 +2427,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				que } \tau \in \text{{\Large $\nu$}}^{t}$	
 		\end{enumerate}
 		Notemos que la primera propiedad se deduce inmediatamente de 
-		\ref{def:sn} y de la definición de {\Large $\nu$}$^{t}$.
+		la definición \ref{def:SimpAut} y de la definición de 
+		{\Large $\nu$}$^{t}$.
 
 		Así pues, vamos a probar la segunda propiedad:
 		$\sigma=(u_{a_{0}},...,u_{a_{p}}) \in 
@@ -2383,7 +2462,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		bien, $t_{i} > t_{j} \text{ implica que } 
 		\text{{\Large $\nu$}}_{p}^{t_{i}} \subset 
 		\text{{\Large $\nu$}}_{p}^{t_{j}}$ por la definición 
-		\ref{def:sn}. Entonces $\emptyset=\text{{\Large $\nu$}}_{0} 
+		\ref{def:SimpAut}. Entonces 
+		$\emptyset=\text{{\Large $\nu$}}_{0} 
 		\subset \text{{\Large $\nu$}}_{1} \subset \cdots \subset 
 		\text{{\Large $\nu$}}_{n}=\text{{\Large $\nu$}}^{t_{n}}$. Se 
 		sigue inmediatamente el resultado.
@@ -2398,7 +2478,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\cite{Articulo-Watanabe}. 
 	
 	Si leemos detenidamente las definiciones de la presente sección, 
-	observamos que la definición \ref{def:ie} tiene un pequeño defecto: no 
+	observamos que la definición \ref{def:impExt} tiene un pequeño 
+	defecto: no 
 	se especifica el significado exacto de $C_{ij}$. Este pequeño defecto, 
 	que en un principio puede pasar desapercibido, supone que haya al 
 	menos dos maneras distintas de calcular los $p$-símplices dado un DAG 
@@ -2415,9 +2496,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	interpretaciones.
 	\begin{ejem}
 		\label{ej:int}
-		Supongamos la siguiente representación de una red neuronal con 
-		las importancias entre neuronas ya calculadas: 	
-		\begin{figure}[H]
+		Supondremos la representación de una red neuronal con 
+		las importancias entre neuronas ya calculadas que puede verse 
+		en \autoref{fig:ejemInter}.
+
+		\begin{figure}[!htbp]
 			\centering
 			\begin{tikzpicture}[
 				roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2440,6 +2523,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{pgfonlayer}
 			\end{tikzpicture}
 			\caption{Representación de una red neuronal de 5 neuronas y 1 capa.}
+			\label{fig:ejemInter}
 		\end{figure}
 		Vamos calcular {\Large $\nu$}$^{0.4}_{2}$ para ver las 
 		diferencias entre las dos interpretaciones. En primer lugar, 
@@ -2512,7 +2596,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	como ya mencionamos, esta interpretación es consistente para el 
 	cálculo de los 1-símplices. Adicionalmente, esta interpretación es 
 	coherente con la definición de clique y con la definición 
-	\ref{def:ie}, donde $C_{ij}$ se considera globalmente: se toma el DAG
+	\ref{def:impExt}, donde $C_{ij}$ se considera globalmente: se toma el 
+	DAG
 	inicial y se le calcula el cierre transitivo. Sobre este nuevo DAG se
 	realizan el resto de cálculos.
 
@@ -2535,9 +2620,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	correspondientes.
 
 	\begin{ejem}
-		Supongamos la siguiente representación de una red neuronal con 
-		las importancias entre neuronas ya calculadas:	
-		\begin{figure}[H]
+		Supondremos la representación de una red neuronal con las 
+		importancias entre neuronas ya calculadas que puede verse en 
+		\autoref{fig:ejemGlobal}.
+
+		\begin{figure}[!htbp]
 				\centering
 				\begin{tikzpicture}[
 					roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2603,9 +2690,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		asociado. Para ello vamos a ilustrar unos cuantos pasos en la 
 		filtración con los correspondientes números de Betti 
 		asociados. Tras esto, mostraremos los complejos
-		simpliciales asociados a cada filtración.
+		simpliciales asociados a cada filtración. Podemos ver estos 
+		pasos en \autoref{fig:CompSimpGlobal}.
 
-		\begin{figure}[H]
+		\begin{figure}[!htbp]
 			\fbox{\minipage{0.225\textwidth}
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
@@ -2633,125 +2721,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 						\end{pgfonlayer}
 					\end{tikzpicture}}	
 				\end{figure}	
-			\endminipage}
-			\fbox{\minipage{0.225\textwidth}
-				\begin{figure}[H]
-					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
-						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
-						]
-						%Nodes
-						\node           (label) 	at	(1,4) 		{Filtración 3 (t=0.7)};
-						\node[roundnode]      (n0) 	at 	(4,0)           {0};
-						\node[roundnode]      (n1) 	at 	(2,2)           {1};
-						\node[roundnode]      (n2) 	at 	(2,0)           {2};
-						\node[roundnode]      (n3)      at 	(2,-2)		{3};
-						\node[roundnode]      (n4)      at 	(0,3)		{4};
-						\node[roundnode]      (n5)      at 	(0,1)		{5};
-						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
-						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
-						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
-						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
-						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
-						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=4,\beta_{1}=0$};
-						
-						\begin{pgfonlayer}{background}
-						%Lines
-						\draw[thick] (n10.mid) -- (n7.mid);
-						\draw[thick] (n8.mid) -- (n4.mid);
-						\draw[thick] (n9.mid) -- (n6.mid);
-						\draw[thick] (n9.mid) -- (n5.mid);
-						\draw[thick] (n6.mid) -- (n3.mid);
-						\draw[thick] (n6.mid) -- (n2.mid);
-						\draw[thick] (n5.mid) -- (n1.mid);
-						\end{pgfonlayer}
-					\end{tikzpicture}}	
-				\end{figure}	
-			\endminipage}
-			\fbox{\minipage{0.225\textwidth}
-				\begin{figure}[H]
-					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
-						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
-						]
-						%Nodes
-						\node           (label) 	at	(1,4) 		{Filtración 4 (t=0.6)};
-						\node[roundnode]      (n0) 	at 	(4,0)           {0};
-						\node[roundnode]      (n1) 	at 	(2,2)           {1};
-						\node[roundnode]      (n2) 	at 	(2,0)           {2};
-						\node[roundnode]      (n3)      at 	(2,-2)		{3};
-						\node[roundnode]      (n4)      at 	(0,3)		{4};
-						\node[roundnode]      (n5)      at 	(0,1)		{5};
-						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
-						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
-						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
-						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
-						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
-						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
-						
-						\begin{pgfonlayer}{background}
-						%Lines
-						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n1.mid) -- (n5.mid) -- cycle;
-						
-						\draw[thick] (n10.mid) -- (n7.mid);
-						\draw[thick] (n8.mid) -- (n4.mid);
-						\draw[thick] (n9.mid) -- (n6.mid);
-						\draw[thick] (n9.mid) -- (n5.mid);
-						\draw[thick] (n6.mid) -- (n3.mid);
-						\draw[thick] (n6.mid) -- (n2.mid);
-						\draw[thick] (n5.mid) -- (n1.mid);
-						\draw[thick] (n3.mid) -- (n0.mid);
-
-						
-						\end{pgfonlayer}
-					\end{tikzpicture}}	
-				\end{figure}	
-			\endminipage}
-			\fbox{\minipage{0.225\textwidth}
-				\begin{figure}[H]
-					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
-						roundnode/.style={circle, draw=black, fill=white, thick, minimum size=7mm},
-						]
-						%Nodes
-						\node           (label) 	at	(1,4) 		{Filtración 6 (t=0.4)};
-						\node[roundnode]      (n0) 	at 	(4,0)           {0};
-						\node[roundnode]      (n1) 	at 	(2,2)           {1};
-						\node[roundnode]      (n2) 	at 	(2,0)           {2};
-						\node[roundnode]      (n3)      at 	(2,-2)		{3};
-						\node[roundnode]      (n4)      at 	(0,3)		{4};
-						\node[roundnode]      (n5)      at 	(0,1)		{5};
-						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
-						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
-						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
-						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
-						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
-						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
-						
-						\begin{pgfonlayer}{background}
-						%Lines
-						\fill[fill=black!20,opacity=1] (n9.mid) to[bend left] (n1.mid) -- (n5.mid) -- cycle;
-						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
-						\fill[fill=black!20,opacity=1] (n9.mid) -- (n2.mid) -- (n6.mid) -- cycle;
-						\fill[fill=black!20,opacity=1] (n6.mid) -- (n0.mid) -- (n3.mid) -- cycle;
-						
-						\draw[thick] (n10.mid) -- (n7.mid);
-						\draw[thick] (n9.mid) -- (n6.mid);
-						\draw[thick] (n9.mid) -- (n5.mid);
-						\draw[thick] (n9.mid) -- (n3.mid);
-						\draw[thick] (n9.mid) -- (n2.mid);
-						\draw[thick] (n9.mid) -- (n1.mid);
-						\draw[thick] (n8.mid) -- (n4.mid);
-						\draw[thick] (n6.mid) -- (n3.mid);
-						\draw[thick] (n6.mid) -- (n2.mid);
-						\draw[thick] (n6.mid) -- (n0.mid);
-						\draw[thick] (n5.mid) -- (n1.mid);
-						\draw[thick] (n3.mid) -- (n0.mid);
-
-						\end{pgfonlayer}
-					\end{tikzpicture}}	
-				\end{figure}	
-			\endminipage}
-		\end{figure}
-		\begin{figure}[H]
-			\fbox{\minipage{0.225\textwidth}
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2802,6 +2771,37 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{figure}
 			\endminipage}
 			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 3 (t=0.7)};
+						\node[roundnode]      (n0) 	at 	(4,0)           {0};
+						\node[roundnode]      (n1) 	at 	(2,2)           {1};
+						\node[roundnode]      (n2) 	at 	(2,0)           {2};
+						\node[roundnode]      (n3)      at 	(2,-2)		{3};
+						\node[roundnode]      (n4)      at 	(0,3)		{4};
+						\node[roundnode]      (n5)      at 	(0,1)		{5};
+						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
+						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
+						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=4,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n10.mid) -- (n7.mid);
+						\draw[thick] (n8.mid) -- (n4.mid);
+						\draw[thick] (n9.mid) -- (n6.mid);
+						\draw[thick] (n9.mid) -- (n5.mid);
+						\draw[thick] (n6.mid) -- (n3.mid);
+						\draw[thick] (n6.mid) -- (n2.mid);
+						\draw[thick] (n5.mid) -- (n1.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -2871,6 +2871,42 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
 						]
 						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 4 (t=0.6)};
+						\node[roundnode]      (n0) 	at 	(4,0)           {0};
+						\node[roundnode]      (n1) 	at 	(2,2)           {1};
+						\node[roundnode]      (n2) 	at 	(2,0)           {2};
+						\node[roundnode]      (n3)      at 	(2,-2)		{3};
+						\node[roundnode]      (n4)      at 	(0,3)		{4};
+						\node[roundnode]      (n5)      at 	(0,1)		{5};
+						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
+						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
+						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n1.mid) -- (n5.mid) -- cycle;
+						
+						\draw[thick] (n10.mid) -- (n7.mid);
+						\draw[thick] (n8.mid) -- (n4.mid);
+						\draw[thick] (n9.mid) -- (n6.mid);
+						\draw[thick] (n9.mid) -- (n5.mid);
+						\draw[thick] (n6.mid) -- (n3.mid);
+						\draw[thick] (n6.mid) -- (n2.mid);
+						\draw[thick] (n5.mid) -- (n1.mid);
+						\draw[thick] (n3.mid) -- (n0.mid);
+
+						
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
 						\node           (label) 	at	(1,4) 		{Filtración 9 (t=0.1)};
 						\node[roundnode]      (n0) 	at 	(4,0)           {0};
 						\node[roundnode]      (n1) 	at 	(2,2)           {1};
@@ -2927,6 +2963,48 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{figure}	
 			\endminipage}
 			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, fill=white, thick, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 6 (t=0.4)};
+						\node[roundnode]      (n0) 	at 	(4,0)           {0};
+						\node[roundnode]      (n1) 	at 	(2,2)           {1};
+						\node[roundnode]      (n2) 	at 	(2,0)           {2};
+						\node[roundnode]      (n3)      at 	(2,-2)		{3};
+						\node[roundnode]      (n4)      at 	(0,3)		{4};
+						\node[roundnode]      (n5)      at 	(0,1)		{5};
+						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
+						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
+						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend left] (n1.mid) -- (n5.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n0.mid) -- (n3.mid) -- cycle;
+						
+						\draw[thick] (n10.mid) -- (n7.mid);
+						\draw[thick] (n9.mid) -- (n6.mid);
+						\draw[thick] (n9.mid) -- (n5.mid);
+						\draw[thick] (n9.mid) -- (n3.mid);
+						\draw[thick] (n9.mid) -- (n2.mid);
+						\draw[thick] (n9.mid) -- (n1.mid);
+						\draw[thick] (n8.mid) -- (n4.mid);
+						\draw[thick] (n6.mid) -- (n3.mid);
+						\draw[thick] (n6.mid) -- (n2.mid);
+						\draw[thick] (n6.mid) -- (n0.mid);
+						\draw[thick] (n5.mid) -- (n1.mid);
+						\draw[thick] (n3.mid) -- (n0.mid);
+
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -3066,9 +3144,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	Para el cálculo de las anteriores listas se han empleado una serie de 
 	algoritmos y programas que detallaremos en la próxima sección.
 
-	Finalmente, veamos los diagramas de barras y persistencia asociados al
-	complejo simplicial filtrado representado en \ref{fig:CompSimpGlobal}:
-	\begin{figure}[H]
+	Finalmente, los diagramas de barras y persistencia asociados al
+	complejo simplicial filtrado representado en 
+	\autoref{fig:CompSimpGlobal} pueden verse en 
+	\autoref{fig:ejemGlobalDiag}.
+	
+	\begin{figure}[!htbp]
 		\minipage{0.5\textwidth}
 			\begin{figure}[H]
 				\resizebox{1.0\textwidth}{!}{\includegraphics{Images/BarrasGlobalEjAutor.png}}
@@ -3081,7 +3162,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\endminipage
 		\caption{Diagramas de barras y persistencia asociados a la red 
 		\ref{fig:ejemGlobal}}
+		\label{fig:ejemGlobalDiag}
 	\end{figure}
+	
 	Observamos que estos diagramas son ligeramente distintos que los 
 	presentados en el capítulo de preeliminares. Esto es debido a que para
 	el cálculo de éstos se ha empleado una librería que los produce 
@@ -3091,11 +3174,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	la filtración 0 nacen 9 clases de equivalencia (componentes conexas) y
 	que a lo largo de las siguientes filtraciones van muriendo hasta que 
 	sólo queda una que persiste. Podemos seguir esta evolución si nos 
-	vamos fijando en el número $\beta_{0}$ en la figura 
-	\ref{fig:CompSimpGlobal}. También podemos observar que en la 
+	vamos fijando en el número $\beta_{0}$ en  
+	\autoref{fig:CompSimpGlobal}. También podemos observar que en la 
 	filtración 7 nace una clase de equivalencia (agujero $2$-dimensional) 
-	y muere en la filtración 8. Esta clase la podemos seguir viendo la 
-	figura \ref{fig:CompSimpGlobal} y fijándonos en el número $\beta_{1}$.
+	y muere en la filtración 8. La evolución de esta clase la podemos 
+	seguir viendo \autoref{fig:CompSimpGlobal} y fijándonos en el 
+	número $\beta_{1}$.
 
 	Observando ahora el digrama derecho (diagrama de persistencia) vemos 
 	la misma información pero con otra representación. En este caso se 
@@ -3117,7 +3201,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	interpretación sea más coherente con la teoría desarrollada, la 
 	información que nos aporta sobre la red es un tanto escasa, pues los 
 	agujeros $p$-dimensionales colapsan muy rápido. Esto se ve claramente 
-	reflejado en el diagrama de barras \ref{fig:ejemGlobal}. Por ello, 
+	reflejado en \autoref{fig:ejemGlobalDiag}. Por ello, 
 	será conveniente hacer una serie de experimentos con el fin de probar
 	el desempeño de esta herramienta.
 
@@ -3134,7 +3218,8 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	\cite{Articulo-Watanabe}:
 	
 	\begin{ejem}
-		Supondremos la red \ref{fig:ejemGlobal}. Como en el ejemplo 
+		Supondremos la red que puede verse en 
+		\autoref{fig:ejemGlobal}. Como en el ejemplo 
 		anterior ya hemos visto una representación de la misma y su 
 		matriz asociada, esta vez los omitimos.
 
@@ -3142,9 +3227,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		filtrado asociado. Al igual que antes, vamos a ilustrar unos 
 		cuantos pasos en la filtración con los correspondientes 
 		números de Betti asociados. Tras esto, mostraremos los 
-		complejos simpliciales asociados a cada filtración.
+		complejos simpliciales asociados a cada filtración. La 
+		ilustración de los pasos en la filtración puede verse en 
+		\autoref{fig:CompSimpLocal}.
 
-		\begin{figure}[H]
+		\begin{figure}[!htbp]
 			\fbox{\minipage{0.225\textwidth}
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
@@ -3172,125 +3259,6 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 						\end{pgfonlayer}
 					\end{tikzpicture}}	
 				\end{figure}	
-			\endminipage}
-			\fbox{\minipage{0.225\textwidth}
-				\begin{figure}[H]
-					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
-						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
-						]
-						%Nodes
-						\node           (label) 	at	(1,4) 		{Filtración 3 (t=0.7)};
-						\node[roundnode]      (n0) 	at 	(4,0)           {0};
-						\node[roundnode]      (n1) 	at 	(2,2)           {1};
-						\node[roundnode]      (n2) 	at 	(2,0)           {2};
-						\node[roundnode]      (n3)      at 	(2,-2)		{3};
-						\node[roundnode]      (n4)      at 	(0,3)		{4};
-						\node[roundnode]      (n5)      at 	(0,1)		{5};
-						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
-						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
-						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
-						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
-						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
-						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=4,\beta_{1}=0$};
-						
-						\begin{pgfonlayer}{background}
-						%Lines
-						\draw[thick] (n10.mid) -- (n7.mid);
-						\draw[thick] (n8.mid) -- (n4.mid);
-						\draw[thick] (n9.mid) -- (n6.mid);
-						\draw[thick] (n9.mid) -- (n5.mid);
-						\draw[thick] (n6.mid) -- (n3.mid);
-						\draw[thick] (n6.mid) -- (n2.mid);
-						\draw[thick] (n5.mid) -- (n1.mid);
-						\end{pgfonlayer}
-					\end{tikzpicture}}	
-				\end{figure}	
-			\endminipage}
-			\fbox{\minipage{0.225\textwidth}
-				\begin{figure}[H]
-					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
-						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
-						]
-						%Nodes
-						\node           (label) 	at	(1,4) 		{Filtración 4 (t=0.6)};
-						\node[roundnode]      (n0) 	at 	(4,0)           {0};
-						\node[roundnode]      (n1) 	at 	(2,2)           {1};
-						\node[roundnode]      (n2) 	at 	(2,0)           {2};
-						\node[roundnode]      (n3)      at 	(2,-2)		{3};
-						\node[roundnode]      (n4)      at 	(0,3)		{4};
-						\node[roundnode]      (n5)      at 	(0,1)		{5};
-						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
-						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
-						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
-						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
-						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
-						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
-						
-						\begin{pgfonlayer}{background}
-						%Lines
-						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n1.mid) -- (n5.mid) -- cycle;
-						
-						\draw[thick] (n10.mid) -- (n7.mid);
-						\draw[thick] (n8.mid) -- (n4.mid);
-						\draw[thick] (n9.mid) -- (n6.mid);
-						\draw[thick] (n9.mid) -- (n5.mid);
-						\draw[thick] (n6.mid) -- (n3.mid);
-						\draw[thick] (n6.mid) -- (n2.mid);
-						\draw[thick] (n5.mid) -- (n1.mid);
-						\draw[thick] (n3.mid) -- (n0.mid);
-
-						
-						\end{pgfonlayer}
-					\end{tikzpicture}}	
-				\end{figure}	
-			\endminipage}
-			\fbox{\minipage{0.225\textwidth}
-				\begin{figure}[H]
-					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
-						roundnode/.style={circle, draw=black, fill=white, thick, minimum size=7mm},
-						]
-						%Nodes
-						\node           (label) 	at	(1,4) 		{Filtración 6 (t=0.4)};
-						\node[roundnode]      (n0) 	at 	(4,0)           {0};
-						\node[roundnode]      (n1) 	at 	(2,2)           {1};
-						\node[roundnode]      (n2) 	at 	(2,0)           {2};
-						\node[roundnode]      (n3)      at 	(2,-2)		{3};
-						\node[roundnode]      (n4)      at 	(0,3)		{4};
-						\node[roundnode]      (n5)      at 	(0,1)		{5};
-						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
-						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
-						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
-						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
-						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
-						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
-						
-						\begin{pgfonlayer}{background}
-						%Lines
-						\fill[fill=black!20,opacity=1] (n9.mid) to[bend left] (n1.mid) -- (n5.mid) -- cycle;
-						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
-						\fill[fill=black!20,opacity=1] (n9.mid) -- (n2.mid) -- (n6.mid) -- cycle;
-						\fill[fill=black!20,opacity=1] (n6.mid) -- (n0.mid) -- (n3.mid) -- cycle;
-						
-						\draw[thick] (n10.mid) -- (n7.mid);
-						\draw[thick] (n9.mid) -- (n6.mid);
-						\draw[thick] (n9.mid) -- (n5.mid);
-						\draw[thick] (n9.mid) -- (n3.mid);
-						\draw[thick] (n9.mid) -- (n2.mid);
-						\draw[thick] (n9.mid) -- (n1.mid);
-						\draw[thick] (n8.mid) -- (n4.mid);
-						\draw[thick] (n6.mid) -- (n3.mid);
-						\draw[thick] (n6.mid) -- (n2.mid);
-						\draw[thick] (n6.mid) -- (n0.mid);
-						\draw[thick] (n5.mid) -- (n1.mid);
-						\draw[thick] (n3.mid) -- (n0.mid);
-
-						\end{pgfonlayer}
-					\end{tikzpicture}}	
-				\end{figure}	
-			\endminipage}
-		\end{figure}
-		\begin{figure}[H]
-			\fbox{\minipage{0.225\textwidth}
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -3340,6 +3308,37 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{figure}
 			\endminipage}
 			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 3 (t=0.7)};
+						\node[roundnode]      (n0) 	at 	(4,0)           {0};
+						\node[roundnode]      (n1) 	at 	(2,2)           {1};
+						\node[roundnode]      (n2) 	at 	(2,0)           {2};
+						\node[roundnode]      (n3)      at 	(2,-2)		{3};
+						\node[roundnode]      (n4)      at 	(0,3)		{4};
+						\node[roundnode]      (n5)      at 	(0,1)		{5};
+						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
+						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
+						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=4,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\draw[thick] (n10.mid) -- (n7.mid);
+						\draw[thick] (n8.mid) -- (n4.mid);
+						\draw[thick] (n9.mid) -- (n6.mid);
+						\draw[thick] (n9.mid) -- (n5.mid);
+						\draw[thick] (n6.mid) -- (n3.mid);
+						\draw[thick] (n6.mid) -- (n2.mid);
+						\draw[thick] (n5.mid) -- (n1.mid);
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -3405,6 +3404,42 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
 						]
 						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 4 (t=0.6)};
+						\node[roundnode]      (n0) 	at 	(4,0)           {0};
+						\node[roundnode]      (n1) 	at 	(2,2)           {1};
+						\node[roundnode]      (n2) 	at 	(2,0)           {2};
+						\node[roundnode]      (n3)      at 	(2,-2)		{3};
+						\node[roundnode]      (n4)      at 	(0,3)		{4};
+						\node[roundnode]      (n5)      at 	(0,1)		{5};
+						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
+						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
+						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n1.mid) -- (n5.mid) -- cycle;
+						
+						\draw[thick] (n10.mid) -- (n7.mid);
+						\draw[thick] (n8.mid) -- (n4.mid);
+						\draw[thick] (n9.mid) -- (n6.mid);
+						\draw[thick] (n9.mid) -- (n5.mid);
+						\draw[thick] (n6.mid) -- (n3.mid);
+						\draw[thick] (n6.mid) -- (n2.mid);
+						\draw[thick] (n5.mid) -- (n1.mid);
+						\draw[thick] (n3.mid) -- (n0.mid);
+
+						
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
+						]
+						%Nodes
 						\node           (label) 	at	(1,4) 		{Filtración 9 (t=0.1)};
 						\node[roundnode]      (n0) 	at 	(4,0)           {0};
 						\node[roundnode]      (n1) 	at 	(2,2)           {1};
@@ -3461,6 +3496,48 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{figure}	
 			\endminipage}
 			\fbox{\minipage{0.225\textwidth}
+				\begin{figure}[H]
+					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
+						roundnode/.style={circle, draw=black, fill=white, thick, minimum size=7mm},
+						]
+						%Nodes
+						\node           (label) 	at	(1,4) 		{Filtración 6 (t=0.4)};
+						\node[roundnode]      (n0) 	at 	(4,0)           {0};
+						\node[roundnode]      (n1) 	at 	(2,2)           {1};
+						\node[roundnode]      (n2) 	at 	(2,0)           {2};
+						\node[roundnode]      (n3)      at 	(2,-2)		{3};
+						\node[roundnode]      (n4)      at 	(0,3)		{4};
+						\node[roundnode]      (n5)      at 	(0,1)		{5};
+						\node[roundnode]      (n6) 	at 	(0,-1)           {6};
+						\node[roundnode]      (n7) 	at 	(0,-3)           {7};
+						\node[roundnode]      (n8) 	at 	(-2,2)           {8};
+						\node[roundnode]      (n9) 	at 	(-2,0)           {9};
+						\node[roundnode]      (n10) 	at 	(-2,-2)           {10};
+						\node 		(label2) 	at 	(1,-4) 		{$\beta_{0}=3,\beta_{1}=0$};
+						
+						\begin{pgfonlayer}{background}
+						%Lines
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend left] (n1.mid) -- (n5.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) to[bend right] (n3.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n9.mid) -- (n2.mid) -- (n6.mid) -- cycle;
+						\fill[fill=black!20,opacity=1] (n6.mid) -- (n0.mid) -- (n3.mid) -- cycle;
+						
+						\draw[thick] (n10.mid) -- (n7.mid);
+						\draw[thick] (n9.mid) -- (n6.mid);
+						\draw[thick] (n9.mid) -- (n5.mid);
+						\draw[thick] (n9.mid) -- (n3.mid);
+						\draw[thick] (n9.mid) -- (n2.mid);
+						\draw[thick] (n9.mid) -- (n1.mid);
+						\draw[thick] (n8.mid) -- (n4.mid);
+						\draw[thick] (n6.mid) -- (n3.mid);
+						\draw[thick] (n6.mid) -- (n2.mid);
+						\draw[thick] (n6.mid) -- (n0.mid);
+						\draw[thick] (n5.mid) -- (n1.mid);
+						\draw[thick] (n3.mid) -- (n0.mid);
+
+						\end{pgfonlayer}
+					\end{tikzpicture}}	
+				\end{figure}	
 				\begin{figure}[H]
 					\resizebox{1.0\textwidth}{!}{\begin{tikzpicture}[
 						roundnode/.style={circle, draw=black, thick, fill=white, minimum size=7mm},
@@ -3524,10 +3601,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 					\end{tikzpicture}}
 				\end{figure}	
 			\endminipage}
-					\caption{Pasos en la filtración del 
+				\caption{Pasos en la filtración del 
 					complejo simplicial asociado a la red 
 					y números de Betti correspondientes}
-					\label{fig:CompSimpLocal}
+				\label{fig:CompSimpLocal}
 		\end{figure}
 		Para una mayor claridad, se ha omitido el dibujo de algunos 
 		símplices. Al igual que antes, damos una lista completa de los 
@@ -3596,9 +3673,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 				\end{itemize}
 		\end{itemize}
 
-	Finalmente, veamos los diagramas de barras y persistencia asociados al
-	complejo simplicial filtrado representado en \ref{fig:CompSimpLocal}:
-	\begin{figure}[H]
+	Finalmente, podemos ver los diagramas de barras y persistencia 
+	asociados al complejo simplicial filtrado representado en 
+	\autoref{fig:CompSimpLocal} en \autoref{fig:ejemLocalDiag}.
+	
+	\begin{figure}[!htbp]
 		\minipage{0.5\textwidth}
 			\begin{figure}[H]
 				\resizebox{1.0\textwidth}{!}{\includegraphics{Images/BarrasLocalEjAutor.png}}
@@ -3611,11 +3690,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 		\endminipage
 		\caption{Diagramas de barras y persistencia asociados a la red 
 		\ref{fig:ejemGlobal}}
+		\label{fig:ejemLocalDiag}
 	\end{figure}
 	
 	Nótese que en esta interpretación, a diferencia de la anterior, 
 	tenemos agujeros $p$-dimensionales ocultos, como el que aparece en 
-	\ref{fig:CompSimpLocal} en la filtración 9.
+	\autoref{fig:CompSimpLocal} en la filtración 9.
 
 	Observamos que, en este caso, los diagramas obtenidos son muy 
 	diferentes a los de la sección anterior. Si bien obtenemos las mismas 
@@ -3687,9 +3767,11 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	con pesos (GDAP). Este objeto consta de un objeto grafo dirigido 
 	acíclico y de una matriz de pesos asociada, esta matriz es la original 
 	dada por la red neuronal y define completamente las aristas del objeto 
-	grafo asociado. La definición es la siguiente:
+	grafo asociado. La definición del objeto la podemos ver en 
+	\autoref{cod:DefGDAP}.
 
-	\begin{verbatim}
+	\begin{lstlisting}[language=Python, float=htbp, label=cod:DefGDAP, caption= 
+	Definición del objeto GDAP]
 	#Un GDAP es un GDA con una matriz asociada. La matriz determina las 
 	#aristas y los vértices del GDA asociado.
     	
@@ -3700,14 +3782,17 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
             for j in range(i):
                 if( self.M[i][j] > 0 ):
                     self.G.crea_arista(i,j)
-	\end{verbatim}
+		    
+	\end{lstlisting}
 
 	Ahora debemos distinguir entre los algoritmos empleados para el 
 	cálculo local y global. Empezaremos con éste último.
 
-	Para el cálculo global hemos empleado la siguiente función:
+	Para el cálculo global hemos empleado la función que podemos ver en 
+	\autoref{cod:DefSMG}.
 
-	\begin{verbatim}
+	\begin{lstlisting}[language=Python,float=htbp,caption=Función para el 
+	cálculo de símplices maximales (global), label=cod:DefSMG]
 	#Devuelve una lista de los símplices maximales de cada vértice si al 
 	#menos uno de ellos pasa el filtro t. Recorre la lista de vértices 
 	#adyacentes a uno dado y en caso de que no haya adyacencia directa, 
@@ -3732,9 +3817,9 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
                 elif (self.M[i][j]>=t):
                     simp.append([i,j])
         return simp
-	\end{verbatim}
+	\end{lstlisting}
 
-	\noindent donde la función <<filtración>> es común a ambas 
+	Donde la función <<filtración>> es común a ambas 
 	interpretaciones y su funcionamiento es el siguiente: recorre la 
 	matriz asociada al grafo, si la entrada $a_{ij}$ supera el filtro $t$ 
 	pasa a la siguiente, en caso contrario la sustituye por 0; tras esto 
@@ -3743,12 +3828,13 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 	la devuelve. La función <<busca pesos>>, común a ambas 
 	interpretaciones, es especialmente importante ya 
 	que hace una búsqueda en profundidad sobre la matriz para calcular el
-	peso apropiado. Damos su definición a continuación:
+	peso apropiado. Podemos ver su definición en \autoref{cod:DefBP}.
 
-	\begin{verbatim}
+	\begin{lstlisting}[language=Python, float=htbp, caption= Función de 
+	búsqueda de pesos, label=cod:DefBP]
 	#Almacena en p una lista de tuplas donde el primer argumento es el 
-	#posible peso entre origen(o) y destino(d); y el segundo argumento es el 
-	#camino que produce dicho peso. 
+	#posible peso entre origen(o) y destino(d); y el segundo argumento es 
+	#el camino que produce dicho peso. 
 	def busca_pesos(self, o, d, p=[], q=1, c=[]):
         #BÚSQUEDA EN PROFUNDIDAD
         if(o==d):
@@ -3759,10 +3845,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
         else:   
             for j in range(d,o):
                 if(self.M[o][j]!=0):
-                    #NOTA: Podríamos optimizarlo para que si q<t pase al 
-                    siguente vértice. SÓLO VÁLIDO PARA V.LOCAL
+        #NOTA: Podríamos optimizarlo para que si q<t pase 
+		    #al siguente vértice. SÓLO VÁLIDO PARA V.LOCAL
                     self.busca_pesos(j,d,p,q*self.M[o][j],c+[o])
-	\end{verbatim}
+	\end{lstlisting}
 
 	Notemos que este algoritmo es el clave dentro de toda esta 
 	implementación, y además, es recursivo, lo que lo hace bastante 
@@ -3774,10 +3860,12 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 
 	Finalizamos la implementación de la interpretación global con una 
 	última función que nos devuelve la lista de los símplices del complejo
-	simplicial:
-	\begin{verbatim}
+	simplicial. Podemos ver esta función en \autoref{cod:DefSG}.
+
+	\begin{lstlisting}[language=Python, float=htbp, caption= Función para 
+	el cálculo de todos los símplices (global), label=cod:DefSG]
 	#Devuelve un lista con el complejo simplicial asociado al GDAP. 
-	V.GLOBAL
+	#V.GLOBAL
 	def get_simplex_global(self, t : float)->List[List[int]]:
         simplices=self.__calcula_simplices_global(t)
         
@@ -3791,7 +3879,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
                     if(list(sub) not in simplices):
                        simplices.append(list(sub))
         
-        Limpiamos aquellos símplices con aristas irreales
+        #Limpiamos aquellos símplices con aristas irreales
         tr=[s for s in simplices if len(s)>2]
         for e in tr:
             if(any([list(sub) not in simplices for sub in 
@@ -3799,20 +3887,25 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
                 simplices.remove(e)
 
         return simplices
-	\end{verbatim}
+	\end{lstlisting}
 
 	Veamos ahora la implementación de los algoritmos asociados a la 
 	interpretación local. Como ya hemos descrito los algoritmos comunes a 
 	ambas interpretaciones, en este caso sólo son necesarias dos 
-	funciones: 
-	\begin{verbatim}
+	funciones. La primera de estas funciones calcula los símplices 
+	maximales y su definición la podemos ver en \autoref{cod:DefSML}. La 
+	definición de la segunda de estas funciones, responsable del cálculo 
+	de la lista de los símplices, puede verse en  \autoref{cod:DefSL}.
+
+	\begin{lstlisting}[language=Python, float=htbp, caption=Función para 
+	el cálculo de símplices maximales (local), label=cod:DefSML]
 	#Devuelve una lista de los símplices maximales de cada vértice que 
 	#pasan el filtro t. Lo que hace es recorrer la lista de vértices 
 	#adyacentes y en caso de que no haya adyacencia directa, calcula los 
 	#caminos indirectos.
 	def __calcula_simplices(self,t)->List[List[int]]:
         simp=[]
-        #Necesario para recorrer los adyacentes. OPTIMIZACIÓN '''
+        #Necesario para recorrer los adyacentes. OPTIMIZACIÓN
         P=self.filtracion(t)
         T=P.clausura_transitiva()
         for i in range(len(self.M)):
@@ -3826,10 +3919,10 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
                 elif (self.M[i][j]>=t):
                     simp.append([i,j])
         return simp
-	\end{verbatim}
-	Y ahora veamos la función que devuelve la lista de símplices 
-	propiamente dicha:
-	\begin{verbatim}
+	\end{lstlisting}
+
+	\begin{lstlisting}[language=Python,float=htbp, caption= Función para 
+	el cálculo de todos los símplices (local), label=cod:DefSL]
 	#Devuelve un lista con el complejo simplicial asociado al GDAP. 
 	#V.LOCAL
 	def get_simplex_local(self, t : float)->List[List[int]]:
@@ -3845,7 +3938,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
                     if(list(sub) not in simplices):
                        simplices.append(list(sub))
         return simplices
-	\end{verbatim}
+	\end{lstlisting}
 
 	Como ya hemos comentado, los algoritmos aquí expuestos son bastante 
 	ineficientes al ser recursivos. Aunque hemos tratado de optimizarlos 
