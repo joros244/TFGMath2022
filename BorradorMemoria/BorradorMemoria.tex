@@ -70,7 +70,7 @@ corners,fill opacity = 0.2,draw,thick,text opacity =1] {$#1$};}
 \usepackage{xcolor}
 \usepackage{soul}
 \sethlcolor{green}
-\renewcommand{\lstlistingname}{Bloque de código}
+\renewcommand{\lstlistingname}{BC}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -162,22 +162,23 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	  \end{center}
 	\end{wrapfigure}
 	
-	En la amplitud del conocimiento matemático existe toda una rama 
+	En matemáticas existe toda una rama 
 	relacionada con la idea de estudiar las propiedades invariantes 
 	(como los agujeros) de los objetos mediante el uso de técnicas 
 	algebraicas. Esta rama se conoce como 
-	la topología algebraica y tiene su origen con el matemático italiano 
+	topología algebraica y tiene su origen con el matemático italiano 
 	Enrico Betti (1823-1892). E. Betti, quien en un principio trabajó 
-	sobre la teoría de Galois, se hico célebre por su estudio topológico 
-	de la conexión entre figuras de dimensión $n$ y por caracterizar la 
-	igualdad entre superficies.
+	sobre la teoría de Galois, se hizo célebre por su estudio topológico 
+	de la conexión entre figuras de dimensiones altas (mayores que tres) y 
+	por caracterizar la igualdad entre superficies.
 
 	Más tarde llegaría Henri Poincaré (1854-1912) quien, inspirado por el 
 	trabajo de E. Betti, formalizaría toda 
 	esta teoría en su famoso <<Analysis Situs>>, acuñando el término 
 	\emph{número de Betti} que precisamente representa el número de 
 	agujeros de un objeto. Esta teoría fue, en un comienzo, puramente 
-	topológica y hubo que esperar a la llegada de la matemática alemana 
+	topológica y para el siguiente avance significativo hubo que esperar 
+	a la llegada de la matemática alemana 
 	Emmy Noether (1882-1935), quien apreció la estructura de grupo 
 	subyacente a los ciclos definidos en la teoría previa. Esto originó 
 	una algebraización de esta teoría.
@@ -191,8 +192,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{wrapfigure}
 
 	En los subsiguientes años esta teoría se desarrolla rápidamente de la 
-	mano de grandes matemáticos como Alexandroff, Vietoris, de Rham y 
-	\v{C}ech entre otros. Finalmente, Samuel Eilenberg (1913-1998) y 
+	mano de grandes matemáticos como Pável Alexandroff, Leopold Vietoris, 
+	Georges de Rham y Eduard \v{C}ech entre otros. Finalmente, Samuel 
+	Eilenberg (1913-1998) y 
 	Saunders Mac Lane (1909-2005) axiomatizaron esta teoría y la 
 	relacionaron con su \emph{teoría de categorías}.
 
@@ -211,34 +213,35 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	En el presente trabajo, los objetos sobre los que estudiaremos los
 	agujeros serán las redes neuronales. Siendo más precisos, vamos a 
 	estudiar los agujeros de los grafos subyacentes a dichas redes.
-	Como ya veremos, estos agujeros, más que simples 
+	Como veremos, estos agujeros, más que simples 
 	vacíos dentro de los grafos, representarán de cierta manera el grado 
-	de conocimiento adquirido por la red. Por lo tanto, mediante el uso de 
+	de conocimiento que podrá ser adquirido por la red. Por lo tanto, 
+	mediante el uso de 
 	la topología algebraica podremos extraer conclusiones valiosas acerca 
 	de las redes neuronales que habitualmente son vistas como <<cajas 
 	negras>>.
 
 	En el capítulo 2 del presente trabajo haremos una introducción a los 
-	conceptos necesarios para el conteo de agujeros descrito 
+	conceptos necesarios para el recuento de agujeros mencionado 
 	anteriormente. En el mismo capítulo haremos una breve introducción a 
-	las redes neuronales. Finalmente, en capítulo 3, aplicaremos toda
+	las redes neuronales. Finalmente, en el capítulo 3, aplicaremos toda
 	la teoría introducida y veremos una serie de ejemplos.
 	
-	\chapter{Preeliminares}
+	\chapter{Preliminares}
 
-	A lo largo de este capítulo vamos a ver todas las nociones teóricas 
+	A lo largo de este capítulo vamos a presentar todas las nociones teóricas 
 	necesarias para el uso de la homología persistente en redes neuronales.	
 	
 	\section{Complejos simpliciales}
 	Comenzamos con el primer concepto fundamental de todo el trabajo, los 
 	\emph{complejos simpliciales}. Esta noción admite dos enfoques 
-	diferentes, por lo que debemos dintinguir entre dos definiciones 
+	diferentes, por lo que debemos distinguir entre dos definiciones 
 	relacionadas: los complejos simpliciales \emph{abstractos} y los 
-	complejos simpliciales \emph{geométricos}. Para el desarrrollo estas 
+	complejos simpliciales \emph{geométricos}. Para el desarrollo de estas 
 	nociones seguiremos la guía proporcionada por 
 	\cite{TopoAlg-Edelsbrunner,Intro-Otter}.
 
-	Siguiendo el enfoque combinatorio, comenzamos definiendo los complejos 
+	Partiendo del enfoque combinatorio, comenzamos definiendo los complejos 
 	simpliciales abstractos y algunas nociones relacionadas. 
 
 	\begin{defi}
@@ -280,7 +283,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\begin{defi}
 		Sean $\sigma$ y $\tau$ dos símplices de {\Large $\nu$} tales 
 		que $\tau \subset \sigma$. Entonces diremos que $\tau$ es una 
-		\textit{cara} de $\sigma$, y además, si las dimensiones de 
+		\textit{cara} de $\sigma$. Además, si las dimensiones de 
 		$\sigma$ y $\tau$ difieren por un número natural $a$, 
 		diremos que $\tau$ es una cara de $\sigma$ de 
 		\textit{codimensión a}.
@@ -301,7 +304,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		Así, tenemos que la dimensión de {\Large $\nu$} es 3. También 
 		observamos que el 3-símplice $\{a,b,c,d\}$ tiene por caras de 
 		codimensión 1 a los 2-símplices $\{a,b,c\},\{a,b,d\}$ y 
-		$\{a,c,d\}$. En \autoref{fig:tetra} ilustramos una 
+		$\{a,c,d\}$. En la \autoref{fig:tetra} ilustramos una 
 		representación geométrica de {\Large $\nu$}.
 
 		\begin{figure}[!htbp]
@@ -328,7 +331,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			\label{fig:tetra}
 		\end{figure}
 
-		La representación recogida en \autoref{fig:tetra}, en la
+		La representación recogida en la \autoref{fig:tetra}, en la
 		que cada símplice corresponde con un poliedro regular (cada 
 		$0$-símplice corresponde a un punto, cada $1$-símplice a una 
 		arista, cada $2$-símplice a un triángulo, cada $3$-símplice a 
@@ -376,16 +379,19 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\begin{defi}
 		Definimos un \textit{k-símplice} como la clausura convexa de 
 		$k+1$ puntos afínmente independientes. Lo denotaremos por 
-		$\sigma=conv\{u_{0},u_{1},...,u_{k}\}$, y diremos que la 
-		\textit{dimensión de $\sigma$} es $k$.
+		$\sigma=conv\{u_{0},u_{1},\dots,u_{k}\}$, y diremos que la 
+		\textit{dimensión de $\sigma$} es $k$. A los puntos $u_{0},
+		\dots,u_{k}$ los llamamos \textit{vértices} del símplice. 
+		Observamos que, al ser afínmente independientes, el conjunto 
+		de vértices de un símplice es único.
 
-		Llamamos \textit{cara} de $\sigma$ a cualquier combinación 
+		Definimos \textit{cara} de $\sigma$ como cualquier combinación 
 		convexa de un subconjunto no vacío de $\{u_{0},u_{1},...,
 		u_{k}\}$. A la relación <<ser cara de>> la denotaremos por 
 		$\leq$.
 
-		Para los casos $k=0,1,2,3$ diremos que $\sigma$ es un vértice,
-		arista, triángulo, tetraedro respectivamente.
+		Para los casos $k=1,2,3$ diremos que $\sigma$ es una arista, 
+		un triángulo o un tetraedro respectivamente.
 	\end{defi}
 
 	Habiendo definido todos los conceptos previos necesarios pasamos a 
@@ -411,9 +417,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	La relación entre los complejos simpliciales abstractos y los 
 	geométricos viene dada por la construcción de la \emph{realización
 	geométrica} de un complejo simplicial abstracto, que es un complejo 
-	simplicial geométrico definido tal y como se ilustra en la figura 
-	\ref{fig:tetra} del ejemplo \ref{ejem:1} (para más detalles véase 
-	\cite{TopoAlg-Edelsbrunner}).
+	simplicial geométrico definido tal y como se ilustra en la 
+	\autoref{fig:tetra} del ejemplo \ref{ejem:1} (para más detalles véase 
+	\cite{TopoAlg-Edelsbrunner}). Siendo más precisos, los conjuntos de 
+	vértices de un símplice geométrico forman un símplice abstracto.
 
 	De aquí en adelante emplearemos la definición de complejo simplicial 
 	abstracto, pues es la más adecuada para el presente trabajo.
@@ -483,10 +490,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{defi}
 
 	\begin{remark}
-	De la noción de $R$-módulo nos interesan particularmente las 
-	siguientes propiedades: todo grupo abeliano es $\mathbb{Z}$-módulo, y
-	si $R$ es un cuerpo, entonces las nociones de $R$-módulo y $R$-espacio
-	vectorial coinciden.
+		Notamos que un grupo abeliano se identifica de manera natural 
+		con un $\mathbb{Z}$-módulo. Asimismo, un módulo sobre un 
+		cuerpo no es otra cosa que un espacio vectorial. 	
 	\end{remark}
 
 	Como es natural, a la noción de $R$-módulo le sigue la definición de
@@ -539,10 +545,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	C_{p-1} \mid p \in \mathbb{Z}\}$, que satisfacen la siguiente 
 	relación: $\partial_{p}\circ 
 	\partial_{p+1}=0$. Se denota por $(\mathcal{C}_{*},\partial)$ y a 
-	$\partial$ se le llama el diferencial del complejo.
+	$\partial$ se le llama el \textit{diferencial} del complejo.
 	\end{defi}
 
-	Notemos que la propiedad anterior es equivalente a que 
+	Notemos que la relación $\partial_{p}\circ \partial_{p+1}=0$ es 
+	equivalente a que 
 	$\Ima \partial_{p+1} \leq \ker \partial_{p},\ p \in \mathbb{Z}$. Es 
 	habitual pensar en $\mathcal{C}_{*}$ como una sucesión infinita cuya
 	representación es como sigue:
@@ -591,67 +598,69 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Ahora que ya tenemos una noción general de los $R$-módulos de 
 	homología, pasamos al caso particular que nos ocupa en el presente 
 	trabajo: \emph{la homología simplicial}. El primer paso será definir 
-	el complejo de cadenas asociado a un complejo simplicial, para ello 
-	será necesario fijar los $R$-módulos y $R$-homomorfismos apropiados.
-
-	Ante esta decisión, lo habitual es fijar una orientación para los 
-	símplices (por ejemplo, la dada por el orden lexicográfico de sus 
-	vértices) y 
-	definir los grupos abelianos de cadenas dados por las sumas formales 
-	de los símplices con coeficientes en $\mathbb{Z}$ 
-	($\mathbb{Z}$-módulos). 
-
-	No obstante, en el presente trabajo ignoramos 
-	la noción de orientación, pues no aporta beneficio alguno a nuestros 
-	propósitos. Así pues, a partir de ahora,
-	fijaremos el anillo $R=\mathbb{Z}_{2}$, con lo que podremos ver los 
-	$\mathbb{Z}_{2}$-módulos que conformarán nuestro complejo de cadenas 
-	como $\mathbb{Z}_{2}$-espacios vectoriales cuya base vendrá dada por 
-	los símplices del complejo simplicial escogido.
-
-	Veamos esto de manera más formal:
+	el complejo de cadenas asociado a un complejo simplicial, tras esto, 
+	fijaremos los $R$-módulos y $R$-homomorfismos sobre los que 
+	finalmente calcularemos la homología. A continuación veamos la 
+	definición de los complejos de cadenas:
 
 	\begin{defi}
-		Sea {\Large $\nu$} un complejo simplicial y $p \in \mathbb{N}
-		\cup\{0\}$ 
+		Sea $R$ un anillo, {\Large $\nu$} un complejo simplicial y $p 
+		\in \mathbb{N}\cup\{0\}$ 
 		tal que $p\leq dim \text{{\Large $\nu$}}$. Una 
-		\textit{p-cadena} es una suma formal de p-símplices de 
-		{\Large $\nu$}. Es decir, si $c$ es una p-cadena, entonces 
+		\textit{$p$-cadena} es una suma formal de $p$-símplices de 
+		{\Large $\nu$}. Es decir, si $c$ es una $p$-cadena, entonces 
 		$c=\sum a_{i}\sigma_{i},\ \sigma_{i} \in 
 		\text{{\Large $\nu$}}\text{ y } 
-		a_{i} \in \mathbb{Z}_{2}$. 
+		a_{i} \in R$. 
 	\end{defi}
 	
-	Con la noción de p-cadena, pasamos a la definición de los 
-	$\mathbb{Z}_{2}$-módulos que hemos introducido anteriormente.
+	Con la noción de $p$-cadena, pasamos a la definición de los 
+	$R$-módulos que hemos mencionado anteriormente:
 	\begin{defi}
-		Sea {\Large $\nu$} un complejo simplicial abstracto. Definimos
-		el \textit{$\mathbb{Z}_{2}$-módulo de p-cadenas} de 
-		{\Large $\nu$} como el conjunto de todas las p-cadenas de 
+		Sea $R$ un anillo y {\Large $\nu$} un complejo simplicial 
+		abstracto. Definimos
+		el \textit{$R$-módulo de p-cadenas} de 
+		{\Large $\nu$} como el conjunto de todas las $R$-cadenas de 
 		{\Large $\nu$}, con la operación suma componente a componente 
-		con coeficientes en $\mathbb{Z}_{2}$, y el producto externo 
-		por elementos de $\mathbb{Z}_{2}$ usual. Lo denotaremos por 
+		con coeficientes en $R$, y el producto por escalares 
+		por elementos de $R$. Lo denotaremos por 
 		$(C_{p}(\text{{\Large $\nu$}}), +)$ o simplemente 
 		$C_{p}(\text{{\Large $\nu$}})$. 	
 	\end{defi}
-	
-	Tal y como ya hemos advertido antes, estos $\mathbb{Z}_{2}$-módulos 
-	pueden ser vistos como espacios vectoriales cuyas bases vienen dadas 
-	por los p-símplices de {\Large $\nu$}. Así pues, en adelante, para una 
-	mayor claridad nos referiremos a ellos como \emph{espacios 
-	vectoriales de p-cadenas}.
 
+	Naturalmente, una decisión que debemos tomar a la hora de calcular la 
+	homología simplicial es elegir el anillo de escalares sobre el que 
+	vamos a trabajar. 
+
+	Lo habitual suele ser fijar una orientación para los 
+	símplices (por ejemplo, la dada por el orden lexicográfico de sus 
+	vértices) y escoger el anillo $\mathbb{Z}$. Otra opción, que ha 
+	demostrado dar información significativa en las aplicaciones, es 
+	escoger el anillo $\mathbb{Z}_{2}$. Al tener dos elementos, el trabajo 
+	sobre él resulta especialmente sencillo, sobre todo desde un punto de 
+	vista computacional.
+
+	Observamos que con la segunda opción, una $p$-cadena puede verse como
+	un conjunto de $p$-símplices y la suma de ellas consiste hacer la 
+	unión de los conjuntos y eliminar los símplices repetidos un número 
+	par de veces. Además, la suma coincide con la resta, y el producto por 
+	escalares es nulo o la propia $p$-cadena.
+	
 	Habiendo especificado los $R$-módulos que vamos a emplear, pasamos a
-	definir los $R$-homomorfismos asociados.
+	definir los $R$-homomorfismos asociados. Para la definición de tales 
+	homomorfismos de manera general es necesario considerar un 
+	ordenamiento en el conjunto {\Large $\nu$}$_{0}$. 
 
 	\begin{defi}
-		Sea {\Large $\nu$} un complejo simplicial abstracto, $\sigma 
-		\in \text{{\Large $\nu$}}$ y $\sigma = \{u_{0},...,u_{p}\}$. 
+		Sea $R$ un anillo, {\Large $\nu$} un complejo simplicial 
+		abstracto, $\sigma \in \text{{\Large $\nu$}}$ y 
+		$\sigma = \{u_{0},...,u_{p}\}$ un 
+		$p$-símplice escogido de manera ordenada. 
 		Definimos el \textit{operador borde para un símplice}
 		como:
 		$$
 		B_{p}(\sigma)=\displaystyle 
-		\sum_{j=0}^{p}\{u_{0},...,\widehat{u_{j}},...,u_{p}\}.
+		\sum_{j=0}^{p}(-1)^{j}\{u_{0},...,\widehat{u_{j}},...,u_{p}\}.
 		$$
  		La suma anterior es una suma formal, donde $\widehat{u_{j}}$ 
 		indica que omitimos $u_{j}$. Ahora extendemos dicho operador 
@@ -662,43 +671,23 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			\partial_{p}\colon C_{p}(\text{{\Large $\nu$}}) & 
 				\rightarrow & C_{p-1}(\text{{\Large $\nu$}})
 				\\[3pt] 
-			\multicolumn{1}{r}{c=\sum\sigma_{i}} & \mapsto & 
-			\partial_{p}(c)=\sum B_{p}(\sigma_{i}).
+				\multicolumn{1}{r}{c=\sum a_{i}\sigma_{i}} & 
+				\mapsto & 
+				\partial_{p}(c)=\sum a_{i}B_{p}(\sigma_{i})
 		\end{array}
 	\end{equation}
-	En esta definición hemos omitido los coeficientes en las cadenas pues
-	trabajamos sobre $\mathbb{Z}_{2}$. A $\partial_{p}$ lo llamaremos 
-	\textit{homomorfismo borde}.	
+	donde $a_{i} \in R$. Notemos que, si escogemos $R=\mathbb{Z}_{2}$, no 
+	es necesaria la alternancia de signos ni el uso de coeficientes 
+	escalares. A $\partial_{p}$ lo llamaremos \textit{homomorfismo borde}.	
 	\end{defi}
 
-	\begin{proof}
-		Vamos a probar que $\partial_{p}$ es, en efecto, un 
-		$\mathbb{Z}_{2}$-homomorfismo.
+	\begin{remark}
+	Puesto que las $p$-cadenas son sumas formales, es decir, estamos 
+	considerando $R$-módulos libres sobre el conjunto de $p$-símplices, la 
+	aplicación borde está bien definida, y es lineal, o sea, un 
+	homomorfismo entre $R$-módulos.
+	\end{remark}
 
-		Sean $\sigma,\tau \in \text{{\Large $\nu$}}_{p}$ tales que
-		$\sigma = \{u_{0},...,u_{p}\}$ y $\tau = \{w_{0},...,w_{p}\}$.
-
-		$B_{p}(\sigma)+B_{p}(\tau)=\displaystyle 
-		\sum_{j=0}^{p}\{u_{0},...,\widehat{u_{j}},...,u_{p}\} + 
-		\displaystyle \sum_{j=0}^{p}\{w_{0},...,\widehat{w_{j}},...,
-		w_{p}\}=\displaystyle \sum_{i=0}^{p}\sum_{j=0}^{p}\{u_{0}, 
-		w_{0},...,\widehat{u_{i}},\\\widehat{w_{j}},...,u_{p},w_{p}\}=
-		B_{p}(\sigma+\tau)$. 
-
-		Esto prueba que $B_{p}$ conmuta con la suma para 
-		símplices. Se sigue que $\partial_{p}$ conmuta 
-		con la suma para cadenas.
-
-		Ahora debemos probar que $\partial_{p}$ conmuta con el 
-		producto exterior, pero esto es inmediato pues:
-		\begin{itemize}
-			\item $\partial_{p}(0c)=\partial_{p}(0)=0=
-				0\partial_{p}(c)$.
-			\item $\partial_{p}(1c)=\partial_{p}(c)=
-				1\partial_{p}(c)$.
-		\end{itemize}
-		Se concluye lo que queremos probar.
-	\end{proof}
 
 	Por lo tanto, ya tenemos casi construido nuestro complejo de cadenas 
 	asociado a un complejo simplicial. Sólo resta enunciar el siguiente 
@@ -714,7 +703,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		de generalidad (en virtud de la definición 
 		\ref{def:borde_form}), supongamos que $c=v,\text{ con }v\in 
 		\text{{\Large $\nu$}}$. Es decir, $c$ es un elemento de la 
-		base del espacio vectorial de cadenas $C_{p+1}(\text{
+		base del $R$-módulo libre de cadenas $C_{p+1}(\text{
 		{\Large $\nu$}})$.Veamos que $\partial_{p}(
 		\partial_{p+1}(c))=0$.
 
@@ -747,7 +736,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{remark}
 
 	Veamos un ejemplo que ilustre el teorema anterior, es decir, que 
-	<<el borde del borde es vacío>>.
+	<<el borde del borde es vacío>>. En él, como hemos sugerido, tomaremos 
+	como anillo el cuerpo $\mathbb{Z}_{2}$.
 
 	\begin{ejem}
 		Supongamos el complejo simplicial {\Large $\nu$} del ejemplo 
@@ -852,15 +842,13 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				0 & 0 & 0 
 				\end{pmatrix}.
 		\end{equation*}
-		En este ejemplo ya apreciamos lo significativo de elegir el 
-		cuerpo $\mathbb{Z}_{2}$, pues en otro caso, los productos 
-		matriciales son más difíciles de calcular.
 	\end{ejem}
 
 	Tras el resultado anterior y las construcciones previas, hemos acabado
 	con la construcción del complejo de cadenas asociado a un complejo 
 	simplicial. En consecuencia, ya estamos en posición de definir los
-	\emph{espacios vectoriales de homología}.
+	\emph{espacios vectoriales de homología}. Para ello, a partir de este 
+	punto fijamos $R=\mathbb{Z}_{2}$
 
 	\begin{defi}
 		\label{defi:homology}
@@ -988,18 +976,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		corresponde con los números de Betti que hemos calculado. 
 
 		Notemos que, al igual que en el ejemplo anterior, si 
-		trabajamos sobre otro cuerpo que no sea $\mathbb{Z}_{2}$, las 
-		matrices y sus rangos son más difíciles de calcular. Por 
-		ejemplo, si trabajamos sobre $\mathbb{Q}$, tendremos que 
-		lidiar con la orientabilidad de los símplices para ser 
-		consistentes con las definiciones previas. La orientabilidad 
-		de los símplices nos provoca la aparición se signos negativos 
-		dentro las matrices, lo que, a mayor escala, dificulta el 
-		cálculo de los rangos. No obstante, recordemos que la idea 
-		intuitiva sobre los números de Betti nos indica que éstos 
-		cuentan agujeros $p$-dimensionales, y por lo tanto, éstos 
-		permanecerán constantes ante cualquier variación del 
-		cuerpo de coeficientes escogido.  
+		trabajamos sobre otro cuerpo que no sea $\mathbb{Z}_{2}$, el 
+		cálculo de las matrices y los rangos sería más costoso.	
 	\end{ejem}
 	
 	Al igual que hicimos para los complejos simpliciales, veamos como 
@@ -1010,7 +988,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\text{
 	{\Large $\nu$}}\rightarrow\text{{\Large $\nu$}}'$. Aplicando el mismo 
 	razonamiento que para la definición del homomorfismo borde, tenemos 
-	que $f$ induce un homomorfismo entre espacios vectoriales de cadenas :
+	que $f$ induce un homomorfismo entre $R$-módulos de cadenas:
 	\begin{equation}
 		\label{hom:induc}
 		\left.
@@ -1026,14 +1004,6 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\end{array}
 		\right. 
 	\end{equation}
-	\begin{remark}
-		Si consideramos el caso particuar $f=\iota$ (la inclusión) 
-		tendremos que $f$ induce una inclusión entre los complejos de 
-		cadenas asociados a {\Large $\nu$} y 
-		{\Large $\nu$}$^{\prime}$. Es decir, 
-		$C_{*}(\text{{\Large $\nu$}}) \subset C_{*}(\text{{\Large 
-		$\nu$}}^{\prime})$.
-	\end{remark}
 	Además, tal $f$ nos permite construir la secuencia:
 	\begin{equation}
 		\label{hom: gruphom}
@@ -1075,7 +1045,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\partial_{p}'\circ\overline{f_{p}}. 
 	\end{equation*}
 	En consecuencia, $\overline{f_{p}}$ induce un 
-	homomorfismo entre espacios vectoriales de homología:	
+	homomorfismo entre $R$-módulos de homología:	
 		\begin{align*}
 			\left.
 			\begin{array}{l}
@@ -1095,6 +1065,19 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		Este propiedad es muy importante, de hecho, se conoce como 
 		\emph{funtorialidad} y pertenece al ámbito de la teoría de 
 		categorías que queda fuera del alcance del presente trabajo. 
+	\end{remark}
+	
+	\begin{remark}
+		Si consideramos el caso particular $f=\iota$ (la inclusión) 
+		tendremos que $f$ induce una inclusión entre los complejos de 
+		cadenas asociados a {\Large $\nu$} y 
+		{\Large $\nu$}$^{\prime}$ de manera natural. Por supuesto, 
+		esta propiedad ya no se hereda al considerar las aplicaciones 
+		entre $R$-módulos de homología. Es decir, $\iota_{p}$ no es 
+		necesariamente una aplicación inyectiva. Muy al contrario, 
+		la posibilidad de que no lo sea juega un papel fundamental en 
+		el estudio de la homología persistente, que estudiaremos a 
+		continuación.	
 	\end{remark}
 
 	Si bien los espacios vectoriales de homología de un complejo 
@@ -1721,10 +1704,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\section{Redes neuronales. Grafos subyacentes}
 	
 	Ahora cambiamos completamente de tema: nos alejamos momentáneamente de 
-	la formal topología algebraica y nos acercamos al mundo 
-	de la informática. En esta sección haremos una
+	la topología algebraica y nos acercamos al mundo 
+	de las ciencias de la información. En esta sección haremos una
 	introducción hacia el otro concepto fundamental del presente trabajo: 
-	\emph{las redes neuronales artificiales}. A direfencia de la sección 
+	\emph{las redes neuronales artificiales}. A diferencia de la sección 
 	anterior, en la presente sección haremos una aproximación un poco menos 
 	formal de las nociones que se introducen. Para el desarrollo de esta 
 	sección emplearemos la guía proporcionada por 
@@ -1747,11 +1730,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Supongamos que queremos que nuestro ordenador nos escriba con palabras
 	un número entre 0 y 9, dado dicho número en cifras. Parece una tarea 
-	sencilla, ¿no?
-	Bastará con desarrollar un programa que a partir de una entrada (la 
+	sencilla, bastará con desarrollar un programa que a partir de una 
+	entrada (la 
 	cifra) nos produzca una salida (la palabra) de entre las nueve 
-	posibilidades; en resumidas cuentas, con unas pocas sentencias 
-	condicionales tendremos el resultado esperado.  
+	posibilidades; resumidamente, unas pocas sentencias 
+	condicionales bastarán para obtener el resultado esperado.  
 
 	Pensemos ahora en la 
 	misma tarea, pero esta vez le proporcionaremos como entrada una imagen
@@ -1760,7 +1743,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	aprendizaje automático es dejar que el ordenador <<aprenda>> a hacer 
 	esa tarea. La idea intuitiva es desarrollar un programa que tome dos 
 	entradas: la imagen y unos parámetros; y que a partir de estas 
-	entradas proporcione una salida, tras esto, ajustar automáticamente 
+	entradas proporcione una salida. Tras esto, ajustar automáticamente 
 	los parámetros para mejorar el desempeño del programa. Iterando este 
 	proceso de predicción-ajuste, llegaremos a proporcionar la salida 
 	correcta. Una vez que hemos encontrado los parámetros correctos,
@@ -1846,7 +1829,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Desafortunadamente, el modelo de regresión lineal es muy limitado: 
 	supone una relación lineal entre la variable objetivo y las variables
-	independientes. Se hace necesaria una generalización que conseguriemos
+	independientes. Se hace necesaria una generalización que conseguiremos
 	introduciendo una función no lineal a la regresión lineal. El primer
 	modelo conocido con esta definición es el \emph{perceptrón}. Este 
 	modelo se expresa de la siguiente manera:
@@ -1855,7 +1838,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{equation*}
 	donde, en general, $r(x)$ es una función no lineal que se conoce como 
 	\emph{función de activación} y el resto de variables son como en la 
-	regresión lineal. En el caso particular del preceptrón, $r(x)$ está 
+	regresión lineal. En el caso particular del perceptrón, $r(x)$ está 
 	definida de la siguiente manera:
 	
 	\begin{equation}
@@ -1868,32 +1851,49 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		     \right .
 	\end{equation}
 
-	\begin{remark}
+	Observamos que la función $r(x)$ no es continua, por lo que no 
+	podemos aplicar el algoritmo del descenso del gradiente para la 
+	actualización de los parámetros. En su lugar se utiliza la siguiente 
+	fórmula:
+	\begin{equation*}
+		w_{i}^{siguiente}=w_{i}^{actual}+\alpha(y-\hat{y})x_{i}
+	\end{equation*}
+	donde $\alpha$ es el ratio de aprendizaje, y $y$ es la salida 
+	esperada. Obtenemos así un modelo más general que no presupone una 
+	relación lineal entre la variable objetivo y las variables 
+	independientes. 
+	
+	\begin{remark}	
 	En el caso general, la función $r(x)$ es un hiperparámetro, es decir,
 	debemos escoger una función no lineal. Lo habitual suele ser escoger
 	la función sigmoide, la tangente hiperbólica o la función ReLU (véase 
 	\cite{Goodfellow-et-al-2016}).
-	\end{remark}
 	
-	Notemos que la función $r(x)$ es continua pero no es suave, pues ella
-	no es diferenciable en $x=0$. Por lo tanto, teóricamente no podemos 
-	asegurar que $J(w_{1},w_{2},\cdots,w_{p},b)$ lo sea. Sin embargo, por 
-	cuestiones prácticas, 
-	este incidente no se tiene en cuenta ya que normalmente no se alcanza
-	el mínimo local de $J(w_{1},w_{2},\cdots,w_{p},b)$ luego no hay 
-	problemas en que dicha 
-	función no sea diferenciable en dicho punto. Adicionalmente, cabe 
+	La función ReLU está definida de la siguiente manera:
+
+	\begin{equation}
+		\label{def:ReLU}
+		ReLU(x)=\left \{
+			\begin{array}{ll}
+				x&\text{si }x>0\\
+				0&\text{si }x\leq0
+			\end{array} 
+		     \right .
+	\end{equation}
+	
+	Observamos que la función ReLU es continua pero no suave, pues no es 
+	diferenciable en $x=0$. Por lo tanto, teóricamente no podremos 
+	asegurar que $\hat{y}$ lo sea y no podremos utilizar el algoritmo del 
+	descenso del gradiente. Sin embargo, por 
+	cuestiones prácticas, este incidente no se tiene en cuenta ya que 
+	habitualmente no se alcanza el mínimo local de $\hat{y}$ luego, a 
+	priori, no hay problemas en que la función no sea diferenciable en 
+	dicho punto. Adicionalmente, cabe 
 	destacar que la mayoría de los algoritmos empleados para el cálculo de 
 	la derivada en el descenso del gradiente sólo calculan una de las 
 	derivadas laterales, luego el problema de la no diferenciabilidad 
 	queda <<resuelto>>.
-
-	Tras salvar el anterior problema, podemos razonar de manera análoga
-	a como hemos hecho para la regresión lineal y tendremos el mismo 
-	mecanismo para actualizar los parámetros y minimizar $J(w_{1},w_{2},
-	\cdots,w_{p},b)$. 
-	Obtenemos así un modelo más general que no presupone una relación 
-	lineal entre la variable objetivo y las variables independientes. 
+	\end{remark}
 	
 	A fin de facilitar el entendimiento de nuestros siguientes pasos, 
 	en \autoref{fig:perceptron} representamos gráficamente la estructura 
@@ -1925,7 +1925,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\caption{Representación gráfica de un perceptrón.}
 		\label{fig:perceptron}
 	\end{figure}
-
+	
+	
+	
 	Esta representación gráfica y las limitaciones del perceptrón (para 
 	más detalles véase \cite{Perceptron-Convergencia}), motivan el 
 	siguiente paso en la 
@@ -1978,10 +1980,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		orden a los extremos de cada arista. Las aristas dirigidas se
 		denotan $(u,v)$, y nótese que $(u,v)\neq(v,u)$. En el 
 		caso de una arista dirigida $(u,v)$, se dice que $u$ es el 
-		\textit{origen} y al vértice $v$ se le llama \textit{término} 
+		\textit{origen} y al vértice $v$ se le llama \textit{destino} 
 		de la arista. Un grafo dirigido se dice \textit{acíclico} si 
 		para cada vértice $u$, no existe una sucesión de aristas cuyo
-		origen y término sea $u$.
+		origen y destino sea $u$.
 	\end{defi}
 
 	Así pues, vamos a estudiar los grafos dirigidos acíclicos 
@@ -2001,7 +2003,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	\begin{defi}
 		Sea $G=(V, E)$ un grafo. Diremos que $G$ es 
-		\textit{grafo nivelado} si tomando una partición de $V$ en 
+		\textit{grafo nivelado} si tomando una partición adecuada de 
+		$V$ en 
 		subconjuntos $L_{1},\dots,L_{h}$, se cumple que si $(u,v) \in 
 		E$ con $u \in L_{i}$ y $v \in L_{j}$, entonces $j=i+1$. A los 
 		conjuntos $L_{1},\dots,L_{h}$ se los conoce como 
@@ -2015,8 +2018,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		pues es suficiente para los propósitos del presente trabajo.
 	\end{remark}
 
-	Observamos que, aunque puedan parecer distintas, la definición de 
-	grafo nivelado y la definición de grafo dirigido acíclico son 
+	Observamos que, la definición de 
+	grafo nivelado generalizado (admitiendo saltos de más de un nivel) y 
+	la definición de grafo dirigido acíclico son 
 	equivalentes. Con lo que, siempre que tengamos una red neuronal 
 	prealimentada podremos identificar de manera natural su grafo nivelado
 	subyacente, y por tanto, su grafo dirigido acíclico asociado.
