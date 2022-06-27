@@ -2258,7 +2258,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	neuronales?}
 	
 	La respuesta a la pregunta del título es afirmativa, sin embargo, a lo 
-	largo de este caítulo iremos viendo que esta respuesta tiene sus 
+	largo de este capítulo iremos viendo que esta respuesta tiene sus 
 	matices. En este capítulo nos vamos a centrar en el desarrollo del 
 	artículo \cite{Articulo-Watanabe} sobre el que está basado el presente 
 	trabajo. 
@@ -2279,12 +2279,25 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	
 	Como bien sabemos, dada una red neuronal prealimentada, es posible 
 	asociarle un DAG. Ademas, aunque en el capítulo anterior no lo 
-	mencionamos, a este grafo podemos asociarle unos pesos que serán los 
+	mencionamos, a este grafo podemos asociarle unos pesos positivos o 
+	negativos que serán los 
 	parámetros de la red neuronal prealimentada. Pensando de esta manera, 
 	tendremos un DAG con pesos $w_{ij}$, con $w_{ij}$ el parámetro de la 
 	red entre $u_{i}$ y $u_{j}$. Notemos que $w_{ij}=0$ si y sólo si 
 	$u_{i}$ y $u_{j}$ no están conectadas.
-	Con esto en mente, damos la siguiente definición: 
+	
+	Observamos que, en cierto modo, un peso positivo indica una 
+	predisposición para pasar de $u_{i}$ a $u_{j}$, mientras que un peso 
+	negativo indica una obstrucción. Puesto que la complejidad de la red 
+	la medimos en términos de esa predisposición de pasar de una neurona a 
+	otra, en la siguiente definición obviaremos los pesos negativos. Para 
+	ello, tomamos la función parte positiva del peso asociado: 
+	$w_{ij}^{+}:=\max\{w_{ij},0\}$. Asimismo, adoptamos el axioma de que 
+	la predisposición de pasar de una neurona $u_{i}$ a otra $u_{j}$ hay 
+	que contextualizarla en el sentido de compararla con la predisposición
+	de pasar de $u_{i}$ a otra neurona de destino $u_{k}$. En cierto 
+	sentido <<probabilizamos>> nuestros pesos. Con esto en mente, damos la 
+	siguiente definición: 
 	
 	\begin{defi}
 	Definimos la \textit{importancia} de $u_{i}$ (salida) para $u_{j}$ 
@@ -2297,20 +2310,12 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			\end{array}
 		\right. 
 	\end{equation*}
-	donde $w_{ij}^{+}$ es la parte positiva del parámetro $w_{ij}$ de la 
-	red, esto es, $w_{ij}^{+}:=\text{máx}\{0,w_{ij}\}$. 
 	\end{defi}
 	Observamos que la importancia de una neurona para sí misma es de 1, y 
 	la importancia entre neuronas distintas es la proporción del peso 
 	entre ellas con respecto al resto de pesos de la neurona de llegada. 
 	Además, es claro que la importancia entre dos neuronas conectadas es 
 	un valor entre $0$ y $1$.
-
-	\begin{remark}
-		La noción de importancia entre neuronas y la anterior 
-		observación, nos permiten ver los DAG con pesos, asociados a 
-		una red neuronal prealimentada, como espacios de probabilidad.
-	\end{remark}
 
 	La noción de importancia entre neuronas nos habilita la construcción 
 	de un complejo simplicial filtrado a partir del DAG asociado a la red. 
@@ -2327,7 +2332,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Por lo tanto, definimos la \textit{importancia extendida} entre 
 	neuronas, y la denotamos por $\overline{R_{ij}}$, como:
 	\begin{equation*}
-		\overline{R_{ij}}=\text{máx}\{R_{u_{i}u_{m_{1}}} \cdots
+		\overline{R_{ij}}=\max\{R_{u_{i}u_{m_{1}}} \cdots
 		R_{u_{m_{n}}u_{j}} \mid (u_{i},u_{m_{1}},...,u_{m_{n}},u_{j}) 
 	\in C_{ij} \}
 	\end{equation*}	
@@ -2336,9 +2341,12 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{defi}
 
 	\begin{remark}
-	Nótese que es posible definir $\overline{R_{ij}}$ considerando varios 
-	caminos en $C_{ij}$. El autor (\cite{Articulo-Watanabe}) justifica la 
-	elección del máximo por eficiencia computacional.
+	Nótese que es posible definir $\overline{R_{ij}}$ considerando 
+	funciones distintas al máximo, tales como la suma o la suma 
+	cuadrática. El autor (\cite{Articulo-Watanabe}) justifica la 
+	elección del máximo por eficiencia computacional. Además, notemos que 
+	el máximo tiene una ventaja evidente: mantiene los números de 
+	importancia entre 0 y 1.
 	\end{remark}
 
 	Como ya mencionamos en el capítulo anterior, numeraremos los nodos 
@@ -2387,7 +2395,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				\begin{array}{l}
 					R_{31}=\frac{6.9}{6.9}=1 \hspace{0.5cm} R_{32}=\frac{5.8}{5.8}=1 \\[3pt]
 					R_{10}=\frac{2.6}{6.5}=0.4 \hspace{0.55cm}  R_{20}=\frac{3.9}{6.5}=0.6 \\[3pt]
-					\overline{R_{30}}=\text{máx}\{R_{31} \cdot R_{10}, R_{32}\cdot R_{20}\}=R_{32} \cdot R_{20}=0.6  
+					\overline{R_{30}}=\max\{R_{31} \cdot R_{10}, R_{32}\cdot R_{20}\}=R_{32} \cdot R_{20}=0.6  
 				\end{array}
 			\right. & 
 		\end{flalign*}
@@ -2559,7 +2567,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				mayor que 0.4, entonces $\{4,2,0\} \in 
 				\text{{\Large $\nu$}}^{0.4}_{2}$,
 				donde importancia entre 4-0 viene dada por:
-				$$\overline{R_{40}}=\text{máx}\{R_{42} \cdot 
+				$$\overline{R_{40}}=\max\{R_{42} \cdot 
 				R_{20}\}=R_{42} \cdot R_{20}=0.6$$
 				Siguiendo la misma regla tenemos que 
 				$\{4,1,0\},\{3,1,0\} \notin 
@@ -2572,7 +2580,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				\text{{\Large $\nu$}}^{0.4}_{2}$. Ahora bien, 
 				como la importancia entre 4-1 y 1-0 es mayor o 
 				igual que 0.4, y 
-				$$\overline{R_{40}}=\text{máx}\{R_{42} \cdot 
+				$$\overline{R_{40}}=\max\{R_{42} \cdot 
 				R_{20},R_{41} \cdot R_{10}\}=R_{42} \cdot 
 				R_{20}=0.6$$ 
 				Entonces $\{4,1,0\} \in 
@@ -3188,7 +3196,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{figure}
 	
 	Observamos que estos diagramas son ligeramente distintos que los 
-	presentados en el capítulo de preeliminares. Esto es debido a que para
+	presentados en el capítulo de preliminares. Esto es debido a que para
 	el cálculo de éstos se ha empleado una librería que los produce 
 	automáticamente. Veremos esto en más detalle en la siguiente sección.
 
@@ -3203,13 +3211,13 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	seguir viendo \autoref{fig:CompSimpGlobal} y fijándonos en el 
 	número $\beta_{1}$.
 
-	Observando ahora el digrama derecho (diagrama de persistencia) vemos 
+	Observando ahora el diagrama derecho (diagrama de persistencia) vemos 
 	la misma información pero con otra representación. En este caso se 
-	aprecian 6 puntos rojos que nacen en la filtración 0 y van mueriendo a 
+	aprecian 6 puntos rojos que nacen en la filtración 0 y van muriendo a 
 	lo largo de las siguientes filtraciones, excepto uno que persiste. 
 	Estos puntos se corresponden 
 	con las componentes conexas de la filtración. A diferencia de los 
-	diagramas presentados en el capítulo de preeliminares, en este caso, 
+	diagramas presentados en el capítulo de preliminares, en este caso, 
 	cuando varias clases nacen y mueren en la misma filtración se 
 	superponen sus puntos correspondientes en el diagrama dando lugar a 
 	puntos más nítidos en el diagrama. También observamos un único punto 
@@ -3839,9 +3847,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
         return simp
 	\end{lstlisting}
 
-	Donde la función <<filtración>> es común a ambas 
+	Aquí la función <<filtración>> es común a ambas 
 	interpretaciones y su funcionamiento es el siguiente: recorre la 
-	matriz asociada al grafo, si la entrada $a_{ij}$ supera el filtro $t$ 
+	matriz asociada al grafo, si la entrada $a_{ij}$ supera el umbral $t$ 
 	pasa a la siguiente, en caso contrario la sustituye por 0; tras esto 
 	devuelve el GDAP asociado a la nueva matriz. La función 
 	<<clausura transitiva>> calcula la clausura transitiva de un GDA y 
@@ -4948,7 +4956,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\autoref{fig:distHomRDG}. Como ya habíamos notado anteriormente, esta 
 	disparidad nos muestra que la información recogida por la 
 	interpretación global es escasa, lo que nos induce a pensar que esta 
-	interpretación, a pesar de su solidez teórica, es deficiente. No 
+	interpretación, a pesar de su solidez teórica, proporciona menos 
+	información. No 
 	obstante, antes de tomar cualquier decisión en este aspecto, debemos 
 	ver su desempeño ante los cambios en las distribuciones de los 
 	siguientes ejemplos. 
@@ -5896,7 +5905,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	mientras que en la interpretación local tenemos que $\beta_{2}=1$, en 
 	la interpretación global tenemos que $\beta_{2}=0$. Es decir, con la 
 	interpretación local estamos capturando un vacío de dimensión 2 que
-	se nos escapa con la interpretación global. Este caso no se nos había 
+	se nos escapa con la interpretación global. Este caso no nos había 
 	aparecido anteriormente y merece la pena detenerse momentáneamente a 
 	hacer una reflexión sobre ello.
 
@@ -6851,8 +6860,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	mantengan constantes a lo largo del proceso de filtración, y que al 
 	final de este proceso cambien rápidamente.
 
-	No obstante, si quisiéramos apreciar las diferencias entre ambas 
-	interpretaciones aplicadas a este ejemplo, bastaría con cambiar la 
+	No obstante, si quisiéramos profundizar en las diferencias entre ambas 
+	interpretaciones aplicadas a este ejemplo, únicamente tendríamos que 
+	cambiar la 
 	granularidad de las filtraciones, esto es, modificar el valor del 
 	parámetro que regula la construcción del complejo simplicial (véase 
 	definición \ref{def:SimpAut}). Como nuestro objetivo es de 
