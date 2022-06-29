@@ -3,8 +3,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
-\usepackage[spanish, es-noshorthands, english]{babel}
 
+\usepackage[spanish, es-noshorthands, english]{babel}
 
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{amsfonts}
@@ -439,6 +439,13 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		y $\{v_{1},v_{2},...,v_{k}\} \in \text{{\Large $\nu$}$^{
 		\prime}$}$.	
 	\end{defi}
+
+	\begin{remark}
+	Notemos que en la anterior definición la función $g$ podría no ser 
+	inyectiva, esto provocaría que la función $f$ no respetara las 
+	dimensiones de los símplices. Este caso particular es muy interesante 
+	y veremos sus implicaciones en la siguiente sección.
+	\end{remark}
 	
 	\section{Homología. Homología persistente}
 	
@@ -536,6 +543,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	cadenas}.
 
 	\begin{defi}
+	\label{def:complejo-cadenas}
 	Sea $R$ un anillo. Decimos que un \textit{complejo de cadenas} sobre 
 	$R$ 
 	es un conjunto $\mathcal{C}_{*}=\{(C_{p},\partial_{p}) \mid p \in 
@@ -624,7 +632,6 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		{\Large $\nu$}, con la operación suma componente a componente 
 		con coeficientes en $R$, y el producto por escalares 
 		por elementos de $R$. Lo denotaremos por 
-		$(C_{p}(\text{{\Large $\nu$}}), +)$ o simplemente 
 		$C_{p}(\text{{\Large $\nu$}})$. 	
 	\end{defi}
 
@@ -690,41 +697,52 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 
 	Por lo tanto, ya tenemos casi construido nuestro complejo de cadenas 
-	asociado a un complejo simplicial. Sólo resta enunciar el siguiente 
-	resultado:
+	asociado a un complejo simplicial. Nótese que en la definición 
+	\ref{def:complejo-cadenas} admitimos complejos de cadenas para 
+	cualquier índice $p \in \mathbb{Z}$, no obstante, tomaremos 
+	$C_{p}=\emptyset$ para todo $p\leq0$ con $p \in \mathbb{Z}$. Tras esta 
+	consideración, sólo resta enunciar el siguiente resultado:
 
 	\begin{theorem}
-		Sea $\partial_{p}$ definida como en \ref{def:borde_form}. 
-		Entonces para todo $p \in \{0,1,2,..\}$, $\partial_{p}\circ 
+		Sea $\partial_{p}$ definida como en la expresión 
+		\ref{def:borde_form}. 
+		Entonces para todo $p \in \mathbb{N}\cup\{0\}$, $\partial_{p}\circ 
 		\partial_{p+1}=0$.
 	\end{theorem}
 	\begin{proof}
 		Sea $c \in C_{p+1}(\text{{\Large $\nu$}})$ y, sin pérdida
 		de generalidad (en virtud de la definición 
-		\ref{def:borde_form}), supongamos que $c=v,\text{ con }v\in 
-		\text{{\Large $\nu$}}$. Es decir, $c$ es un elemento de la 
+		\ref{def:borde_form}), supongamos que $c$ es un elemento de la 
 		base del $R$-módulo libre de cadenas $C_{p+1}(\text{
 		{\Large $\nu$}})$.Veamos que $\partial_{p}(
 		\partial_{p+1}(c))=0$.
 
-		En efecto, notemos que, si $p\geq1$ (si $p=0$ es trivial), $v$ 
-		posee $\binom{p+2}{p}$ 
-		caras distintas de codimensión 2. Sea $\tau$ una de ellas, es 
-		decir, $\tau$ es un $(p-1)$-símplice y $\tau \subset v$.
+		En efecto, notemos que, si $p\geq1$ (si $p=0$ es trivial), 
+		$\partial_{p}(\partial_{p+1}(c))$ 
+		posee $\binom{p+2}{p}=(p+2)(p+1)$ sumandos, y cada uno de 
+		ellos es el producto de un escalar por un $(p-1)$-símplice. 
+		Sea $\tau$ uno de ellos, y sean $u_{i}$, $u_{j}$ los 
+		$0$-símplices presentes en el $(p+1)$-símplice de $c$ pero no 
+		en $\tau$. Supondremos también que $u_{i}$, $u_{j}$ ocupan las
+		posiciones $i$ y $j$ respectivamente en el $(p+1)$-símplice de
+		$c$ escrito de manera ordenada.
 
-		Si probamos que $\tau$ aparece en 2 caras de codimensión 1 de 
-		$v$ habremos terminado, pues aparecerá 2 veces al 
-		hacer $\partial_{p}(\partial_{p+1}(c))$ y como estamos en 
-		$\mathbb{Z}_{2}$ se anulará. Esto implica lo que queremos
-		probar.
+		Observamos que $\tau$ aparece en dos sumandos de 
+		$\partial_{p}(\partial_{p+1}(c))$ con las expresiones 
+		opuestas:
+		\begin{equation*}
+			(-1)^{i}(-1)^{j}\tau, (-1)^{j-1}(-1)^{i}\tau.
+		\end{equation*}
 
-		Observemos que $\tau$ tiene cardinalidad $p$ mientras que $v$ 
-		tiene dimensión $p+2$. Por lo tanto, supongamos, sin pérdida 
-		de generalidad, que $\tau$ viene dado por los $p$ últimos 
-		elementos de $v$. Así, tenemos dos elementos libres en $v$, y 
-		al calcular las caras de codimensión 1 de $v$, con los $p$ 
-		últimos elementos fijos, tendremos únicamente 2 caras que 
-		contienen a $\tau$.  	
+		La primera expresión se obtiene al omitir el elemento en la 
+		posición $j$ y luego el de la posición $i$ del 
+		$(p+1)$-símplice de $c$ (véase la definición 
+		\ref{def:borde_form}); la segunda expresión se obtiene al 
+		omitir el elemento en la posición $i$, con lo que se adelanta 
+		una posición $u_{j}$, y luego el de la posición $j-1$.
+
+		Notemos que al ser expresiones opuestas la suma es nula y se 
+		concluye el resultado.
 	\end{proof}
 	
 	\begin{remark}
@@ -847,19 +865,43 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Tras el resultado anterior y las construcciones previas, hemos acabado
 	con la construcción del complejo de cadenas asociado a un complejo 
 	simplicial. En consecuencia, ya estamos en posición de definir los
-	\emph{espacios vectoriales de homología}. Para ello, a partir de este 
-	punto fijamos $R=\mathbb{Z}_{2}$
+	\emph{$R$-módulos de homología}.
 
 	\begin{defi}
 		\label{defi:homology}
-		Sea $p \in \mathbb{N}\cup\{0\}$ y {\Large $\nu$} un complejo 
-		simplicial. Definimos el \textit{p-ésimo espacio vectorial de 
+		Sea $R$ un anillo, $p \in \mathbb{N}\cup\{0\}$ y 
+		{\Large $\nu$} un complejo 
+		simplicial. Definimos el \textit{p-ésimo $R$-módulo de 
 		homología simplicial} del complejo simplicial {\Large $\nu$} 
-		como el espacio vectorial cociente $\ker \partial_{p}/
+		como el $R$-módulo cociente $\ker \partial_{p}/
 		\Ima\partial_{p+1}$, donde $\partial_{p}$ está definida como
-		en \ref{def:borde_form}. Lo denotaremos por $H_{p}(\text{
+		en la expresión \ref{def:borde_form}. Lo denotaremos por 
+		$H_{p}(\text{
 		{\Large $\nu$}})$.
+	\end{defi}
 
+	La definición de $R$-módulos de homología tiene sentido para cualquier 
+	anillo unitario y conmutativo $R$, pero se puede decir más sobre su 
+	estructura si exigimos a $R$ propiedades adicionales. En particular, 
+	si $R$ es un dominio de ideales principales, el teorema de estructura 
+	de $R$-módulos finitamente generados (véase \cite{Algebra-Elduque}) 
+	asegura que cada $R$-módulo de homología tendrá una parte libre 
+	(su rango) y 
+	una parte de torsión. Puesto que este estudio general alargaría en 
+	exceso esta memoria, particularizamos a partir de este punto los 
+	coeficientes para que sean el cuerpo con dos elementos 
+	$\mathbb{Z}_{2}$, 
+	lo que es suficiente para las aplicaciones de las siguientes 
+	secciones. En este nuevo contexto, los $R$-módulos de homología, que 
+	ahora serán $\mathbb{Z}_{2}$-espacios vectoriales, quedan 
+	caracterizados por su dimensión, que se denomina \emph{número de 
+	Betti} (en honor al matemático del mismo nombre, y que también puede 
+	ser definido en el caso general como diferencia entre rangos).
+
+	\begin{defi}
+		Sea $H_{p}(\text{{\Large $\nu$}})$ el $p$-ésimo 
+		$\mathbb{Z}_{2}$-espacio vectorial de homología de un complejo
+		simplicial {\Large $\nu$}.
 		A su dimensión, $dimH_{p}(\text{{\Large $\nu$}})=
 		dim \ker\partial_{p}-dim\Ima\partial_{p+1}$, la 
 		llamaremos \textit{p-ésimo número de Betti}, y la denotaremos
@@ -870,8 +912,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	p-dimensionales. Por lo tanto, $\beta_{p}(\text{{\Large $\nu$}})$ 
 	representa el número de p-agujeros de {\Large $\nu$}. Además, notemos 
 	que si $dim\text{{\Large $\nu$}}=n$, entonces $\forall p >n 
-	\hspace{0.25cm} H_{p}(\text{{\Large $\nu$}})=\emptyset$, pues {\Large 
-	$\nu$}$_{p}=\emptyset$.
+	\hspace{0.25cm} H_{p}(\text{{\Large $\nu$}})=[0]$, pues 
+	{\Large $\nu$}$_{p}=\emptyset$.
 
 	Ahora veamos un ejemplo (propuesto en \cite{Intro-Otter}) en el que calculamos 
 	los números de Betti dado un complejo simplicial abstracto.
@@ -937,7 +979,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		dim \ker \partial_{1}=2$, y por lo tanto, $\beta_{1}(\text{
 		{\Large $\nu$}})=1$ y $\beta_{0}(\text{{\Large $\nu$}})=2$. La
 		representación gráfica de {\Large $\nu$} en $\mathbb{R}^{2}$
-		puede verse en \autoref{fig:homs}.
+		puede verse en la \autoref{fig:homs}.
 		
 		\begin{figure}[!htbp]
 			\centering
@@ -1199,22 +1241,24 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	vectoriales de 
 	cadenas vienen inducidos por el homomorfismo inclusión $f^{i,j}\colon 
 	\text{{\Large $\nu$}$^{i}$} \xhookrightarrow{} 
-	\text{{\Large $\nu$}$^{j}$}$ con $0\leq i \leq j \leq k$, como en 
-	\ref{hom:induc}. Ahora, aplicando el mismo razonamiento que en 
+	\text{{\Large $\nu$}$^{j}$}$ con $0\leq i \leq j \leq k$, como en la 
+	expresión
+	\ref{hom:induc}. Ahora, aplicando el mismo razonamiento que en la 
+	expresión 
 	\ref{hom: gruphom} definimos los homomorfismos entre espacios 
 	vectoriales de 
 	homología $f^{i,j}_{p}$.
 
 	Ahora que ya tenemos una herramienta que nos captura las 
 	características topológicas junto con la variable <<tiempo>> en un 
-	complejo simplicial abstracto filtrado, necesitamos una manera gŕafica 
+	complejo simplicial abstracto filtrado, necesitamos una manera gráfica 
 	de visualizar esta información. Para ello, emplearemos los  
 	\emph{diagramas de barras} y los \emph{diagramas de persistencia}.
 	
 	Para construir los diagramas de barras, dibujamos $\beta_{p}^{i,i+1}$ 
 	puntos para la i-ésima filtración, y los conectamos con los 
 	$\beta_{p}^{i+1,i+2}$ puntos de la filtración i+1 atendiendo al 
-	siguiente crietrio: unimos los puntos $a$ de la filtración i y $b$ de
+	siguiente criterio: unimos los puntos $a$ de la filtración i y $b$ de
 	la filtración i+1, si la clase del elemento que genera a $a$ es 
 	preimagen por $f_{p}^{i,i+1}$ de la clase del elemento que genera a 
 	$b$. Si la clase del elemento que genera a $a$ es enviada a 0 por 
@@ -1238,7 +1282,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		una <<buena>> base está garantizada (véase 
 		\cite{BaseDiagExt-Carlsson}) y la 
 		coherencia de los diagramas también (véase 
-		\cite{BaseDiag-Cavanna}).   
+		\cite{BaseDiag-Cavanna}). Adicionalmente, debemos destacar que
+		en las aplicaciones el cálculo de estos diagramas y la 
+		elección de una base apropiada se ha 
+		realizado de manera automática (véase la
+		\autoref{sec:local+prog}). 
 	\end{remark}
 
 	Veamos un ejemplo (propuesto en \cite{Intro-Otter}) ilustrativo de estos 
@@ -1269,7 +1317,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				\{b,c\},\{b,f\},\{c,f\},\{c,e\},$\\
 				$\{a,b,c\},\{a,c,e\}\}$.
 	\end{itemize}
-	En \autoref{fig:EjBas} podemos ver su representación gráfica en 
+	En la \autoref{fig:EjBas} podemos ver su representación gráfica en 
 	$\mathbb{R}^{2}$.
 	\begin{figure}[!htbp]
 		\fbox{\minipage{0.225\textwidth}
@@ -1389,7 +1437,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		de {\Large $\nu$}.}
 		\label{fig:EjBas}
 	\end{figure}
-	En \autoref{fig:EjBasDiagB} podemos ver los diagramas de barras 
+	En la \autoref{fig:EjBasDiagB} podemos ver los diagramas de barras 
 	correspondientes.
 	
 	\begin{figure}[!htbp]
@@ -1509,23 +1557,24 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\label{fig:EjBasDiagB}
 	\end{figure}
 
-	Como podemos observar en \autoref{fig:EjBasDiagB} diagrama izquierdo 
-	(grado 0), 
+	Como podemos observar en la \autoref{fig:EjBasDiagB} diagrama 
+	izquierdo (grado 0), 
 	tenemos inicialmente (filtración 1 que corresponde al dibujo de 
 	{\Large $\nu$}$^{1}$) 3 clases de equivalencia que son, en orden 
 	ascendente 
 	en el diagrama, las clases $[d],[a+b]$ y $[c]$. Como ya hemos visto, 
 	esta representación se corresponde con las componentes conexas de 
 	{\Large $\nu$}$^{1}$. Ahora, a medida que avanzamos en las 
-	filtraciones podemos ver cómo la clase $[a+b]$ muere en la filtración 2
+	filtraciones podemos ver cómo la clase $[a+b]$ muere en la filtración 
+	2
 	(que se corresponde con el dibujo de {\Large $\nu$}$^{2}$), nacen dos 
 	clases más ($[f]$ y $[e]$ en orden ascendente en el diagrama), ambas 
 	clases mueren en la filtración 3 (véase el dibujo de 
 	{\Large $\nu$}$^{3}$), y finalmente, las clases $[d]$ y $[c]$ 
 	persisten.
 	
-	Observemos ahora \autoref{fig:EjBasDiagB} diagrama derecho (grado 1). 
-	Como se puede 
+	Observemos ahora la \autoref{fig:EjBasDiagB} diagrama derecho 
+	(grado 1). Como se puede 
 	ver, en la filtración 1 no tenemos ninguna clase de equivalencia, 
 	tendremos que esperar a la filtración 2 en la que nace la clase 
 	$[ab+bc+ac]$. Esta clase muere en la siguiente filtración, pero nacen 
@@ -1543,7 +1592,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	equivalencia que persisten representan características topológicas, 
 	mientras que las que mueren en alguna filtración representan ruido.
 
-	Por último, en \autoref{fig:EjBasDiagP} podemos visualizar los 
+	Por último, en la \autoref{fig:EjBasDiagP} podemos visualizar los 
 	diagramas de persistencia.
 	\begin{figure}[!htbp]
 		\fbox{\minipage{0.48\textwidth}
@@ -1679,7 +1728,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\label{fig:EjBasDiagP}
 	\end{figure}
 
-	En este caso, si nos fijamos en \autoref{fig:EjBasDiagP} 
+	En este caso, si nos fijamos en la \autoref{fig:EjBasDiagP} 
 	diagrama izquierdo (grado 0), vemos
 	que hay una clase de equivalencia ($[a+b]$) que nace en la 
 	filtración 1 y muere en la filtración 2, dos clases ($[f]$ y $[e]$) 
@@ -1691,7 +1740,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	remarcar que hay varias clases que comparten nacimiento y muerte se 
 	han señalizado con un punto grueso.
 
-	Si nos fijamos ahora en \autoref{fig:EjBasDiagP} diagrama 
+	Si nos fijamos ahora en la \autoref{fig:EjBasDiagP} diagrama 
 	derecho (grado 1), observamos cómo
 	hay una clase de equivalencia ($[ab+bc+ac]$) que nace en la filtración 
 	2
@@ -1718,7 +1767,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	obstante, conviene reseñar que, aunque los términos aprendizaje 
 	profundo y red neuronal nos parezcan algo reciente, la realidad es muy
 	distinta. El origen de esta disciplina data de los años 40 de la mano
-	de McCulloch y Pitts, y ha sufrido varias etapas de desarrollo hasta 
+	de Warren McCulloch y Walter Pitts, y ha sufrido varias etapas de 
+	desarrollo hasta 
 	llegar a nuestros días. Al igual que con otras líneas de 
 	investigación, la inteligencia artificial (y en particular el 
 	aprendizaje profundo) sufrió varios estancamientos y contratiempos 
@@ -1896,8 +1946,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{remark}
 	
 	A fin de facilitar el entendimiento de nuestros siguientes pasos, 
-	en \autoref{fig:perceptron} representamos gráficamente la estructura 
-	subyacente del perceptrón.
+	en la \autoref{fig:perceptron} representamos gráficamente la 
+	estructura subyacente del perceptrón.
 	\begin{figure}[!htbp]
 		\centering
 		\begin{tikzpicture}[
@@ -2002,6 +2052,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	de una red neuronal prealimentada:
 
 	\begin{defi}
+		\label{def:gNivelado}
 		Sea $G=(V, E)$ un grafo. Diremos que $G$ es 
 		\textit{grafo nivelado} si tomando una partición adecuada de 
 		$V$ en 
@@ -2021,9 +2072,18 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Observamos que, la definición de 
 	grafo nivelado generalizado (admitiendo saltos de más de un nivel) y 
 	la definición de grafo dirigido acíclico son 
-	equivalentes. Con lo que, siempre que tengamos una red neuronal 
+	equivalentes. En efecto, un vértice $u$ de un grafo dirigido acíclico 
+	está en el nivel $L_{i}$ cuando la sucesión de aristas más larga cuyo 
+	destino es $u$ tiene $i$ vértices. Con lo que, siempre que tengamos 
+	una red neuronal 
 	prealimentada podremos identificar de manera natural su grafo nivelado
-	subyacente, y por tanto, su grafo dirigido acíclico asociado.
+	subyacente, y por tanto, su grafo dirigido acíclico asociado. 
+
+	Notemos que de la definición \ref{def:gNivelado} se deduce 
+	naturalmente un orden parcial sobre los vértices del grafo: si $j>i$, 
+	$u \in L_{i}$ y $v \in L_{j}$, entonces $v>u$. Así pues, este será el 
+	orden que consideraremos para nuestras próximas definiciones y 
+	resultados.
 
 	Recapitulando, dada una red neuronal, le asociaremos un grafo dirigido
 	acíclico (nivelado) sobre el que aplicaremos la teoría de homología 
@@ -2032,7 +2092,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	\begin{ejem}
 	 Supondremos una red neuronal prealimentada de 2 capas y 13 neuronas.
-	 Su grafo asociado puede verse en \autoref{fig:redEjem}.
+	 Su grafo asociado puede verse en la \autoref{fig:redEjem}.
 	 
 	 Hemos etiquetado las neuronas (vértices) en orden ascendente desde la 
 	 primera neurona de la capa de salida hasta la última de la capa de 
@@ -2116,11 +2176,12 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	neuronal prealimentada, construir el complejo simplicial asociado a su
 	grafo dirigido acíclico (DAG por sus siglas en inglés); a partir del 
 	complejo simplicial construiremos un complejo simplicial filtrado, y 
-	sobre éste consideraremos la homología persistente. En esta subsección
+	sobre éste consideraremos la homología persistente. En esta sección
 	ilustraremos únicamente el primer paso.
 
 	Si bien existen varias maneras de construir un complejo simplicial a 
-	partir de un DAG (véase \cite{Clique-Jakob}), en el presente trabajo desarrollaremos la más simple
+	partir de un DAG (véase \cite{Clique-Jakob}), en el presente trabajo 
+	desarrollaremos la más simple
 	de todas ellas: la construcción del complejo simplicial \emph{clique}. 
 	Esta construcción, aunque simple, nos servirá de inspiración para la 
 	construcción que realizaremos más adelante. 
@@ -2150,7 +2211,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\begin{ejem}
 		Vamos a construir el clique asociado al ejemplo anterior. Lo
 		denotaremos por {\Large $\nu$}. Atendiendo a la definición de 
-		clique y a \autoref{fig:redEjem} tendremos que:
+		clique y a la \autoref{fig:redEjem} tendremos que:
 		\begin{multline*} 
 			\text{{\Large $\nu$}}=\{\{0\},\{1\},\{2\},\{3\},
 			\{4\},\{5\},\{6\},\{7\},\{8\},\{9\},
@@ -2169,7 +2230,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		Observamos que {\Large $\nu$} es un clique muy particular, 
 		pues está compuesto únicamente por vértices ($0$-símplices) y 
 		aristas (1-símplices). Su representación gráfica puede verse 
-		en \autoref{fig:cliqueEjem}.
+		en la \autoref{fig:cliqueEjem}.
 		
 		\begin{figure}[!htbp]
 			\centering
@@ -2248,7 +2309,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	No obstante, estamos adelantando acontecimientos pues en el siguiente 
 	capítulo veremos detalladamente el proceso necesario para la 
 	aplicación de la homología persistente a una red neuronal 
-	prealimentada. Así pues, finalizamos este capítulo de preeliminares en
+	prealimentada. Así pues, finalizamos este capítulo de preliminares en
 	el que se han expuesto todas las nociones teóricas necesarias para la 
 	comprensión del artículo sobre el que versa el presente trabajo.
 
@@ -2358,7 +2419,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\begin{ejem}
 		\label{ej:primerRel}	
 		Supondremos la representación de una red neuronal, que puede 
-		verse en \autoref{fig:ejCalcImp}, con sus correspondientes 
+		verse en la \autoref{fig:ejCalcImp}, con sus correspondientes 
 		pesos.
 
 		\begin{figure}[!htbp]
@@ -2528,7 +2589,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\label{ej:int}
 		Supondremos la representación de una red neuronal con 
 		las importancias entre neuronas ya calculadas que puede verse 
-		en \autoref{fig:ejemInter}.
+		en la \autoref{fig:ejemInter}.
 
 		\begin{figure}[!htbp]
 			\centering
@@ -2652,7 +2713,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\begin{ejem}
 		Supondremos la representación de una red neuronal con las 
 		importancias entre neuronas ya calculadas que puede verse en 
-		\autoref{fig:ejemGlobal}.
+		la \autoref{fig:ejemGlobal}.
 
 		\begin{figure}[!htbp]
 				\centering
@@ -2721,7 +2782,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		filtración con los correspondientes números de Betti 
 		asociados. Tras esto, mostraremos los complejos
 		simpliciales asociados a cada filtración. Podemos ver estos 
-		pasos en \autoref{fig:CompSimpGlobal}.
+		pasos en la \autoref{fig:CompSimpGlobal}.
 
 		\begin{figure}[!htbp]
 			\fbox{\minipage{0.225\textwidth}
@@ -3172,12 +3233,13 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				\end{itemize}
 		\end{itemize}
 	Para el cálculo de las anteriores listas se han empleado una serie de 
-	algoritmos y programas que detallaremos en la próxima sección.
+	algoritmos y programas que detallaremos en la 
+	\autoref{sec:local+prog}.
 
 	Finalmente, los diagramas de barras y persistencia asociados al
 	complejo simplicial filtrado representado en 
-	\autoref{fig:CompSimpGlobal} pueden verse en 
-	\autoref{fig:ejemGlobalDiag}.
+	la \autoref{fig:CompSimpGlobal} pueden verse en 
+	la \autoref{fig:ejemGlobalDiag}.
 	
 	\begin{figure}[!htbp]
 		\minipage{0.5\textwidth}
@@ -3198,17 +3260,18 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Observamos que estos diagramas son ligeramente distintos que los 
 	presentados en el capítulo de preliminares. Esto es debido a que para
 	el cálculo de éstos se ha empleado una librería que los produce 
-	automáticamente. Veremos esto en más detalle en la siguiente sección.
+	automáticamente. Veremos esto en más detalle en la 
+	\autoref{sec:local+prog}.
 
 	Si observamos el diagrama izquierdo (diagrama de barras), vemos que en 
 	la filtración 0 nacen 9 clases de equivalencia (componentes conexas) y
 	que a lo largo de las siguientes filtraciones van muriendo hasta que 
 	sólo queda una que persiste. Podemos seguir esta evolución si nos 
 	vamos fijando en el número $\beta_{0}$ en  
-	\autoref{fig:CompSimpGlobal}. También podemos observar que en la 
+	la \autoref{fig:CompSimpGlobal}. También podemos observar que en la 
 	filtración 7 nace una clase de equivalencia (agujero $2$-dimensional) 
 	y muere en la filtración 8. La evolución de esta clase la podemos 
-	seguir viendo \autoref{fig:CompSimpGlobal} y fijándonos en el 
+	seguir viendo la \autoref{fig:CompSimpGlobal} y fijándonos en el 
 	número $\beta_{1}$.
 
 	Observando ahora el diagrama derecho (diagrama de persistencia) vemos 
@@ -3230,12 +3293,12 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	interpretación sea más coherente con la teoría desarrollada, la 
 	información que nos aporta sobre la red es un tanto escasa, pues los 
 	agujeros $p$-dimensionales colapsan muy rápido. Esto se ve claramente 
-	reflejado en \autoref{fig:ejemGlobalDiag}. Por ello, 
+	reflejado en la \autoref{fig:ejemGlobalDiag}. Por ello, 
 	será conveniente hacer una serie de experimentos con el fin de probar
 	el desempeño de esta herramienta.
 
 	\section{Interpretación local. Algoritmos y programas}
-
+	\label{sec:local+prog}
 	En esta sección veremos cómo funciona la interpretación que propone 
 	el autor (que se corresponde con la que hemos bautizado como local) 
 	mediante su desempeño en el mismo ejemplo que hemos visto en la 
@@ -3248,7 +3311,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	
 	\begin{ejem}
 		Supondremos la red que puede verse en 
-		\autoref{fig:ejemGlobal}. Como en el ejemplo 
+		la \autoref{fig:ejemGlobal}. Como en el ejemplo 
 		anterior ya hemos visto una representación de la misma y su 
 		matriz asociada, esta vez los omitimos.
 
@@ -3258,7 +3321,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		números de Betti asociados. Tras esto, mostraremos los 
 		complejos simpliciales asociados a cada filtración. La 
 		ilustración de los pasos en la filtración puede verse en 
-		\autoref{fig:CompSimpLocal}.
+		la \autoref{fig:CompSimpLocal}.
 
 		\begin{figure}[!htbp]
 			\fbox{\minipage{0.225\textwidth}
@@ -3704,7 +3767,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Finalmente, podemos ver los diagramas de barras y persistencia 
 	asociados al complejo simplicial filtrado representado en 
-	\autoref{fig:CompSimpLocal} en \autoref{fig:ejemLocalDiag}.
+	la \autoref{fig:CompSimpLocal} en la \autoref{fig:ejemLocalDiag}.
 	
 	\begin{figure}[!htbp]
 		\minipage{0.5\textwidth}
@@ -3724,7 +3787,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	
 	Nótese que en esta interpretación, a diferencia de la anterior, 
 	tenemos agujeros $p$-dimensionales ocultos, como el que aparece en 
-	\autoref{fig:CompSimpLocal} en la filtración 9.
+	la \autoref{fig:CompSimpLocal} en la filtración 9.
 
 	Observamos que, en este caso, los diagramas obtenidos son muy 
 	diferentes a los de la sección anterior. Si bien obtenemos las mismas 
@@ -3796,7 +3859,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	acíclico y de una matriz de pesos asociada, esta matriz es la original 
 	dada por la red neuronal y define completamente las aristas del objeto 
 	grafo asociado. La definición del objeto la podemos ver en 
-	\autoref{cod:DefGDAP}.
+	el \autoref{cod:DefGDAP}.
 
 	\begin{lstlisting}[language=Python, float=htbp, label=cod:DefGDAP, caption= 
 	Definición del objeto GDAP.]
@@ -3817,7 +3880,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	cálculo local y global. Empezaremos con éste último.
 
 	Para el cálculo global hemos empleado la función que podemos ver en 
-	\autoref{cod:DefSMG}.
+	el \autoref{cod:DefSMG}.
 
 	\begin{lstlisting}[language=Python,float=htbp,caption=Función para el 
 	cálculo de símplices maximales (global)., label=cod:DefSMG]
@@ -3856,7 +3919,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	la devuelve. La función <<busca pesos>>, común a ambas 
 	interpretaciones, es especialmente importante ya 
 	que hace una búsqueda en profundidad sobre la matriz para calcular el
-	peso apropiado. Podemos ver su definición en \autoref{cod:DefBP}.
+	peso apropiado. Podemos ver su definición en el \autoref{cod:DefBP}.
 
 	\begin{lstlisting}[language=Python, float=htbp, caption= Función de 
 	búsqueda de pesos., label=cod:DefBP]
@@ -3888,7 +3951,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Finalizamos la implementación de la interpretación global con una 
 	última función que nos devuelve la lista de los símplices del complejo
-	simplicial. Podemos ver esta función en \autoref{cod:DefSG}.
+	simplicial. Podemos ver esta función en el \autoref{cod:DefSG}.
 
 	\begin{lstlisting}[language=Python, float=htbp, caption= Función para 
 	el cálculo de todos los símplices (global)., label=cod:DefSG]
@@ -3921,9 +3984,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	interpretación local. Como ya hemos descrito los algoritmos comunes a 
 	ambas interpretaciones, en este caso sólo son necesarias dos 
 	funciones. La primera de estas funciones calcula los símplices 
-	maximales y su definición la podemos ver en \autoref{cod:DefSML}. La 
+	maximales y su definición la podemos ver en el \autoref{cod:DefSML}. 
+	La 
 	definición de la segunda de estas funciones, responsable del cálculo 
-	de la lista de los símplices, puede verse en  \autoref{cod:DefSL}.
+	de la lista de los símplices, puede verse en el \autoref{cod:DefSL}.
 
 	\begin{lstlisting}[language=Python, float=htbp, caption=Función para 
 	el cálculo de símplices maximales (local)., label=cod:DefSML]
@@ -3996,7 +4060,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Para que la comparativa entre las distribuciones tenga sentido vamos 
 	a considerar fija la arquitectura de la red en los tres ejemplos. La 
-	arquitectura escogida puede verse en \autoref{fig:arqEjs}.
+	arquitectura escogida puede verse en la \autoref{fig:arqEjs}.
 
 	\begin{figure}[!htbp]
 		\centering
@@ -4061,7 +4125,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	En un primer lugar, supondremos que la red estudiada posee una 
 	distribución ciertamente homogénea de los pesos. Esta distribución da 
 	lugar la representación de la red, con las importancias entre neuronas
-	ya calculadas, que puede verse en \autoref{fig:distHomR}.
+	ya calculadas, que puede verse en la \autoref{fig:distHomR}.
 	
 	\begin{figure}[!htbp]
 			\centering
@@ -4112,10 +4176,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	igual que en los ejemplos que hemos presentado anteriormente, vamos a 
 	ilustrar unos cuantos pasos en la filtración con los correspondientes 
 	números de Betti asociados. Esta ilustración puede verse en 
-	\autoref{fig:distHomRSL} y en \autoref{fig:distHomRSG}. También 
+	la \autoref{fig:distHomRSL} y en la \autoref{fig:distHomRSG}. También 
 	añadimos los diagramas de 
-	barras y de persistencia que pueden verse en \autoref{fig:distHomRDL} 
-	y en \autoref{fig:distHomRDG}.
+	barras y de persistencia que pueden verse en la 
+	\autoref{fig:distHomRDL} 
+	y en la \autoref{fig:distHomRDG}.
 
 	\begin{figure}[!htbp]
 		\fbox{\minipage{0.225\textwidth}
@@ -4947,13 +5012,16 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{figure}
 
 	Si observamos detenidamente los pasos en la filtración del complejo 
-	simplicial en \autoref{fig:distHomRSL} y en \autoref{fig:distHomRSG}, 
+	simplicial en la \autoref{fig:distHomRSL} y en la 
+	\autoref{fig:distHomRSG}, 
 	apreciamos que la diferencia entre ambas interpretaciones se produce 
 	en las filtraciones 6 y 7, donde los números de Betti $\beta_{1}$ 
 	valen 4 en la interpretación local, y 2 en la interpretación global. 
 	También podemos apreciar esta distinción en los diagramas de barras 
-	correspondientes que podemos encontrar en \autoref{fig:distHomRDL} y 
-	\autoref{fig:distHomRDG}. Como ya habíamos notado anteriormente, esta 
+	correspondientes que podemos encontrar en la 
+	\autoref{fig:distHomRDL} y 
+	la \autoref{fig:distHomRDG}. Como ya habíamos notado anteriormente, 
+	esta 
 	disparidad nos muestra que la información recogida por la 
 	interpretación global es escasa, lo que nos induce a pensar que esta 
 	interpretación, a pesar de su solidez teórica, proporciona menos 
@@ -4972,7 +5040,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	heterogénea, no presentará desigualdades muy significativas entre los 
 	pesos de la red. Esta distribución dará lugar a la representación de 
 	la red, con las importancias entre neuronas ya calculadas, que puede 
-	verse en \autoref{fig:distIntR}.
+	verse en la \autoref{fig:distIntR}.
 	
 	\begin{figure}[!htbp]
 			\centering
@@ -5023,10 +5091,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	ya hemos mencionado anteriormente, vamos a ilustrar unos cuantos pasos 
 	en la filtración con los correspondientes 
 	números de Betti asociados. Esta ilustración puede verse en 
-	\autoref{fig:distIntRSL} y en \autoref{fig:distIntRSG}. También 
+	la \autoref{fig:distIntRSL} y en la \autoref{fig:distIntRSG}. También 
 	añadimos los diagramas de 
 	barras y de persistencia asociados que pueden verse en 
-	\autoref{fig:distIntRDL} y en \autoref{fig:distIntRDG}.
+	la \autoref{fig:distIntRDL} y en la \autoref{fig:distIntRDG}.
 
 	\begin{figure}[!htbp]
 		\fbox{\minipage{0.225\textwidth}
@@ -5898,7 +5966,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{figure}
 
 	Si observamos detenidamente los pasos en la filtración del complejo 
-	simplicial en \autoref{fig:distIntRSL} y en \autoref{fig:distIntRSG}, 
+	simplicial en la \autoref{fig:distIntRSL} y en la 
+	\autoref{fig:distIntRSG}, 
 	apreciamos una clara diferencia entre ambas interpretaciones que se 
 	produce en la filtración 6 y se mantiene hasta la última filtración. 
 	Esta disparidad es especialmente significativa en la filtración 9: 
@@ -5911,7 +5980,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Conceptualmente, $\beta_{2}=1$ se ha producido porque existe un agujero
 	entre $3$-símplices, es decir, existe un agujero entre tetraedro en 
-	la filtración 9 de la \autoref{fig:distIntRSL}. De manera intuitiva, 
+	la filtración 9 de la la \autoref{fig:distIntRSL}. De manera intuitiva, 
 	esto nos dice que la red ha necesitado, equitativamente, la 
 	salida de 3 neuronas para determinar la neurona de llegada. Siguiendo 
 	el razonamiento hecho en \cite{Articulo-Watanabe}, esto mostraría un 
@@ -5927,11 +5996,12 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Adicionalmente, podemos observar que la interpretación local nos está 
 	permitiendo visualizar un número mayor de agujeros de dimensión 1. 
-	Esto puede verse en la filtración 8 de \autoref{fig:distIntRSL} y 
-	\autoref{fig:distIntRSG}.
+	Esto puede verse en la filtración 8 de la \autoref{fig:distIntRSL} y 
+	la \autoref{fig:distIntRSG}.
 
 	Todas estas disparidades quedan todavía mejor reflejadas en la 
-	comparativa de \autoref{fig:distHomRDL} con \autoref{fig:distIntRDG}.
+	comparativa de la \autoref{fig:distHomRDL} con la 
+	\autoref{fig:distIntRDG}.
 	\end{ejem}
 
 	Por último, veamos el ejemplo correspondiente a una distribución 
@@ -5943,7 +6013,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	desigualdades muy significativas entre los pesos de la red. Esta 
 	distribución dará lugar a la representación de 
 	la red, con las importancias entre neuronas ya calculadas, que puede 
-	verse en \autoref{fig:distExtR}.
+	verse en la \autoref{fig:distExtR}.
 	
 	\begin{figure}[!htbp]
 			\centering
@@ -5994,10 +6064,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	ya hemos mencionado anteriormente, vamos a ilustrar unos cuantos pasos 
 	en la filtración con los correspondientes 
 	números de Betti asociados. Esta ilustración puede verse en 
-	\autoref{fig:distExtRSL} y en \autoref{fig:distExtRSG}. También 
+	la \autoref{fig:distExtRSL} y en la \autoref{fig:distExtRSG}. También 
 	añadimos los diagramas de 
 	barras y de persistencia asociados que pueden verse en 
-	\autoref{fig:distExtRDL} y en \autoref{fig:distExtRDG}.
+	la \autoref{fig:distExtRDL} y en la \autoref{fig:distExtRDG}.
 
 	\begin{figure}[!htbp]
 		\fbox{\minipage{0.225\textwidth}
@@ -6847,11 +6917,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\end{figure}
 
 	En este último caso, si observamos detenidamente los pasos en la 
-	filtración del complejo simplicial en \autoref{fig:distIntRSL} y en 
-	\autoref{fig:distIntRSG}, podemos ver que no hay diferencia alguna 
+	filtración del complejo simplicial en la \autoref{fig:distIntRSL} y en 
+	la \autoref{fig:distIntRSG}, podemos ver que no hay diferencia alguna 
 	entre ambas interpretaciones. Tampoco podemos apreciar ninguna 
 	diferencia entre los diagramas que mostramos en 
-	\autoref{fig:distExtRDL} y en \autoref{fig:distExtRDG}.
+	la \autoref{fig:distExtRDL} y en la \autoref{fig:distExtRDG}.
 
 	Esta concordancia, que inicialmente puede parecer sorprendente, 
 	queda explicada por la disparidad en la distribución de los pesos, y 
@@ -6864,7 +6934,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	interpretaciones aplicadas a este ejemplo, únicamente tendríamos que 
 	cambiar la 
 	granularidad de las filtraciones, esto es, modificar el valor del 
-	parámetro que regula la construcción del complejo simplicial (véase 
+	parámetro que regula la construcción del complejo simplicial (véase la 
 	definición \ref{def:SimpAut}). Como nuestro objetivo es de 
 	comparar el funcionamiento de la homología persistente en función de 
 	la distribución de los pesos de la red, mantendremos la granularidad 
