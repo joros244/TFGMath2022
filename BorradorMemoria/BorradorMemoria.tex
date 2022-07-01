@@ -18,6 +18,7 @@
 \usepackage{titleps}
 \usepackage{wrapfig}
 \usepackage{caption}
+\usepackage{enumitem}
 
 \newpagestyle{main}[\sffamily]{
 	\setheadrule{.55pt}
@@ -193,7 +194,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	En los subsiguientes años esta teoría se desarrolla rápidamente de la 
 	mano de grandes matemáticos como Pável Alexandroff, Leopold Vietoris, 
-	Georges de Rham y Eduard \v{C}ech entre otros. Finalmente, Samuel 
+	Georges de Rham, y Eduard \v{C}ech entre otros. Finalmente, Samuel 
 	Eilenberg (1913-1998) y 
 	Saunders Mac Lane (1909-2005) axiomatizaron esta teoría y la 
 	relacionaron con su \emph{teoría de categorías}.
@@ -202,7 +203,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	sobre la que versa el presente trabajo: \emph{la homología 
 	persistente}. Este concepto surge en la década de los 90 y los 2000 
 	de la mano de varios autores: Patrizio Frosini, Massimo Ferri, 
-	Vanessa Robins y Herbert Edelsbrunner. Estos autores llegaron de 
+	Vanessa Robins, y Herbert Edelsbrunner. Estos autores llegaron de 
 	manera independiente al concepto de persistencia que se desarrollaría 
 	en profundidad durante los siguientes 15 años. 
 
@@ -246,9 +247,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	\begin{defi}
 	
-	Un \textit{complejo simplicial abstracto} es una colección, 
+	Un \textit{complejo simplicial abstracto} es una colección 
 	\begin{Large}$\nu$\end{Large}, de subconjuntos no vacíos de un 
-	conjunto, {\Large $\nu$}$_{0}$, que verifica las siguientes 
+	conjunto {\Large $\nu$}$_{0}$, que verifica las siguientes 
 	propiedades:
 	
 	\begin{enumerate}
@@ -612,7 +613,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	definición de los complejos de cadenas:
 
 	\begin{defi}
-		Sea $R$ un anillo, {\Large $\nu$} un complejo simplicial y $p 
+		Sea $R$ un anillo, {\Large $\nu$} un complejo simplicial, y $p 
 		\in \mathbb{N}\cup\{0\}$ 
 		tal que $p\leq dim \text{{\Large $\nu$}}$. Una 
 		\textit{$p$-cadena} es una suma formal de $p$-símplices de 
@@ -648,7 +649,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	vista computacional.
 
 	Observamos que con la segunda opción, una $p$-cadena puede verse como
-	un conjunto de $p$-símplices y la suma de ellas consiste hacer la 
+	un conjunto de $p$-símplices y la suma de ellas consiste en hacer la 
 	unión de los conjuntos y eliminar los símplices repetidos un número 
 	par de veces. Además, la suma coincide con la resta, y el producto por 
 	escalares es nulo o la propia $p$-cadena.
@@ -786,6 +787,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				0 & 0 & 1 & 0 & 1 &1
 			\end{pmatrix}.
 		\end{equation*}
+
 		Ahora, teniendo en cuenta que estamos operando en un cuerpo de 
 		característica 2, hacemos $\partial_{1}(\partial_{2}(c))$:
 		\begin{equation*}
@@ -834,6 +836,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 				\vec{0}.
 			\end{split}
 		\end{equation*}
+
 		Hemos comprobado que, en efecto, <<el borde del borde>> de 
 		$c$ es 0. Para comprobarlo para cualquier vector bastará 
 		observar que:
@@ -870,14 +873,13 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	\begin{defi}
 		\label{defi:homology}
 		Sea $R$ un anillo, $p \in \mathbb{N}\cup\{0\}$ y 
-		{\Large $\nu$} un complejo 
+		{\Large $\nu$}, un complejo 
 		simplicial. Definimos el \textit{p-ésimo $R$-módulo de 
 		homología simplicial} del complejo simplicial {\Large $\nu$} 
 		como el $R$-módulo cociente $\ker \partial_{p}/
 		\Ima\partial_{p+1}$, donde $\partial_{p}$ está definida como
 		en la expresión \ref{def:borde_form}. Lo denotaremos por 
-		$H_{p}(\text{
-		{\Large $\nu$}})$.
+		$H_{p}(\text{{\Large $\nu$}})$.
 	\end{defi}
 
 	La definición de $R$-módulos de homología tiene sentido para cualquier 
@@ -908,9 +910,9 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		por $\beta_{p}(\text{{\Large $\nu$}})$.
 	\end{defi}
 
-	Intuitivamente, los p-ciclos que no son p-bordes representan agujeros
-	p-dimensionales. Por lo tanto, $\beta_{p}(\text{{\Large $\nu$}})$ 
-	representa el número de p-agujeros de {\Large $\nu$}. Además, notemos 
+	Intuitivamente, los $p$-ciclos que no son $p$-bordes representan agujeros
+	$p$-dimensionales. Por lo tanto, $\beta_{p}(\text{{\Large $\nu$}})$ 
+	representa el número de $p$-agujeros de {\Large $\nu$}. Además, notemos 
 	que si $dim\text{{\Large $\nu$}}=n$, entonces $\forall p >n 
 	\hspace{0.25cm} H_{p}(\text{{\Large $\nu$}})=[0]$, pues 
 	{\Large $\nu$}$_{p}=\emptyset$.
@@ -924,6 +926,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			\text{{\Large $\nu$}}=\{\{a\},\{b\},\{c\},\{d\},\{e\},
 			\{a,b\},\{a,c\},\{a,d\},\{b,c\},\{c,d\},\{a,b,c\}\}.
 		\end{equation*}
+
 		Construimos la secuencia de espacios de cadenas asociados:
 		\begin{equation*}
 			 \left.
@@ -941,6 +944,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			\end{array}
 			\right. 
 		\end{equation*}
+
 		Calculamos $\partial_{2}$ y $\partial_{1}$, y los expresamos 
 		de manera matricial:
 		\begin{equation*}
@@ -962,6 +966,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			0 & 0 & 0 & 0 & 0
 			\end{pmatrix}.
 		\end{equation*}
+
 		Ahora para calcular $\beta_{0}(\text{{\Large $\nu$}}) 
 		\text{ y } \beta_{1}(\text{{\Large $\nu$}})$ bastará
 		calcular el rango de las anteriores matrices. Observamos que:
@@ -975,6 +980,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 			0 & 0 & 0 & 0 & 0
 			\end{pmatrix}.
 		\end{equation*}
+
 		Con lo que, $dim \Ima \partial_{1}=3 \text{ y } 
 		dim \ker \partial_{1}=2$, y por lo tanto, $\beta_{1}(\text{
 		{\Large $\nu$}})=1$ y $\beta_{0}(\text{{\Large $\nu$}})=2$. La
@@ -1012,7 +1018,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		\end{figure}
 		
 		Tal y como ya hemos comentado, los números de Betti nos 
-		cuentan los agujeros p-dimensionales. En este caso, si 
+		cuentan los agujeros $p$-dimensionales. En este caso, si 
 		observamos la representación anterior, vemos que tenemos un 
 		agujero 1-dimensional y dos componentes conexas, que se 
 		corresponde con los números de Betti que hemos calculado. 
@@ -1022,7 +1028,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		cálculo de las matrices y los rangos sería más costoso.	
 	\end{ejem}
 	
-	Al igual que hicimos para los complejos simpliciales, veamos como 
+	Al igual que hicimos para los complejos simpliciales, veamos cómo 
 	podemos definir morfismos, de manera más general, entre los objetos 
 	que estamos manejando.
 	
@@ -1104,7 +1110,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	homología.
 	
 	\begin{remark}
-		Este propiedad es muy importante, de hecho, se conoce como 
+		Esta propiedad es muy importante, de hecho, se conoce como 
 		\emph{funtorialidad} y pertenece al ámbito de la teoría de 
 		categorías que queda fuera del alcance del presente trabajo. 
 	\end{remark}
@@ -1145,7 +1151,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Esta noción nos habilita la variable <<tiempo>>, pues nos permite 
 	preguntarnos en que momento de la secuencia aparecerá una cierta 
-	característica topológica y cuanto <<tiempo>> sobrevivirá dicha 
+	característica topológica, y cuanto <<tiempo>> sobrevivirá dicha 
 	característica.
 
 	Existen varias maneras de construir la secuencia de complejos 
@@ -1153,8 +1159,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Čech}. Su construcción se realiza de la siguiente manera:
 
 	Sea {\Large $\nu$} un complejo simplicial y $\mathcal{U}$ un 
-	cubrimiento de {\Large $\nu$}. Los p-símplices del complejo simplicial
-	de Čech vendrán dados por la intersección no vacía de p+1 conjuntos de
+	cubrimiento de {\Large $\nu$}. Los $p$-símplices del complejo simplicial
+	de Čech vendrán dados por la intersección no vacía de $p+1$ conjuntos de
 	$\mathcal{U}$.
 
 	Lo interesante de este método es que si $\mathcal{U}$ verifica ciertas
@@ -1255,21 +1261,19 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	de visualizar esta información. Para ello, emplearemos los  
 	\emph{diagramas de barras} y los \emph{diagramas de persistencia}.
 	
-	Para construir los diagramas de barras, dibujamos $\beta_{p}^{i,i+1}$ 
-	puntos para la i-ésima filtración, y los conectamos con los 
-	$\beta_{p}^{i+1,i+2}$ puntos de la filtración i+1 atendiendo al 
-	siguiente criterio: unimos los puntos $a$ de la filtración i y $b$ de
-	la filtración i+1, si la clase del elemento que genera a $a$ es 
+	Para construir los diagramas de barras dibujamos $\beta_{p}^{i,i+1}$ 
+	puntos para la $i$-ésima filtración, y los conectamos con los 
+	$\beta_{p}^{i+1,i+2}$ puntos de la filtración $i+1$ atendiendo al 
+	siguiente criterio: unimos los puntos $a$ de la filtración $i$ y $b$ de
+	la filtración $i+1$, si la clase del elemento que genera a $a$ es 
 	preimagen por $f_{p}^{i,i+1}$ de la clase del elemento que genera a 
 	$b$. Si la clase del elemento que genera a $a$ es enviada a 0 por 
-	$f_{p}^{i,i+1}$ dibujaremos una linea que sale de $a$ en la filtración
-	i hasta la filtración i+1. 
-
-	En este caso, diremos que la clase del 
-	elemento que genera a $a$ \emph{muere} en la filtración i+1. Si la 
+	$f_{p}^{i,i+1}$, dibujaremos una linea que sale de $a$ en la filtración
+	$i$ hasta la filtración $i+1$. En este caso, diremos que la clase del 
+	elemento que genera a $a$ \emph{muere} en la filtración $i+1$. Si la 
 	preimagen de la clase del elemento que genera a $a$ por 
 	$f_{p}^{i-1,i}$ es el 0, diremos que la clase \emph{nace} en la 
-	filtración i.
+	filtración $i$.
 
 	Para los diagramas de persistencia, dibujaremos $\sum_{p}
 	\beta_{p}^{i,j}$ puntos cuyas coordenadas en $\mathbb{R}^{2}$ vendrán 
@@ -1560,11 +1564,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Como podemos observar en la \autoref{fig:EjBasDiagB} diagrama 
 	izquierdo (grado 0), 
 	tenemos inicialmente (filtración 1 que corresponde al dibujo de 
-	{\Large $\nu$}$^{1}$) 3 clases de equivalencia que son, en orden 
+	{\Large $\nu$}$^{1}$) tres clases de equivalencia que son, en orden 
 	ascendente 
-	en el diagrama, las clases $[d],[a+b]$ y $[c]$. Como ya hemos visto, 
+	en el diagrama, las clases $[d],[a+b],$ y $[c]$. Como ya hemos visto, 
 	esta representación se corresponde con las componentes conexas de 
-	{\Large $\nu$}$^{1}$. Ahora, a medida que avanzamos en las 
+	{\Large $\nu$}$^{1}$. A medida que avanzamos en las 
 	filtraciones podemos ver cómo la clase $[a+b]$ muere en la filtración 
 	2
 	(que se corresponde con el dibujo de {\Large $\nu$}$^{2}$), nacen dos 
@@ -1578,17 +1582,18 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	ver, en la filtración 1 no tenemos ninguna clase de equivalencia, 
 	tendremos que esperar a la filtración 2 en la que nace la clase 
 	$[ab+bc+ac]$. Esta clase muere en la siguiente filtración, pero nacen 
-	otras 2: la clase $[bc+cf+bf]$ y la clase $[ac+ae+ce]$. Esta última 
+	otras dos: la clase $[bc+cf+bf]$ y la clase $[ac+ae+ce]$. Esta última 
 	morirá en la filtración 4, no obstante, la clase $[bc+cf+bf]$ 
 	persiste. Como ya mencionamos, estas clases de equivalencia se 
-	corresponden con agujeros $2$-dimensionales cuya evolución podemos ir
+	corresponden con agujeros $2$-dimensionales, cuya evolución podemos ir
 	viendo en los dibujos anteriores que representan los pasos en la 
 	filtración del complejo simplicial {\Large $\nu$}.
 
 	De los anteriores diagramas podemos extraer información topológica 
 	muy importante acerca de nuestro complejo simplicial: vemos que 
 	presenta dos componentes conexas y un agujero $2$-dimensional. Esta 
-	información nos la aporta la homología persiste, ya que las clases de 
+	información nos la aporta la homología persistente, ya que las 
+	clases de 
 	equivalencia que persisten representan características topológicas, 
 	mientras que las que mueren en alguna filtración representan ruido.
 
@@ -1745,9 +1750,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	hay una clase de equivalencia ($[ab+bc+ac]$) que nace en la filtración 
 	2
 	y muere en la filtración 3, una clase ($[ac+ae+ce]$) que nace en la 
-	filtración 3 y muere en la 4, y una clase ($[bc+cf+bf]$) que nace en 
-	la 
-	filtración 3 y persiste.
+	filtración 3 y muere en la filtración 4, y una clase ($[bc+cf+bf]$) 
+	que nace en la filtración 3 y persiste.
 	\end{ejem}
 
 	\section{Redes neuronales. Grafos subyacentes}
@@ -1765,30 +1769,37 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	La historia del \emph{aprendizaje profundo} y de las redes neuronales 
 	es muy amplia y queda fuera del alcance del presente trabajo. No 
 	obstante, conviene reseñar que, aunque los términos aprendizaje 
-	profundo y red neuronal nos parezcan algo reciente, la realidad es muy
-	distinta. El origen de esta disciplina data de los años 40 de la mano
-	de Warren McCulloch y Walter Pitts, y ha sufrido varias etapas de 
-	desarrollo hasta 
-	llegar a nuestros días. Al igual que con otras líneas de 
-	investigación, la inteligencia artificial (y en particular el 
+	profundo y red neuronal nos puedan parecer algo recientes, provienen 
+	de una disciplina con un largo recorrido temporal. El origen de esta 
+	disciplina data de los años 40 de la mano de Warren McCulloch y Walter 
+	Pitts, quienes inspirados en el cerebro humano propusieron el primer 
+	modelo de red neuronal artificial. Tras ellos, en los años 50, Frank 
+	Rosenblatt propuso el primer modelo del que más tarde surgieron las
+	redes neuronales modernas: \emph{el perceptrón}. En esa misma época se
+	comenzó a usar el algoritmo del \emph{descenso del gradiente}, que 
+	se emplea para optimizar de manera automática los modelos de redes 
+	neuronales. Tras esto se alcanzaron multitud de hitos importantes, 
+	como la victoria en 1997 de la computadora Deep Blue ante el campeón 
+	mundial de ajedrez Gari Kaspárov, que hicieron avanzar la disciplina 
+	hasta nuestros días. Actualmente, gracias a la potencia de cómputo 
+	moderna la inteligencia artificial tiene multitud de aplicaciones: la 
+	conducción autónoma, la generación de imágenes realistas, la 
+	traducción automática, la detección de tumores, etc. No obstante, cabe
+	reseñar que, al igual que con otras líneas de investigación, la 
+	inteligencia artificial (y en particular el 
 	aprendizaje profundo) sufrió varios estancamientos y contratiempos 
-	hasta llegar a nuestros días (<<inviernos de la IA>>). Por lo tanto, 
-	debemos agradecer a todos aquellos investigadores que, aun cuando no 
-	existía certeza del éxito de la inteligencia artificial, continuaron 
-	con su trabajo en la disciplina y la desarrollaron hasta nuestros 
-	días.
+	hasta llegar a nuestros días (<<inviernos de la IA>>).
 
 	Supongamos que queremos que nuestro ordenador nos escriba con palabras
-	un número entre 0 y 9, dado dicho número en cifras. Parece una tarea 
-	sencilla, bastará con desarrollar un programa que a partir de una 
-	entrada (la 
-	cifra) nos produzca una salida (la palabra) de entre las nueve 
-	posibilidades; resumidamente, unas pocas sentencias 
+	un número entre 0 y 9, dado dicho número en cifras. Aparentemente es 
+	una tarea sencilla, bastará con desarrollar un programa que a partir 
+	de una entrada (la cifra) nos produzca una salida (la palabra) de 
+	entre las nueve posibilidades; resumidamente, unas pocas sentencias 
 	condicionales bastarán para obtener el resultado esperado.  
 
 	Pensemos ahora en la 
 	misma tarea, pero esta vez le proporcionaremos como entrada una imagen
-	de la cifra manuscrita. El problema se acaba de volver 
+	de la cifra manuscrita. Ahora el problema es 
 	significativamente más difícil. La aproximación que propone el 
 	aprendizaje automático es dejar que el ordenador <<aprenda>> a hacer 
 	esa tarea. La idea intuitiva es desarrollar un programa que tome dos 
@@ -1804,18 +1815,20 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	llegar a las redes neuronales.
 
 	Supongamos que queremos modelar la relación lineal entre una variable
-	objetivo ($y$) y $p$ variables independientes. Este modelo se conoce 
-	como regresión lineal y puede ser expresado como:
+	objetivo ($y$) y $p$ variables independientes ($x_{1},\dots,x_{p}$). 
+	Este modelo se conoce como regresión lineal y puede ser expresado 
+	como:
 	\begin{equation*}
 		\hat{y}=w_{1}x_{1}+w_{2}x_{2}+\cdots+w_{p}x_{p}+b,
 	\end{equation*}
-	donde $\hat{y}$ es valor estimado de $y$, $w_{1},w_{2},\cdots,w_{p}$ 
+	donde $\hat{y}$ es valor estimado de $y$; $w_{1},w_{2},\cdots,w_{p}$ 
 	son los pesos que indican la importancia de cada variable 
-	independiente para el modelo, y $b$ es el término independiente. En 
-	principio, $w_{1},w_{2},\cdots,w_{p}$ y $b$ toman valores en 
-	$\mathbb{R}$.
-	Siguiendo la terminología anterior, $\hat{y}$ es nuestra salida, las 
-	variables independientes son nuestras entradas y $w_{1},w_{2},\cdots,
+	independiente para el modelo; y $b$ es el término independiente. Aquí 
+	los parámetros $w_{1},w_{2},\cdots,w_{p}$ y el término independiente 
+	$b$ toman valores en $\mathbb{R}$.
+	Volviendo a la terminología introducida por la idea intuitiva, 
+	$\hat{y}$ es nuestra salida, las 
+	variables independientes son nuestras entradas, y $w_{1},w_{2},\cdots,
 	w_{p}$ son los parámetros a ajustar. 
 
 	Para realizar este ajuste será necesario tener una métrica que nos 
@@ -1823,17 +1836,18 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	usaremos el error cuadrático medio cuya expresión es la siguiente:
 
 	\begin{equation*}
-		J(w_{1},w_{2},\cdots,w_{p},b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2,
+		MSE(w_{1},w_{2},\cdots,w_{p},b)=\frac{1}{n}\sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^2,
 	\end{equation*}
 
 	\noindent donde $n$ es el número de datos (cada dato es un vector de $p$ 
 	entradas), $y_{i}$ es la salida real y 
 	$\hat{y}_{i}$ es la salida estimada por el modelo. Nuestro objetivo
-	es el de minimizar $J(w_{1},w_{2},\cdots,w_{p},b)$ para que el modelo 
+	es el de minimizar $MSE(w_{1},w_{2},\cdots,w_{p},b)$ para que el modelo 
 	sea el mejor posible. 
 	Para minimizar esta función será necesario ir ajustando los parámetros 
 	correctamente. Para ello se emplea el algoritmo conocido como 
-	\emph{el descenso del gradiente}.
+	\emph{el descenso del gradiente}. A continuación, veamos cómo funciona 
+	este algoritmo.
 
 	Supongamos una función continua y suave. Por ser ella continua sabemos
 	que mapea puntos <<cercanos>> a puntos <<cercanos>>, y por ser suave,
@@ -1841,22 +1855,21 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	función por una función lineal cuya pendiente sea la diferencial de la 
 	función. Este resultado se conoce como el \emph{teorema de Taylor} (un 
 	enunciado más riguroso, así como su demostración, puede verse en 
-	\cite{Diferencial-Bello}). 
-	Como bien sabemos, el gradiente de una función en un punto 
+	\cite{Diferencial-Bello}). El gradiente de una función en un punto 
 	nos indica cuanto aumenta o disminuye el valor 
 	de dicha función ante un pequeño cambio en su entrada. Lo que haremos 
 	será <<movernos un poco>> en la dirección marcada por el gradiente 
 	pero en sentido opuesto, pues nuestro objetivo 
 	es el de minimizar la función. Iterando este proceso,
-	iremos dando pequeños <<pasos>> minimizando $J(w_{1},w_{2},\cdots,
+	iremos dando pequeños <<pasos>> minimizando $MSE(w_{1},w_{2},\cdots,
 	w_{p},b)$. En concreto, la 
 	actualización de los parámetros es como sigue:
 	
 	\begin{equation*}
 	\begin{array}{c}
-		w_{i}^{siguiente}=w_{i}^{actual}-\alpha\frac{\partial J(w,b)}
+		w_{i}^{siguiente}=w_{i}^{actual}-\alpha\frac{\partial MSE(w,b)}
 		{\partial w_{i}}\\
-		b^{siguiente}=b^{actual}-\alpha\frac{\partial J(w,b)}
+		b^{siguiente}=b^{actual}-\alpha\frac{\partial MSE(w,b)}
 		{\partial w_{i}}
 	\end{array},
 	\end{equation*}
@@ -1870,7 +1883,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	
 	\begin{remark}
 	Notemos que el proceso presentado logra teóricamente la convergencia 
-	al mínimo local de $J(w_{1},w_{2},\cdots,w_{p},b)$. Para converger de 
+	al mínimo local de $MSE(w_{1},w_{2},\cdots,w_{p},b)$. Para converger de 
 	manera teórica al 
 	mínimo global son necesarias técnicas más avanzadas cuya descripción 
 	queda fuera del alcance del presente trabajo. Para más información 
@@ -1918,8 +1931,15 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	debemos escoger una función no lineal. Lo habitual suele ser escoger
 	la función sigmoide, la tangente hiperbólica o la función ReLU (véase 
 	\cite{Goodfellow-et-al-2016}).
+	\end{remark}
 	
-	La función ReLU está definida de la siguiente manera:
+	(\textbf{Este estudio de la función ReLU me resulta interesante porque 
+	en la práctica es una función que se utiliza mucho. Sin embargo, aquí 
+	pega poco o nada. ¿Lo quito?})
+
+	Dado que habitualmente se utiliza la función ReLU, vamos a detenernos 
+	brevemente a analizar su uso. La función ReLU está definida de la 
+	siguiente manera:
 
 	\begin{equation}
 		\label{def:ReLU}
@@ -1933,18 +1953,17 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	
 	Observamos que la función ReLU es continua pero no suave, pues no es 
 	diferenciable en $x=0$. Por lo tanto, teóricamente no podremos 
-	asegurar que $\hat{y}$ lo sea y no podremos utilizar el algoritmo del 
+	asegurar que $\hat{y}$ lo sea (y por tanto $MSE$ tampoco) y no 
+	podremos utilizar el algoritmo del 
 	descenso del gradiente. Sin embargo, por 
 	cuestiones prácticas, este incidente no se tiene en cuenta ya que 
-	habitualmente no se alcanza el mínimo local de $\hat{y}$ luego, a 
+	habitualmente no se alcanza el mínimo local de $\hat{y}$, luego a 
 	priori, no hay problemas en que la función no sea diferenciable en 
 	dicho punto. Adicionalmente, cabe 
 	destacar que la mayoría de los algoritmos empleados para el cálculo de 
 	la derivada en el descenso del gradiente sólo calculan una de las 
-	derivadas laterales, luego el problema de la no diferenciabilidad 
-	queda <<resuelto>>.
-	\end{remark}
-	
+	derivadas laterales.
+
 	A fin de facilitar el entendimiento de nuestros siguientes pasos, 
 	en la \autoref{fig:perceptron} representamos gráficamente la 
 	estructura subyacente del perceptrón.
@@ -1985,11 +2004,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	añadir más perceptrones en paralelo (nodos) y en serie (capas), 
 	consiguiendo lo que se conoce como \emph{perceptrón multicapa}.
 
-	El perceptrón multicapa es caso particular de arquitectura de una red 
+	El perceptrón multicapa es un caso particular de arquitectura de una red 
 	neuronal. En esta arquitectura las conexiones entre nodos (neuronas) 
 	se realizan únicamente hacia adelante, no se permite la conexión 
 	entre nodos de la misma capa, y la función de activación es 
-	r(x) definida en \ref{def:r}. Para los propósitos del presente 
+	$r(x)$ definida en \ref{def:r}. Para los propósitos del presente 
 	trabajo, la función de activación no es relevante; pero sí lo es la 
 	dirección de las conexiones entre los nodos. Por lo tanto, nos 
 	ceñiremos al caso particular de las redes neuronales cuyas conexiones
@@ -2022,7 +2041,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		llamaremos a $u$ y a $v$ \textit{extremos} de la arista.
 	\end{defi}
 
-	Para el caso las redes neuronales prealimentadas, necesitamos un caso 
+	Para el caso las redes neuronales prealimentadas necesitamos un caso 
 	particular de grafo:
 	
 	\begin{defi}
@@ -2042,7 +2061,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	podemos aproximarnos a sus grafos subyacentes desde otro punto de 
 	vista. 
 
-	Como ya sabemos, las neuronas de una red neuronal prealimentada están
+	Como ya hemos visto, las neuronas de una red neuronal prealimentada 
+	están
 	distribuidas por capas. Además, podemos identificar claramente estas 
 	capas, y ya hemos visto que, en el caso que nos ocupa, el flujo de 
 	información de la red se produce en un único sentido. Estas 
@@ -2175,7 +2195,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	persistente a estas nociones. Lo que haremos será, dada una red 
 	neuronal prealimentada, construir el complejo simplicial asociado a su
 	grafo dirigido acíclico (DAG por sus siglas en inglés); a partir del 
-	complejo simplicial construiremos un complejo simplicial filtrado, y 
+	complejo simplicial construiremos un complejo simplicial filtrado; y 
 	sobre éste consideraremos la homología persistente. En esta sección
 	ilustraremos únicamente el primer paso.
 
@@ -2469,32 +2489,37 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	La definición de importancia extendida nos habilita la construcción 
 	del complejo simplicial filtrado asociado a un DAG con pesos de una 
 	manera muy natural. El primer paso será definir el complejo 
-	simplicial asociado, pues no vamos a usar un clique, para ello damos 
-	la siguiente definición: 
+	simplicial asociado, pues no vamos a usar un clique. Esencialmente, 
+	vamos a definir umbrales de importancia para determinar los complejos
+	simpliciales asociados a una red neuronal.
+
 	\begin{defi}
 		\label{def:SimpAut}
-		Definimos los \textit{$p$-símplices asociados a un DAG con pesos} a partir del conjunto de vértices del DAG ( que
-		por simplificar notación denotaremos por {\Large $\nu$}$_{0}$) 
+		Sea $0\leq t \leq 1$ un parámetro real. Definimos los 
+		\textit{$p$-símplices asociados a un DAG con pesos} a partir 
+		del conjunto de vértices del DAG (que por simplificar notación 
+		denotaremos por {\Large $\nu$}$_{0}$) 
 		como sigue:
 	\begin{equation*}
 		\text{{\Large $\nu$}}_{p}^{t}=
 		\left \{
 			\begin{array}{ll}
 				\text{{\Large $\nu$}}_{0} & \text{si } p=0\\[3pt]
-				\{(u_{a_{0}},...,u_{a_{p}}) \mid u_{a_{i}} \in 
+				\{\{u_{a_{0}},\dots,u_{a_{p}}\} \mid u_{a_{i}} \in 
 					\text{{\Large $\nu$}}_{0},\ 
 					\overline{R_{a_{i}a_{j}}} \geq t,\ 
 				\forall a_{i} > a_{j} \} & \text{si } p \geq 1
 			\end{array}
 		\right.  
 	\end{equation*}
-	donde $0 \leq t \leq 1$ es un parámetro real.
+	donde cada $u_{a_{i}}$ pertenece al nivel $a_{i}$ del DAG y $a_{0} 
+	< \cdots < a_{i} < \cdots < a_{p}$.
 	\end{defi}
 	Ahora que ya tenemos definidos los p-símplices, vamos con la 
 	construcción del complejo simplicial asociado. Para ello damos el 
 	siguiente resultado:
 	\begin{prop}
-		Sea {\Large $\nu$}$_{0}=\{u_{0},...,u_{n}\}$ un conjunto 
+		Sea {\Large $\nu$}$_{0}=\{u_{0},\dots,u_{n}\}$ un conjunto 
 		finito, y $\{w_{ij}\}_{0\leq j \leq i \leq n}$ un 
 		conjunto de números reales. Sea $\overline{R_{ij}}$ la 
 		importancia entre neuronas definida en \ref{def:impExt}, y 
@@ -2522,14 +2547,14 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		{\Large $\nu$}$^{t}$.
 
 		Así pues, vamos a probar la segunda propiedad:
-		$\sigma=(u_{a_{0}},...,u_{a_{p}}) \in 
+		$\sigma=\{u_{a_{0}},\dots,u_{a_{p}}\} \in 
 		\text{{\Large $\nu$}}^{t}$ 
 		 implica que $\overline{R_{a_{i}a_{j}}}\geq t, \  
 		\forall a_{i} \geq a_{j}$. 
 		Ahora sea $\tau \subset \sigma$, entonces, 
-		$\tau = (u_{b_{0}},...,u_{b_{q}})$, y como $\{b_{0},...,
+		$\tau = \{u_{b_{0}},\dots,u_{b_{q}}\}$, y como $\{b_{0},\dots,
 		b_{q}\} 
-		\subset \{a_{0},...,a_{p}\}$, se tendrá que 
+		\subset \{a_{0},\dots,a_{p}\}$, se tendrá que 
 		$\overline{R_{b_{i}b_{j}}} \geq t,\ \forall n_{i} \geq n_{j}$. 
 		El resultado se sigue inmediatamente. 
 	\end{proof}
@@ -2563,10 +2588,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	Hasta ahora, hemos conseguido construir el complejo simplicial 
 	filtrado asociado a un DAG con pesos, con lo que podemos pensar que ya 
 	estamos listos para aplicar la homología persistente y extraer 
-	conclusiones. No obstante, la realidad es bien distinta y existe un 
-	problema con el que nos topamos en el desarrollo del presente trabajo. 
-	Este problema está relacionado con una pobre explicación en 
-	\cite{Articulo-Watanabe}. 
+	conclusiones. No obstante, nuestro análisis del artículo de 
+	investigación \cite{Articulo-Watanabe} nos lleva a considerar una 
+	forma diferente de definir complejos simpliciales a partir de DAG con 
+	pesos.
 	
 	Si leemos detenidamente las definiciones de la presente sección, 
 	observamos que la definición \ref{def:impExt} tiene un pequeño 
@@ -2578,11 +2603,12 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 
 	Esta disyuntiva da lugar a las dos interpretaciones posibles sobre el
 	cálculo de los $p$-símplices, las hemos bautizado como: la 
-	interpretación \emph{local} y la interpretación \emph{global}. Tal y 
-	como hemos podido comprobar, por medio de correo electrónico, la 
-	interpretación original que hace el autor se corresponde con la que 
-	nosotros hemos bautizado como local.
-	
+	interpretación \emph{local} y la interpretación \emph{global}. De los 
+	mensajes que hemos podido intercambiar con los autores de 
+	\cite{Articulo-Watanabe}, hemos constatado que los cálculos que 
+	realizan se corresponden con la interpretación que hemos bautizado 
+	como \emph{local}.
+
 	Veamos un pequeño ejemplo que ilustre la diferencia entre ambas 
 	interpretaciones.
 	\begin{ejem}
@@ -2655,8 +2681,8 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	El ejemplo anterior pone de manifiesto la principal diferencia 
 	entre ambas interpretaciones: en la primera, el máximo se 
 	calcula sobre los caminos que aparecen en el p-símplice; en la 
-	segunda, el máximo se calcula sobre los caminos que aparecen 
-	en todos los p-símplices.
+	segunda, el máximo se calcula sobre todos los caminos posibles entre el 
+	vértice de origen y de destino. 
 	\begin{remark}
 		Mientras que la interpretación global es consistente 
 		para los 1-símplices (aristas), la interpretación 
@@ -2695,7 +2721,34 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	No obstante, aunque esta interpretación nos pueda parecer más 
 	coherente desde el punto de vista teórico, habrá que realizar una 
 	serie de experimentos y comparativas para validar la información 
-	obtenida siguiendo esta interpretación.
+	obtenida siguiendo esta interpretación. A continuación describimos, de
+	manera general, los pasos que hemos seguido para el cálculo de los 
+	símplices bajo esta interpretación: 
+
+	(\textbf{Creo que con esta pequeña explicación es suficiente, pero 
+	quizás se entienda mejor con un mini ejemplo. ¿Lo incluyo?})
+
+	\begin{enumerate}[label=\arabic*)]
+		\item Se calculan recursivamente todos los posibles caminos 
+			para un vértice de origen. 
+		\item Se calcula la importancia de cada camino, es decir, la 
+			importancia entre el vértice de origen y de destino de 
+			la siguiente manera: se van multiplicando las 
+			importancias entre cada par de vértices; y si dos 
+			caminos comparten un vértice intermedio, entonces la 
+			importancia hasta ese vértice será la máxima producida 
+			por ambos caminos hasta ese vértice. La importancia 
+			obtenida tras esta multiplicación será la importancia 
+			del camino, y por ser un número entre 0 y 1, todas las
+			importancias intermedias serán mayores o iguales que 
+			la importancia del camino.
+		\item Habiendo calculado las importancias de cada camino, se 
+			descartan aquellos caminos que no superan el
+			umbral fijado.
+		\item Como cada camino constituye un símplice maximal, se 
+			calculan todos los subsímplices
+			asociados al camino.
+	\end{enumerate}
 
 	Aunque no lo hemos mencionado, un DAG con pesos no es más que un DAG
 	al que le asociamos una matriz de pesos (recordemos que, en el caso 
@@ -2705,7 +2758,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	simplicial filtrado. Veremos más en detalle estos pasos en la 
 	siguiente sección. 
 
-	Habiendo descrito de manera genera la interpretación global, vamos a 
+	Habiendo descrito de manera general la interpretación global, vamos a 
 	aplicarla al ejemplo propuesto en \cite{Articulo-Watanabe}, en el que 
 	vamos a calcular los números de Betti y vamos a ver los diagramas 
 	correspondientes.
@@ -3304,9 +3357,31 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	mediante su desempeño en el mismo ejemplo que hemos visto en la 
 	sección anterior. Además, aprovecharemos para describir más 
 	detalladamente los algoritmos y programas que hemos empleado para el 
-	cálculo automático de la homología persistente en este ejemplo.
+	cálculo automático de la homología persistente en este ejemplo. 
+	Siguiendo esta interpretación, hemos realizado el cálculo de los 
+	símplices mediante estos pasos:
 
-	Comenzamos con el ejemplo tal y cómo lo propone el autor en 
+	(\textbf{No sé hasta qué punto esta explicación enturbia la idea de
+	que la interpretación local no es consistente para aristas. La 
+	explicación que doy aquí abajo hace el cálculo desde atrás hacia 
+	adelante con lo que no se ve que no sea consistente. Si hacemos el 
+	cálculo de adelante hacia atrás sí que se aprecia mejor (lo explico al 
+	final del ejemplo 3.1.2)})
+
+	\begin{enumerate}[label=\arabic*)]
+		\item Se calculan recursivamente todos los posibles caminos 
+			para un vértice de origen. 
+		\item Se calcula la importancia de cada camino multiplicando 
+			la importancia entre cada par vértices, sin tener en 
+			cuenta si existe otro camino que comparta vértices.
+		\item Al igual que en la interpretación global, se descartan 
+			aquellos caminos que no superan el umbral fijado. 
+
+		\item Se calculan todos los subsímplices asociados a cada 
+			camino.
+	\end{enumerate}
+
+	A continuación veamos el ejemplo tal y cómo lo propone el autor en 
 	\cite{Articulo-Watanabe}:
 	
 	\begin{ejem}

@@ -4,10 +4,10 @@
 
 ### Contenidos:
 
-- Bibliografía: Pdf's utilizados para el trabajo
-- Diagramas autor: Imágenes correspondientes a los diagramas de barras y de 
-persistencia empleados por S.Watanabe
-- PrimeBoceto: tex y pdf del primer boceto de la memoria
-- BorradorMemoria: Carpeta en la que se desarrolla la memoria. Contiene el tex
-y el pdf de la memoria. 
+- Bibliografía: Contiene los pdf's utilizados para el trabajo.
+- BorradorMemoria: Carpeta en la que se ha desarrollado la memoria. Contiene 
+el tex y el pdf de la memoria. 
+- Scripts: Carpeta con todo el código desarrollado en el trabajo.
+- Listas_ejemplos_finales: Carpeta con las listas de símplices correspondientes 
+a los ejemplos del final del capítulo 3.
 
