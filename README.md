@@ -1,8 +1,8 @@
 # Repositorio con el TFG de matemáticas 2021-2022
 [![CC BY-NC-ND 4.0][cc-by-nc-nd-shield]][cc-by-nc-nd]
 ## Autor: José Manuel Ros Rodrigo
-## Email: joros@unirioja.es
 ### Tutores: José Luis Ansorena Barasoain y Julio Rubio García
+### Email de contacto: joros@unirioja.es
 
 ### Contenidos:
 
