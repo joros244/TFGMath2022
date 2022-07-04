@@ -144,7 +144,7 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	to artificial neural networks. Secondly, we focus on the development 
 	of the research paper, as well as on the problems encountered during 
 	the study of it. Finally, we detail the code developed in this project, 
-	and we the tool on a collection of examples.  
+	and we use the tool on a collection of examples.  
 
 	\tableofcontents
 
@@ -1289,8 +1289,10 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	de visualizar esta información. Para ello, emplearemos los  
 	\emph{diagramas de barras} y los \emph{diagramas de persistencia}.
 	
-	Para construir los diagramas de barras dibujamos $\beta_{p}^{i,i+1}$ 
-	puntos para la $i$-ésima filtración, y los conectamos con los 
+	Para construir los diagramas de barras elegimos, para cada $i$, una 
+	base de cada espacio vectorial $H_{p}^{i,i+1}$, que representamos en el 
+	diagrama mediante $\beta_{p}^{i,i+1}$ puntos. Entonces, conectamos los
+	$\beta_{p}^{i,i+1}$ puntos de la $i$-ésima filtración con los 
 	$\beta_{p}^{i+1,i+2}$ puntos de la filtración $i+1$ atendiendo al 
 	siguiente criterio: unimos los puntos $a$ de la filtración $i$ y $b$ de
 	la filtración $i+1$, si la clase del elemento que genera a $a$ es 
@@ -2752,9 +2754,6 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	obtenida siguiendo esta interpretación. A continuación describimos, de
 	manera general, los pasos que hemos seguido para el cálculo de los 
 	símplices bajo esta interpretación: 
-
-	(\textbf{Creo que con esta pequeña explicación es suficiente, pero 
-	quizás se entienda mejor con un mini ejemplo. ¿Lo incluyo?})
 
 	\begin{enumerate}[label=\arabic*)]
 		\item Se calculan recursivamente todos los posibles caminos 
