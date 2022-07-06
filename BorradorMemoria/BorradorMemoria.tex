@@ -1956,18 +1956,11 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	relación lineal entre la variable objetivo y las variables 
 	independientes. 
 	
-	\begin{remark}	
-	En el caso general, la función $r(x)$ es un hiperparámetro, es decir,
-	debemos escoger una función no lineal. Lo habitual suele ser escoger
-	la función sigmoide, la tangente hiperbólica o la función ReLU (véase 
-	\cite{Goodfellow-et-al-2016}).
-	\end{remark}
-	
-	(\textbf{Este estudio de la función ReLU me resulta interesante porque 
-	en la práctica es una función que se utiliza mucho. Sin embargo, aquí 
-	pega poco o nada. ¿Lo quito?})
-
-	Dado que habitualmente se utiliza la función ReLU, vamos a detenernos 
+	La función $r(x)$ puede ser considerada como un hiperparámetro, es decir,
+	puede ser instanciada a una función no lineal distinta de la considerada 
+	anteriormente. Podemos, por ejemplo, considerar la función sigmoide, 
+	la tangente hiperbólica o la función ReLU (véase 
+	\cite{Goodfellow-et-al-2016}). Dado que habitualmente se utiliza la función ReLU, vamos a detenernos 
 	brevemente a analizar su uso. La función ReLU está definida de la 
 	siguiente manera:
 
@@ -2720,10 +2713,15 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 		no podremos calcular una arista entre dos vértices no 
 		conectados, pues no existirá camino local sobre el que tomar 
 		el máximo. Este hecho imposibilitaría el cálculo del complejo 
-		simplicial asociado a la red. Por lo tanto, para el cálculo de 
-		los 1-símplices en la interpretación local se toma el máximo 
-		entre todos los posibles caminos, es decir, se sigue el 
-		razonamiento global. 
+		simplicial asociado a la red. Por lo tanto, para el cálculo en 
+		la interpretación local se calcula el producto a través de cada 
+		camino, y se adopta el criterio de que cuando ese producto alcanza 
+		el umbral establecido el símplice formado por los nodos de ese 
+		camino y todos sus subsímplices pertenecen a nuestro complejo 
+		simplicial. Notamos que esta interpretación permite construir 
+		los complejos simpliciales sin realizar el cálculo de 
+		$\overline{R}$ que introducen los autores de 
+		\cite{Articulo-Watanabe}.	
 	\end{remark}
 	
 	A lo largo de las siguientes secciones veremos más en detalle la 
@@ -3387,13 +3385,6 @@ literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ñ}{{\~n}}1 {ó}{{\'o}}1
 	cálculo automático de la homología persistente en este ejemplo. 
 	Siguiendo esta interpretación, hemos realizado el cálculo de los 
 	símplices mediante estos pasos:
-
-	(\textbf{No sé hasta qué punto esta explicación enturbia la idea de
-	que la interpretación local no es consistente para aristas. La 
-	explicación que doy aquí abajo hace el cálculo desde atrás hacia 
-	adelante con lo que no se ve que no sea consistente. Si hacemos el 
-	cálculo de adelante hacia atrás sí que se aprecia mejor (lo explico al 
-	final del ejemplo 3.1.2)})
 
 	\begin{enumerate}[label=\arabic*)]
 		\item Se calculan recursivamente todos los posibles caminos 
