@@ -6,7 +6,6 @@
 
 ### Contenidos:
 
-- Bibliografía: Contiene los pdf's utilizados para el trabajo.
 - BorradorMemoria: Carpeta en la que se ha desarrollado la memoria. Contiene 
 el tex y el pdf de la memoria. 
 - Scripts: Carpeta con todo el código desarrollado en el trabajo.
